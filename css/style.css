@@ -11,7 +11,9 @@ body{
 }
 
 .menuIcon, .carta{
+    position: absolute;
     height: 200px;
+    width: 200px;
 }
 
 .inativo{
@@ -24,5 +26,10 @@ h1{
 
 .clickable{
     cursor: pointer;
+}
+
+/* ----CLASSE DE TESTE---- */
+.selected{
+    border: 2px solid red;
 }
 
