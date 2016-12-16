@@ -8,52 +8,54 @@
     <script src="js/script.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
-<body style="background-color: cornflowerblue">
+<body>
 <div id="interacao1">
     <h1 class="center">Metodo de interaçao</h1>
     <div class="container">
         <div class="row">
-            <div class="col s2 offset-s1 rounded menuIcon valign-wrapper white">
+            <div class="col s2 offset-s1 rounded menuIcon valign-wrapper white_elem white_elem z-depth-4 clickable" id="varrimento">
                 <div class="center-block"><i class="material-icons large">schedule</i></div>
             </div>
-            <div class="col s2 offset-s1 rounded menuIcon valign-wrapper white">
+            <div class="col s2 offset-s1 rounded menuIcon valign-wrapper white_elem white_elem z-depth-4 clickable" id="point_wait">
                 <div class="center-block"><i class="material-icons large">schedule</i></div>
             </div>
-            <div class="col s2 offset-s1 rounded menuIcon valign-wrapper white">
+            <div class="col s2 offset-s1 rounded menuIcon valign-wrapper white_elem white_elem z-depth-4 clickable" id="point_click">
                 <div class="center-block"><i class="material-icons large">schedule</i></div>
             </div>
-            <div class="col s2 offset-s1 rounded menuIcon valign-wrapper white">
+            <div class="col s2 offset-s1 rounded menuIcon valign-wrapper white_elem white_elem z-depth-4 clickable" id="voz">
                 <div class="center-block"><i class="material-icons large">schedule</i></div>
             </div>
         </div>
     </div>
 </div>
-<div id="interacao2">
+<div id="interacao2" style="display: none">
     <h1 class="center">Jogos</h1>
     <div class="container">
         <div class="row">
-            <div class="col s2 offset-s1 rounded menuIcon valign-wrapper white">
+            <div class="col s2 offset-s1 rounded menuIcon valign-wrapper z-depth-4 clickable inativo" id="btn_num">
                 <div class="center-block"><i class="material-icons large">schedule</i></div>
             </div>
-            <div class="col s2 offset-s1 rounded menuIcon valign-wrapper white">
+            <div class="col s2 offset-s1 rounded menuIcon valign-wrapper z-depth-4 clickable inativo" id="btn_palavras">
                 <div class="center-block"><i class="material-icons large">schedule</i></div>
             </div>
-            <div class="col s2 offset-s1 rounded menuIcon valign-wrapper white z-depth-4">
+            <div class="col s2 offset-s1 rounded menuIcon valign-wrapper z-depth-4 clickable" id="btn_mem">
                 <div class="center-block"><i class="material-icons large">schedule</i></div>
             </div>
-            <div class="col s2 offset-s1 rounded menuIcon valign-wrapper white">
+            <div class="col s2 offset-s1 rounded menuIcon valign-wrapper z-depth-4 clickable inativo" id="btn_cores">
                 <div class="center-block"><i class="material-icons large">schedule</i></div>
             </div>
         </div>
     </div>
 </div>
-<div id="jogoMemoria">
+<div id="jogoMemoria" style="display: none">
     <h1 class="center">Jogo Memória</h1>
     <div class="container">
         <div class="row" id="memoTab">
         </div>
     </div>
 </div>
+
+
 <script src="js/jquery-3.1.1.min.js"></script>
 <script src="js/materialize.min.js"></script>
 </body>
