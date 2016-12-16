@@ -1,7 +1,11 @@
 .rounded{
-    border-radius: 20px;
+    border-radius: 10px;
 }
 
-.menuIcon{
+.menuIcon, .carta{
     height: 200px;
+}
+
+h1{
+    font-size: 20px;
 }
