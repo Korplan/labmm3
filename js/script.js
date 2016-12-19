@@ -26,6 +26,8 @@ var memoCartas = [1, 1, 2, 2, 3, 3, 4, 4]; //array com pares de cartas
 //----------GERAL----------
 var jogo_memoria = false;
 var voiceEnable = false;
+var atual = [];
+var over = false;
 
 window.onload = function () {
     var temp = "";
@@ -56,10 +58,10 @@ window.onload = function () {
         document.getElementById("interacao2").style.display = "block";
         loadPointAndWait();
         fps = setInterval("loadPointAndWait()", 10);
-        document.onmousemove = function (e) {
-            posX = e.pageX;
-            posY = e.pageY;
-        };
+        // document.onmousemove = function (e) {
+        //     posX = e.pageX;
+        //     posY = e.pageY;
+        // };
     };
 
     document.getElementById("point_click").onclick = function () {
@@ -85,51 +87,47 @@ window.onload = function () {
 };
 
 function loadPointAndWait() {
-
     var elements = document.getElementsByClassName("clickable");
-    // console.log(elements);
-    for (var i = 0; i < elements.length; i++) {
 
-        var elLeft = parseInt(elements[i].style.left);
-        var elRight = elLeft + 200;
-        var elTop = parseInt(elements[i].style.top);
-        var elBottom = elTop + 200;
-        // print(posX + " " + posY + "__" + elLeft + " " + elRight + " " + elTop + " " + elBottom);
-        if (posX > elLeft && posX < elRight && posY > elTop && posY < elBottom) {
-            elements[i].innerHTML = "<i class='material-icons large'>schedule</i>";
-            elem = elements[i];
-            if (!anim) {
-                selecting = setInterval("select(elem)", 500);
-                anim = true;
+    for (var i = 0; i < elements.length; i++) {
+        elements[i].onmouseover = function () {
+            if (!over) {
+                elem = this;
+                atual[i] = this.innerHTML;
+                over = true;
+                this.innerHTML = "<div class='center-block'><img id='selecionada' src='img/PaW/0.png' style='height: 100px; width: 100px'></div>";
+                if (!anim) {
+                    sprite = 0;
+                    selecting = setInterval("select(elem)", 500);
+                    anim = true;
+                }
             }
-            // console.log("eu");
-        } else {
-            elements[i].innerHTML = "";
-            // sprite = 0;
+        };
+        elements[i].onmouseout = function () {
+            if (over) {
+                over = false;
+                this.innerHTML = atual[i];
+                if (anim) {
+                    clearInterval(selecting);
+                    anim = false;
+                }
+            }
         }
     }
 }
 
 
 function select(elem) {
-    print(sessionStorage.getItem("lastElem"));
-    if (elem.innerHTML == "") {
-        sprite = 0;
-        anim = false;
+    sprite++;
+    document.getElementById("selecionada").src = "img/PaW/" + sprite + ".png";
+    if (sprite == 8) {
+        print(elem);
         clearInterval(selecting);
-    } else {
-        if (elem.style.left + elem.style.top != sessionStorage.getItem("lastElem")) {
-            sprite = 0;
-            sessionStorage.setItem("lastElem", elem.style.left + elem.style.top);
-        }
-        print(sprite);
-        sprite++;
-    }
-    if(sprite == 10) {
+        anim = false;
         elem.click();
-        sprite = 0;
     }
 }
+
 
 function loadPointAndClick() {
 
@@ -141,11 +139,13 @@ function loadVarrimento() {
 
 function loadVoiceRec() {
     speechRecognition = new webkitSpeechRecognition();
-    // var keyWords = "cima | baixo | direita | esquerda";
-    // var grammar = new webkitSpeechGrammarList();
-    // grammar.addFromString(keyWords, 1);
+    var colors = [ '1' , '2' , '3', '4', '5', '6', '7', '8'];
+    var grammar = '#JSGF V1.0; grammar colors; public <color> = ' + colors.join(' | ') + ' ;';
+    var grammarList = new webkitSpeechGrammarList();
+    grammarList.addFromString(grammar, 1);
+    console.log(grammarList);
 
-    // speechRecognition.grammars = grammar;
+    speechRecognition.grammars = grammar;
     speechRecognition.lang = 'pt-PT';                       // default: html lang
     speechRecognition.continuous = false;                   // default: false
     speechRecognition.interimResults = false;               // resultados intermédios, com .final = false (default: false)
@@ -263,7 +263,7 @@ function jogoMemoria() {
         //criar x pares de elementos (cartas) com id "memoCarta#"
         for (var id2 = 0; id2 < 4; id2++) {
             document.getElementById("linha" + id).innerHTML +=
-                "<div class='rounded carta valign-wrapper white clickable card' style='top: " + (125 * (id + 1 + id)) + "px; left: " + (250 * (id2 + 1)) + "px; height: 200px; width: 200px;' id='memoCarta" + (numCartas + 1) + "'>" +
+                "<div class='rounded carta valign-wrapper clickable card grey' style='top: " + (125 * (id + 1 + id)) + "px; left: " + (250 * (id2 + 1)) + "px; height: 200px; width: 200px;' id='memoCarta" + (numCartas + 1) + "'>" +
                 "<div class='center-block face front'>" + memoCartas[numCartas] + "</div>" +
                 // "<div class='face back'>numCartas</div>" +
                 "</div>";

@@ -16,6 +16,10 @@ body{
     width: 200px;
 }
 
+.grey{
+    background-color: grey;
+}
+
 .inativo{
     background-color: grey;
 }
