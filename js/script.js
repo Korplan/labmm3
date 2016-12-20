@@ -16,12 +16,12 @@ var sprite = 0;
 var fps;
 var anim = false;
 var elem = "";
-sessionStorage.setItem("lastElem", "");
-var posX;
-var posY;
 
 //----------JOGO_MEMORIA----------
 var memoCartas = [1, 1, 2, 2, 3, 3, 4, 4]; //array com pares de cartas
+var par = false;
+var ultimo = "";
+
 
 //----------GERAL----------
 var jogo_memoria = false;
@@ -58,10 +58,6 @@ window.onload = function () {
         document.getElementById("interacao2").style.display = "block";
         loadPointAndWait();
         fps = setInterval("loadPointAndWait()", 10);
-        // document.onmousemove = function (e) {
-        //     posX = e.pageX;
-        //     posY = e.pageY;
-        // };
     };
 
     document.getElementById("point_click").onclick = function () {
@@ -263,28 +259,39 @@ function jogoMemoria() {
         //criar x pares de elementos (cartas) com id "memoCarta#"
         for (var id2 = 0; id2 < 4; id2++) {
             document.getElementById("line" + id).innerHTML +=
-                "<div class='rounded carta valign-wrapper clickable card grey' style='top: " + (125 * (id + 1 + id)) + "px; left: " + (250 * (id2 + 1)) + "px; height: 200px; width: 200px;' id='item" + numCartas + "'>" +
-                "<div class='center-block face front'>" + memoCartas[numCartas] + "</div>" +
-                "<div class='face back'>numCartas</div>" +
+                "<div class='rounded carta valign-wrapper clickable card grey' style='top: " + (125 * (id + 1 + id)) + "px; left: " + (250 * (id2 + 1)) + "px; height: 200px; width: 200px;' id='item" + (numCartas + 1) + "'>" +
+                "<div class='center-block face front'>" + (numCartas + 1) + "</div>" +
+                "<div class='face back'>" + memoCartas[numCartas] + "</div>" +
                 "</div>";
             numCartas++;
         }
     }
 
-    for (var j = 0; j < 8; j++) {
+    for (var j = 1; j < 9; j++) {
         document.getElementById("item" + j).setAttribute("onclick", "flip(" + j + ")");
     }
 }
 
 function flip(id) {
+
     console.log(id);
     document.getElementById("item" + id).setAttribute("class", document.getElementById("item" + id).getAttribute("class") + " flipped");
 }
 
 function selectItem(itemId) {
     if (jogo_memoria) {
-        var temp = document.getElementById("item" + itemId).getAttribute("class") + " selected";
-        document.getElementById("item" + itemId).setAttribute("class", temp);
+        document.getElementById("item" + itemId).click();
+        setTimeout(function () {
+            if (!par)
+                ultimo = itemId;
+            else if (document.getElementById("item" + ultimo).getElementsByTagName("div")[1].innerHTML != document.getElementById("item" + itemId).getElementsByTagName("div")[1].innerHTML) {
+                document.getElementById("item" + ultimo).setAttribute("class", "rounded carta valign-wrapper clickable card grey");
+                document.getElementById("item" + itemId).setAttribute("class", "rounded carta valign-wrapper clickable card grey");
+                ultimo = "";
+            }
+            par = !par;
+        }, 1000);
+        console.log(ultimo);
     }
 }
 
