@@ -39,10 +39,10 @@ h1{
 
 .flip {
     -webkit-perspective: 800;
-    width: 400px;
-    height: 200px;
-    position: relative;
-    margin: 50px auto;
+    /*width: 400px;*/
+    /*height: 200px;*/
+    /*position: relative;*/
+    /*margin: 50px auto;*/
 }
 .flip .card.flipped {
     -webkit-transform: rotatex(-180deg);
@@ -65,7 +65,7 @@ h1{
     line-height: 200px;
 }
 .flip .card .front {
-    position: absolute;
+    /*position: absolute;*/
     z-index: 1;
     background: black;
     color: white;

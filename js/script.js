@@ -259,7 +259,7 @@ function jogoMemoria() {
         //criar x pares de elementos (cartas) com id "memoCarta#"
         for (var id2 = 0; id2 < 4; id2++) {
             document.getElementById("line" + id).innerHTML +=
-                "<div class='rounded carta valign-wrapper clickable card grey' style='top: " + (125 * (id + 1 + id)) + "px; left: " + (250 * (id2 + 1)) + "px; height: 200px; width: 200px;' id='item" + (numCartas + 1) + "'>" +
+                "<div class='rounded carta valign-wrapper clickable card grey' style='top: " + (125 * (id + id)) + "px; left: " + (250 * (id2 + 1)) + "px; height: 200px; width: 200px;' id='item" + (numCartas + 1) + "'>" +
                 "<div class='center-block face front'>" + (numCartas + 1) + "</div>" +
                 "<div class='face back'>" + memoCartas[numCartas] + "</div>" +
                 "</div>";
