@@ -139,13 +139,13 @@ function loadVarrimento() {
 
 function loadVoiceRec() {
     speechRecognition = new webkitSpeechRecognition();
-    var colors = [ '1' , '2' , '3', '4', '5', '6', '7', '8'];
-    var grammar = '#JSGF V1.0; grammar colors; public <color> = ' + colors.join(' | ') + ' ;';
-    var grammarList = new webkitSpeechGrammarList();
-    grammarList.addFromString(grammar, 1);
-    console.log(grammarList);
-
-    speechRecognition.grammars = grammar;
+    // var colors = [ '1' , '2' , '3', '4', '5', '6', '7', '8'];
+    // var grammar = '#JSGF V1.0; grammar colors; public <color> = ' + colors.join(' | ') + ' ;';
+    // var grammarList = new webkitSpeechGrammarList();
+    // grammarList.addFromString(grammar, 1);
+    // console.log(grammarList);
+    //
+    // speechRecognition.grammars = grammar;
     speechRecognition.lang = 'pt-PT';                       // default: html lang
     speechRecognition.continuous = false;                   // default: false
     speechRecognition.interimResults = false;               // resultados intermédios, com .final = false (default: false)
@@ -169,7 +169,7 @@ function loadVoiceRec() {
         if ((command == "cancela" || command == "cancelar") && debug)
             stop = true;
         else
-            selectItem(command);
+            selectItem(command[command.length - 1]);
 
     };
     speechRecognition.onspeechend = function () {
@@ -258,24 +258,33 @@ function jogoMemoria() {
     //criar linhas com id "linha1" até 2
     for (var id = 0; id < 2; id++) {
         document.getElementById("memoTab").innerHTML +=
-            "<div class='flip' id='linha" + id + "'><div/>";
+            "<div class='flip' id='line" + id + "'><div/>";
 
         //criar x pares de elementos (cartas) com id "memoCarta#"
         for (var id2 = 0; id2 < 4; id2++) {
-            document.getElementById("linha" + id).innerHTML +=
-                "<div class='rounded carta valign-wrapper clickable card grey' style='top: " + (125 * (id + 1 + id)) + "px; left: " + (250 * (id2 + 1)) + "px; height: 200px; width: 200px;' id='memoCarta" + (numCartas + 1) + "'>" +
+            document.getElementById("line" + id).innerHTML +=
+                "<div class='rounded carta valign-wrapper clickable card grey' style='top: " + (125 * (id + 1 + id)) + "px; left: " + (250 * (id2 + 1)) + "px; height: 200px; width: 200px;' id='item" + numCartas + "'>" +
                 "<div class='center-block face front'>" + memoCartas[numCartas] + "</div>" +
-                // "<div class='face back'>numCartas</div>" +
+                "<div class='face back'>numCartas</div>" +
                 "</div>";
             numCartas++;
         }
     }
+
+    for (var j = 0; j < 8; j++) {
+        document.getElementById("item" + j).setAttribute("onclick", "flip(" + j + ")");
+    }
+}
+
+function flip(id) {
+    console.log(id);
+    document.getElementById("item" + id).setAttribute("class", document.getElementById("item" + id).getAttribute("class") + " flipped");
 }
 
 function selectItem(itemId) {
     if (jogo_memoria) {
-        var temp = document.getElementById("memoCarta" + itemId).getAttribute("class") + " selected";
-        document.getElementById("memoCarta" + itemId).setAttribute("class", temp);
+        var temp = document.getElementById("item" + itemId).getAttribute("class") + " selected";
+        document.getElementById("item" + itemId).setAttribute("class", temp);
     }
 }
 
