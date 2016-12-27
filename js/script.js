@@ -89,22 +89,23 @@ function loadPointAndWait() {
     var elements = document.getElementsByClassName("clickable");
     // console.log(elements);
     for (var i = 0; i < elements.length; i++) {
-
+        var content = elements[i].getElementsByTagName("div")[0].innerHTML;
         var elLeft = parseInt(elements[i].style.left);
         var elRight = elLeft + 200;
         var elTop = parseInt(elements[i].style.top);
         var elBottom = elTop + 200;
         // print(posX + " " + posY + "__" + elLeft + " " + elRight + " " + elTop + " " + elBottom);
         if (posX > elLeft && posX < elRight && posY > elTop && posY < elBottom) {
-            elements[i].innerHTML = "<i class='material-icons large'>schedule</i>";
+            elements[i].getElementsByTagName("div").style.display = "none";
             elem = elements[i];
+            print(content);
             if (!anim) {
                 selecting = setInterval("select(elem)", 500);
                 anim = true;
             }
             // console.log("eu");
         } else {
-            elements[i].innerHTML = "";
+            elements[i].getElementsByTagName("div")[0].innerHTML = content;
             // sprite = 0;
         }
     }
