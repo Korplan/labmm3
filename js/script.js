@@ -22,8 +22,22 @@ var memoCartas = [1, 1, 2, 2, 3, 3, 4, 4]; //array com pares de cartas
 var par = false;
 var ultimo = "";
 
+//----------JOGO_PALAVRAS----------
+var feitas = [];
+
 
 //----------GERAL----------
+var interacao;                  // 0 - Point Wait
+                                // 1 - Point Click
+                                // 2 - Varrimento
+                                // 3 - Voz
+
+var jogo = 0;                   // 0 - Menu
+                                // 1 - Jogo Memoria
+                                // 2 - Jogo Numeros
+                                // 3 - Jogo Palavras
+                                // 4 - Jogo Cores
+
 var jogo_memoria = false;
 var voiceEnable = false;
 var pawEnable = false;
@@ -42,6 +56,7 @@ window.onload = function () {
         document.getElementById("voz").onclick = function () {
             document.getElementById("interacao1").style.display = "none";
             document.getElementById("interacao2").style.display = "block";
+            interacao = 3;
             voiceEnable = true;
             loadVoiceRec();
         };
@@ -59,6 +74,7 @@ window.onload = function () {
         document.getElementById("interacao1").style.display = "none";
         document.getElementById("interacao2").style.display = "block";
         loadPointAndWait();
+        interacao = 0;
         // fps = setInterval("loadPointAndWait()", 250);
         pawEnable = true;
     };
@@ -66,12 +82,14 @@ window.onload = function () {
     document.getElementById("point_click").onclick = function () {
         document.getElementById("interacao1").style.display = "none";
         document.getElementById("interacao2").style.display = "block";
+        interacao = 1;
         loadPointAndClick();
     };
 
     document.getElementById("varrimento").onclick = function () {
         document.getElementById("interacao1").style.display = "none";
         document.getElementById("interacao2").style.display = "block";
+        interacao = 2;
         loadVarrimento();
     };
 
@@ -83,7 +101,14 @@ window.onload = function () {
             speechRecognition.start();
         if (pawEnable)
             loadPointAndWait();
+    };
+
+    document.getElementById("btn_palavras").onclick = function () {
+        document.getElementById("interacao2").style.display = "none";
+        document.getElementById("jogoPalavras").style.display = "block";
+        loadJogoPalavras();
     }
+
 
 };
 
@@ -279,7 +304,7 @@ function jogoMemoria() {
 
 function flip(id) {
     console.log(id);
-    document.getElementById("item" + id).setAttribute("class", document.getElementById("item" + id).getAttribute("class") + " flipped");
+    document.getElementById("item" + id).classList.add("flipped"); //setAttribute("class", document.getElementById("item" + id).getAttribute("class") + " flipped");
     document.getElementById("item" + id).onclick = null;
     document.getElementById("item" + id).onmouseover = null;
 
@@ -288,11 +313,10 @@ function flip(id) {
             if (!par)
                 ultimo = id;
             else if (document.getElementById("item" + ultimo).getElementsByTagName("div")[1].innerHTML != document.getElementById("item" + id).getElementsByTagName("div")[1].innerHTML) {
-                document.getElementById("item" + ultimo).setAttribute("class", "rounded carta valign-wrapper clickable card grey");
-                document.getElementById("item" + id).setAttribute("class", "rounded carta valign-wrapper clickable card grey");
+                document.getElementById("item" + ultimo).classList.remove("flipped"); //setAttribute("class", "rounded carta valign-wrapper clickable card grey");
+                document.getElementById("item" + id).classList.remove("flipped"); //setAttribute("class", "rounded carta valign-wrapper clickable card grey");
                 document.getElementById("item" + id).setAttribute("onclick", "flip(" + id + ")");
                 document.getElementById("item" + ultimo).setAttribute("onclick", "flip(" + ultimo + ")");
-                loadPointAndWait();
                 ultimo = "";
             }
             par = !par;
@@ -304,4 +328,56 @@ function flip(id) {
 function print(s) {
     if (debug)
         console.log(s);
+}
+
+function loadJogoPalavras() {
+    var palavras = [];
+    palavras[0] = ["ba", "na", "na"];
+    palavras[1] = ["ro", "ja", "mi"];
+    palavras[2] = ["la", "ran", "ja"];
+    palavras[3] = ["ro", "mo", "cas"];
+    palavras[4] = ["mo", "ran", "go"];
+    palavras[5] = ["ca", "ro", "çã"];
+    palavras[6] = ["ce", "nou", "ra"];
+    palavras[7] = ["ge", "la", "ti"];
+    palavras[8] = ["ma", "ra", "cu", "já"];
+    palavras[9] = ["ba", "na", "a"];
+    palavras[10] = ["pe", "ra"];
+    palavras[11] = ["ma", "ge", "ri"];
+    palavras[12] = ["ma", "çã"];
+    palavras[13] = ["pe", "mor", "ca"];
+
+    var palavra;
+    do {
+        palavra = Math.floor(Math.random() * palavras.length);
+        console.log("ciclo");
+    } while (palavra % 2 != 0 || feitas.indexOf(palavra) != -1);
+
+    var retira = Math.floor(Math.random() * palavras[palavra].length);
+
+    document.getElementById("palavraIncompleta").innerHTML = "";
+
+    for (var i = 0; i < palavras[palavra].length; i++) {
+        if (retira != i)
+            document.getElementById("palavraIncompleta").innerHTML += palavras[palavra][i];
+        else
+            for (var j = 0; j < palavras[palavra][retira].length; j++)
+                document.getElementById("palavraIncompleta").innerHTML += "_";
+    }
+
+
+    document.getElementById("letras").innerHTML = "";
+    for (var k = 0; k < palavras[palavra + 1].length; k++) {
+        document.getElementById("letras").innerHTML += "<div class='menuIcon rounded col m3' onclick='console.log(\"errado\")'>" + palavras[palavra + 1][k] + "</div>";
+    }
+    document.getElementById("letras").innerHTML += "<div id='certo' class='menuIcon rounded col m3'>" + palavras[palavra][retira] + "</div>";
+    document.getElementById("certo").onclick = function () {
+        feitas.push(palavra);
+        console.log(feitas.length + " / " + palavras.length / 2);
+        if (palavras.length / 2 == feitas.length) {
+            alert("não ha mais");
+            document.getElementById("certo").onclick = null;
+        } else
+            loadJogoPalavras();
+    }
 }
