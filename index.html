@@ -61,12 +61,54 @@
     </div>
 </div>
 <div id="jogoPalavras" style="display: none">
+    <h1 class="center">Jogo das Palavras</h1>
+    <div class="container">
+        <h1 class="center" id="palavraIncompleta"></h1>
+        <div class="row" id="letras"></div>
+    </div>
+</div>
+<div id="jogoCores" style="display: none">
     <h1 class="center">Jogo das Cores</h1>
-    <h1 class="center" id="palavraIncompleta"></h1>
-    <div class="row" id="letras"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col m6">
+                <div class="row">
+                    <div class="col m6" id="cor1">
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col m6" id="cor2">
+
+                    </div>
+                    <div class="col m6" id="corFinal" style="background-color: white">
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col m6" id="cor3">
+
+                    </div>
+                    <div class="col m6">
+                        <div class="center-block" id="apagar">
+                            <span>X</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col m6" id="imagem">
+
+            </div>
+        </div>
+    </div>
 </div>
 
 <script src="js/jquery-3.1.1.min.js"></script>
 <script src="js/materialize.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.modal').modal();
+    });
+</script>
 </body>
 </html>

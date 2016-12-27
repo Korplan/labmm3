@@ -107,6 +107,12 @@ window.onload = function () {
         document.getElementById("interacao2").style.display = "none";
         document.getElementById("jogoPalavras").style.display = "block";
         loadJogoPalavras();
+    };
+
+    document.getElementById("btn_cores").onclick = function () {
+        document.getElementById("interacao2").style.display = "none";
+        document.getElementById("jogoCores").style.display = "block";
+        loadJogoCores();
     }
 
 
@@ -379,5 +385,66 @@ function loadJogoPalavras() {
             document.getElementById("certo").onclick = null;
         } else
             loadJogoPalavras();
+    }
+}
+
+function loadJogoCores() {
+    var final;
+    document.getElementById("cor1").onclick = function () {
+        final = document.getElementById("corFinal");
+        console.log(final.style.backgroundColor);
+        switch (final.style.backgroundColor) {
+            case 'white':
+                final.style.backgroundColor = "magenta";
+                break;
+            case 'cyan':
+                final.style.backgroundColor = "purple";
+                break;
+            case 'yellow':
+                final.style.backgroundColor = "orange";
+                break;
+            default:
+                console.log("nada");
+                break;
+        }
+    };
+    document.getElementById("cor2").onclick = function () {
+        final = document.getElementById("corFinal");
+        console.log(final.style.backgroundColor);
+        switch (final.style.backgroundColor) {
+            case 'white':
+                final.style.backgroundColor = "cyan";
+                break;
+            case 'magenta':
+                final.style.backgroundColor = "purple";
+                break;
+            case 'yellow':
+                final.style.backgroundColor = "green";
+                break;
+            default:
+                console.log("nada");
+                break;
+        }
+    };
+    document.getElementById("cor3").onclick = function () {
+        final = document.getElementById("corFinal");
+        console.log(final.style.backgroundColor);
+        switch (final.style.backgroundColor) {
+            case 'white':
+                final.style.backgroundColor = "yellow";
+                break;
+            case 'cyan':
+                final.style.backgroundColor = "green";
+                break;
+            case 'magenta':
+                final.style.backgroundColor = "orange";
+                break;
+            default:
+                console.log("nada");
+                break;
+        }
+    };
+    document.getElementById("apagar").onclick = function () {
+        document.getElementById("corFinal").style.backgroundColor = "white";
     }
 }

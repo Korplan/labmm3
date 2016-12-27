@@ -11,7 +11,7 @@ body{
 }
 
 .menuIcon, .carta{
-    position: absolute;
+    /*position: absolute;*/
     height: 200px;
     width: 200px;
 }
@@ -76,5 +76,40 @@ h1{
     background: blue;
     background: white;
     color: black;
+    cursor: pointer;
+}
+
+#cor1, #cor2, #cor3{
+    border-radius: 50px;
+    width: 100px;
+    height: 100px;
+    margin: 25px;
+    cursor: url("../img/PaW/0.png"),pointer;
+}
+
+#cor1{
+    background-color: magenta;
+}
+
+#cor2{
+    background-color: cyan;
+}
+
+#cor3{
+    background-color: yellow;
+}
+
+#corFinal{
+    border-radius: 100px;
+    width: 150px;
+    height: 150px;
+    margin-left: 50px;
+}
+
+#apagar{
+    width: 25px;
+    height: 25px;
+    background-color: white;
+    border-radius: 25px;
     cursor: pointer;
 }
