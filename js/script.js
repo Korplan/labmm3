@@ -337,27 +337,24 @@ function print(s) {
 }
 
 function loadJogoPalavras() {
+    var silabas = ["ba", "na", "mo", "ja", "a", "la", "tar", "pol", "sor", "cur", "ve", "ga", "ção", "tra", "du", "tor"];
+    var hipoteses = [];
     var palavras = [];
     palavras[0] = ["ba", "na", "na"];
-    palavras[1] = ["ro", "ja", "mi"];
-    palavras[2] = ["la", "ran", "ja"];
-    palavras[3] = ["ro", "mo", "cas"];
-    palavras[4] = ["mo", "ran", "go"];
-    palavras[5] = ["ca", "ro", "çã"];
-    palavras[6] = ["ce", "nou", "ra"];
-    palavras[7] = ["ge", "la", "ti"];
-    palavras[8] = ["ma", "ra", "cu", "já"];
-    palavras[9] = ["ba", "na", "a"];
-    palavras[10] = ["pe", "ra"];
-    palavras[11] = ["ma", "ge", "ri"];
-    palavras[12] = ["ma", "çã"];
-    palavras[13] = ["pe", "mor", "ca"];
+    palavras[1] = ["la", "ran", "ja"];
+    palavras[2] = ["mo", "ran", "go"];
+    palavras[3] = ["ce", "nou", "ra"];
+    palavras[4] = ["ma", "ra", "cu", "já"];
+    palavras[5] = ["pe", "ra"];
+    palavras[6] = ["ma", "çã"];
+    palavras[7] = ["a", "na", "nás"];
+    palavras[8] = ["ce", "re", "ja"];
 
     var palavra;
     do {
         palavra = Math.floor(Math.random() * palavras.length);
         console.log("ciclo");
-    } while (palavra % 2 != 0 || feitas.indexOf(palavra) != -1);
+    } while (feitas.indexOf(palavra) != -1);
 
     var retira = Math.floor(Math.random() * palavras[palavra].length);
 
@@ -373,14 +370,22 @@ function loadJogoPalavras() {
 
 
     document.getElementById("letras").innerHTML = "";
-    for (var k = 0; k < palavras[palavra + 1].length; k++) {
-        document.getElementById("letras").innerHTML += "<div class='menuIcon rounded col m3' onclick='console.log(\"errado\")'>" + palavras[palavra + 1][k] + "</div>";
+    for (var k = 0; k < 3; k++) {
+        var random = silabas[Math.floor(Math.random() * silabas.length)];
+        if (random != palavras[palavra][retira])
+            hipoteses[k] = "<div class='rounded col m3'>" + random + "</div>";
+        console.log(random);
+        console.log(palavras[palavra][retira]);
     }
-    document.getElementById("letras").innerHTML += "<div id='certo' class='menuIcon rounded col m3'>" + palavras[palavra][retira] + "</div>";
+    hipoteses[k] = "<div id='certo' class='rounded col m3'>" + palavras[palavra][retira] + "</div>";
+    hipoteses.sort(function () {
+        return 0.5 - Math.random()
+    });
+    document.getElementById("letras").innerHTML = hipoteses.join("");
     document.getElementById("certo").onclick = function () {
         feitas.push(palavra);
-        console.log(feitas.length + " / " + palavras.length / 2);
-        if (palavras.length / 2 == feitas.length) {
+        console.log(feitas.length + " / " + palavras.length);
+        if (palavras.length == feitas.length) {
             alert("não ha mais");
             document.getElementById("certo").onclick = null;
         } else
@@ -392,16 +397,16 @@ function loadJogoCores() {
     var final;
     document.getElementById("cor1").onclick = function () {
         final = document.getElementById("corFinal");
-        console.log(final.style.backgroundColor);
-        switch (final.style.backgroundColor) {
-            case 'white':
-                final.style.backgroundColor = "magenta";
+        console.log(rgbToHex(final.style.backgroundColor));
+        switch (rgbToHex(final.style.backgroundColor)) {
+            case '#ffffff':
+                final.style.backgroundColor = "#c2185b";
                 break;
-            case 'cyan':
-                final.style.backgroundColor = "purple";
+            case '#00b0ff':
+                final.style.backgroundColor = "#7b1fa2";
                 break;
-            case 'yellow':
-                final.style.backgroundColor = "orange";
+            case '#f4b400':
+                final.style.backgroundColor = "#d84315";
                 break;
             default:
                 console.log("nada");
@@ -410,16 +415,16 @@ function loadJogoCores() {
     };
     document.getElementById("cor2").onclick = function () {
         final = document.getElementById("corFinal");
-        console.log(final.style.backgroundColor);
-        switch (final.style.backgroundColor) {
-            case 'white':
-                final.style.backgroundColor = "cyan";
+        console.log(rgbToHex(final.style.backgroundColor));
+        switch (rgbToHex(final.style.backgroundColor)) {
+            case '#ffffff':
+                final.style.backgroundColor = "#00b0ff";
                 break;
-            case 'magenta':
-                final.style.backgroundColor = "purple";
+            case '#c2185b':
+                final.style.backgroundColor = "#7b1fa2";
                 break;
-            case 'yellow':
-                final.style.backgroundColor = "green";
+            case '#f4b400':
+                final.style.backgroundColor = "#43a047";
                 break;
             default:
                 console.log("nada");
@@ -429,15 +434,15 @@ function loadJogoCores() {
     document.getElementById("cor3").onclick = function () {
         final = document.getElementById("corFinal");
         console.log(final.style.backgroundColor);
-        switch (final.style.backgroundColor) {
-            case 'white':
-                final.style.backgroundColor = "yellow";
+        switch (rgbToHex(final.style.backgroundColor)) {
+            case '#ffffff':
+                final.style.backgroundColor = "#f4b400";
                 break;
-            case 'cyan':
-                final.style.backgroundColor = "green";
+            case '#00b0ff':
+                final.style.backgroundColor = "#43a047";
                 break;
-            case 'magenta':
-                final.style.backgroundColor = "orange";
+            case '#c2185b':
+                final.style.backgroundColor = "#d84315";
                 break;
             default:
                 console.log("nada");
@@ -445,6 +450,20 @@ function loadJogoCores() {
         }
     };
     document.getElementById("apagar").onclick = function () {
-        document.getElementById("corFinal").style.backgroundColor = "white";
+        document.getElementById("corFinal").style.backgroundColor = "#ffffff";
+    }
+}
+
+function rgbToHex(col)
+{
+    if(col.charAt(0)=='r')
+    {
+        col=col.replace('rgb(','').replace(')','').split(',');
+        var r=parseInt(col[0], 10).toString(16);
+        var g=parseInt(col[1], 10).toString(16);
+        var b=parseInt(col[2], 10).toString(16);
+        r=r.length==1?'0'+r:r; g=g.length==1?'0'+g:g; b=b.length==1?'0'+b:b;
+        var colHex='#'+r+g+b;
+        return colHex;
     }
 }

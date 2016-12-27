@@ -28,8 +28,8 @@ h1{
 
 .menuIcon, .carta{
     /*position: absolute;*/
-    height: 200px;
-    width: 200px;
+    height: 250px;
+    /*width: 200px;*/
     color: #363636;
 }
 
@@ -101,15 +101,15 @@ h1{
 }
 
 #cor1{
-    background-color: magenta;
+    background-color: #c2185b;
 }
 
 #cor2{
-    background-color: cyan;
+    background-color: #00b0ff;
 }
 
 #cor3{
-    background-color: yellow;
+    background-color: #f4b400;
 }
 
 #corFinal{
@@ -117,6 +117,7 @@ h1{
     width: 150px;
     height: 150px;
     margin-left: 50px;
+    transition: background-color 1s ease;
 }
 
 #apagar{
