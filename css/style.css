@@ -1,19 +1,36 @@
+/*----------GERAL--------*/
 body{
-    background-color: cornflowerblue;
+    background-color: #74c043;
+    color: #fff;
 }
 
-.white_elem{
-    background-color: white;
-}
-
+/*Borda redonda*/
 .rounded{
     border-radius: 10px;
+}
+
+/*Títulos*/
+h1{
+    font-size: 20px;
+    text-transform: uppercase;
+    color: #fff;
+}
+
+/*----------CORES--------*/
+.grey{
+    background-color: grey;
+}
+
+/*----------ELEMENTOS--------*/
+.white_elem{
+    background-color: white;
 }
 
 .menuIcon, .carta{
     /*position: absolute;*/
     height: 200px;
     width: 200px;
+    color: #363636;
 }
 
 .grey{
@@ -24,21 +41,19 @@ body{
     background-color: grey;
 }
 
-h1{
-    font-size: 20px;
+.margin_top_bottom{
+    Margin-top: 20vh;
+    Margin-bottom: 20vh;
 }
 
+/*Clicáveis*/
 .clickable{
     cursor: pointer;
 }
 
-/* ----CLASSE DE TESTE---- */
-.selected{
-    border: 2px solid red;
-}
-
+/*----------OUTROS--------*/
 .flip {
-    -webkit-perspective: 800;
+    -webkit-perspective: 800px;
     /*width: 400px;*/
     /*height: 200px;*/
     /*position: relative;*/
@@ -59,7 +74,6 @@ h1{
     position: absolute;
     -webkit-backface-visibility: hidden ;
     z-index: 2;
-    font-family: Georgia;
     font-size: 3em;
     text-align: center;
     line-height: 200px;
@@ -73,7 +87,6 @@ h1{
 }
 .flip .card .back {
     -webkit-transform: rotatex(-180deg);
-    background: blue;
     background: white;
     color: black;
     cursor: pointer;
@@ -112,4 +125,19 @@ h1{
     background-color: white;
     border-radius: 25px;
     cursor: pointer;
+}
+
+/*Classe de Teste*/
+.selected{
+    border: 2px solid red;
+}
+
+.modal{
+    color: #363636;
+    margin-top: 20vh;
+}
+
+.icon{
+    height: 80%;
+    width: 80%;
 }

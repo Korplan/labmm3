@@ -10,47 +10,63 @@
 </head>
 <body>
 <div id="interacao1">
-    <h1 class="center">Metodo de interaçao</h1>
+    <h1 class="center margin_top_bottom">TIPO DE NAVEGAÇÃO</h1>
     <div class="container">
         <div class="row">
-            <div class="rounded menuIcon valign-wrapper white_elem white_elem z-depth-4 clickable"
-                 style="left: 200px; top: 250px" id="varrimento">
-                <div class="center-block"><i class="material-icons large">view_carousel</i></div>
+            <div class="col m3 s6 xs12 l3 xl3 center">
+                <div class="rounded menuIcon valign-wrapper white_elem  z-depth-2 clickable modal-trigger modal-action" data-target="modal1" id="varrimento">
+                    <div class="center-block"><i class="material-icons large">view_carousel</i></div>
+                </div>
+                <p>Varrimento</p>
             </div>
-            <div class="rounded menuIcon valign-wrapper white_elem white_elem z-depth-4 clickable"
-                 style="left: 450px; top: 250px" id="point_wait">
-                <div class="center-block"><i class="material-icons large">restore</i></div>
+            <div class="col m3 s6 xs12 l3 xl3 center">
+                <div class="rounded menuIcon valign-wrapper white_elem  z-depth-2 clickable" id="point_wait">
+                    <div class="center-block"><i class="material-icons large">restore</i></div>
+                </div>
+                <p>Apontar e Esperar</p>
             </div>
-            <div class="rounded menuIcon valign-wrapper white_elem white_elem z-depth-4 clickable"
-                 style="left: 700px; top: 250px" id="point_click">
-                <div class="center-block"><i class="material-icons large">mouse</i></div>
+            <div class="col m3 s6 xs12 l3 xl3 center">
+                <div class="rounded menuIcon valign-wrapper white_elem z-depth-2 clickable" id="point_click">
+                    <div class="center-block"><i class="material-icons large">mouse</i></div>
+                </div>
+                <p>Cursor</p>
             </div>
-            <div class="rounded menuIcon valign-wrapper white_elem white_elem z-depth-4 clickable"
-                 style="left: 950px; top: 250px" id="voz">
-                <div class="center-block"><i class="material-icons large">mic</i></div>
+            <div class="col m3 s6 xs12 l3 xl3 center">
+                <div class="rounded menuIcon valign-wrapper white_elem  z-depth-2 clickable" id="voz">
+                    <div class="center-block"><i class="material-icons large">mic</i></div>
+                </div>
+                <p>Voz</p>
             </div>
         </div>
     </div>
 </div>
 <div id="interacao2" style="display: none">
-    <h1 class="center">Jogos</h1>
+    <h1 class="center margin_top_bottom">Jogos</h1>
     <div class="container">
         <div class="row">
-            <div class="rounded menuIcon valign-wrapper z-depth-4 clickable inativo" style="left: 200px; top: 250px"
-                 id="btn_num">
-                <div class="center-block"><i class="material-icons large">star</i></div>
+            <div class="col m3 s6 xs12 l3 xl3 center">
+                <div class="rounded menuIcon valign-wrapper z-depth-2 clickable white_elem" id="btn_num">
+                    <div class="center-block"><img src="img/icons/icon_numeros.png" class="icon"/></div>
+                </div>
+                <p>Números</p>
             </div>
-            <div class="rounded menuIcon valign-wrapper z-depth-4 clickable" style="left: 450px; top: 250px"
-                 id="btn_palavras">
-                <div class="center-block"><i class="material-icons large">star</i></div>
+            <div class="col m3 s6 xs12 l3 xl3 center">
+                <div class="rounded menuIcon valign-wrapper z-depth-2 clickable inativo" id="btn_palavras">
+                    <div class="center-block"><img src="img/icons/icon_palavras.png" class="icon"/></div>
+                </div>
+                <p>Palavras</p>
             </div>
-            <div class="rounded menuIcon valign-wrapper z-depth-4 clickable" style="left: 700px; top: 250px"
-                 id="btn_mem">
-                <div class="center-block"><i class="material-icons large">star</i></div>
+            <div class="col m3 s6 xs12 l3 xl3 center">
+                <div class="rounded menuIcon valign-wrapper z-depth-2 clickable white_elem" id="btn_mem">
+                    <div class="center-block"><img src="img/icons/icon_memoria.png" class="icon"/></div>
+                </div>
+                <p>Memória</p>
             </div>
-            <div class="rounded menuIcon valign-wrapper z-depth-4 clickable inativo" style="left: 950px; top: 250px"
-                 id="btn_cores">
-                <div class="center-block"><i class="material-icons large">star</i></div>
+            <div class="col m3 s6 xs12 l3 xl3 center">
+                <div class="rounded menuIcon valign-wrapper z-depth-2 clickable inativo" id="btn_cores">
+                    <div class="center-block"><img src="img/icons/icon_cores.png" class="icon"/></div>
+                </div>
+                <p>Cores</p>
             </div>
         </div>
     </div>
@@ -73,24 +89,24 @@
         <div class="row">
             <div class="col m6">
                 <div class="row">
-                    <div class="col m6" id="cor1">
+                    <div class="col m6 z-depth-2" id="cor1">
 
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col m6" id="cor2">
+                    <div class="col m6 z-depth-2" id="cor2">
 
                     </div>
-                    <div class="col m6" id="corFinal" style="background-color: white">
+                    <div class="col m6 z-depth-4" id="corFinal" style="background-color: white">
 
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col m6" id="cor3">
+                    <div class="col m6 z-depth-2" id="cor3">
 
                     </div>
                     <div class="col m6">
-                        <div class="center-block" id="apagar">
+                        <div class="center-block z-depth-2" id="apagar">
                             <span>X</span>
                         </div>
                     </div>
@@ -103,10 +119,23 @@
     </div>
 </div>
 
+        <!-- Modal Trigger -->
+<!--        <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a>
+<!-- Modal Structure -->
+<div id="modal1" class="modal">
+    <div class="modal-content">
+        <h4>ALTERAR O TIPO DE INTERAÇÃO</h4>
+        <p>Pode alterar a qualquer momento o tipo de interação no menu de opções .</p>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Continuar</a>
+    </div>
+</div>
+
 <script src="js/jquery-3.1.1.min.js"></script>
 <script src="js/materialize.min.js"></script>
 <script>
-    $(document).ready(function() {
+    $(document).ready(function(){
         $('.modal').modal();
     });
 </script>
