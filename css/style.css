@@ -143,3 +143,20 @@ h1{
     height: 80%;
     width: 80%;
 }
+
+.side-nav .collapsible{
+    margin-left: 32px !important;
+}
+
+@media only screen and (max-width: 992px){
+    .side-nav .collapsible{
+        margin-left: 16px !important;
+    }
+}
+
+#settings{
+    color: #FFF;
+    position: absolute;
+    top: 0;
+    left: 0;
+}

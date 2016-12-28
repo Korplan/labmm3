@@ -282,7 +282,7 @@ function loadVoiceRec() {
 function jogoMemoria() {
     jogo_memoria = true;
     //define posições aleatorias para os elementos do array
-    memoCartas.sort(function (a, b) {
+    memoCartas.sort(function () {
         return 0.5 - Math.random()
     });
     var numCartas = 0; //nenhuma carta colocada

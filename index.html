@@ -9,30 +9,36 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
+<a href="#" data-activates="slide-out" class="button-collapse" id="settings"><i
+        class="material-icons medium">settings</i></a>
 <div id="interacao1">
     <h1 class="center margin_top_bottom">TIPO DE NAVEGAÇÃO</h1>
     <div class="container">
         <div class="row">
             <div class="col m3 s6 xs12 l3 xl3 center">
-                <div class="rounded menuIcon valign-wrapper white_elem  z-depth-2 clickable modal-trigger modal-action" data-target="modal1" id="varrimento">
+                <div class="rounded menuIcon valign-wrapper white_elem  z-depth-2 clickable modal-trigger modal-action"
+                     data-target="modal1" id="varrimento">
                     <div class="center-block"><i class="material-icons large">view_carousel</i></div>
                 </div>
                 <p>Varrimento</p>
             </div>
             <div class="col m3 s6 xs12 l3 xl3 center">
-                <div class="rounded menuIcon valign-wrapper white_elem  z-depth-2 clickable modal-trigger modal-action" data-target="modal1" id="point_wait">
+                <div class="rounded menuIcon valign-wrapper white_elem  z-depth-2 clickable modal-trigger modal-action"
+                     data-target="modal1" id="point_wait">
                     <div class="center-block"><i class="material-icons large">restore</i></div>
                 </div>
                 <p>Apontar e Esperar</p>
             </div>
             <div class="col m3 s6 xs12 l3 xl3 center">
-                <div class="rounded menuIcon valign-wrapper white_elem z-depth-2 clickable modal-trigger modal-action" data-target="modal1" id="point_click">
+                <div class="rounded menuIcon valign-wrapper white_elem z-depth-2 clickable modal-trigger modal-action"
+                     data-target="modal1" id="point_click">
                     <div class="center-block"><i class="material-icons large">mouse</i></div>
                 </div>
                 <p>Cursor</p>
             </div>
             <div class="col m3 s6 xs12 l3 xl3 center">
-                <div class="rounded menuIcon valign-wrapper white_elem  z-depth-2 clickable modal-trigger modal-action" data-target="modal1" id="voz">
+                <div class="rounded menuIcon valign-wrapper white_elem  z-depth-2 clickable modal-trigger modal-action"
+                     data-target="modal1" id="voz">
                     <div class="center-block"><i class="material-icons large">mic</i></div>
                 </div>
                 <p>Voz</p>
@@ -107,8 +113,8 @@
 
                     </div>
                     <div class="col m6">
-                        <div class="center-block z-depth-2" id="apagar">
-                            <span>X</span>
+                        <div class="center z-depth-2" id="apagar">
+                            <i class="material-icons tiny" style="color:#000;">close</i>
                         </div>
                     </div>
                 </div>
@@ -127,25 +133,82 @@
     </div>
 </div>
 
-        <!-- Modal Trigger -->
+<!-- Modal Trigger -->
 <!--        <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a>
 <!-- Modal Structure -->
 <div id="modal1" class="modal">
     <div class="modal-content">
         <h4>ALTERAR O TIPO DE INTERAÇÃO</h4>
-        <p>Pode alterar a qualquer momento o tipo de interação no menu de opções <i class="material-icons tiny">settings</i>.</p>
+        <p>Pode alterar a qualquer momento o tipo de interação no menu de opções <i
+                class="material-icons tiny">settings</i>.</p>
     </div>
     <div class="modal-footer">
         <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Continuar</a>
     </div>
 </div>
 
+
+<ul id="slide-out" class="side-nav">
+    <li>
+        <div class="userView center">
+            <img src="img/icons/logo.png" style="width: 50%">
+        </div>
+    </li>
+    <li><a class="subheader" style="color: red">SOM</a></li>
+    <li>
+        <div class="switch">
+            <a>Leitura de ecrã
+                <label>
+                    <input type="checkbox">
+                    <span class="lever"></span>
+                </label>
+            </a>
+        </div>
+    </li>
+    <li>
+        <div class="switch">
+            <a>Música
+                <label>
+                    <input type="checkbox">
+                    <span class="lever"></span>
+                </label>
+            </a>
+        </div>
+    </li>
+    <li><a class="subheader" style="color: red">NAVEGAÇÃO</a></li>
+    <li style="color: #000">
+        <ul class="collapsible" data-collapsible="accordion">
+            <li>
+                <input class="collapsible-header" name="menu" type="radio" id="menu_paw">
+                <label for="menu_paw">Apontar e esperar</label>
+                <div class="collapsible-body">Lorem ipsum dolor sit amet.</div>
+            </li>
+            <li>
+                <input class="collapsible-header" name="menu" type="radio" id="menu_cursor">
+                <label for="menu_cursor">Cursor</label>
+                <div class="collapsible-body">Lorem ipsum dolor sit amet.</div>
+            </li>
+            <li>
+                <input class="collapsible-header" name="menu" type="radio" id="menu_varriento">
+                <label for="menu_varriento">Varrimento</label>
+                <div class="collapsible-body">Lorem ipsum dolor sit amet.</div>
+            </li>
+            <li>
+                <input class="collapsible-header" name="menu" type="radio" id="menu_voz">
+                <label for="menu_voz">Controlo por voz</label>
+                <div class="collapsible-body">Lorem ipsum dolor sit amet.</div>
+            </li>
+        </ul>
+    </li>
+</ul>
+
 <script src="js/jquery-3.1.1.min.js"></script>
 <script src="js/materialize.min.js"></script>
 <script>
-    $(document).ready(function(){
+    $(document).ready(function () {
         $('.modal').modal();
     });
+    $(".button-collapse").sideNav();
 </script>
 </body>
 </html>
