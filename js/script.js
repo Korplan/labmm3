@@ -290,15 +290,15 @@ function jogoMemoria() {
     //criar linhas com id "linha1" até 2
     for (var id = 0; id < 2; id++) {
         document.getElementById("memoTab").innerHTML +=
-            "<div class='flip' id='line" + id + "'><div/>";
+            "</div><div class='flip' id='line" + id + "'></div>";
 
         //criar x pares de elementos (cartas) com id "item#"
         for (var id2 = 0; id2 < 4; id2++) {
             document.getElementById("line" + id).innerHTML +=
-                "<div class='rounded carta valign-wrapper clickable card grey' style='top: " + (125 * (id + id)) + "px; left: " + (250 * (id2 + 1)) + "px; height: 200px; width: 200px;' id='item" + (numCartas + 1) + "'>" +
+                "<div class='col s6 m4 l3'><div class='rounded carta valign-wrapper clickable card grey' style='height: 200px; width: 200px;' id='item" + (numCartas + 1) + "'>" +
                 "<div class='center-block face front'>" + (numCartas + 1) + "</div>" +
                 "<div class='face back'>" + memoCartas[numCartas] + "</div>" +
-                "</div>";
+                "</div></div>";
             numCartas++;
         }
     }
