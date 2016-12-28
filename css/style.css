@@ -97,7 +97,7 @@ h1{
     width: 100px;
     height: 100px;
     margin: 25px;
-    cursor: url("../img/PaW/0.png"),pointer;
+    cursor: pointer;
 }
 
 #cor1{
@@ -118,6 +118,7 @@ h1{
     height: 150px;
     margin-left: 50px;
     transition: background-color 1s ease;
+    cursor: default;
 }
 
 #apagar{

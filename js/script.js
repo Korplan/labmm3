@@ -397,6 +397,7 @@ function loadJogoCores() {
     var final;
     document.getElementById("cor1").onclick = function () {
         final = document.getElementById("corFinal");
+        document.getElementById("corFinal").style.cursor = "url('img/icons/brush.png'), pointer";
         console.log(rgbToHex(final.style.backgroundColor));
         switch (rgbToHex(final.style.backgroundColor)) {
             case '#ffffff':
@@ -415,6 +416,7 @@ function loadJogoCores() {
     };
     document.getElementById("cor2").onclick = function () {
         final = document.getElementById("corFinal");
+        document.getElementById("corFinal").style.cursor = "url('img/icons/brush.png'), pointer";
         console.log(rgbToHex(final.style.backgroundColor));
         switch (rgbToHex(final.style.backgroundColor)) {
             case '#ffffff':
@@ -433,6 +435,7 @@ function loadJogoCores() {
     };
     document.getElementById("cor3").onclick = function () {
         final = document.getElementById("corFinal");
+        document.getElementById("corFinal").style.cursor = "url('img/icons/brush.png'), pointer";
         console.log(final.style.backgroundColor);
         switch (rgbToHex(final.style.backgroundColor)) {
             case '#ffffff':
@@ -451,6 +454,7 @@ function loadJogoCores() {
     };
     document.getElementById("apagar").onclick = function () {
         document.getElementById("corFinal").style.backgroundColor = "#ffffff";
+        document.getElementById("corFinal").style.cursor = "default";
     }
 }
 
