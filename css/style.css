@@ -144,13 +144,20 @@ h1{
     width: 80%;
 }
 
-.side-nav .collapsible{
-    margin-left: 32px !important;
+.side-nav .collapsible li label{
+    margin-left: 32px;
+}
+
+.side-nav .collapsible-body span {
+    padding: 0 32px;
 }
 
 @media only screen and (max-width: 992px){
-    .side-nav .collapsible{
-        margin-left: 16px !important;
+    .side-nav .collapsible li label{
+        margin-left: 16px;
+    }
+    .side-nav .collapsible-body span {
+        padding: 0 16px;
     }
 }
 
