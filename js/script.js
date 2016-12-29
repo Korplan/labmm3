@@ -1,15 +1,15 @@
 //----------VARIÁVEIS GLOBAIS----------//
-var debug = true;                               //Prints na consola de coisas xD
+var debug = true;                               //(mostrar ou não) Prints na consola
 
 //----------VOICE2TEXT----------
 var speechRecognition;
 var stop = false;
 
 //----------TEXT2VOICE----------
-//var voices = [];
-//var volume = 1;
-//var speed = 1;
-//var pitch = 1;
+var voices = [];
+var volume = 1;
+var speed = 1;
+var pitch = 1;
 
 //----------POINTandWAIT----------
 var selecting;  //
@@ -48,8 +48,8 @@ var over = false;               //Interação por Point and Wait
 
 //----------DEBUG----------//
 function print(s) {
-    if (debug)
-        console.log(s);
+    if (debug)                  //Se debug==true
+        console.log(s);         //Faz print na consola dos parâmetros recebidos
 }
 
 
@@ -363,22 +363,25 @@ function loadJogoPalavras() {
         print("ciclo");
     } while (feitas.indexOf(palavra)!= -1);                             //Enquanto forem sorteadas palavras que já tenham saído é sorteada nova palavra (se o elemento de index # existir no array feitas repete ciclo)
 
-    var retira = Math.floor(Math.random() * palavras[palavra].length);  //Retira (retira sílaba de palavra) = Sorteio entre 0 e palavra.lenght do elemento sorteado acima
+    document.getElementById("palavraIncompleta").innerHTML = "<img src='img/frutas/" + palavras[palavra].join("") + ".png'/>";
 
+    var retira = Math.floor(Math.random() * palavras[palavra].length);  //Retira (retira sílaba de palavra) = Sorteio entre 0 e palavra.lenght do elemento sorteado acima
 
     for (var i = 0; i < palavras[palavra].length; i++) {                //Enquanto i for menor que o número de sílabas/indexs da(o) palavra/array "palavras[#]"
         if (retira != i)                                                //Se sílaba sorteada for diferente de i
-            document.getElementById("palavraIncompleta").innerHTML += palavras[palavra][i]; //Escreve a sílaba para formar a palavra
-        else                                                                                //Senão
+            document.getElementById("palavraIncompleta").innerHTML += "<div class='silaba'>" + palavras[palavra][i] + "</div>"; //Escreve a sílaba para formar a palavra
+        else{                                                                                //Senão
+            document.getElementById("palavraIncompleta").innerHTML +="<div id='silaba-falta'></div>";
             for (var j = 0; j < palavras[palavra][retira].length; j++)                      //Escreve um "_" por cada letra da sílaba retirada
-                document.getElementById("palavraIncompleta").innerHTML += "_";
+                document.getElementById("silaba-falta").innerHTML += "__ ";
+        }
     }
 
 
     for (var k = 0; k < 3; k++) {                                               //Nº de opções = 3 no máximo
         var random = silabas[Math.floor(Math.random() * silabas.length)];       //Random = ao index sorteado do array "silabas" entre 0 e nº de index máximo
         if (random != palavras[palavra][retira]){                               //Se a sílaba sorteada for diferente da sílaba retirada (que constitui a palavra a completar)
-            hipoteses[k] = "<div class='rounded col m3'>" + random + "</div>";  //É colocada num array "hipoteses" de index igual a K (=3)
+            hipoteses[k] = "<div class='col m2 offset-m1 center'><div class='silaba-opcao clickable'>" + random + "</div></div>";  //É colocada num array "hipoteses" de index igual a K (=3)
         }
         else {
             k--;                                                                //É decrementado um k para poder repetir o ciclo com o mesmo valor de k
@@ -386,12 +389,11 @@ function loadJogoPalavras() {
         print(random);
         print(palavras[palavra][retira]);
     }
-    hipoteses[k] = "<div id='certo' class='rounded col m3'>" + palavras[palavra][retira] + "</div>";    //Último index do array "hipoteses" é a sílaba certa para completar a palavra
+    hipoteses[k] = "<div class='col m2 offset-m1 center'><div id='certo' class='silaba-opcao clickable'>" + palavras[palavra][retira] + "</div></div>";    //Último index do array "hipoteses" é a sílaba certa para completar a palavra
     hipoteses.sort(function () {                                                                        //Dispõe em index aleatorios as sílabas do array (para que as opções )
         return 0.5 - Math.random()
     });
 
-    document.getElementById("opcoes").innerHTML = "";                           //O innerHTML do elemento "opcoes" está vazio
     document.getElementById("opcoes").innerHTML = hipoteses.join("");           //O innerHTML do elemento "opcoes" contém o array hipoteses com elemntos separados por espaço
     document.getElementById("certo").onclick = function () {                    //Ao clocar no elemento "certo" (sílaba certa)
         feitas.push(palavra);                                                   //Insere no fim do array "feitas" o index da palavra
@@ -401,7 +403,7 @@ function loadJogoPalavras() {
             document.getElementById("certo").onclick = null;                    //Bloqueia o clique no elemento "certo"
         } else                                                                  //Senão
             loadJogoPalavras();                                                 //Repete o jogo
-    }
+    };
 }
 
 //----------JOGO CORES----------//

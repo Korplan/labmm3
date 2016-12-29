@@ -5495,7 +5495,7 @@ button.btn-floating {
 
 .side-nav .collapsible-header:hover,
 .side-nav.fixed .collapsible-header:hover {
-  background-color: rgba(0, 0, 0, 0.05);
+  background-color: #fff/*rgba(0, 0, 0, 0.05)*/;
 }
 
 .side-nav .collapsible-header i,
@@ -5672,7 +5672,7 @@ button:focus {
 
 label {
   font-size: 0.8rem;
-  color: #9e9e9e;
+  color: #363636 /*#9e9e9e*/;
 }
 
 /* Text Inputs + Textarea
@@ -6201,12 +6201,12 @@ textarea.materialize-textarea {
 [type="radio"]:checked + label:after,
 [type="radio"].with-gap:checked + label:before,
 [type="radio"].with-gap:checked + label:after {
-  border: 2px solid #26a69a;
+  border: 2px solid #ef5350 /*#26a69a*/;
 }
 
 [type="radio"]:checked + label:after,
 [type="radio"].with-gap:checked + label:after {
-  background-color: #26a69a;
+  background-color: #ef5350 /*#26a69a*/;
 }
 
 [type="radio"]:checked + label:after {
@@ -6222,7 +6222,7 @@ textarea.materialize-textarea {
 
 /* Focused styles */
 [type="radio"].tabbed:focus + label:before {
-  box-shadow: 0 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: #fff /* 0 0 0 10px rgba(0, 0, 0, 0.1)*/;
 }
 
 /* Disabled Radio With gap */
@@ -6328,7 +6328,7 @@ form p:last-child {
           transform: scale(1);
   border: 0;
   border-radius: 50%;
-  box-shadow: 0 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: #fff/*0 0 0 10px rgba(0, 0, 0, 0.1)*/;
   background-color: rgba(0, 0, 0, 0.1);
 }
 
@@ -6444,8 +6444,8 @@ form p:last-child {
 
 [type="checkbox"].filled-in.tabbed:checked:focus + label:after {
   border-radius: 2px;
-  background-color: #26a69a;
-  border-color: #26a69a;
+  background-color: #ef5350 /*#26a69a*/;
+  border-color: #ef5350 /*#26a69a*/;
 }
 
 [type="checkbox"].filled-in:disabled:not(:checked) + label:before {
@@ -6488,11 +6488,11 @@ form p:last-child {
 }
 
 .switch label input[type=checkbox]:checked + .lever {
-  background-color: #84c7c1;
+  background-color: #e57373 /*#84c7c1*/;
 }
 
 .switch label input[type=checkbox]:checked + .lever:after {
-  background-color: #26a69a;
+  background-color: #ef5350 /*#26a69a*/;
   left: 24px;
 }
 

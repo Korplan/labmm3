@@ -20,27 +20,13 @@ h1{
 .grey{
     background-color: grey;
 }
-
-/*----------ELEMENTOS--------*/
 .white_elem{
     background-color: white;
 }
 
-.menuIcon, .carta{
-    /*position: absolute;*/
-    height: 250px;
-    /*width: 200px;*/
-    color: #363636;
-}
+/*----------ELEMENTOS--------*/
 
-.grey{
-    background-color: grey;
-}
-
-.inativo{
-    background-color: grey;
-}
-
+/*Margens e Espaçamentos*/
 .margin_top_bottom{
     Margin-top: 20vh;
     Margin-bottom: 20vh;
@@ -51,7 +37,54 @@ h1{
     cursor: pointer;
 }
 
-/*----------OUTROS--------*/
+/*Inativos*/
+.inativo{
+    background-color: grey;
+}
+
+.modal{
+    color: #363636;
+    margin-top: 20vh;
+}
+
+.icon{
+    height: 80%;
+    width: 80%;
+}
+
+/*Navegação*/
+.side-nav .collapsible{
+    margin-left: 32px !important;
+}
+
+@media only screen and (max-width: 992px){
+    .side-nav .collapsible{
+        margin-left: 16px !important;
+    }
+}
+
+#settings{
+    color: #FFF;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.line-height{
+    line-height: 1.3em;
+}
+
+/*----------JOGO MEMÓRIA--------*/
+
+/*Carta*/
+.menuIcon, .carta{
+    /*position: absolute;*/
+    height: 250px;
+    /*width: 200px;*/
+    color: #363636;
+}
+
+/*Rodar Cartas*/
 .flip {
     -webkit-perspective: 800px;
     /*width: 400px;*/
@@ -78,6 +111,8 @@ h1{
     text-align: center;
     line-height: 200px;
 }
+
+/*Frente Carta*/
 .flip .card .front {
     /*position: absolute;*/
     z-index: 1;
@@ -85,6 +120,8 @@ h1{
     color: white;
     cursor: pointer;
 }
+
+/*Trás Carta*/
 .flip .card .back {
     -webkit-transform: rotatex(-180deg);
     background: white;
@@ -92,6 +129,7 @@ h1{
     cursor: pointer;
 }
 
+/*----------JOGO CORES--------*/
 #cor1, #cor2, #cor3{
     border-radius: 50px;
     width: 100px;
@@ -129,15 +167,14 @@ h1{
     cursor: pointer;
 }
 
+
+/*----------OUTROS--------*/
+
 /*Classe de Teste*/
 .selected{
     border: 2px solid red;
 }
 
-.modal{
-    color: #363636;
-    margin-top: 20vh;
-}
 
 .icon{
     height: 80%;
@@ -166,4 +203,33 @@ h1{
     position: absolute;
     top: 0;
     left: 0;
+}
+
+.silaba{
+    display: inline-block;
+    background-color: #fff;
+    padding: 15px;
+    margin: 10px;
+    border-radius: 5px;
+    min-width: 100px;
+    color: #363636;
+}
+
+#silaba-falta{
+    display: inline-block;
+    background-color: #cfcfcf;
+    padding: 15px;
+    margin: 10px;
+    border-radius: 5px;
+    min-width: 100px;
+    color: #363636;
+}
+
+.silaba-opcao{
+    background-color: #fff;
+    border-radius: 5px;
+    color: #363636;
+    padding: 15px;
+    font-size: 1.2em;
+    text-transform: uppercase;
 }
