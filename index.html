@@ -16,28 +16,28 @@
     <div class="container">
         <div class="row">
             <div class="col m3 s6 l3 center">
-                <div class="rounded menuIcon valign-wrapper white_elem z-depth-2 clickable modal-trigger modal-action"
+                <div class="rounded menuIcon valign-wrapper white_elem z-depth-1 clickable modal-trigger modal-action"
                      data-target="modal1" id="varrimento">
                     <div class="center-block"><i class="material-icons large">view_carousel</i></div>
                 </div>
                 <p>Varrimento</p>
             </div>
             <div class="col m3 s6 l3 center">
-                <div class="rounded menuIcon valign-wrapper white_elem z-depth-2 clickable modal-trigger modal-action"
+                <div class="rounded menuIcon valign-wrapper white_elem z-depth-1 clickable modal-trigger modal-action"
                      data-target="modal1" id="point_wait">
                     <div class="center-block"><i class="material-icons large">restore</i></div>
                 </div>
                 <p>Apontar e Esperar</p>
             </div>
             <div class="col m3 s6 l3 center">
-                <div class="rounded menuIcon valign-wrapper white_elem z-depth-2 clickable modal-trigger modal-action"
+                <div class="rounded menuIcon valign-wrapper white_elem z-depth-1 clickable modal-trigger modal-action"
                      data-target="modal1" id="point_click">
                     <div class="center-block"><i class="material-icons large">mouse</i></div>
                 </div>
                 <p>Cursor</p>
             </div>
             <div class="col m3 s6 l3 center">
-                <div class="rounded menuIcon valign-wrapper white_elem z-depth-2 clickable modal-trigger modal-action"
+                <div class="rounded menuIcon valign-wrapper white_elem z-depth-1 clickable modal-trigger modal-action"
                      data-target="modal1" id="voz">
                     <div class="center-block"><i class="material-icons large">mic</i></div>
                 </div>
@@ -128,8 +128,24 @@
 <div id="jogoNumeros" style="display: none">
     <h1 class="center">Jogo dos Números</h1>
     <div class="row">
-        <div class="col m6" id="img"></div>
-        <div class="col m6" id="op"></div>
+        <div class="col m6">
+            <div class="col m6">
+                <div class="row">
+                    <div class="col m6" id="fruta1"></div>
+                    <div class="col m6" id="fruta2"></div>
+                </div>
+                <div class="row center">
+                    <div class="col m6" id="num1"></div>
+                    <div class="col m6" id="num2"></div>
+                </div>
+            </div>
+            <div class="col m6" id="sumo"></div>
+        </div>
+        <div class="col m6">
+            <div class="row" id="op1"></div>
+            <div class="row" id="op2"></div>
+            <div class="row" id="op3"></div>
+        </div>
     </div>
 </div>
 
@@ -146,7 +162,6 @@
         <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Continuar</a>
     </div>
 </div>
-
 
 <ul id="slide-out" class="side-nav">
     <li>
@@ -181,22 +196,22 @@
             <li>
                 <input class="collapsible-header" name="menu" type="radio" id="menu_paw">
                 <label for="menu_paw">Apontar e esperar</label>
-                <div class="collapsible-body line-height">O utilizador tem que colocar o cursor sobre o item a selecionar e esperar que o temporizador pare.</div>
+                <div class="collapsible-body">O utilizador tem que colocar o cursor sobre o item a selecionar e esperar que o temporizador pare.</div>
             </li>
             <li>
                 <input class="collapsible-header" name="menu" type="radio" id="menu_cursor">
                 <label for="menu_cursor">Cursor</label>
-                <div class="collapsible-body line-height">O utilizador tem que colocar o cursor sobre o item a selecionar e clicar.</div>
+                <div class="collapsible-body">O utilizador tem que colocar o cursor sobre o item a selecionar e clicar.</div>
             </li>
             <li>
                 <input class="collapsible-header" name="menu" type="radio" id="menu_varriento">
                 <label for="menu_varriento">Varrimento</label>
-                <div class="collapsible-body line-height">Os itens são selecionados automaticamente e o utilizador só tem que parar no pretendido.</div>
+                <div class="collapsible-body">Os itens são selecionados automaticamente e o utilizador só tem que parar no pretendido.</div>
             </li>
             <li>
                 <input class="collapsible-header" name="menu" type="radio" id="menu_voz">
                 <label for="menu_voz">Controlo por voz</label>
-                <div class="collapsible-body line-height">O utilizador apenas tem que falar para selecionar itens.</div>
+                <div class="collapsible-body">O utilizador apenas tem que falar para selecionar itens.</div>
             </li>
         </ul>
     </li>

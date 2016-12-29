@@ -25,6 +25,8 @@ var ultimo = "";
 //----------JOGO PALAVRAS----------
 var feitas = [];        //Array que armazena os index do array "palavras" que já sairam
 
+//----------JOGO NUMEROS----------
+var numMax = 5;
 
 //----------GERAL----------
 var interacao;                  // 0 - Point Wait
@@ -122,9 +124,14 @@ window.onload = function () {
         document.getElementById("interacao2").style.display = "none";                   //Esconde a div "interacao2" (div de seleção de Jogos)
         document.getElementById("jogoCores").style.display = "block";                   //Mostra a div "jogoCores"
         loadJogoCores();
+    };
+
+    document.getElementById("btn_num").onclick = function () {                        //Ao clicar no elemento "btn_cores"
+        document.getElementById("interacao2").style.display = "none";                   //Esconde a div "interacao2" (div de seleção de Jogos)
+        document.getElementById("jogoNumeros").style.display = "block";                   //Mostra a div "jogoCores"
+        loadJogoNumeros();
     }
 };
-
 
 //----------POINTandWAIT----------//
 function loadPointAndWait() {
@@ -167,7 +174,6 @@ function select(elem) {
         elem.click();
     }
 }
-
 
 //----------VARRIMENTO----------//
 function loadVarrimento() {
@@ -286,7 +292,6 @@ function loadVoiceRec() {
 //     speechSynthesis.speak(msg);
 // }
 
-
 //----------JOGO MEMÓRIA----------//
 function jogoMemoria() {
     jogo_memoria = true;
@@ -361,7 +366,7 @@ function loadJogoPalavras() {
     do {
         palavra = Math.floor(Math.random() * palavras.length);          //Palavra = sorteio de index entre 0 e 8 (=palavras.lenght)
         print("ciclo");
-    } while (feitas.indexOf(palavra)!= -1);                             //Enquanto forem sorteadas palavras que já tenham saído é sorteada nova palavra (se o elemento de index # existir no array feitas repete ciclo)
+    } while (feitas.indexOf(palavra) != -1);                             //Enquanto forem sorteadas palavras que já tenham saído é sorteada nova palavra (se o elemento de index # existir no array feitas repete ciclo)
 
     document.getElementById("palavraIncompleta").innerHTML = "<img src='img/frutas/" + palavras[palavra].join("") + ".png'/>";
 
@@ -476,18 +481,91 @@ function loadJogoCores() {
 }
 
 //Função que transforma o código das cores de RGB para Hex
-function rgbToHex(col)
-{
-    if(col.charAt(0)=='r')
-    {
-        col=col.replace('rgb(','').replace(')','').split(',');
-        var r=parseInt(col[0], 10).toString(16);
-        var g=parseInt(col[1], 10).toString(16);
-        var b=parseInt(col[2], 10).toString(16);
-        r=r.length==1?'0'+r:r; g=g.length==1?'0'+g:g; b=b.length==1?'0'+b:b;
-        var colHex='#'+r+g+b;
+function rgbToHex(col) {
+    if (col.charAt(0) == 'r') {
+        col = col.replace('rgb(', '').replace(')', '').split(',');
+        var r = parseInt(col[0], 10).toString(16);
+        var g = parseInt(col[1], 10).toString(16);
+        var b = parseInt(col[2], 10).toString(16);
+        r = r.length == 1 ? '0' + r : r;
+        g = g.length == 1 ? '0' + g : g;
+        b = b.length == 1 ? '0' + b : b;
+        var colHex = '#' + r + g + b;
         return colHex;
     }
 }
 
 //----------JOGO NÚMEROS----------//
+function loadJogoNumeros() {
+    var frutas = ["maca", "pera", "cenoura", "laranja"];                //array com as furtas
+    var f1, f2, fErrada1, fErrada2;                                                         //variaveis da fruta1 e da fruta2
+    do {
+        f1 = frutas[Math.floor(Math.random() * frutas.length)];
+        f2 = frutas[Math.floor(Math.random() * frutas.length)];
+    } while (f1 == f2);                                                 //escolhe duas frutas diferentes, aleatoriamente
+
+    var sumo = document.getElementById("sumo");
+
+    document.getElementById("fruta1").innerHTML = "<img src='img/jogoNumeros/frutas/" + f1 + ".png'>";          //coloca a imagem respetiva a fruta1 escolhida
+    document.getElementById("fruta2").innerHTML = "<img src='img/jogoNumeros/frutas/" + f2 + ".png'>";          //coloca a imagem respetiva a fruta2 escolhida
+    var num1 = document.getElementById("num1").innerHTML = Math.floor(Math.random() * (numMax - 1)) + 1;              //gera um número aleatorio entre 1 e o num Máximo, coloca-o no HTML e guarda na variavel
+    var num2 = document.getElementById("num2").innerHTML = numMax - num1;                                       //calcula as frutas que faltam até ao numero maximo
+
+
+    switch (f1 + "_" + f2) {                            //verifica as frutas sorteadas e coloca no HTML a respetiva imagem
+        case 'maca_pera':
+        case 'pera_maca':
+            sumo.innerHTML = "<img src='img/jogoNumeros/sumos/1.png'>";
+            break;
+        case 'maca_cenoura':
+        case 'cenoura_maca':
+            sumo.innerHTML = "<img src='img/jogoNumeros/sumos/2.png'>";
+            break;
+        case 'maca_laranja':
+        case 'laranja_maca':
+            sumo.innerHTML = "<img src='img/jogoNumeros/sumos/3.png'>";
+            break;
+        case 'pera_cenoura':
+        case 'cenoura_pera':
+            sumo.innerHTML = "<img src='img/jogoNumeros/sumos/4.png'>";
+            break;
+        case 'pera_laranja':
+        case 'laranja_pera':
+            sumo.innerHTML = "<img src='img/jogoNumeros/sumos/5.png'>";
+            break;
+        case 'cenoura_laranja':
+        case 'laranja_cenoura':
+            sumo.innerHTML = "<img src='img/jogoNumeros/sumos/6.png'>";
+            break;
+    }
+
+    document.getElementById("op1").innerHTML = "";              //limpa o innerHTML do elemento
+    document.getElementById("op2").innerHTML = "";              //limpa o innerHTML do elemento
+    document.getElementById("op3").innerHTML = "";              //limpa o innerHTML do elemento
+
+    var opCerta = Math.floor(Math.random() * 3 + 1);                //escolhe a posição onde vai colocar a hipotese certa
+
+    for (var i = 0; i < num1; i++) {                    //coloca as imagens das frutas na posição da resposta correta
+        document.getElementById("op" + opCerta).innerHTML += "<img src='img/jogoNumeros/frutas/" + f1 + ".png'>";
+    }
+    for (var j = 0; j < num2; j++) {
+        document.getElementById("op" + opCerta).innerHTML += "<img src='img/jogoNumeros/frutas/" + f2 + ".png'>";
+    }
+
+    for (var l = 1; l <= 3; l++) {                      //coloca as imagens das frutas em cada uma das posiçoes com respostas erradas
+        if (l != opCerta) {                             //as erradas sao colocadas num sitio diferente da opção certa
+            do {
+                fErrada1 = Math.floor(Math.random() * (numMax - 1) + 1);
+            } while (fErrada1 == f1);                   //sorteia um número diferente do correto
+
+            fErrada2 = numMax - fErrada1;               //calcula o numero de 2as frutas
+
+            for (var k = 0; k < fErrada1; k++) {        //coloca as imagens das frutas na posição respetiva
+                document.getElementById("op" + l).innerHTML += "<img src='img/jogoNumeros/frutas/" + f1 + ".png'>";
+            }
+            for (var n = 0; n < fErrada2; n++) {
+                document.getElementById("op" + l).innerHTML += "<img src='img/jogoNumeros/frutas/" + f2 + ".png'>";
+            }
+        }
+    }
+}

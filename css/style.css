@@ -35,8 +35,14 @@ h1{
 /*Clicáveis*/
 .clickable{
     cursor: pointer;
+    box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.14), 0 1px 7px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -1px rgba(0, 0, 0, 0.2);
 }
 
+.clickable:hover{
+    box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.3);
+}
+
+/*----------OUTROS--------*/
 /*Inativos*/
 .inativo{
     background-color: grey;
@@ -185,16 +191,18 @@ h1{
     margin-left: 32px;
 }
 
-.side-nav .collapsible-body span {
+.side-nav .collapsible-body {
     padding: 0 32px;
+    line-height: 1.3em;
 }
 
 @media only screen and (max-width: 992px){
     .side-nav .collapsible li label{
         margin-left: 16px;
     }
-    .side-nav .collapsible-body span {
+    .side-nav .collapsible-body {
         padding: 0 16px;
+        line-height: 1.3em;
     }
 }
 
