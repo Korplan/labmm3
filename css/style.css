@@ -34,11 +34,11 @@ h1{
 
 /*Clicáveis*/
 .clickable{
+    cursor: pointer;
     box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.14), 0 1px 7px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -1px rgba(0, 0, 0, 0.2);
 }
 
 .clickable:hover{
-    cursor: pointer;
     box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.3);
 }
 
@@ -59,16 +59,6 @@ h1{
 }
 
 /*Navegação*/
-.side-nav .collapsible{
-    margin-left: 32px !important;
-}
-
-@media only screen and (max-width: 992px){
-    .side-nav .collapsible{
-        margin-left: 16px !important;
-    }
-}
-
 #settings{
     color: #FFF;
     position: absolute;
@@ -265,26 +255,16 @@ h1{
     padding: 15px;
     margin: 10px;
     border-radius: 5px;
-    min-width: 100px;
+    width: 100px;
     color: #363636;
 }
 
 #silaba-falta{
-    display: inline-block;
     background-color: #cfcfcf;
-    padding: 15px;
-    margin: 10px;
-    border-radius: 5px;
-    min-width: 100px;
-    color: #363636;
 }
 
-.silaba-opcao{
-    background-color: #fff;
-    border-radius: 5px;
-    color: #363636;
-    padding: 15px;
+.opcao{
+    margin: 10px 30px;
     font-size: 1.2em;
     text-transform: uppercase;
 }
-

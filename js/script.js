@@ -24,6 +24,9 @@ var ultimo = "";
 
 //----------JOGO PALAVRAS----------
 var feitas = [];        //Array que armazena os index do array "palavras" que já sairam
+var palavra;            //guarda palavra sorteada (=palavra para completar no jogo)
+var palavras = [];      //Array com palavras do jogo
+
 
 //----------JOGO NUMEROS----------
 var numMax = 5;
@@ -41,12 +44,10 @@ var jogo = 0;                   // 0 - Menu
                                 // 4 - Jogo Cores
 
 var jogo_memoria = false;       //Esconde jogo memória
-var voiceEnable = false;        //Interação por voz - falso
 var pawEnable = false;          //Interação por Point and Wait - falso
-var pacEnable = false;          //Interação por Point and Click - falso
 var atual = [];                 //Interação por Point and Wait
 var over = false;               //Interação por Point and Wait
-
+var refresh;
 
 //----------DEBUG----------//
 function print(s) {
@@ -70,8 +71,7 @@ window.onload = function () {
             document.getElementById("interacao1").style.display = "none";               //Esconde a div "interacao1" (div de seleção de interação)
             document.getElementById("interacao2").style.display = "block";              //Mostra a div "interacao2" (div de seleção de Jogos)
             interacao = 3;                                                              //3 = Interação por voz (ver vars globais)
-            voiceEnable = true;                                                         //Permite captar voz
-            loadVoiceRec();                                                             //Executa função de reconhecimento de voz
+            menu();
         };
 
     // verifica se o browser suporta t2v
@@ -90,13 +90,14 @@ window.onload = function () {
         loadPointAndWait();
         interacao = 0;                                                                  //0 = Interação por Point and Wait (ver vars globais)
         pawEnable = true;
+        menu();
     };
 
     document.getElementById("point_click").onclick = function () {                      //Ao clicar no elemento "point_click"
         document.getElementById("interacao1").style.display = "none";                   //Esconde a div "interacao1" (div de seleção de interação)
         document.getElementById("interacao2").style.display = "block";                  //Mostra a div "interacao2" (div de seleção de Jogos)
         interacao = 1;                                                                  //1 = Interação por Point and Click (ver vars globais)
-        loadPointAndClick();
+        menu();
     };
 
     document.getElementById("varrimento").onclick = function () {                       //Ao clicar no elemento "varrimento"
@@ -104,35 +105,70 @@ window.onload = function () {
         document.getElementById("interacao2").style.display = "block";                  //Mostra a div "interacao2" (div de seleção de Jogos)
         interacao = 2;                                                                  //2 = Interação por varrimento (ver vars globais)
         loadVarrimento();
+        menu();
     };
 
     document.getElementById("btn_mem").onclick = function () {                          //Ao clicar no elemento "btn_mem"
         document.getElementById("interacao2").style.display = "none";                   //Esconde a div "interacao2" (div de seleção de Jogos)
         document.getElementById("jogoMemoria").style.display = "block";                 //Mostra a div "jogoMemoria"
+        jogo = 1;
         jogoMemoria();
-        if (voiceEnable)
-            speechRecognition.start();
-        if (pawEnable)
-            loadPointAndWait();
+        // if (voiceEnable)
+        //
+        // if (pawEnable)
+        //     loadPointAndWait();
     };
 
     document.getElementById("btn_palavras").onclick = function () {                     //Ao clicar no elemento "btn_palavras"
         document.getElementById("interacao2").style.display = "none";                   //Esconde a div "interacao2" (div de seleção de Jogos)
         document.getElementById("jogoPalavras").style.display = "block";                //Mostra a div "jogoPalavras"
+        jogo = 3;
         loadJogoPalavras();
     };
 
     document.getElementById("btn_cores").onclick = function () {                        //Ao clicar no elemento "btn_cores"
         document.getElementById("interacao2").style.display = "none";                   //Esconde a div "interacao2" (div de seleção de Jogos)
         document.getElementById("jogoCores").style.display = "block";                   //Mostra a div "jogoCores"
+        jogo = 4;
         loadJogoCores();
     };
 
     document.getElementById("btn_num").onclick = function () {                        //Ao clicar no elemento "btn_cores"
         document.getElementById("interacao2").style.display = "none";                   //Esconde a div "interacao2" (div de seleção de Jogos)
         document.getElementById("jogoNumeros").style.display = "block";                   //Mostra a div "jogoCores"
+        jogo = 2;
         loadJogoNumeros();
-    }
+    };
+
+    document.getElementById("menu_paw").onclick = function () {
+        if(interacao != 0) {
+            interacao = 0;
+            menu();
+        }
+    };
+
+    document.getElementById("menu_cursor").onclick = function () {
+        if(interacao != 1) {
+            interacao = 1;
+            menu();
+        }
+    };
+
+    document.getElementById("menu_varrimento").onclick = function () {
+        if(interacao != 2) {
+            interacao = 2;
+            menu();
+        }
+    };
+
+    document.getElementById("menu_voz").onclick = function () {
+        if(interacao != 3) {
+            interacao = 3;
+            menu();
+        }
+    };
+
+
 };
 
 //----------POINTandWAIT----------//
@@ -197,6 +233,8 @@ function loadVoiceRec() {
     speechRecognition.interimResults = false;               // resultados intermédios, com .final = false (default: false)
     speechRecognition.maxAlternatives = 1;                  // resultados máximos (default: 1)
 
+    speechRecognition.start();
+
     speechRecognition.onresult = function (event) {
         // propriedade "results" de SpeechRecognitionEvent faz return de um objeto SpeechRecognitionResultList
         // SpeechRecognitionResultList tem vários objetos SpeechRecognitionResult
@@ -216,8 +254,62 @@ function loadVoiceRec() {
             stop = true;
         else
         // selectItem();
-            document.getElementById("item" + command[command.length - 1]).click();
+            switch (jogo) {
+                case 0:             //MENU
+                    switch (command) {
+                        case 'memória':
+                            document.getElementById("btn_mem").click();
+                            break;
+                        case 'número':
+                        case 'números':
+                            document.getElementById("btn_num").click();
+                            break;
+                        case 'palavras':
+                        case 'palavra':
+                            document.getElementById("btn_palavras").click();
+                            break;
+                        case 'cores':
+                        case 'cor':
+                            document.getElementById("btn_cores").click();
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+                case 1:             //Memoria
+                    document.getElementById("item" + command[command.length - 1]).click();
+                    break;
+                case 2:             //Numeros
 
+                    break;
+                case 3:             //Palavras
+                    if (command == palavras[palavra].join("")) {
+                        document.getElementById("certo").click();
+                    }
+                    break;
+                case 4:             //Cores
+                    switch (command) {
+                        case 'magenta':
+                            document.getElementById("cor1").click();
+                            break;
+                        case 'azul':
+                            document.getElementById("cor2").click();
+                            break;
+                        case 'amarelo':
+                            document.getElementById("cor3").click();
+                            break;
+                        case 'pinta':
+                        case 'pintar':
+                        case 'colorir':
+                            document.getElementById("corFinal").click();
+                            break;
+                        case 'limpa':
+                        case 'apaga':
+                            document.getElementById("apagar").click();
+                            break;
+                    }
+                    break;
+            }
     };
     speechRecognition.onspeechend = function () {
         speechRecognition.stop();
@@ -351,7 +443,6 @@ function flip(id) {                                                     //Funç�
 function loadJogoPalavras() {
     var silabas = ["ba", "na", "mo", "ja", "a", "la", "tar", "pol", "sor", "cur", "ve", "ga", "ção", "tra", "du", "tor"];   //Array com sílabas "erradas"
     var hipoteses = [];                         //Array com sílabas de opção
-    var palavras = [];                          //Array com palavras do jogo
     palavras[0] = ["ba", "na", "na"];           //0 = Banana
     palavras[1] = ["la", "ran", "ja"];          //1 = Laranja
     palavras[2] = ["mo", "ran", "go"];          //2 = Morango
@@ -363,14 +454,13 @@ function loadJogoPalavras() {
     palavras[8] = ["ce", "re", "ja"];           //8 = Cereja
 
     document.getElementById("palavraIncompleta").innerHTML = "";        //O innerHTML do elemento palavraIncompleta está vazio
-    var palavra;                                                        //guarda palavra sorteada (=palavra para completar no jogo)
 
     do {
         palavra = Math.floor(Math.random() * palavras.length);          //Palavra = sorteio de index entre 0 e 8 (=palavras.lenght)
         print("ciclo");
     } while (feitas.indexOf(palavra) != -1);                             //Enquanto forem sorteadas palavras que já tenham saído é sorteada nova palavra (se o elemento de index # existir no array feitas repete ciclo)
 
-    document.getElementById("palavraIncompleta").innerHTML = "<img src='img/frutas/" + palavras[palavra].join("") + ".png'/>";
+    document.getElementById("imgPal").innerHTML = "<img style='width: 100%' src='img/frutas/" + palavras[palavra].join("") + ".png'/>";
 
     var retira = Math.floor(Math.random() * palavras[palavra].length);  //Retira (retira sílaba de palavra) = Sorteio entre 0 e palavra.lenght do elemento sorteado acima
 
@@ -378,7 +468,7 @@ function loadJogoPalavras() {
         if (retira != i)                                                //Se sílaba sorteada for diferente de i
             document.getElementById("palavraIncompleta").innerHTML += "<div class='silaba'>" + palavras[palavra][i] + "</div>"; //Escreve a sílaba para formar a palavra
         else {                                                                                //Senão
-            document.getElementById("palavraIncompleta").innerHTML += "<div id='silaba-falta'></div>";
+            document.getElementById("palavraIncompleta").innerHTML += "<div class='silaba' id='silaba-falta'></div>";
             for (var j = 0; j < palavras[palavra][retira].length; j++)                      //Escreve um "_" por cada letra da sílaba retirada
                 document.getElementById("silaba-falta").innerHTML += "__ ";
         }
@@ -387,8 +477,9 @@ function loadJogoPalavras() {
 
     for (var k = 0; k < 3; k++) {                                               //Nº de opções = 3 no máximo
         var random = silabas[Math.floor(Math.random() * silabas.length)];       //Random = ao index sorteado do array "silabas" entre 0 e nº de index máximo
-        if (random != palavras[palavra][retira]) {                               //Se a sílaba sorteada for diferente da sílaba retirada (que constitui a palavra a completar)
-            hipoteses[k] = "<div class='col m2 offset-m1 center'><div class='silaba-opcao clickable'>" + random + "</div></div>";  //É colocada num array "hipoteses" de index igual a K (=3)
+        if (random != palavras[palavra][retira]) {                              //Se a sílaba sorteada for diferente da sílaba retirada (que constitui a palavra a completar)
+            hipoteses[k] = "<div class='silaba opcao clickable'>" + random + "</div></div>";  //É colocada num array "hipoteses" de index igual a K (=3)
+            silabas.splice(silabas.indexOf(random), 1);                         //retira do array "silabas" o elemento que já saiu (evita repetiçoes de silabas erradas)
         }
         else {
             k--;                                                                //É decrementado um k para poder repetir o ciclo com o mesmo valor de k
@@ -396,7 +487,7 @@ function loadJogoPalavras() {
         print(random);
         print(palavras[palavra][retira]);
     }
-    hipoteses[k] = "<div class='col m2 offset-m1 center'><div id='certo' class='silaba-opcao clickable'>" + palavras[palavra][retira] + "</div></div>";    //Último index do array "hipoteses" é a sílaba certa para completar a palavra
+    hipoteses[k] = "<div id='certo' class='silaba opcao clickable'>" + palavras[palavra][retira] + "</div></div>";    //Último index do array "hipoteses" é a sílaba certa para completar a palavra
     hipoteses.sort(function () {                                                                        //Dispõe em index aleatorios as sílabas do array (para que as opções )
         return 0.5 - Math.random()
     });
@@ -541,8 +632,8 @@ function rgbToHex(col) {
 
 //----------JOGO NÚMEROS----------//
 function loadJogoNumeros() {
-    document.body.style.backgroundColor="#fff";
-    document.getElementById('settings').style.color="#363636";
+    document.body.style.backgroundColor = "#fff";
+    document.getElementById('settings').style.color = "#363636";
     var frutas = ["maca", "pera", "cenoura", "laranja"];                //array com as furtas
     var f1, f2, fErrada1, fErrada2;                                     //variaveis que guardan fruta1, fruta2, frutaErrada1 e frutaErrada2
     do {
@@ -614,5 +705,41 @@ function loadJogoNumeros() {
                 document.getElementById("op" + l).innerHTML += "<img src='img/frutas/" + f2 + ".png'>";
             }
         }
+    }
+}
+
+
+//----------CONTROLOS----------//
+function menu() {
+    console.log(interacao);
+    switch (interacao) {
+        case 0:
+            if (!document.getElementById("menu_paw").classList.contains("active")) {
+                document.getElementById("menu_paw").click();
+                speechRecognition.abort();
+                stop = true;
+            }
+            break;
+        case 1:
+            if (!document.getElementById("menu_cursor").classList.contains("active")) {
+                document.getElementById("menu_cursor").click();
+                speechRecognition.abort();
+                stop = true;
+            }
+            break;
+        case 2:
+            if (!document.getElementById("menu_varrimento").classList.contains("active")) {
+                document.getElementById("menu_varrimento").click();
+                speechRecognition.abort();
+                stop = true;
+            }
+            break;
+        case 3:
+            if (!document.getElementById("menu_voz").classList.contains("active")) {
+                document.getElementById("menu_voz").click();
+                stop = false;
+                loadVoiceRec();
+            }
+            break;
     }
 }
