@@ -441,6 +441,8 @@ function flip(id) {                                                     //Funç�
 
 //----------JOGO PALAVRAS----------//
 function loadJogoPalavras() {
+    document.body.style.backgroundColor = "#fff";
+    document.getElementById("settings").style.color = "#363636";
     var silabas = ["ba", "na", "mo", "ja", "a", "la", "tar", "pol", "sor", "cur", "ve", "ga", "ção", "tra", "du", "tor"];   //Array com sílabas "erradas"
     var hipoteses = [];                         //Array com sílabas de opção
     palavras[0] = ["ba", "na", "na"];           //0 = Banana

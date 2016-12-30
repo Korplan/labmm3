@@ -1,7 +1,7 @@
 /*----------GERAL--------*/
 body{
     background-color: #74c043;
-    color: #fff;
+    /*color: #fff;*/
 }
 
 /*Borda redonda*/
@@ -13,7 +13,7 @@ body{
 h1{
     font-size: 20px;
     text-transform: uppercase;
-    color: #fff;
+    /*color: #fff;*/
 }
 
 /*----------CORES--------*/
@@ -250,6 +250,7 @@ h1{
 }
 
 .silaba{
+    text-transform: uppercase;
     display: inline-block;
     background-color: #fff;
     padding: 15px;
@@ -266,5 +267,4 @@ h1{
 .opcao{
     margin: 10px 30px;
     font-size: 1.2em;
-    text-transform: uppercase;
 }
