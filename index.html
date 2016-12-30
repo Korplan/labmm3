@@ -9,8 +9,12 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
+
+<!-- Menu (botão) -->
 <a href="#" data-activates="slide-out" class="button-collapse" id="settings"><i
         class="material-icons medium">settings</i></a>
+
+<!-- Página - Escolher interação -->
 <div id="interacao1">
     <h1 class="center margin_top_bottom">TIPO DE NAVEGAÇÃO</h1>
     <div class="container">
@@ -46,6 +50,8 @@
         </div>
     </div>
 </div>
+
+<!-- Página - Escolher jogo -->
 <div id="interacao2" style="display: none">
     <h1 class="center margin_top_bottom">Jogos</h1>
     <div class="container">
@@ -77,12 +83,16 @@
         </div>
     </div>
 </div>
+
+<!-- Página - Jogo memória -->
 <div id="jogoMemoria" style="display: none">
     <h1 class="center">Jogo Memória</h1>
     <div class="container">
         <div class="row" id="memoTab"></div>
     </div>
 </div>
+
+<!-- Página - Jogo palavras -->
 <div id="jogoPalavras" style="display: none">
     <h1 class="center">Jogo das Palavras</h1>
     <div class="container">
@@ -90,41 +100,38 @@
         <div class="row" id="opcoes"></div>
     </div>
 </div>
+
+<!-- Página - Jogo cores -->
 <div id="jogoCores" style="display: none">
     <h1 class="center">Jogo das Cores</h1>
     <div class="container">
         <div class="row">
             <div class="col m6">
                 <div class="row">
-                    <div class="col m6 z-depth-2" id="cor1">
-
-                    </div>
+                    <div class="col m6 z-depth-2 clickable" id="cor1"></div>
+                    <div class="cores-lig z-depth-1" id="cores-lig-1"></div>
                 </div>
                 <div class="row">
-                    <div class="col m6 z-depth-2" id="cor2">
-
-                    </div>
-                    <div class="col m6 z-depth-4" id="corFinal" style="background-color: #FFF">
-
-                    </div>
+                    <div class="col m6 z-depth-2 clickable" id="cor2"></div>
+                    <div class="col m6 z-depth-4 clickable" id="corFinal" style="background-color: #FFF"></div>
+                    <div class="cores-lig z-depth-1" id="cores-lig-2"></div>
                 </div>
                 <div class="row">
-                    <div class="col m6 z-depth-2" id="cor3">
-
-                    </div>
+                    <div class="col m6 z-depth-2 clickable" id="cor3"></div>
                     <div class="col m6">
-                        <div class="center z-depth-2" id="apagar">
+                        <div class="center z-depth-2 clickable" id="apagar">
                             <i class="material-icons tiny" style="color:#000;">close</i>
                         </div>
                     </div>
+                    <div class="cores-lig z-depth-1" id="cores-lig-3"></div>
                 </div>
             </div>
-            <div class="col m6" id="imagem">
-
-            </div>
+            <div class="col m6" id="imagem"></div>
         </div>
     </div>
 </div>
+
+<!-- Página - Jogo números -->
 <div id="jogoNumeros" style="display: none">
     <h1 class="center">Jogo dos Números</h1>
     <div class="row">
@@ -149,9 +156,7 @@
     </div>
 </div>
 
-<!-- Modal Trigger -->
-<!--        <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a>
-<!-- Modal Structure -->
+<!-- Modal - Alterar Interação -->
 <div id="modal1" class="modal">
     <div class="modal-content">
         <h4>ALTERAR O TIPO DE INTERAÇÃO</h4>
@@ -163,6 +168,7 @@
     </div>
 </div>
 
+<!-- Menu -->
 <ul id="slide-out" class="side-nav">
     <li>
         <div class="userView center">
@@ -219,6 +225,8 @@
 
 <script src="js/jquery-3.1.1.min.js"></script>
 <script src="js/materialize.min.js"></script>
+
+<!-- Modais -->
 <script>
     $(document).ready(function () {
         $('.modal').modal();

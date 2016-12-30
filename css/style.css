@@ -34,11 +34,11 @@ h1{
 
 /*Clicáveis*/
 .clickable{
-    cursor: pointer;
     box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.14), 0 1px 7px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -1px rgba(0, 0, 0, 0.2);
 }
 
 .clickable:hover{
+    cursor: pointer;
     box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.3);
 }
 
@@ -143,7 +143,6 @@ h1{
     width: 100px;
     height: 100px;
     margin: 25px;
-    cursor: pointer;
 }
 
 #cor1{
@@ -165,6 +164,7 @@ h1{
     margin-left: 50px;
     transition: background-color 1s ease;
     cursor: default;
+    transition-delay: 0.3s;
 }
 
 #apagar{
@@ -175,6 +175,33 @@ h1{
     cursor: pointer;
 }
 
+.cores-lig{
+    width: 200px;
+    height: 20px;
+    background-color: #FFFFFF;
+    position: relative;
+    z-index: -10;
+}
+
+#cores-lig-1 {
+    transform: rotate(45deg);
+    top: 150px;
+    left: 70px;
+    transition: background-color 1s ease;
+}
+
+#cores-lig-2{
+    top: 70px;
+    left: 70px;
+    transition: background-color 1s ease;
+}
+
+#cores-lig-3{
+    transform:rotate(-45deg);
+    top: -10px;
+    left: 70px;
+    transition: background-color 1s ease;
+}
 /*----------JOGO NUMEROS--------*/
 
 .jogo-num-bola{
@@ -261,6 +288,3 @@ h1{
     text-transform: uppercase;
 }
 
-#jogoNumeros{
-    background-color: #fff;
-}

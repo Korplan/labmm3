@@ -416,8 +416,27 @@ function loadJogoPalavras() {
 //----------JOGO CORES----------//
 function loadJogoCores() {
     var final;
+    var numCores=0;
+    document.getElementById('cores-lig-1').style.backgroundColor = "#fff";
+    document.getElementById('cores-lig-2').style.backgroundColor = "#fff";
+    document.getElementById('cores-lig-3').style.backgroundColor = "#fff";
+    document.getElementById("cor1").classList.add('clickable');
+    document.getElementById("cor2").classList.add('clickable');
+    document.getElementById("cor3").classList.add('clickable');
+    document.getElementById("corFinal").classList.remove('clickable');
 
     document.getElementById("cor1").onclick = function () {     //Ao clicar no elemtno "cor1" (=mangenta)
+        numCores++;
+        document.getElementById("corFinal").classList.add('clickable');
+        document.getElementById("cor1").onclick = null;
+        document.getElementById("cor1").classList.remove('clickable');
+        if(numCores==2){
+            document.getElementById("cor2").onclick = null;
+            document.getElementById("cor2").classList.remove('clickable');
+            document.getElementById("cor3").onclick = null;
+            document.getElementById("cor3").classList.remove('clickable');
+        }
+        document.getElementById('cores-lig-1').style.backgroundColor = "#c2185b";
         final = document.getElementById("corFinal");            //Var que guarda o elemento "cor final"
         document.getElementById("corFinal").style.cursor = "url('img/icons/brush.png'), pointer";   //O estilo do cursor quando está sobre a corFinal muda para a imagem de um pincel
         print(rgbToHex(final.style.backgroundColor));
@@ -439,6 +458,17 @@ function loadJogoCores() {
         }
     };
     document.getElementById("cor2").onclick = function () {
+        numCores++;
+        document.getElementById("corFinal").classList.add('clickable');
+        document.getElementById("cor2").onclick = null;
+        document.getElementById("cor2").classList.remove('clickable');
+        if(numCores==2){
+            document.getElementById("cor1").onclick = null;
+            document.getElementById("cor1").classList.remove('clickable');
+            document.getElementById("cor3").onclick = null;
+            document.getElementById("cor3").classList.remove('clickable');
+        }
+        document.getElementById('cores-lig-2').style.backgroundColor = "#00b0ff";
         final = document.getElementById("corFinal");
         document.getElementById("corFinal").style.cursor = "url('img/icons/brush.png'), pointer";
         console.log(rgbToHex(final.style.backgroundColor));
@@ -458,6 +488,17 @@ function loadJogoCores() {
         }
     };
     document.getElementById("cor3").onclick = function () {
+        numCores++;
+        document.getElementById("corFinal").classList.add('clickable');
+        document.getElementById("cor3").onclick = null;
+        document.getElementById("cor3").classList.remove('clickable');
+        if(numCores==2){
+            document.getElementById("cor2").onclick = null;
+            document.getElementById("cor2").classList.remove('clickable');
+            document.getElementById("cor1").onclick = null;
+            document.getElementById("cor1").classList.remove('clickable');
+        }
+        document.getElementById('cores-lig-3').style.backgroundColor = "#f4b400";
         final = document.getElementById("corFinal");
         document.getElementById("corFinal").style.cursor = "url('img/icons/brush.png'), pointer";
         console.log(final.style.backgroundColor);
@@ -479,6 +520,7 @@ function loadJogoCores() {
     document.getElementById("apagar").onclick = function () {                       //Ao clicar no elemento "apagar"
         document.getElementById("corFinal").style.backgroundColor = "#ffffff";      //Cor final passa a branco
         document.getElementById("corFinal").style.cursor = "default";               //ponteiro passa ao estilo default
+        loadJogoCores();
     }
 }
 
