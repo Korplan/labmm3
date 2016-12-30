@@ -63,6 +63,8 @@ window.onload = function () {
         print("O browser não é compatível com reconhecimento de voz");                  //Escreve na consola (ver função "print")
         temp = document.getElementById("voz").getAttribute("class") + " inativo";       //Desativa a interação por voz na página de seleção de interação
         document.getElementById("voz").setAttribute("class", temp);                     //Acrescenta a class "inativo" ao elemento "voz"
+        document.getElementById("menu_voz").style.display = "none";                     //Desativa a interação por voz no menu de seleção de interação
+
     } else
         document.getElementById("voz").onclick = function () {                          //Ao clicar no elemento "voz"
             document.getElementById("interacao1").style.display = "none";               //Esconde a div "interacao1" (div de seleção de interação)
@@ -320,19 +322,19 @@ function jogoMemoria() {
     }
 }
 
-function flip(id) {                                                 //Função "flip()" que recebe como parâmetro o # da carta
-    print(id);                                                      //Escreve na consola o # da carta
-    document.getElementById("item" + id).classList.add("flipped");  //Procura o item com o # recebido e adiciona-lhe a classe "flipped"
-    document.getElementById("item" + id).onclick = null;            //Desativa o clique na carta
-    document.getElementById("item" + id).onmouseover = null;        //Desativa o onmouseover da carta
+function flip(id) {                                                     //Função "flip()" que recebe como parâmetro o # da carta
+    print(id);                                                          //Escreve na consola o # da carta
+    document.getElementById("item" + id).classList.add("flipped");      //Procura o item com o # recebido e adiciona-lhe a classe "flipped"
+    document.getElementById("item" + id).onclick = null;                //Desativa o clique na carta
+    document.getElementById("item" + id).onmouseover = null;            //Desativa o onmouseover da carta
 
-    if (jogo_memoria) {             //Se jogo_memoria=true
-        setTimeout(function () {    //Ocorre 1 vez passado 1segundo
-            if (!par)               //Se for virada a primeira carta ainda não há um par
-                ultimo = id;        //logo ultimo (var que guarda  aultima carta virada) = ao # da carta recebido
+    if (jogo_memoria) {                 //Se jogo_memoria=true
+        setTimeout(function () {        //Ocorre 1 vez passado 1segundo
+            if (!par)                   //Se for virada a primeira carta ainda não há um par
+                ultimo = id;            //logo ultimo (var que guarda  aultima carta virada) = ao # da carta recebido
 
-            //Senão, se par==true, ou seja, foram viradas duas cartas, verifica-se se uma é igual à outra. Então, o conteúdo (innerHTML) da div 1 (elemento de índice 1 do array "getElementsByTagName("div")") do elemento "itemultimo" (última carta virada) é igual ao conteudo (innerHTML) da div 1 (elemento de índice 1 do array "getElementsByTagName("div")") do elemento "itemid" (primeira carta virada)
-            else if (document.getElementById("item" + ultimo).getElementsByTagName("div")[1].innerHTML != document.getElementById("item" + id).getElementsByTagName("div")[1].innerHTML) {
+
+            else if (document.getElementById("item" + ultimo).getElementsByTagName("div")[1].innerHTML != document.getElementById("item" + id).getElementsByTagName("div")[1].innerHTML) {      //Senão, se par==true, ou seja, foram viradas duas cartas, verifica-se se uma é igual à outra. Então, o conteúdo (innerHTML) da div 1 (elemento de índice 1 do array "getElementsByTagName("div")") do elemento "itemultimo" (última carta virada) é igual ao conteudo (innerHTML) da div 1 (elemento de índice 1 do array "getElementsByTagName("div")") do elemento "itemid" (primeira carta virada)
                 document.getElementById("item" + ultimo).classList.remove("flipped");                       //Verifica a lista de classes do elemento "item ultimo" e remove a classe "flipped"
                 document.getElementById("item" + id).classList.remove("flipped");                           //Verifica a lista de classes do elemento "item id" e remove a classe "flipped"
                 document.getElementById("item" + ultimo).setAttribute("onclick", "flip(" + ultimo + ")");   //Adiciona a função (anteriormente retirada) "flip(ultimo)"
@@ -348,7 +350,7 @@ function flip(id) {                                                 //Função "
 //----------JOGO PALAVRAS----------//
 function loadJogoPalavras() {
     var silabas = ["ba", "na", "mo", "ja", "a", "la", "tar", "pol", "sor", "cur", "ve", "ga", "ção", "tra", "du", "tor"];   //Array com sílabas "erradas"
-    var hipoteses = [];
+    var hipoteses = [];                         //Array com sílabas de opção
     var palavras = [];                          //Array com palavras do jogo
     palavras[0] = ["ba", "na", "na"];           //0 = Banana
     palavras[1] = ["la", "ran", "ja"];          //1 = Laranja
@@ -375,8 +377,8 @@ function loadJogoPalavras() {
     for (var i = 0; i < palavras[palavra].length; i++) {                //Enquanto i for menor que o número de sílabas/indexs da(o) palavra/array "palavras[#]"
         if (retira != i)                                                //Se sílaba sorteada for diferente de i
             document.getElementById("palavraIncompleta").innerHTML += "<div class='silaba'>" + palavras[palavra][i] + "</div>"; //Escreve a sílaba para formar a palavra
-        else{                                                                                //Senão
-            document.getElementById("palavraIncompleta").innerHTML +="<div id='silaba-falta'></div>";
+        else {                                                                                //Senão
+            document.getElementById("palavraIncompleta").innerHTML += "<div id='silaba-falta'></div>";
             for (var j = 0; j < palavras[palavra][retira].length; j++)                      //Escreve um "_" por cada letra da sílaba retirada
                 document.getElementById("silaba-falta").innerHTML += "__ ";
         }
@@ -385,7 +387,7 @@ function loadJogoPalavras() {
 
     for (var k = 0; k < 3; k++) {                                               //Nº de opções = 3 no máximo
         var random = silabas[Math.floor(Math.random() * silabas.length)];       //Random = ao index sorteado do array "silabas" entre 0 e nº de index máximo
-        if (random != palavras[palavra][retira]){                               //Se a sílaba sorteada for diferente da sílaba retirada (que constitui a palavra a completar)
+        if (random != palavras[palavra][retira]) {                               //Se a sílaba sorteada for diferente da sílaba retirada (que constitui a palavra a completar)
             hipoteses[k] = "<div class='col m2 offset-m1 center'><div class='silaba-opcao clickable'>" + random + "</div></div>";  //É colocada num array "hipoteses" de index igual a K (=3)
         }
         else {
@@ -497,8 +499,10 @@ function rgbToHex(col) {
 
 //----------JOGO NÚMEROS----------//
 function loadJogoNumeros() {
+    document.body.style.backgroundColor="#fff";
+    document.getElementById('settings').style.color="#363636";
     var frutas = ["maca", "pera", "cenoura", "laranja"];                //array com as furtas
-    var f1, f2, fErrada1, fErrada2;                                                         //variaveis da fruta1 e da fruta2
+    var f1, f2, fErrada1, fErrada2;                                     //variaveis que guardan fruta1, fruta2, frutaErrada1 e frutaErrada2
     do {
         f1 = frutas[Math.floor(Math.random() * frutas.length)];
         f2 = frutas[Math.floor(Math.random() * frutas.length)];
@@ -506,38 +510,39 @@ function loadJogoNumeros() {
 
     var sumo = document.getElementById("sumo");
 
-    document.getElementById("fruta1").innerHTML = "<img src='img/jogoNumeros/frutas/" + f1 + ".png'>";          //coloca a imagem respetiva a fruta1 escolhida
-    document.getElementById("fruta2").innerHTML = "<img src='img/jogoNumeros/frutas/" + f2 + ".png'>";          //coloca a imagem respetiva a fruta2 escolhida
-    var num1 = document.getElementById("num1").innerHTML = Math.floor(Math.random() * (numMax - 1)) + 1;              //gera um número aleatorio entre 1 e o num Máximo, coloca-o no HTML e guarda na variavel
+    document.getElementById("fruta1").innerHTML = "<img src='img/frutas/" + f1 + ".png'>";                      //coloca a imagem respetiva a fruta1 escolhida
+    document.getElementById("fruta2").innerHTML = "<img src='img/frutas/" + f2 + ".png'>";                      //coloca a imagem respetiva a fruta2 escolhida
+    var num1 = document.getElementById("num1").innerHTML = Math.floor(Math.random() * (numMax - 1)) + 1;        //gera um número aleatorio entre 1 e o num Máximo, coloca-o no HTML e guarda na variavel
     var num2 = document.getElementById("num2").innerHTML = numMax - num1;                                       //calcula as frutas que faltam até ao numero maximo
+    document.getElementById("num2").classList.add('jogo-num-bola');                                             //calcula as frutas que faltam até ao numero maximo
 
-
-    switch (f1 + "_" + f2) {                            //verifica as frutas sorteadas e coloca no HTML a respetiva imagem
+    switch (f1 + "_" + f2) {                                                            //verifica as frutas sorteadas e coloca no HTML a respetiva imagem
         case 'maca_pera':
         case 'pera_maca':
-            sumo.innerHTML = "<img src='img/jogoNumeros/sumos/1.png'>";
+            sumo.innerHTML = "<img src='img/jogoNumeros/sumo1.png'>";
             break;
         case 'maca_cenoura':
         case 'cenoura_maca':
-            sumo.innerHTML = "<img src='img/jogoNumeros/sumos/2.png'>";
+            sumo.innerHTML = "<img src='img/jogoNumeros/sumo2.png'>";
             break;
         case 'maca_laranja':
         case 'laranja_maca':
-            sumo.innerHTML = "<img src='img/jogoNumeros/sumos/3.png'>";
+            sumo.innerHTML = "<img src='img/jogoNumeros/sumo3.png'>";
             break;
         case 'pera_cenoura':
         case 'cenoura_pera':
-            sumo.innerHTML = "<img src='img/jogoNumeros/sumos/4.png'>";
+            sumo.innerHTML = "<img src='img/jogoNumeros/sumo4.png'>";
             break;
         case 'pera_laranja':
         case 'laranja_pera':
-            sumo.innerHTML = "<img src='img/jogoNumeros/sumos/5.png'>";
+            sumo.innerHTML = "<img src='img/jogoNumeros/sumo5.png'>";
             break;
         case 'cenoura_laranja':
         case 'laranja_cenoura':
-            sumo.innerHTML = "<img src='img/jogoNumeros/sumos/6.png'>";
+            sumo.innerHTML = "<img src='img/jogoNumeros/sumo6.png'>";
             break;
     }
+
 
     document.getElementById("op1").innerHTML = "";              //limpa o innerHTML do elemento
     document.getElementById("op2").innerHTML = "";              //limpa o innerHTML do elemento
@@ -546,10 +551,10 @@ function loadJogoNumeros() {
     var opCerta = Math.floor(Math.random() * 3 + 1);                //escolhe a posição onde vai colocar a hipotese certa
 
     for (var i = 0; i < num1; i++) {                    //coloca as imagens das frutas na posição da resposta correta
-        document.getElementById("op" + opCerta).innerHTML += "<img src='img/jogoNumeros/frutas/" + f1 + ".png'>";
+        document.getElementById("op" + opCerta).innerHTML += "<img src='img/frutas/" + f1 + ".png'>";
     }
     for (var j = 0; j < num2; j++) {
-        document.getElementById("op" + opCerta).innerHTML += "<img src='img/jogoNumeros/frutas/" + f2 + ".png'>";
+        document.getElementById("op" + opCerta).innerHTML += "<img src='img/frutas/" + f2 + ".png'>";
     }
 
     for (var l = 1; l <= 3; l++) {                      //coloca as imagens das frutas em cada uma das posiçoes com respostas erradas
@@ -561,10 +566,10 @@ function loadJogoNumeros() {
             fErrada2 = numMax - fErrada1;               //calcula o numero de 2as frutas
 
             for (var k = 0; k < fErrada1; k++) {        //coloca as imagens das frutas na posição respetiva
-                document.getElementById("op" + l).innerHTML += "<img src='img/jogoNumeros/frutas/" + f1 + ".png'>";
+                document.getElementById("op" + l).innerHTML += "<img src='img/frutas/" + f1 + ".png'>";
             }
             for (var n = 0; n < fErrada2; n++) {
-                document.getElementById("op" + l).innerHTML += "<img src='img/jogoNumeros/frutas/" + f2 + ".png'>";
+                document.getElementById("op" + l).innerHTML += "<img src='img/frutas/" + f2 + ".png'>";
             }
         }
     }

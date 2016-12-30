@@ -57,7 +57,7 @@
                 <p>Números</p>
             </div>
             <div class="col m3 s6 l3 center">
-                <div class="rounded menuIcon valign-wrapper z-depth-2 clickable inativo" id="btn_palavras">
+                <div class="rounded menuIcon valign-wrapper z-depth-2 clickable white_elem" id="btn_palavras">
                     <div class="center-block"><img src="img/icons/icon_palavras.png" class="icon"/></div>
                 </div>
                 <p>Palavras</p>
@@ -69,7 +69,7 @@
                 <p>Memória</p>
             </div>
             <div class="col m3 s6 l3 center">
-                <div class="rounded menuIcon valign-wrapper z-depth-2 clickable inativo" id="btn_cores">
+                <div class="rounded menuIcon valign-wrapper z-depth-2 clickable white_elem" id="btn_cores">
                     <div class="center-block"><img src="img/icons/icon_cores.png" class="icon"/></div>
                 </div>
                 <p>Cores</p>
@@ -135,16 +135,16 @@
                     <div class="col m6" id="fruta2"></div>
                 </div>
                 <div class="row center">
-                    <div class="col m6" id="num1"></div>
-                    <div class="col m6" id="num2"></div>
+                    <div class="col m6"><div id="num1" class='jogo-num-bola center'></div></div>
+                    <div class="col m6 center"><div id="num2" class='jogo-num-bola '></div></div>
                 </div>
             </div>
             <div class="col m6" id="sumo"></div>
         </div>
-        <div class="col m6">
-            <div class="row" id="op1"></div>
-            <div class="row" id="op2"></div>
-            <div class="row" id="op3"></div>
+        <div class="col m6" id="op-num">
+            <div class="row clickable rounded" id="op1"></div>
+            <div class="row clickable rounded" id="op2"></div>
+            <div class="row clickable rounded" id="op3"></div>
         </div>
     </div>
 </div>
@@ -166,7 +166,7 @@
 <ul id="slide-out" class="side-nav">
     <li>
         <div class="userView center">
-            <img src="img/icons/logo.png" style="width: 50%">
+            <img src="img/logo.png" style="width: 50%">
         </div>
     </li>
     <li><a class="subheader" style="color: #ef5350">SOM</a></li>

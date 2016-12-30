@@ -122,9 +122,10 @@ h1{
 .flip .card .front {
     /*position: absolute;*/
     z-index: 1;
-    background: black;
-    color: white;
+    background: #00acc1;
+    color: #fff;
     cursor: pointer;
+    border-radius: 5px;
 }
 
 /*Trás Carta*/
@@ -133,6 +134,7 @@ h1{
     background: white;
     color: black;
     cursor: pointer;
+    border-radius: 5px;
 }
 
 /*----------JOGO CORES--------*/
@@ -173,6 +175,24 @@ h1{
     cursor: pointer;
 }
 
+/*----------JOGO NUMEROS--------*/
+
+.jogo-num-bola{
+    border-radius: 70px;
+    background-color: #ef5350;
+    color: #fff;
+    /*padding: 25px;*/
+    height: 70px;
+    width: 70px;
+}
+
+#jogoNumeros img{
+    width: 100%;
+}
+
+#op-num img{
+    width: 20%;
+}
 
 /*----------OUTROS--------*/
 
@@ -180,7 +200,6 @@ h1{
 .selected{
     border: 2px solid red;
 }
-
 
 .icon{
     height: 80%;
@@ -240,4 +259,8 @@ h1{
     padding: 15px;
     font-size: 1.2em;
     text-transform: uppercase;
+}
+
+#jogoNumeros{
+    background-color: #fff;
 }
