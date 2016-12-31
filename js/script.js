@@ -140,9 +140,9 @@ window.onload = function () {
         loadJogoNumeros();
     };
 
-    document.getElementById("menu_paw").onclick = function () {
-        if(interacao != 0) {
-            interacao = 0;
+    document.getElementById("menu_paw").onclick = function () {                     //Ao clicar na opção de interação "apontar e esperar"
+        if(interacao != 0) {                                                        //Se a opção não estiver ainda selecionada (se a interação for diferente da atual)
+            interacao = 0;                                                          //Muda interação para "apontar e esperar"
             menu();
         }
     };
@@ -170,6 +170,41 @@ window.onload = function () {
 
 
 };
+
+//----------CONTROLOS----------//
+function menu() {
+    print(interacao);
+    switch (interacao) {                                                                    //Se interação for
+        case 0:                                                                             //0 = "apontar e esperar"
+            if (!document.getElementById("menu_paw").classList.contains("active")) {        //Se a interação do tipo "apontar e esperar" tiver class "ativa"
+                document.getElementById("menu_paw").click();                                //Simula o clique em "apontar e esperar" no menu lateral
+                speechRecognition.abort();                                                  //Pára o reconhecimento por voz
+                stop = true;
+            }
+            break;
+        case 1:
+            if (!document.getElementById("menu_cursor").classList.contains("active")) {
+                document.getElementById("menu_cursor").click();
+                speechRecognition.abort();
+                stop = true;
+            }
+            break;
+        case 2:
+            if (!document.getElementById("menu_varrimento").classList.contains("active")) {
+                document.getElementById("menu_varrimento").click();
+                speechRecognition.abort();
+                stop = true;
+            }
+            break;
+        case 3:
+            if (!document.getElementById("menu_voz").classList.contains("active")) {
+                document.getElementById("menu_voz").click();
+                loadVoiceRec();                                                                 //Inicia o reconhecimento por voz
+                stop = false;
+            }
+            break;
+    }
+}
 
 //----------POINTandWAIT----------//
 function loadPointAndWait() {
@@ -228,14 +263,16 @@ function loadVoiceRec() {
     // console.log(grammarList);
     //
     // speechRecognition.grammars = grammar;
+
     speechRecognition.lang = 'pt-PT';                       // default: html lang
     speechRecognition.continuous = false;                   // default: false
     speechRecognition.interimResults = false;               // resultados intermédios, com .final = false (default: false)
     speechRecognition.maxAlternatives = 1;                  // resultados máximos (default: 1)
 
-    speechRecognition.start();
+    speechRecognition.start();                              //Inicia o reconhecimento por voz
 
     speechRecognition.onresult = function (event) {
+
         // propriedade "results" de SpeechRecognitionEvent faz return de um objeto SpeechRecognitionResultList
         // SpeechRecognitionResultList tem vários objetos SpeechRecognitionResult
         // Tem um "getter" que permite ser acedido como um array
@@ -304,7 +341,9 @@ function loadVoiceRec() {
                             document.getElementById("corFinal").click();
                             break;
                         case 'limpa':
+                        case 'limpar':
                         case 'apaga':
+                        case 'apagar':
                             document.getElementById("apagar").click();
                             break;
                     }
@@ -388,9 +427,8 @@ function loadVoiceRec() {
 
 //----------JOGO MEMÓRIA----------//
 function jogoMemoria() {
-    jogo_memoria = true;
-    //define posições aleatorias para os elementos do array
-    memoCartas.sort(function () {
+    jogo_memoria = true;                                                //Mostrar jogo
+    memoCartas.sort(function () {                                       //Define posições aleatorias para os elementos do array
         return 0.5 - Math.random()
     });
     var numCartas = 0;                                                  //Numeros de cartas colocadas no tabuleiro
@@ -399,14 +437,28 @@ function jogoMemoria() {
         document.getElementById("memoTab").innerHTML +=
             "</div><div class='flip' id='line" + id + "'></div>";
 
-        for (var id2 = 0; id2 < 4; id2++) {                             //Criar elementos (cartas) com id "item#" por linha até 3 (para ecrã M)
+        if(interacao == 3){
+        for (var id2 = 0; id2 < 4; id2++) {                             //Criar elementos (cartas) com id "item#" por linha até 3 (para ecrã tamanho M)
             document.getElementById("line" + id).innerHTML +=
-                "<div class='col s6 m4 l3'><div class='rounded carta valign-wrapper clickable card grey' style='height: 200px; width: 200px;' id='item" + (numCartas + 1) + "'>" +
+                "<div class='col s6 m4 l3'><div class='rounded carta valign-wrapper clickable card grey' style='height: 250px; width: 200px;' id='item" + (numCartas + 1) + "'>" +
                 "<div class='center-block face front'>" + (numCartas + 1) + "</div>" +
                 "<div class='face back'>" + memoCartas[numCartas] + "</div>" +
                 "</div></div>";
             numCartas++;                                                //Soma 1 carta às cartas colocadas
+            }
         }
+        else{
+            for (var id2 = 0; id2 < 4; id2++) {                             //Criar elementos (cartas) com id "item#" por linha até 3 (para ecrã tamanho M)
+                document.getElementById("line" + id).innerHTML +=
+                    "<div class='col s6 m4 l3'><div class='rounded carta valign-wrapper clickable card grey' style='height: 250px; width: 200px;' id='item" + (numCartas + 1) + "'>" +
+                    "<div class='center-block face front'></div>" +
+                    "<div class='face back'>" + memoCartas[numCartas] + "</div>" +
+                    "</div></div>";
+                numCartas++;                                                //Soma 1 carta às cartas colocadas
+            }
+
+            }
+
     }
 
     for (var j = 1; j < 9; j++) {
@@ -508,6 +560,7 @@ function loadJogoPalavras() {
 
 //----------JOGO CORES----------//
 function loadJogoCores() {
+    document.body.style.backgroundColor = "#fff";
     var final;
     var numCores=0;
     document.getElementById('cores-lig-1').style.backgroundColor = "#fff";
@@ -711,37 +764,3 @@ function loadJogoNumeros() {
 }
 
 
-//----------CONTROLOS----------//
-function menu() {
-    console.log(interacao);
-    switch (interacao) {
-        case 0:
-            if (!document.getElementById("menu_paw").classList.contains("active")) {
-                document.getElementById("menu_paw").click();
-                speechRecognition.abort();
-                stop = true;
-            }
-            break;
-        case 1:
-            if (!document.getElementById("menu_cursor").classList.contains("active")) {
-                document.getElementById("menu_cursor").click();
-                speechRecognition.abort();
-                stop = true;
-            }
-            break;
-        case 2:
-            if (!document.getElementById("menu_varrimento").classList.contains("active")) {
-                document.getElementById("menu_varrimento").click();
-                speechRecognition.abort();
-                stop = true;
-            }
-            break;
-        case 3:
-            if (!document.getElementById("menu_voz").classList.contains("active")) {
-                document.getElementById("menu_voz").click();
-                stop = false;
-                loadVoiceRec();
-            }
-            break;
-    }
-}
