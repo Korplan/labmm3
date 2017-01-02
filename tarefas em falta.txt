@@ -38,7 +38,7 @@ PROGRAMAÇAO
 
 -colocar instruções					[prioridade média]
 
--botão de retroceder				            	[prioridade alta]
+-botão de retroceder				            	[prioridade alta]  (Cláudia A- Feito apenas com clique.)
 
 -botão ajuda					[prioridade alta]
 

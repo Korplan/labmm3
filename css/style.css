@@ -67,6 +67,13 @@ h1{
     left: 0;
 }
 
+.voltar{
+    color: #FFF;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
 .line-height{
     line-height: 1.3em;
 }
