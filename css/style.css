@@ -1,80 +1,266 @@
+/*----------GERAL--------*/
 body{
-    background-color: cornflowerblue;
+    background: url('../img/fundo.png'), #74c043;
+    background-size: cover;
+    /*color: #fff;*/
 }
 
-.white_elem{
-    background-color: white;
-}
-
+/*Borda redonda*/
 .rounded{
     border-radius: 10px;
 }
 
-.menuIcon, .carta{
-    position: absolute;
-    height: 200px;
-    width: 200px;
+/*Títulos*/
+h1{
+    font-size: 20px;
+    text-transform: uppercase;
+    /*color: #fff;*/
 }
 
+/*----------CORES--------*/
 .grey{
     background-color: grey;
 }
+.white_elem{
+    background-color: white;
+}
 
+/*----------ELEMENTOS--------*/
+
+/*Margens e Espaçamentos*/
+.margin_top_bottom{
+    Margin-top: 20vh;
+    Margin-bottom: 20vh;
+}
+
+/*Clicáveis*/
+.clickable{
+    cursor: pointer;
+    box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.14), 0 1px 7px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -1px rgba(0, 0, 0, 0.2);
+}
+
+.clickable:hover{
+    box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.3);
+}
+
+/*----------OUTROS--------*/
+/*Inativos*/
 .inativo{
     background-color: grey;
 }
 
-h1{
-    font-size: 20px;
+.modal{
+    color: #363636;
+    margin-top: 20vh;
 }
 
-.clickable{
-    cursor: pointer;
+.icon{
+    height: 80%;
+    width: 80%;
 }
 
-/* ----CLASSE DE TESTE---- */
-.selected{
-    border: 2px solid red;
+/*Navegação*/
+#settings{
+    color: #FFF;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
+.line-height{
+    line-height: 1.3em;
+}
+
+/*----------JOGO MEMÓRIA--------*/
+
+/*Carta*/
+.menuIcon, .carta{
+    height: 250px;
+    color: #363636;
+}
+
+/*Rodar Cartas*/
 .flip {
-    -webkit-perspective: 800;
-    /*width: 400px;*/
-    /*height: 200px;*/
-    /*position: relative;*/
-    /*margin: 50px auto;*/
+    -webkit-perspective: 4000px;                /*Roda segundo determinada perspetiva - simula o ângulo em que é virada*/
 }
 .flip .card.flipped {
-    -webkit-transform: rotatex(-180deg);
+    -webkit-transform: rotatey(-180deg);        /*Roda -180º no eixo dos yy - simula o sentido em que é virada (direita-esquerda e vice-versa)*/
 }
 .flip .card {
     width: 100%;
     height: 100%;
-    -webkit-transform-style: preserve-3d;
-    -webkit-transition: 0.5s;
+    -webkit-transform-style: preserve-3d;       /*Preserva o efeito 3D*/
+    -webkit-transition: 0.7s;                   /*Tempo que demora a rodar a carta*/
 }
+
 .flip .card .face {
     width: 100%;
     height: 100%;
     position: absolute;
     -webkit-backface-visibility: hidden ;
     z-index: 2;
-    font-family: Georgia;
     font-size: 3em;
     text-align: center;
     line-height: 200px;
 }
+
+/*Frente Carta*/
 .flip .card .front {
-    /*position: absolute;*/
     z-index: 1;
-    background: black;
-    color: white;
+    background-color: #00acc1;
+    background-image: url("");
+    color: #363636;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+/*Trás Carta*/
+.flip .card .back {
+    -webkit-transform: rotatey(-180deg);        /*Roda -180º no eixo dos yy - simula o sentido em que é virada (direita-esquerda e vice-versa)*/
+    background: #efefef;
+    color: #363636;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+/*----------JOGO CORES--------*/
+#cor1, #cor2, #cor3{
+    border-radius: 50px;
+    width: 100px;
+    height: 100px;
+    margin: 25px;
+}
+
+#cor1{
+    background-color: #c2185b;
+}
+
+#cor2{
+    background-color: #00b0ff;
+}
+
+#cor3{
+    background-color: #f4b400;
+}
+
+#corFinal{
+    border-radius: 100px;
+    width: 150px;
+    height: 150px;
+    margin-left: 50px;
+    transition: background-color 1s ease;
+    cursor: default;
+    transition-delay: 0.3s;
+}
+
+#apagar{
+    width: 25px;
+    height: 25px;
+    background-color: white;
+    border-radius: 25px;
     cursor: pointer;
 }
-.flip .card .back {
-    -webkit-transform: rotatex(-180deg);
-    background: blue;
-    background: white;
-    color: black;
-    cursor: pointer;
+
+.cores-lig{
+    width: 200px;
+    height: 20px;
+    background-color: #FFFFFF;
+    position: relative;
+    z-index: -10;
+}
+
+#cores-lig-1 {
+    transform: rotate(45deg);
+    top: 150px;
+    left: 70px;
+    transition: background-color 1s ease;
+}
+
+#cores-lig-2{
+    top: 70px;
+    left: 70px;
+    transition: background-color 1s ease;
+}
+
+#cores-lig-3{
+    transform:rotate(-45deg);
+    top: -10px;
+    left: 70px;
+    transition: background-color 1s ease;
+}
+/*----------JOGO NUMEROS--------*/
+
+.jogo-num-bola{
+    border-radius: 70px;
+    background-color: #ef5350;
+    color: #fff;
+    /*padding: 25px;*/
+    height: 70px;
+    width: 70px;
+}
+
+#jogoNumeros img{
+    width: 100%;
+}
+
+#op-num img{
+    width: 20%;
+}
+
+/*----------OUTROS--------*/
+
+/*Classe de Teste*/
+.selected{
+    border: 2px solid red;
+}
+
+.icon{
+    height: 80%;
+    width: 80%;
+}
+
+.side-nav .collapsible li label{
+    margin-left: 32px;
+}
+
+.side-nav .collapsible-body {
+    padding: 0 32px;
+    line-height: 1.3em;
+}
+
+@media only screen and (max-width: 992px){
+    .side-nav .collapsible li label{
+        margin-left: 16px;
+    }
+    .side-nav .collapsible-body {
+        padding: 0 16px;
+        line-height: 1.3em;
+    }
+}
+
+#settings{
+    color: #FFF;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.silaba{
+    text-transform: uppercase;
+    display: inline-block;
+    background-color: #fff;
+    padding: 15px;
+    margin: 10px;
+    border-radius: 5px;
+    width: 100px;
+    color: #363636;
+}
+
+#silaba-falta{
+    background-color: #cfcfcf;
+}
+
+.opcao{
+    margin: 10px 30px;
+    font-size: 1.2em;
 }

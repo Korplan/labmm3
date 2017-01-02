@@ -9,58 +9,237 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
+
+<!-- Menu (botão) -->
+<a href="#" data-activates="slide-out" class="button-collapse" id="settings"><i
+        class="material-icons medium">settings</i></a>
+
+<!-- Página - Escolher interação -->
 <div id="interacao1">
-    <h1 class="center">Método de interação</h1>
+    <h1 class="center margin_top_bottom">TIPO DE NAVEGAÇÃO</h1>
     <div class="container">
         <div class="row">
-            <div class="rounded menuIcon valign-wrapper white_elem white_elem z-depth-4 clickable"
-                 style="left: 200px; top: 250px" id="varrimento">
-                <div class="center-block"><i class="material-icons large">view_carousel</i></div>
+            <div class="col m3 s6 l3 center">
+                <div class="rounded menuIcon valign-wrapper white_elem z-depth-1 clickable modal-trigger modal-action"
+                     data-target="modal1" id="varrimento">
+                    <div class="center-block"><i class="material-icons large">view_carousel</i></div>
+                </div>
+                <p>Varrimento</p>
             </div>
-            <div class="rounded menuIcon valign-wrapper white_elem white_elem z-depth-4 clickable"
-                 style="left: 450px; top: 250px" id="point_wait">
-                <div class="center-block"><i class="material-icons large">restore</i></div>
+            <div class="col m3 s6 l3 center">
+                <div class="rounded menuIcon valign-wrapper white_elem z-depth-1 clickable modal-trigger modal-action"
+                     data-target="modal1" id="point_wait">
+                    <div class="center-block"><i class="material-icons large">restore</i></div>
+                </div>
+                <p>Apontar e Esperar</p>
             </div>
-            <div class="rounded menuIcon valign-wrapper white_elem white_elem z-depth-4 clickable"
-                 style="left: 700px; top: 250px" id="point_click">
-                <div class="center-block"><i class="material-icons large">schedule</i></div>
+            <div class="col m3 s6 l3 center">
+                <div class="rounded menuIcon valign-wrapper white_elem z-depth-1 clickable modal-trigger modal-action"
+                     data-target="modal1" id="point_click">
+                    <div class="center-block"><i class="material-icons large">mouse</i></div>
+                </div>
+                <p>Cursor</p>
             </div>
-            <div class="rounded menuIcon valign-wrapper white_elem white_elem z-depth-4 clickable"
-                 style="left: 950px; top: 250px" id="voz">
-                <div class="center-block"><i class="material-icons large">mic</i></div>
+            <div class="col m3 s6 l3 center">
+                <div class="rounded menuIcon valign-wrapper white_elem z-depth-1 clickable modal-trigger modal-action"
+                     data-target="modal1" id="voz">
+                    <div class="center-block"><i class="material-icons large">mic</i></div>
+                </div>
+                <p>Voz</p>
             </div>
         </div>
     </div>
 </div>
+
+<!-- Página - Escolher jogo -->
 <div id="interacao2" style="display: none">
-    <h1 class="center">Jogos</h1>
+    <h1 class="center margin_top_bottom">Jogos</h1>
     <div class="container">
         <div class="row">
-            <div class="rounded menuIcon valign-wrapper z-depth-4 clickable inativo" style="left: 200px; top: 250px"
-                 id="btn_num">
-                <div class="center-block"><i class="material-icons large">mic</i></div>
+            <div class="col m3 s6 l3 center">
+                <div class="rounded menuIcon valign-wrapper z-depth-2 clickable white_elem" id="btn_num">
+                    <div class="center-block"><img src="img/icons/icon_numeros.png" class="icon"/></div>
+                </div>
+                <p>Números</p>
             </div>
-            <div class="rounded menuIcon valign-wrapper z-depth-4 clickable inativo" style="left: 450px; top: 250px"
-                 id="btn_palavras">
-                <div class="center-block"><i class="material-icons large">schedule</i></div>
+            <div class="col m3 s6 l3 center">
+                <div class="rounded menuIcon valign-wrapper z-depth-2 clickable white_elem" id="btn_palavras">
+                    <div class="center-block"><img src="img/icons/icon_palavras.png" class="icon"/></div>
+                </div>
+                <p>Palavras</p>
             </div>
-            <div class="rounded menuIcon valign-wrapper z-depth-4 clickable" style="left: 700px; top: 250px"
-                 id="btn_mem">
-                <div class="center-block"><i class="material-icons large">mic</i></div>
+            <div class="col m3 s6 l3 center">
+                <div class="rounded menuIcon valign-wrapper z-depth-2 clickable white_elem" id="btn_mem">
+                    <div class="center-block"><img src="img/icons/icon_memoria.png" class="icon"/></div>
+                </div>
+                <p>Memória</p>
             </div>
-            <div class="rounded menuIcon valign-wrapper z-depth-4 clickable inativo" style="left: 950px; top: 250px"
-                 id="btn_cores">
-                <div class="center-block"><i class="material-icons large">schedule</i></div>
+            <div class="col m3 s6 l3 center">
+                <div class="rounded menuIcon valign-wrapper z-depth-2 clickable white_elem" id="btn_cores">
+                    <div class="center-block"><img src="img/icons/icon_cores.png" class="icon"/></div>
+                </div>
+                <p>Cores</p>
             </div>
         </div>
     </div>
 </div>
+
+<!-- Página - Jogo memória -->
 <div id="jogoMemoria" style="display: none">
     <h1 class="center">Jogo Memória</h1>
-    <div id="memoTab">
+    <div class="container">
+        <div class="row" id="memoTab"></div>
     </div>
 </div>
+
+<!-- Página - Jogo palavras -->
+<div id="jogoPalavras" style="display: none">
+    <h1 class="center">Jogo das Palavras</h1>
+    <div class="container">
+        <h1 class="center"></h1>
+        <div class="row">
+            <div id="imgPal" class="col m4 offset-m4"></div>
+        </div>
+        <div class="row center">
+            <div class="col m8 offset-m2" id="palavraIncompleta"></div>
+        </div>
+        <div class="row center">
+            <div class="col m10 offset-m1" id="opcoes"></div>
+        </div>
+    </div>
+</div>
+
+<!-- Página - Jogo cores -->
+<div id="jogoCores" style="display: none">
+    <h1 class="center">Jogo das Cores</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col m6">
+                <div class="row">
+                    <div class="col m6 z-depth-2 clickable" id="cor1"></div>
+                    <div class="cores-lig z-depth-1" id="cores-lig-1"></div>
+                </div>
+                <div class="row">
+                    <div class="col m6 z-depth-2 clickable" id="cor2"></div>
+                    <div class="col m6 z-depth-4 clickable" id="corFinal" style="background-color: #FFF"></div>
+                    <div class="cores-lig z-depth-1" id="cores-lig-2"></div>
+                </div>
+                <div class="row">
+                    <div class="col m6 z-depth-2 clickable" id="cor3"></div>
+                    <div class="col m6">
+                        <div class="center z-depth-2 clickable" id="apagar">
+                            <i class="material-icons tiny" style="color:#000;">close</i>
+                        </div>
+                    </div>
+                    <div class="cores-lig z-depth-1" id="cores-lig-3"></div>
+                </div>
+            </div>
+            <div class="col m6" id="imagem"></div>
+        </div>
+    </div>
+</div>
+
+<!-- Página - Jogo números -->
+<div id="jogoNumeros" style="display: none">
+    <h1 class="center">Jogo dos Números</h1>
+    <div class="row">
+        <div class="col m6">
+            <div class="col m6">
+                <div class="row">
+                    <div class="col m6" id="fruta1"></div>
+                    <div class="col m6" id="fruta2"></div>
+                </div>
+                <div class="row center">
+                    <div class="col m6"><div id="num1" class='jogo-num-bola center'></div></div>
+                    <div class="col m6 center"><div id="num2" class='jogo-num-bola '></div></div>
+                </div>
+            </div>
+            <div class="col m6" id="sumo"></div>
+        </div>
+        <div class="col m6" id="op-num">
+            <div class="row clickable rounded" id="op1"></div>
+            <div class="row clickable rounded" id="op2"></div>
+            <div class="row clickable rounded" id="op3"></div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal - Alterar Interação -->
+<div id="modal1" class="modal">
+    <div class="modal-content">
+        <h4>ALTERAR O TIPO DE INTERAÇÃO</h4>
+        <p>Pode alterar a qualquer momento o tipo de interação no menu de opções <i
+                class="material-icons tiny">settings</i>.</p>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Continuar</a>
+    </div>
+</div>
+
+<!-- Menu -->
+<ul id="slide-out" class="side-nav">
+    <li>
+        <div class="userView center">
+            <img src="img/logo.png" style="width: 50%">
+        </div>
+    </li>
+    <li><a class="subheader" style="color: #ef5350">SOM</a></li>
+    <li>
+        <div class="switch">
+            <a>Leitura de ecrã
+                <label>
+                    <input type="checkbox">
+                    <span class="lever"></span>
+                </label>
+            </a>
+        </div>
+    </li>
+    <li>
+        <div class="switch">
+            <a>Música
+                <label>
+                    <input type="checkbox">
+                    <span class="lever"></span>
+                </label>
+            </a>
+        </div>
+    </li>
+    <li><a class="subheader" style="color: #ef5350">NAVEGAÇÃO</a></li>
+    <li style="color: #000">
+        <ul class="collapsible" data-collapsible="accordion">
+            <li>
+                <input class="collapsible-header" name="menu" type="radio" id="menu_paw">
+                <label for="menu_paw">Apontar e esperar</label>
+                <div class="collapsible-body">O utilizador tem que colocar o cursor sobre o item a selecionar e esperar que o temporizador pare.</div>
+            </li>
+            <li>
+                <input class="collapsible-header" name="menu" type="radio" id="menu_cursor">
+                <label for="menu_cursor">Cursor</label>
+                <div class="collapsible-body">O utilizador tem que colocar o cursor sobre o item a selecionar e clicar.</div>
+            </li>
+            <li>
+                <input class="collapsible-header" name="menu" type="radio" id="menu_varrimento">
+                <label for="menu_varrimento">Varrimento</label>
+                <div class="collapsible-body">Os itens são selecionados automaticamente e o utilizador só tem que parar no pretendido.</div>
+            </li>
+            <li>
+                <input class="collapsible-header" name="menu" type="radio" id="menu_voz">
+                <label for="menu_voz">Controlo por voz</label>
+                <div class="collapsible-body">O utilizador apenas tem que falar para selecionar itens.</div>
+            </li>
+        </ul>
+    </li>
+</ul>
+
 <script src="js/jquery-3.1.1.min.js"></script>
 <script src="js/materialize.min.js"></script>
+
+<!-- Modais -->
+<script>
+    $(document).ready(function () {
+        $('.modal').modal();
+    });
+    $(".button-collapse").sideNav();
+</script>
 </body>
 </html>

@@ -1,0 +1,72 @@
+﻿ATENÇÃO
+
+-comentar o código (em especial JS)			[prioridade muito alta]
+
+-escrever o relatório					[prioridade alta]
+
+
+
+DESIGN
+
+-aprovar design					[prioridade alta]
+
+-criar logótipo (depois de escolher o nome)		[prioridade média]
+
+-autoria no menu nav			            		[prioridade baixa]
+
+-desenhar as frutas + fundo + cursor cores			[prioridade alta]
+
+-animar os icons + instruções				[prioridade média/baixa]
+
+-escolher mascote (icon ajuda)				[prioridade alta]
+
+
+
+PROGRAMAÇAO
+
+-responsive (PC, tablet, telemóvel)		        	[prioridade média]
+
+-paralax no fundo nas transiçoes entre cenários	    	[prioridade baixa]
+
+-navegçao por varrimento				[prioridade alta]
+
+-navegaçao por apontar e esperar		        	[prioridade alta]
+
+-leitura de ecrã					[prioridade alta]
+
+-colocar sons e música de fundo			[prioridade média]
+
+-colocar instruções					[prioridade média]
+
+-botão de retroceder				            	[prioridade alta]
+
+-botão ajuda					[prioridade alta]
+
+	
+
+	JOGO MEMORIA
+	
+	-mais níveis (com mais cartas/ mais difícil)		[prioridade alta]
+
+	
+	
+	JOGO NUMEROS
+	
+	-mais níveis (com mais cartas/ mais difícil)		[prioridade alta]
+
+	
+	-mais níveis (com mais cartas/ mais difícil)		[prioridade alta]
+
+	
+	
+	JOGO PALAVRAS
+	
+	-animar o completar da palavra 			[prioridade média]
+	
+	-animar a palavra completa			[prioridade média]
+
+	
+	
+	JOGO CORES
+	
+	-ver canvas para pintar as figuras	            	[prioridade média/alta]
