@@ -14,7 +14,17 @@
 <a href="#" data-activates="slide-out" class="button-collapse" id="settings"><i
         class="material-icons medium">settings</i></a>
 
+
+<!-- Voltar (botão) -->
+
+<a href="#" class="button voltar" id="voltar1" style="display: none"><i
+        class="material-icons medium">launch</i></a>
+
+<a href="#" class="button voltar" id="voltar2" style="display: none"><i
+        class="material-icons medium">launch</i></a>
+
 <!-- Página - Escolher interação -->
+
 <div id="interacao1">
     <h1 class="center margin_top_bottom">TIPO DE NAVEGAÇÃO</h1>
     <div class="container">
@@ -57,26 +67,26 @@
     <div class="container">
         <div class="row">
             <div class="col m3 s6 l3 center">
-                <div class="rounded menuIcon valign-wrapper z-depth-2 clickable white_elem" id="btn_num">
-                    <div class="center-block"><img src="img/icons/icon_numeros.png" class="icon"/></div>
+                <div class="rounded menuIcon valign-wrapper z-depth-1 clickable white_elem" id="btn_num">
+                    <div class="center-block click_container"><img src="img/icons/icon_numeros.png" class="icon"/></div>
                 </div>
                 <p>Números</p>
             </div>
             <div class="col m3 s6 l3 center">
-                <div class="rounded menuIcon valign-wrapper z-depth-2 clickable white_elem" id="btn_palavras">
-                    <div class="center-block"><img src="img/icons/icon_palavras.png" class="icon"/></div>
+                <div class="rounded menuIcon valign-wrapper z-depth-1 clickable white_elem" id="btn_palavras">
+                    <div class="center-block click_container"><img src="img/icons/icon_palavras.png" class="icon"/></div>
                 </div>
                 <p>Palavras</p>
             </div>
             <div class="col m3 s6 l3 center">
-                <div class="rounded menuIcon valign-wrapper z-depth-2 clickable white_elem" id="btn_mem">
-                    <div class="center-block"><img src="img/icons/icon_memoria.png" class="icon"/></div>
+                <div class="rounded menuIcon valign-wrapper z-depth-1 clickable white_elem" id="btn_mem">
+                    <div class="center-block click_container"><img src="img/icons/icon_memoria.png" class="icon"/></div>
                 </div>
                 <p>Memória</p>
             </div>
             <div class="col m3 s6 l3 center">
-                <div class="rounded menuIcon valign-wrapper z-depth-2 clickable white_elem" id="btn_cores">
-                    <div class="center-block"><img src="img/icons/icon_cores.png" class="icon"/></div>
+                <div class="rounded menuIcon valign-wrapper z-depth-1 clickable white_elem" id="btn_cores">
+                    <div class="center-block click_container"><img src="img/icons/icon_cores.png" class="icon"/></div>
                 </div>
                 <p>Cores</p>
             </div>
@@ -88,7 +98,7 @@
 <div id="jogoMemoria" style="display: none">
     <h1 class="center">Jogo Memória</h1>
     <div class="container">
-        <div class="row" id="memoTab"></div>
+        <div class="row flip" id="memoTab"></div>
     </div>
 </div>
 
@@ -116,18 +126,18 @@
         <div class="row">
             <div class="col m6">
                 <div class="row">
-                    <div class="col m6 z-depth-2 clickable" id="cor1"></div>
+                    <div class="col m6 z-depth-1 clickable" id="cor1"></div>
                     <div class="cores-lig z-depth-1" id="cores-lig-1"></div>
                 </div>
                 <div class="row">
-                    <div class="col m6 z-depth-2 clickable" id="cor2"></div>
-                    <div class="col m6 z-depth-4 clickable" id="corFinal" style="background-color: #FFF"></div>
+                    <div class="col m6 z-depth-1 clickable" id="cor2"></div>
+                    <div class="col m6 z-depth-1" id="corFinal" style="background-color: #FFF"></div>
                     <div class="cores-lig z-depth-1" id="cores-lig-2"></div>
                 </div>
                 <div class="row">
-                    <div class="col m6 z-depth-2 clickable" id="cor3"></div>
+                    <div class="col m6 z-depth-1 clickable" id="cor3"></div>
                     <div class="col m6">
-                        <div class="center z-depth-2 clickable" id="apagar">
+                        <div class="center z-depth-1 clickable" id="apagar">
                             <i class="material-icons tiny" style="color:#000;">close</i>
                         </div>
                     </div>
@@ -228,6 +238,9 @@
                 <div class="collapsible-body">O utilizador apenas tem que falar para selecionar itens.</div>
             </li>
         </ul>
+    </li>
+    <li>
+        <span class="userView center">Frutas! &copy; 2017</span>
     </li>
 </ul>
 
