@@ -35,12 +35,31 @@ h1{
 
 /*Clicáveis*/
 .clickable{
+    position: relative;
     cursor: pointer;
-    box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.14), 0 1px 7px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -1px rgba(0, 0, 0, 0.2);
 }
 
 .clickable:hover{
     box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.3);
+}
+
+#sel_cont,
+.click_container{
+    position: absolute;
+    /*display: block;*/
+    /*margin: auto;*/
+    width: 100%;
+    height: auto;
+    /*padding: 30% 0;*/
+}
+
+#sel_cont{
+    z-index: 100;
+}
+
+#selecionada{
+    /*height: 70%;*/
+    width: 70%;
 }
 
 /*----------OUTROS--------*/
@@ -90,7 +109,7 @@ h1{
     width: 100%;
     height: 100%;
     -webkit-transform-style: preserve-3d;       /*Preserva o efeito 3D*/
-    -webkit-transition: 0.7s;                   /*Tempo que demora a rodar a carta*/
+    -webkit-transition: 0.7s, border 0s;                   /*Tempo que demora a rodar a carta*/
 }
 
 .flip .card .face {
@@ -108,7 +127,7 @@ h1{
 .flip .card .front {
     z-index: 1;
     background-color: #00acc1;
-    background-image: url("");
+    /*background-image: url("");*/
     color: #363636;
     cursor: pointer;
     border-radius: 5px;
