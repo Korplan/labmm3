@@ -1,72 +1,35 @@
-﻿ATENÇÃO
+﻿Última atualização: 04h20
+Podem existir tarefas que não constam na lista e convém irmos falando para saber quem está a fazer o quê e atualizar a lista frequentemente :)
 
--comentar o código (em especial JS)			[prioridade muito alta]
-
--escrever o relatório					[prioridade alta]
-
-
+ATENÇÃO
+-comentar o código (em especial JS)			[prioridade muito alta] - a ser feito (Inês, Joel)
+-escrever o relatório					[prioridade alta] - a ser feito (Inês)
 
 DESIGN
-
 -aprovar design					[prioridade alta]
-
 -criar logótipo (depois de escolher o nome)		[prioridade média]
-
 -autoria no menu nav			            		[prioridade baixa]
-
--desenhar as frutas + fundo + cursor cores			[prioridade alta]
-
+-desenhar as frutas + fundo + cursor cores	(+canvas)		[prioridade alta] - a ser feito (Inês)
 -animar os icons + instruções				[prioridade média/baixa]
-
 -escolher mascote (icon ajuda)				[prioridade alta]
 
-
-
 PROGRAMAÇAO
-
--responsive (PC, tablet, telemóvel)		        	[prioridade média]
-
+-responsive (PC, tablet, telemóvel)		        	[prioridade média] - a ser feito (Joel, Inês)
 -paralax no fundo nas transiçoes entre cenários	    	[prioridade baixa]
-
--navegçao por varrimento				[prioridade alta]
-
--navegaçao por apontar e esperar		        	[prioridade alta]
-
+-navegaçao por apontar e esperar		        	[prioridade alta] - a ser feito (Joel)
 -leitura de ecrã					[prioridade alta]
-
 -colocar sons e música de fundo			[prioridade média]
-
--colocar instruções					[prioridade média]
-
--botão de retroceder				            	[prioridade alta]  (Cláudia A- Feito apenas com clique.)
-
+-colocar instruções (modal)				[prioridade média/alta]
 -botão ajuda					[prioridade alta]
+-botão retroceder					[prioridade alta] - a ser feito (Cláudia A)
+-colocar animações na interação com os elementos		[prioridade média/alta] - a ser feito (Inês)
 
-	
-
-	JOGO MEMORIA
-	
-	-mais níveis (com mais cartas/ mais difícil)		[prioridade alta]
-
-	
+	JOGO MEMORIA	
+	-mais níveis (com mais cartas/ mais difícil)		[prioridade alta] - a ser feito (Joel)
 	
 	JOGO NUMEROS
-	
-	-mais níveis (com mais cartas/ mais difícil)		[prioridade alta]
-
-	
-	-mais níveis (com mais cartas/ mais difícil)		[prioridade alta]
-
-	
-	
-	JOGO PALAVRAS
-	
-	-animar o completar da palavra 			[prioridade média]
-	
-	-animar a palavra completa			[prioridade média]
-
-	
+	-implementar interação 			[prioridade alta]
+	-mais níveis (mais difícil)			[prioridade alta/média]
 	
 	JOGO CORES
-	
-	-ver canvas para pintar as figuras	            	[prioridade média/alta]
+	-ver canvas para pintar as figuras	            	[prioridade média/alta] - a ser feito (Inês)

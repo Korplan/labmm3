@@ -17,10 +17,15 @@ var sprite = 0;
 var anim = false;
 var elem = "";
 
+//----------VARRIMENTO----------
+var varrimento;
+var local;
+
 //----------JOGO MEMORIA----------
-var memoCartas = [1, 1, 2, 2, 3, 3, 4, 4];      //Array pares de cartas
+var memoCartas = [];                            //Array pares de cartas
 var par = false;                                //Quando selecionas uma carta passa a true para usar como comparação
 var ultimo = "";
+var memMax = 12;                                 //numero maximo de cartas
 
 //----------JOGO PALAVRAS----------
 var feitas = [];        //Array que armazena os index do array "palavras" que já sairam
@@ -59,6 +64,8 @@ function print(s) {
 //----------NO CARREGAMENTO----------//
 window.onload = function () {
     var temp = "";                                                                      //Elimina classes acrescentadas ao elemento "voz"
+
+    document.getElementById("btn-back").onclick=retroceder;                             //Botão de retroceder para o menu principal
 
     if (!('webkitSpeechRecognition' in window)) {                                       //Verifica se o browser suporta v2t (voz para texto)
         print("O browser não é compatível com reconhecimento de voz");                  //Escreve na consola (ver função "print")
@@ -119,10 +126,17 @@ window.onload = function () {
         document.getElementById("voltar2").style.display = "block";                     //Mostra o botão "voltar2"
         jogo = 1;
         jogoMemoria();
-        // if (voiceEnable)
-        //
-        // if (pawEnable)
-        //     loadPointAndWait();
+        if (interacao == 3)
+            for (var i = 0; i < document.getElementsByClassName("mostraNum")[i].length; i++)
+                document.getElementsByClassName("mostraNum")[i].style.display = "block";
+        switch (interacao) {
+            case 0:
+                loadPointAndWait();
+                break;
+            case 2:
+                loadVarrimento();
+                break;
+        }
     };
 
     document.getElementById("btn_palavras").onclick = function () {                     //Ao clicar no elemento "btn_palavras"
@@ -132,6 +146,14 @@ window.onload = function () {
         document.getElementById("voltar2").style.display = "block";                     //Mostra o botão "voltar2"
         jogo = 3;
         loadJogoPalavras();
+        switch (interacao) {
+            case 0:
+                loadPointAndWait();
+                break;
+            case 2:
+                loadVarrimento();
+                break;
+        }
     };
 
     document.getElementById("btn_cores").onclick = function () {                        //Ao clicar no elemento "btn_cores"
@@ -141,6 +163,14 @@ window.onload = function () {
         document.getElementById("voltar2").style.display = "block";                     //Mostra o botão "voltar2"
         jogo = 4;
         loadJogoCores();
+        switch (interacao) {
+            case 0:
+                loadPointAndWait();
+                break;
+            case 2:
+                loadVarrimento();
+                break;
+        }
     };
 
     document.getElementById("btn_num").onclick = function () {                          //Ao clicar no elemento "btn_cores"
@@ -150,31 +180,39 @@ window.onload = function () {
         document.getElementById("voltar2").style.display = "block";                     //Mostra o botão "voltar2"
         jogo = 2;
         loadJogoNumeros();
+        switch (interacao) {
+            case 0:
+                loadPointAndWait();
+                break;
+            case 2:
+                loadVarrimento();
+                break;
+        }
     };
 
     document.getElementById("menu_paw").onclick = function () {                     //Ao clicar na opção de interação "apontar e esperar"
-        if(interacao != 0) {                                                        //Se a opção não estiver ainda selecionada (se a interação for diferente da atual)
+        if (interacao != 0) {                                                        //Se a opção não estiver ainda selecionada (se a interação for diferente da atual)
             interacao = 0;                                                          //Muda interação para "apontar e esperar"
             menu();
         }
     };
 
     document.getElementById("menu_cursor").onclick = function () {
-        if(interacao != 1) {
+        if (interacao != 1) {
             interacao = 1;
             menu();
         }
     };
 
     document.getElementById("menu_varrimento").onclick = function () {
-        if(interacao != 2) {
+        if (interacao != 2) {
             interacao = 2;
             menu();
         }
     };
 
     document.getElementById("menu_voz").onclick = function () {
-        if(interacao != 3) {
+        if (interacao != 3) {
             interacao = 3;
             menu();
         }
@@ -205,22 +243,46 @@ function menu() {
         case 0:                                                                             //0 = "apontar e esperar"
             if (!document.getElementById("menu_paw").classList.contains("active")) {        //Se a interação do tipo "apontar e esperar" tiver class "ativa"
                 document.getElementById("menu_paw").click();                                //Simula o clique em "apontar e esperar" no menu lateral
-                speechRecognition.abort();                                                  //Pára o reconhecimento por voz
-                stop = true;
+                try {
+                    speechRecognition.abort();                                                  //Pára o reconhecimento por voz
+                    stop = true;
+                    clearVarrimento(local);
+                } catch (err) {
+                }
+                loadPointAndWait();
+                if (jogo == 1)
+                    for (var i = 0; i < document.getElementsByClassName("mostraNum")[i].length; i++)
+                        document.getElementsByClassName("mostraNum")[i].style.display = "none";
             }
             break;
         case 1:
             if (!document.getElementById("menu_cursor").classList.contains("active")) {
                 document.getElementById("menu_cursor").click();
-                speechRecognition.abort();
-                stop = true;
+                try {
+                    speechRecognition.abort();                                                  //Pára o reconhecimento por voz
+                    stop = true;
+                    clearVarrimento(local);
+                } catch (err) {
+                }
+                unloadPointAndWait();
+                if (jogo == 1)
+                    for (var i = 0; i < document.getElementsByClassName("mostraNum")[i].length; i++)
+                        document.getElementsByClassName("mostraNum")[i].style.display = "none";
             }
             break;
         case 2:
             if (!document.getElementById("menu_varrimento").classList.contains("active")) {
                 document.getElementById("menu_varrimento").click();
-                speechRecognition.abort();
-                stop = true;
+                try {
+                    speechRecognition.abort();                                                  //Pára o reconhecimento por voz
+                    stop = true;
+                } catch (err) {
+                }
+                unloadPointAndWait();
+                loadVarrimento();
+                if (jogo == 1)
+                    for (var i = 0; i < document.getElementsByClassName("mostraNum")[i].length; i++)
+                        document.getElementsByClassName("mostraNum")[i].style.display = "none";
             }
             break;
         case 3:
@@ -228,6 +290,14 @@ function menu() {
                 document.getElementById("menu_voz").click();
                 loadVoiceRec();                                                                 //Inicia o reconhecimento por voz
                 stop = false;
+                unloadPointAndWait();
+                try {
+                    clearVarrimento(local);
+                } catch (err) {
+                }
+                if (jogo == 1)
+                    for (var i = 0; i < document.getElementsByClassName("mostraNum")[i].length; i++)
+                        document.getElementsByClassName("mostraNum")[i].style.display = "block";
             }
             break;
     }
@@ -243,7 +313,7 @@ function loadPointAndWait() {
                 elem = this;
                 atual[i] = this.innerHTML;
                 over = true;
-                this.innerHTML = "<div class='center-block'><img id='selecionada' src='img/PaW/0.png' style='height: 100px; width: 100px'></div>";
+                this.innerHTML += "<div id='sel_cont'><img id='selecionada' src='img/PaW/0.png'></div>";
                 if (!anim) {
                     sprite = 0;
                     selecting = setInterval("select(elem)", 500);
@@ -271,13 +341,71 @@ function select(elem) {
         print(elem);
         clearInterval(selecting);
         anim = false;
-        elem.click();
+        // elem.click();
+    }
+}
+
+function unloadPointAndWait() {
+    var elements = document.getElementsByClassName("clickable");
+
+    for (var i = 0; i < elements.length; i++) {
+        elements[i].onmouseover = null;
+        elements[i].onmouseout = null;
     }
 }
 
 //----------VARRIMENTO----------//
 function loadVarrimento() {
+    var i = -1;
+    switch (jogo) {
+        case 0:
+            local = document.getElementById("interacao2");
+            break;
+        case 1:
+            local = document.getElementById("jogoMemoria");
+            break;
+        case 2:
+            local = document.getElementById("jogoNumeros");
+            break;
+        case 3:
+            local = document.getElementById("jogoPalavras");
+            break;
+        case 4:
+            local = document.getElementById("jogoCores");
+            break;
+    }
+    clearVarrimento(local);
 
+    // document.onclick = function(){
+    //     local.getElementsByClassName("clickable")[i].click();
+    // };
+    window.onkeypress = function () {
+        local.getElementsByClassName("clickable")[i].click();
+    };
+
+
+    varrimento = setInterval(function () {
+        i++;
+        if (i > local.getElementsByClassName("clickable").length - 1)
+            i = 0;
+        for (var j = 0; j < local.getElementsByClassName("clickable").length; j++)
+            if (j != i) {
+                local.getElementsByClassName("clickable")[j].classList.remove("z-depth-4");
+                local.getElementsByClassName("clickable")[j].classList.add("z-depth-1");
+            }
+        local.getElementsByClassName("clickable")[i].classList.remove("z-depth-1");
+        local.getElementsByClassName("clickable")[i].classList.add("z-depth-4");
+        print(i + "_" + (local.getElementsByClassName("clickable").length - 1));
+    }, 1000);
+}
+
+function clearVarrimento(loc) {
+    clearInterval(varrimento);
+    for (var j = 0; j < loc.getElementsByClassName("clickable").length; j++) {
+        local.getElementsByClassName("clickable")[j].classList.remove("z-depth-4");
+        local.getElementsByClassName("clickable")[j].classList.add("z-depth-1");
+    }
+    // loc.getElementsByClassName("clickable")[j].style.border = "";
 }
 
 //----------VOZ----------//
@@ -454,41 +582,36 @@ function loadVoiceRec() {
 
 //----------JOGO MEMÓRIA----------//
 function jogoMemoria() {
+    var x = 1;
+    for (var m = 0; m < memMax; m += 2) {
+        memoCartas[m] = memoCartas[m + 1] = x;
+        x++;
+    }
+
+    document.body.style.backgroundImage= "url('img/Frutas!-23.png')";
+    document.body.style.backgroundImage= "cover";
+
+    document.getElementById("btn-back").style.display="block";          //Mostra botão retroceder
     jogo_memoria = true;                                                //Mostrar jogo
     memoCartas.sort(function () {                                       //Define posições aleatorias para os elementos do array
         return 0.5 - Math.random()
     });
     var numCartas = 0;                                                  //Numeros de cartas colocadas no tabuleiro
 
-    for (var id = 0; id < 2; id++) {                                    //Criar linhas com id "line#" até 2 (para ecrã M)
+    // for (var id = 0; id < 2; id++) {                                    //Criar linhas com id "line#" até 2 (para ecrã M)
+    //     document.getElementById("memoTab").innerHTML +=
+    //         "<div class='flip' id='line" + id + "'></div>";
+
+    for (var id2 = 0; id2 < memMax; id2++) {                             //Criar elementos (cartas) com id "item#"
         document.getElementById("memoTab").innerHTML +=
-            "</div><div class='flip' id='line" + id + "'></div>";
-
-        if(interacao == 3){
-        for (var id2 = 0; id2 < 4; id2++) {                             //Criar elementos (cartas) com id "item#" por linha até 3 (para ecrã tamanho M)
-            document.getElementById("line" + id).innerHTML +=
-                "<div class='col s6 m4 l3'><div class='rounded carta valign-wrapper clickable card grey' style='height: 250px; width: 200px;' id='item" + (numCartas + 1) + "'>" +
-                "<div class='center-block face front'>" + (numCartas + 1) + "</div>" +
-                "<div class='face back'>" + memoCartas[numCartas] + "</div>" +
-                "</div></div>";
-            numCartas++;                                                //Soma 1 carta às cartas colocadas
-            }
-        }
-        else{
-            for (var id2 = 0; id2 < 4; id2++) {                             //Criar elementos (cartas) com id "item#" por linha até 3 (para ecrã tamanho M)
-                document.getElementById("line" + id).innerHTML +=
-                    "<div class='col s6 m4 l3'><div class='rounded carta valign-wrapper clickable card grey' style='height: 250px; width: 200px;' id='item" + (numCartas + 1) + "'>" +
-                    "<div class='center-block face front'></div>" +
-                    "<div class='face back'>" + memoCartas[numCartas] + "</div>" +
-                    "</div></div>";
-                numCartas++;                                                //Soma 1 carta às cartas colocadas
-            }
-
-            }
-
+            "<div class='col s6 m4 l3'><div class='rounded carta valign-wrapper clickable card grey' style='height: 250px; width: 200px;' id='item" + numCartas + "'>" +
+            "<div class='center-block face front'><span class='mostraNum' style='display: none'>" + (numCartas + 1) + "</span></div>" +
+            "<div class='face back'>" + memoCartas[numCartas] + "</div>" +
+            "</div></div>";
+        numCartas++;                                //Soma 1 carta às cartas colocadas
     }
 
-    for (var j = 1; j < 9; j++) {
+    for (var j = 0; j < memMax; j++) {
         document.getElementById("item" + j).setAttribute("onclick", "flip(" + j + ")"); //Cada carta é atribuido um evento onclick com a função "flip(#);"
     }
 }
@@ -520,7 +643,11 @@ function flip(id) {                                                     //Funç�
 
 //----------JOGO PALAVRAS----------//
 function loadJogoPalavras() {
-    document.body.style.backgroundColor = "#fff";
+    document.body.style.backgroundImage= "url('img/Frutas!-21.png')";
+    document.body.style.backgroundImage= "cover";
+
+    document.getElementById("btn-back").style.display="block";          //Mostra botão retroceder
+
     document.getElementById("settings").style.color = "#363636";
     var silabas = ["ba", "na", "mo", "ja", "a", "la", "tar", "pol", "sor", "cur", "ve", "ga", "ção", "tra", "du", "tor"];   //Array com sílabas "erradas"
     var hipoteses = [];                         //Array com sílabas de opção
@@ -559,7 +686,7 @@ function loadJogoPalavras() {
     for (var k = 0; k < 3; k++) {                                               //Nº de opções = 3 no máximo
         var random = silabas[Math.floor(Math.random() * silabas.length)];       //Random = ao index sorteado do array "silabas" entre 0 e nº de index máximo
         if (random != palavras[palavra][retira]) {                              //Se a sílaba sorteada for diferente da sílaba retirada (que constitui a palavra a completar)
-            hipoteses[k] = "<div class='silaba opcao clickable'>" + random + "</div></div>";  //É colocada num array "hipoteses" de index igual a K (=3)
+            hipoteses[k] = "<div class='silaba opcao clickable'>" + random + "</div>";  //É colocada num array "hipoteses" de index igual a K (=3)
             silabas.splice(silabas.indexOf(random), 1);                         //retira do array "silabas" o elemento que já saiu (evita repetiçoes de silabas erradas)
         }
         else {
@@ -568,28 +695,36 @@ function loadJogoPalavras() {
         print(random);
         print(palavras[palavra][retira]);
     }
-    hipoteses[k] = "<div id='certo' class='silaba opcao clickable'>" + palavras[palavra][retira] + "</div></div>";    //Último index do array "hipoteses" é a sílaba certa para completar a palavra
+    hipoteses[k] = "<div id='certo' class='silaba opcao clickable'>" + palavras[palavra][retira] + "</div>";    //Último index do array "hipoteses" é a sílaba certa para completar a palavra
     hipoteses.sort(function () {                                                                        //Dispõe em index aleatorios as sílabas do array (para que as opções )
         return 0.5 - Math.random()
     });
+    document.getElementById("opcoes").innerHTML = hipoteses.join("");                                       //O innerHTML do elemento "opcoes" contém o array hipoteses com elemntos separados por espaço
+    document.getElementById("certo").onclick = function () {                                                //Ao clicar no elemento "certo" (sílaba certa)
+        document.getElementById("silaba-falta").innerHTML = document.getElementById("certo").innerHTML;     //Substituir o espaço a completar pela sílaba certa
+        document.getElementById("certo").style.animation = "shake 0.8s";                                //Animar o elemento "certo" durante 0.8segundos através da animação "bounceOut" (ver .css)
 
-    document.getElementById("opcoes").innerHTML = hipoteses.join("");           //O innerHTML do elemento "opcoes" contém o array hipoteses com elemntos separados por espaço
-    document.getElementById("certo").onclick = function () {                    //Ao clocar no elemento "certo" (sílaba certa)
         feitas.push(palavra);                                                   //Insere no fim do array "feitas" o index da palavra
         print(feitas.length + " / " + palavras.length);
-        if (palavras.length == feitas.length) {                                 //Se tiverem saído/ sido completadas todas as palavras
-            alert("não ha mais");
-            document.getElementById("certo").onclick = null;                    //Bloqueia o clique no elemento "certo"
-        } else                                                                  //Senão
-            loadJogoPalavras();                                                 //Repete o jogo
+        setTimeout(function () {
+            if (palavras.length == feitas.length) {                                 //Se tiverem saído/ sido completadas todas as palavras
+                alert("não ha mais");
+                document.getElementById("certo").onclick = null;                    //Bloqueia o clique no elemento "certo"
+            } else                                                                  //Senão
+                loadJogoPalavras();                                                 //Repete o jogo
+        },2000);
     };
 }
 
 //----------JOGO CORES----------//
 function loadJogoCores() {
-    document.body.style.backgroundColor = "#fff";
+    document.body.style.backgroundImage= "url('img/Frutas!-19.png')";
+    document.body.style.backgroundImage= "cover";
+
+    document.getElementById("btn-back").style.display="block";          //Mostra botão retroceder
+
     var final;
-    var numCores=0;
+    var numCores = 0;
     document.getElementById('cores-lig-1').style.backgroundColor = "#fff";
     document.getElementById('cores-lig-2').style.backgroundColor = "#fff";
     document.getElementById('cores-lig-3').style.backgroundColor = "#fff";
@@ -603,7 +738,7 @@ function loadJogoCores() {
         document.getElementById("corFinal").classList.add('clickable');
         document.getElementById("cor1").onclick = null;
         document.getElementById("cor1").classList.remove('clickable');
-        if(numCores==2){
+        if (numCores == 2) {
             document.getElementById("cor2").onclick = null;
             document.getElementById("cor2").classList.remove('clickable');
             document.getElementById("cor3").onclick = null;
@@ -635,7 +770,7 @@ function loadJogoCores() {
         document.getElementById("corFinal").classList.add('clickable');
         document.getElementById("cor2").onclick = null;
         document.getElementById("cor2").classList.remove('clickable');
-        if(numCores==2){
+        if (numCores == 2) {
             document.getElementById("cor1").onclick = null;
             document.getElementById("cor1").classList.remove('clickable');
             document.getElementById("cor3").onclick = null;
@@ -665,7 +800,7 @@ function loadJogoCores() {
         document.getElementById("corFinal").classList.add('clickable');
         document.getElementById("cor3").onclick = null;
         document.getElementById("cor3").classList.remove('clickable');
-        if(numCores==2){
+        if (numCores == 2) {
             document.getElementById("cor2").onclick = null;
             document.getElementById("cor2").classList.remove('clickable');
             document.getElementById("cor1").onclick = null;
@@ -714,7 +849,11 @@ function rgbToHex(col) {
 
 //----------JOGO NÚMEROS----------//
 function loadJogoNumeros() {
-    document.body.style.backgroundColor = "#fff";
+    document.body.style.backgroundImage= "url('img/Frutas!-24.png')";
+    document.body.style.backgroundImage= "cover";
+
+    document.getElementById("btn-back").style.display="block";          //Mostra botão retroceder
+
     document.getElementById('settings').style.color = "#363636";
     var frutas = ["maca", "pera", "cenoura", "laranja"];                //array com as furtas
     var f1, f2, fErrada1, fErrada2;                                     //variaveis que guardan fruta1, fruta2, frutaErrada1 e frutaErrada2
@@ -790,4 +929,22 @@ function loadJogoNumeros() {
     }
 }
 
-
+function retroceder() {                                                             //Retroceder para o menu principal
+    document.getElementById("interacao2").style.display = "block";                  //Mostra o menu principal
+    switch(jogo){
+        case 1:
+        document.getElementById("jogoMemoria").style.display = "none";              //Esconde o jogo memória
+        break;
+        case 2:
+        document.getElementById("jogoNumeros").style.display = "none";              //Esconde o jogo numeros
+        break;
+        case 3:
+        document.getElementById("jogoPalavras").style.display = "none";             //Esconde o jogo palavras
+        break;
+        case 4:
+        document.getElementById("jogoCores").style.display = "none";                //Esconde o jogo cores
+        break;
+    }
+    jogo=0;                                                                         //De volta ao menu => jogo=0
+    document.getElementById("btn-back").style.display="none";
+}
