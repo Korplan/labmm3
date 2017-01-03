@@ -82,8 +82,7 @@ h1{
 #settings{
     color: #FFF;
     position: absolute;
-    top: 0;
-    left: 0;
+    padding: 10px;
 }
 
 .line-height{
@@ -282,4 +281,108 @@ h1{
 .opcao{
     margin: 10px 30px;
     font-size: 1.2em;
+}
+
+/*----------ANIMAÇÕES--------*/
+
+/*Escolheu a opção certa (Saída em Zoom para baixo)*/
+@keyframes zoomOut {
+    40% {
+        opacity: 1;
+        -webkit-transform: scale3d(.475, .475, .475) translate3d(0, 60px, 0);
+        transform: scale3d(.475, .475, .475) translate3d(0, 60px, 0);
+        -webkit-animation-timing-function: cubic-bezier(0.550, 0.055, 0.675, 0.190);
+        animation-timing-function: cubic-bezier(0.550, 0.055, 0.675, 0.190);
+    }
+
+    to {
+        opacity: 0;
+        -webkit-transform: scale3d(.1, .1, .1) translate3d(0, -2000px, 0);
+        transform: scale3d(.1, .1, .1) translate3d(0, -2000px, 0);
+        -webkit-transform-origin: center bottom;
+        transform-origin: center bottom;
+        -webkit-animation-timing-function: cubic-bezier(0.175, 0.885, 0.320, 1);
+        animation-timing-function: cubic-bezier(0.175, 0.885, 0.320, 1);
+    }
+}
+
+/*Escolheu a opção certa (Saída em Zoom Simples)*/
+@keyframes zoomOut2 {
+    from {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+        -webkit-transform: scale3d(.3, .3, .3);
+        transform: scale3d(.3, .3, .3);
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+/*Escolheu a opção errada (Tremer)*/
+@keyframes shake {
+    from, to {
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+    }
+
+    10%, 30%, 50%, 70%, 90% {
+        -webkit-transform: translate3d(-10px, 0, 0);
+        transform: translate3d(-10px, 0, 0);
+    }
+
+    20%, 40%, 60%, 80% {
+        -webkit-transform: translate3d(10px, 0, 0);
+        transform: translate3d(10px, 0, 0);
+    }
+}
+
+/*Escolheu a opção certa (Saída a balançar)*/
+@keyframes bounceOut {
+    20% {
+        -webkit-transform: scale3d(.9, .9, .9);
+        transform: scale3d(.9, .9, .9);
+    }
+
+    50%, 55% {
+        opacity: 1;
+        -webkit-transform: scale3d(1.1, 1.1, 1.1);
+        transform: scale3d(1.1, 1.1, 1.1);
+    }
+
+    to {
+        opacity: 0;
+        -webkit-transform: scale3d(.3, .3, .3);
+        transform: scale3d(.3, .3, .3);
+    }
+}
+
+/*Escolheu a opção certa (Saída a tremer)*/
+@keyframes tinUpOut {
+    0%, 20%, 40%, 50% {
+        opacity: 1;
+        transform: scale(1, 1) translateY(0);
+    }
+
+    10%, 30% {
+        opacity: 1;
+        transform: scale(1.1, 1.1) translateY(0);
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+#btn-back{
+    color: #FFF;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px;
+    cursor: pointer;
 }

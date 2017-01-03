@@ -65,6 +65,8 @@ function print(s) {
 window.onload = function () {
     var temp = "";                                                                      //Elimina classes acrescentadas ao elemento "voz"
 
+    document.getElementById("btn-back").onclick=retroceder;                             //Botão de retroceder para o menu principal
+
     if (!('webkitSpeechRecognition' in window)) {                                       //Verifica se o browser suporta v2t (voz para texto)
         print("O browser não é compatível com reconhecimento de voz");                  //Escreve na consola (ver função "print")
         temp = document.getElementById("voz").getAttribute("class") + " inativo";       //Desativa a interação por voz na página de seleção de interação
@@ -559,6 +561,10 @@ function jogoMemoria() {
         x++;
     }
 
+    document.body.style.backgroundImage= "url('img/Frutas!-23.png')";
+    document.body.style.backgroundImage= "cover";
+
+    document.getElementById("btn-back").style.display="block";          //Mostra botão retroceder
     jogo_memoria = true;                                                //Mostrar jogo
     memoCartas.sort(function () {                                       //Define posições aleatorias para os elementos do array
         return 0.5 - Math.random()
@@ -610,7 +616,11 @@ function flip(id) {                                                     //Funç�
 
 //----------JOGO PALAVRAS----------//
 function loadJogoPalavras() {
-    document.body.style.backgroundColor = "#fff";
+    document.body.style.backgroundImage= "url('img/Frutas!-21.png')";
+    document.body.style.backgroundImage= "cover";
+
+    document.getElementById("btn-back").style.display="block";          //Mostra botão retroceder
+
     document.getElementById("settings").style.color = "#363636";
     var silabas = ["ba", "na", "mo", "ja", "a", "la", "tar", "pol", "sor", "cur", "ve", "ga", "ção", "tra", "du", "tor"];   //Array com sílabas "erradas"
     var hipoteses = [];                         //Array com sílabas de opção
@@ -662,22 +672,30 @@ function loadJogoPalavras() {
     hipoteses.sort(function () {                                                                        //Dispõe em index aleatorios as sílabas do array (para que as opções )
         return 0.5 - Math.random()
     });
+    document.getElementById("opcoes").innerHTML = hipoteses.join("");                                       //O innerHTML do elemento "opcoes" contém o array hipoteses com elemntos separados por espaço
+    document.getElementById("certo").onclick = function () {                                                //Ao clicar no elemento "certo" (sílaba certa)
+        document.getElementById("silaba-falta").innerHTML = document.getElementById("certo").innerHTML;     //Substituir o espaço a completar pela sílaba certa
+        document.getElementById("certo").style.animation = "shake 0.8s";                                //Animar o elemento "certo" durante 0.8segundos através da animação "bounceOut" (ver .css)
 
-    document.getElementById("opcoes").innerHTML = hipoteses.join("");           //O innerHTML do elemento "opcoes" contém o array hipoteses com elemntos separados por espaço
-    document.getElementById("certo").onclick = function () {                    //Ao clocar no elemento "certo" (sílaba certa)
         feitas.push(palavra);                                                   //Insere no fim do array "feitas" o index da palavra
         print(feitas.length + " / " + palavras.length);
-        if (palavras.length == feitas.length) {                                 //Se tiverem saído/ sido completadas todas as palavras
-            alert("não ha mais");
-            document.getElementById("certo").onclick = null;                    //Bloqueia o clique no elemento "certo"
-        } else                                                                  //Senão
-            loadJogoPalavras();                                                 //Repete o jogo
+        setTimeout(function () {
+            if (palavras.length == feitas.length) {                                 //Se tiverem saído/ sido completadas todas as palavras
+                alert("não ha mais");
+                document.getElementById("certo").onclick = null;                    //Bloqueia o clique no elemento "certo"
+            } else                                                                  //Senão
+                loadJogoPalavras();                                                 //Repete o jogo
+        },2000);
     };
 }
 
 //----------JOGO CORES----------//
 function loadJogoCores() {
-    document.body.style.backgroundColor = "#fff";
+    document.body.style.backgroundImage= "url('img/Frutas!-19.png')";
+    document.body.style.backgroundImage= "cover";
+
+    document.getElementById("btn-back").style.display="block";          //Mostra botão retroceder
+
     var final;
     var numCores = 0;
     document.getElementById('cores-lig-1').style.backgroundColor = "#fff";
@@ -804,7 +822,11 @@ function rgbToHex(col) {
 
 //----------JOGO NÚMEROS----------//
 function loadJogoNumeros() {
-    document.body.style.backgroundColor = "#fff";
+    document.body.style.backgroundImage= "url('img/Frutas!-24.png')";
+    document.body.style.backgroundImage= "cover";
+
+    document.getElementById("btn-back").style.display="block";          //Mostra botão retroceder
+
     document.getElementById('settings').style.color = "#363636";
     var frutas = ["maca", "pera", "cenoura", "laranja"];                //array com as furtas
     var f1, f2, fErrada1, fErrada2;                                     //variaveis que guardan fruta1, fruta2, frutaErrada1 e frutaErrada2
@@ -880,4 +902,22 @@ function loadJogoNumeros() {
     }
 }
 
-
+function retroceder() {                                                             //Retroceder para o menu principal
+    document.getElementById("interacao2").style.display = "block";                  //Mostra o menu principal
+    switch(jogo){
+        case 1:
+        document.getElementById("jogoMemoria").style.display = "none";              //Esconde o jogo memória
+        break;
+        case 2:
+        document.getElementById("jogoNumeros").style.display = "none";              //Esconde o jogo numeros
+        break;
+        case 3:
+        document.getElementById("jogoPalavras").style.display = "none";             //Esconde o jogo palavras
+        break;
+        case 4:
+        document.getElementById("jogoCores").style.display = "none";                //Esconde o jogo cores
+        break;
+    }
+    jogo=0;                                                                         //De volta ao menu => jogo=0
+    document.getElementById("btn-back").style.display="none";
+}
