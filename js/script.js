@@ -25,7 +25,8 @@ var local;
 var memoCartas = [];                            //Array pares de cartas
 var par = false;                                //Quando selecionas uma carta passa a true para usar como comparação
 var ultimo = "";
-var memMax = 12;                                 //numero maximo de cartas
+var memMax = 4;                                 //numero maximo de cartas
+var certas = 0;
 
 //----------JOGO PALAVRAS----------
 var feitas = [];        //Array que armazena os index do array "palavras" que já sairam
@@ -48,11 +49,9 @@ var jogo = 0;                   // 0 - Menu
                                 // 3 - Jogo Palavras
                                 // 4 - Jogo Cores
 
-var jogo_memoria = false;       //Esconde jogo memória
-var pawEnable = false;          //Interação por Point and Wait - falso
+// var jogo_memoria = false;       //Esconde jogo memória
 var atual = [];                 //Interação por Point and Wait
 var over = false;               //Interação por Point and Wait
-var refresh;
 
 //----------DEBUG----------//
 function print(s) {
@@ -65,6 +64,7 @@ function print(s) {
 window.onload = function () {
     var temp = "";                                                                      //Elimina classes acrescentadas ao elemento "voz"
 
+    //document.getElementById("btn-back").onclick=retroceder;                             //Botão de retroceder para o menu principal
 
     if (!('webkitSpeechRecognition' in window)) {                                       //Verifica se o browser suporta v2t (voz para texto)
         print("O browser não é compatível com reconhecimento de voz");                  //Escreve na consola (ver função "print")
@@ -95,7 +95,6 @@ window.onload = function () {
         document.getElementById("interacao2").style.display = "block";                  //Mostra a div "interacao2" (div de seleção de Jogos)
         loadPointAndWait();
         interacao = 0;                                                                  //0 = Interação por Point and Wait (ver vars globais)
-        pawEnable = true;
         menu();
     };
 
@@ -165,7 +164,7 @@ window.onload = function () {
         }
     };
 
-    document.getElementById("btn_num").onclick = function () {                          //Ao clicar no elemento "btn_cores"
+    document.getElementById("btn_num").onclick = function () {                        //Ao clicar no elemento "btn_cores"
         document.getElementById("interacao2").style.display = "none";                   //Esconde a div "interacao2" (div de seleção de Jogos)
         document.getElementById("jogoNumeros").style.display = "block";                 //Mostra a div "jogoCores"
         document.getElementById("voltar").style.display = "block";                      //Mostra o botão "voltar"
@@ -182,7 +181,7 @@ window.onload = function () {
     };
 
     document.getElementById("menu_paw").onclick = function () {                     //Ao clicar na opção de interação "apontar e esperar"
-        if (interacao != 0) {                                                       //Se a opção não estiver ainda selecionada (se a interação for diferente da atual)
+        if (interacao != 0) {                                                        //Se a opção não estiver ainda selecionada (se a interação for diferente da atual)
             interacao = 0;                                                          //Muda interação para "apontar e esperar"
             menu();
         }
@@ -566,17 +565,19 @@ function loadVoiceRec() {
 
 //----------JOGO MEMÓRIA----------//
 function jogoMemoria() {
+    document.getElementById("memoTab").innerHTML = "";
+    certas = 0;
     var x = 1;
     for (var m = 0; m < memMax; m += 2) {
         memoCartas[m] = memoCartas[m + 1] = x;
         x++;
     }
 
-    document.body.style.backgroundImage= "url('img/Frutas!-23.png')";
-    document.body.style.backgroundImage= "cover";
+    document.body.style.backgroundImage = "url('img/Frutas!-23.png')";
+    document.body.style.backgroundImage = "cover";
 
 
-    jogo_memoria = true;                                                //Mostrar jogo
+    // jogo_memoria = true;                                                //Mostrar jogo
     memoCartas.sort(function () {                                       //Define posições aleatorias para os elementos do array
         return 0.5 - Math.random()
     });
@@ -588,14 +589,14 @@ function jogoMemoria() {
 
     for (var id2 = 0; id2 < memMax; id2++) {                             //Criar elementos (cartas) com id "item#"
         document.getElementById("memoTab").innerHTML +=
-            "<div class='col s6 m4 l3'><div class='rounded carta valign-wrapper clickable card grey' style='height: 250px; width: 200px;' id='item" + numCartas + "'>" +
+            "<div class='col s6 m4 l3'><div class='rounded carta valign-wrapper clickable card grey' style='height: 250px; width: 200px;' id='item" + (numCartas + 1) + "'>" +
             "<div class='center-block face front'><span class='mostraNum' style='display: none'>" + (numCartas + 1) + "</span></div>" +
             "<div class='face back'>" + memoCartas[numCartas] + "</div>" +
             "</div></div>";
         numCartas++;                                //Soma 1 carta às cartas colocadas
     }
 
-    for (var j = 0; j < memMax; j++) {
+    for (var j = 1; j <= memMax; j++) {
         document.getElementById("item" + j).setAttribute("onclick", "flip(" + j + ")"); //Cada carta é atribuido um evento onclick com a função "flip(#);"
     }
 }
@@ -606,29 +607,36 @@ function flip(id) {                                                     //Funç�
     document.getElementById("item" + id).onclick = null;                //Desativa o clique na carta
     document.getElementById("item" + id).onmouseover = null;            //Desativa o onmouseover da carta
 
-    if (jogo_memoria) {                 //Se jogo_memoria=true
-        setTimeout(function () {        //Ocorre 1 vez passado 1segundo
-            if (!par)                   //Se for virada a primeira carta ainda não há um par
-                ultimo = id;            //logo ultimo (var que guarda  aultima carta virada) = ao # da carta recebido
+    // if (jogo_memoria) {                 //Se jogo_memoria=true
+    setTimeout(function () {        //Ocorre 1 vez passado 1segundo
+        if (!par)                   //Se for virada a primeira carta ainda não há um par
+            ultimo = id;            //logo ultimo (var que guarda  aultima carta virada) = ao # da carta recebido
 
-
-            else if (document.getElementById("item" + ultimo).getElementsByTagName("div")[1].innerHTML != document.getElementById("item" + id).getElementsByTagName("div")[1].innerHTML) {      //Senão, se par==true, ou seja, foram viradas duas cartas, verifica-se se uma é igual à outra. Então, o conteúdo (innerHTML) da div 1 (elemento de índice 1 do array "getElementsByTagName("div")") do elemento "itemultimo" (última carta virada) é igual ao conteudo (innerHTML) da div 1 (elemento de índice 1 do array "getElementsByTagName("div")") do elemento "itemid" (primeira carta virada)
-                document.getElementById("item" + ultimo).classList.remove("flipped");                       //Verifica a lista de classes do elemento "item ultimo" e remove a classe "flipped"
-                document.getElementById("item" + id).classList.remove("flipped");                           //Verifica a lista de classes do elemento "item id" e remove a classe "flipped"
-                document.getElementById("item" + ultimo).setAttribute("onclick", "flip(" + ultimo + ")");   //Adiciona a função (anteriormente retirada) "flip(ultimo)"
-                document.getElementById("item" + id).setAttribute("onclick", "flip(" + id + ")");           //Adiciona a função (anteriormente retirada) "flip(id)"
-                ultimo = "";
-            }
-            par = !par; //se par==true passa a par=false e se par==false passa a par=true
-        }, 1000);
-        print(ultimo);
-    }
+        else if (document.getElementById("item" + ultimo).getElementsByTagName("div")[1].innerHTML != document.getElementById("item" + id).getElementsByTagName("div")[1].innerHTML) {      //Senão, se par==true, ou seja, foram viradas duas cartas, verifica-se se uma é igual à outra. Então, o conteúdo (innerHTML) da div 1 (elemento de índice 1 do array "getElementsByTagName("div")") do elemento "itemultimo" (última carta virada) é igual ao conteudo (innerHTML) da div 1 (elemento de índice 1 do array "getElementsByTagName("div")") do elemento "itemid" (primeira carta virada)
+            document.getElementById("item" + ultimo).classList.remove("flipped");                       //Verifica a lista de classes do elemento "item ultimo" e remove a classe "flipped"
+            document.getElementById("item" + id).classList.remove("flipped");                           //Verifica a lista de classes do elemento "item id" e remove a classe "flipped"
+            document.getElementById("item" + ultimo).setAttribute("onclick", "flip(" + ultimo + ")");   //Adiciona a função (anteriormente retirada) "flip(ultimo)"
+            document.getElementById("item" + id).setAttribute("onclick", "flip(" + id + ")");           //Adiciona a função (anteriormente retirada) "flip(id)"
+            ultimo = "";
+        } else {
+            certas += 2;
+        }
+        par = !par; //se par==true passa a par=false e se par==false passa a par=true
+        if (certas == memMax) {
+            print("GANHASTE!!");
+            if (memMax < 10)
+                memMax += 2;
+            setTimeout("jogoMemoria()", 5000);
+        }
+    }, 1000);
+    print(ultimo);
+    // }
 }
 
 //----------JOGO PALAVRAS----------//
 function loadJogoPalavras() {
-    document.body.style.backgroundImage= "url('img/Frutas!-21.png')";
-    document.body.style.backgroundImage= "cover";
+    document.body.style.backgroundImage = "url('img/Frutas!-21.png')";
+    document.body.style.backgroundImage = "cover";
 
 
     document.getElementById("settings").style.color = "#363636";
@@ -695,14 +703,14 @@ function loadJogoPalavras() {
                 document.getElementById("certo").onclick = null;                    //Bloqueia o clique no elemento "certo"
             } else                                                                  //Senão
                 loadJogoPalavras();                                                 //Repete o jogo
-        },2000);
+        }, 2000);
     };
 }
 
 //----------JOGO CORES----------//
 function loadJogoCores() {
-    document.body.style.backgroundImage= "url('img/Frutas!-19.png')";
-    document.body.style.backgroundImage= "cover";
+    document.body.style.backgroundImage = "url('img/Frutas!-19.png')";
+    document.body.style.backgroundImage = "cover";
 
 
     var final;
@@ -831,8 +839,8 @@ function rgbToHex(col) {
 
 //----------JOGO NÚMEROS----------//
 function loadJogoNumeros() {
-    document.body.style.backgroundImage= "url('img/Frutas!-24.png')";
-    document.body.style.backgroundImage= "cover";
+    document.body.style.backgroundImage = "url('img/Frutas!-24.png')";
+    document.body.style.backgroundImage = "cover";
 
 
     document.getElementById('settings').style.color = "#363636";
@@ -896,7 +904,7 @@ function loadJogoNumeros() {
         if (l != opCerta) {                             //as erradas sao colocadas num sitio diferente da opção certa
             do {
                 fErrada1 = Math.floor(Math.random() * (numMax - 1) + 1);
-            } while (fErrada1 == f1);                   //sorteia um número diferente do correto
+            } while (fErrada1 == num1);                   //sorteia um número diferente do correto
 
             fErrada2 = numMax - fErrada1;               //calcula o numero de 2as frutas
 
@@ -908,23 +916,4 @@ function loadJogoNumeros() {
             }
         }
     }
-}
-
-function retroceder() {                                                             //Retroceder para o menu principal
-    document.getElementById("interacao2").style.display = "block";                  //Mostra o menu principal
-    switch(jogo){
-        case 1:
-        document.getElementById("jogoMemoria").style.display = "none";              //Esconde o jogo memória
-        break;
-        case 2:
-        document.getElementById("jogoNumeros").style.display = "none";              //Esconde o jogo numeros
-        break;
-        case 3:
-        document.getElementById("jogoPalavras").style.display = "none";             //Esconde o jogo palavras
-        break;
-        case 4:
-        document.getElementById("jogoCores").style.display = "none";                //Esconde o jogo cores
-        break;
-    }
-    jogo=0;                                                                         //De volta ao menu => jogo=0
 }

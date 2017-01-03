@@ -1,4 +1,4 @@
-﻿Última atualização: 04h20
+Última atualização: 04h20
 Podem existir tarefas que não constam na lista e convém irmos falando para saber quem está a fazer o quê e atualizar a lista frequentemente :)
 
 ATENÇÃO
@@ -17,15 +17,15 @@ PROGRAMAÇAO
 -responsive (PC, tablet, telemóvel)		        	[prioridade média] - a ser feito (Joel, Inês)
 -paralax no fundo nas transiçoes entre cenários	    	[prioridade baixa]
 -navegaçao por apontar e esperar		        	[prioridade alta] - a ser feito (Joel)
--leitura de ecrã					[prioridade alta]
+-leitura de ecrã					[prioridade alta] - em espera, 1º tem de se fazer PaW e varrimento
 -colocar sons e música de fundo			[prioridade média]
 -colocar instruções (modal)				[prioridade média/alta]
 -botão ajuda					[prioridade alta]
 -botão retroceder					[prioridade alta] - a ser feito (Cláudia A)
 -colocar animações na interação com os elementos		[prioridade média/alta] - a ser feito (Inês)
 
-	JOGO MEMORIA	
-	-mais níveis (com mais cartas/ mais difícil)		[prioridade alta] - a ser feito (Joel)
+	JOGO MEMORIA
+	-mais níveis (com mais cartas/ mais difícil)		[prioridade alta] - feito!!!
 	
 	JOGO NUMEROS
 	-implementar interação 			[prioridade alta]
