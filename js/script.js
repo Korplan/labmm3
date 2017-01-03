@@ -575,7 +575,7 @@ function jogoMemoria() {
     document.body.style.backgroundImage= "url('img/Frutas!-23.png')";
     document.body.style.backgroundImage= "cover";
 
-    //document.getElementById("btn-back").style.display="block";          //Mostra botão retroceder
+
     jogo_memoria = true;                                                //Mostrar jogo
     memoCartas.sort(function () {                                       //Define posições aleatorias para os elementos do array
         return 0.5 - Math.random()
@@ -630,7 +630,6 @@ function loadJogoPalavras() {
     document.body.style.backgroundImage= "url('img/Frutas!-21.png')";
     document.body.style.backgroundImage= "cover";
 
-    //document.getElementById("btn-back").style.display="block";          //Mostra botão retroceder
 
     document.getElementById("settings").style.color = "#363636";
     var silabas = ["ba", "na", "mo", "ja", "a", "la", "tar", "pol", "sor", "cur", "ve", "ga", "ção", "tra", "du", "tor"];   //Array com sílabas "erradas"
@@ -705,7 +704,6 @@ function loadJogoCores() {
     document.body.style.backgroundImage= "url('img/Frutas!-19.png')";
     document.body.style.backgroundImage= "cover";
 
-    //document.getElementById("btn-back").style.display="block";          //Mostra botão retroceder
 
     var final;
     var numCores = 0;
@@ -836,7 +834,6 @@ function loadJogoNumeros() {
     document.body.style.backgroundImage= "url('img/Frutas!-24.png')";
     document.body.style.backgroundImage= "cover";
 
-    //document.getElementById("btn-back").style.display="block";          //Mostra botão retroceder
 
     document.getElementById('settings').style.color = "#363636";
     var frutas = ["maca", "pera", "cenoura", "laranja"];                //array com as furtas
@@ -930,5 +927,4 @@ function retroceder() {                                                         
         break;
     }
     jogo=0;                                                                         //De volta ao menu => jogo=0
-    //document.getElementById("btn-back").style.display="none";
 }
