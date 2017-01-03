@@ -65,7 +65,6 @@ function print(s) {
 window.onload = function () {
     var temp = "";                                                                      //Elimina classes acrescentadas ao elemento "voz"
 
-    //document.getElementById("btn-back").onclick=retroceder;                             //Botão de retroceder para o menu principal
 
     if (!('webkitSpeechRecognition' in window)) {                                       //Verifica se o browser suporta v2t (voz para texto)
         print("O browser não é compatível com reconhecimento de voz");                  //Escreve na consola (ver função "print")
@@ -77,7 +76,6 @@ window.onload = function () {
         document.getElementById("voz").onclick = function () {                          //Ao clicar no elemento "voz"
             document.getElementById("interacao1").style.display = "none";               //Esconde a div "interacao1" (div de seleção de interação)
             document.getElementById("interacao2").style.display = "block";              //Mostra a div "interacao2" (div de seleção de Jogos)
-            document.getElementById("voltar1").style.display = "block";                 //Mostra o botão "voltar1"
             interacao = 3;                                                              //3 = Interação por voz (ver vars globais)
             menu();
         };
@@ -95,7 +93,6 @@ window.onload = function () {
     document.getElementById("point_wait").onclick = function () {                       //Ao clicar no elemento "point_wait"
         document.getElementById("interacao1").style.display = "none";                   //Esconde a div "interacao1" (div de seleção de interação)
         document.getElementById("interacao2").style.display = "block";                  //Mostra a div "interacao2" (div de seleção de Jogos)
-        document.getElementById("voltar1").style.display = "block";                     //Mostra o botão "voltar1"
         loadPointAndWait();
         interacao = 0;                                                                  //0 = Interação por Point and Wait (ver vars globais)
         pawEnable = true;
@@ -105,7 +102,6 @@ window.onload = function () {
     document.getElementById("point_click").onclick = function () {                      //Ao clicar no elemento "point_click"
         document.getElementById("interacao1").style.display = "none";                   //Esconde a div "interacao1" (div de seleção de interação)
         document.getElementById("interacao2").style.display = "block";                  //Mostra a div "interacao2" (div de seleção de Jogos)
-        document.getElementById("voltar1").style.display = "block";                     //Mostra o botão "voltar1"
         interacao = 1;                                                                  //1 = Interação por Point and Click (ver vars globais)
         menu();
     };
@@ -114,7 +110,6 @@ window.onload = function () {
         document.getElementById("interacao1").style.display = "none";                   //Esconde a div "interacao1" (div de seleção de interação)
         document.getElementById("interacao2").style.display = "block";                  //Mostra a div "interacao2" (div de seleção de Jogos)
         interacao = 2;                                                                  //2 = Interação por varrimento (ver vars globais)
-        document.getElementById("voltar1").style.display = "block";                     //Mostra o botão "voltar1"
         loadVarrimento();
         menu();
     };
@@ -122,8 +117,7 @@ window.onload = function () {
     document.getElementById("btn_mem").onclick = function () {                          //Ao clicar no elemento "btn_mem"
         document.getElementById("interacao2").style.display = "none";                   //Esconde a div "interacao2" (div de seleção de Jogos)
         document.getElementById("jogoMemoria").style.display = "block";                 //Mostra a div "jogoMemoria"
-        document.getElementById("voltar1").style.display = "none";                      //Esconde o botão "voltar1"
-        document.getElementById("voltar2").style.display = "block";                     //Mostra o botão "voltar2"
+        document.getElementById("voltar").style.display = "block";                      //Mostra o botão "voltar"
         jogo = 1;
         jogoMemoria();
         if (interacao == 3)
@@ -142,8 +136,7 @@ window.onload = function () {
     document.getElementById("btn_palavras").onclick = function () {                     //Ao clicar no elemento "btn_palavras"
         document.getElementById("interacao2").style.display = "none";                   //Esconde a div "interacao2" (div de seleção de Jogos)
         document.getElementById("jogoPalavras").style.display = "block";                //Mostra a div "jogoPalavras"
-        document.getElementById("voltar1").style.display = "none";                      //Esconde o botão "voltar1"
-        document.getElementById("voltar2").style.display = "block";                     //Mostra o botão "voltar2"
+        document.getElementById("voltar").style.display = "block";                      //Mostra o botão "voltar"
         jogo = 3;
         loadJogoPalavras();
         switch (interacao) {
@@ -159,8 +152,7 @@ window.onload = function () {
     document.getElementById("btn_cores").onclick = function () {                        //Ao clicar no elemento "btn_cores"
         document.getElementById("interacao2").style.display = "none";                   //Esconde a div "interacao2" (div de seleção de Jogos)
         document.getElementById("jogoCores").style.display = "block";                   //Mostra a div "jogoCores"
-        document.getElementById("voltar1").style.display = "none";                      //Esconde o botão "voltar1"
-        document.getElementById("voltar2").style.display = "block";                     //Mostra o botão "voltar2"
+        document.getElementById("voltar").style.display = "block";                      //Mostra o botão "voltar"
         jogo = 4;
         loadJogoCores();
         switch (interacao) {
@@ -176,8 +168,7 @@ window.onload = function () {
     document.getElementById("btn_num").onclick = function () {                          //Ao clicar no elemento "btn_cores"
         document.getElementById("interacao2").style.display = "none";                   //Esconde a div "interacao2" (div de seleção de Jogos)
         document.getElementById("jogoNumeros").style.display = "block";                 //Mostra a div "jogoCores"
-        document.getElementById("voltar1").style.display = "none";                      //Esconde o botão "voltar1"
-        document.getElementById("voltar2").style.display = "block";                     //Mostra o botão "voltar2"
+        document.getElementById("voltar").style.display = "block";                      //Mostra o botão "voltar"
         jogo = 2;
         loadJogoNumeros();
         switch (interacao) {
@@ -191,7 +182,7 @@ window.onload = function () {
     };
 
     document.getElementById("menu_paw").onclick = function () {                     //Ao clicar na opção de interação "apontar e esperar"
-        if (interacao != 0) {                                                        //Se a opção não estiver ainda selecionada (se a interação for diferente da atual)
+        if (interacao != 0) {                                                       //Se a opção não estiver ainda selecionada (se a interação for diferente da atual)
             interacao = 0;                                                          //Muda interação para "apontar e esperar"
             menu();
         }
@@ -218,20 +209,13 @@ window.onload = function () {
         }
     };
 
-    document.getElementById("voltar1").onclick = function () {
-        document.getElementById("interacao2").style.display = "none";                       //Esconde a div "interacao2"
-        document.getElementById("interacao1").style.display = "block";                      //Mostra a div "interacao1"
-        document.getElementById("voltar1").style.display = "none";                          //Esconde o botão "voltar1"
-    }
-
-    document.getElementById("voltar2").onclick = function () {
+    document.getElementById("voltar").onclick = function () {
         document.getElementById("jogoMemoria").style.display = "none";                      //Esconde a div "jogoMemoria"
         document.getElementById("jogoPalavras").style.display = "none";                     //Esconde a div "jogoPalavras"
         document.getElementById("jogoCores").style.display = "none";                        //Esconde a div "jogoCores"
         document.getElementById("jogoNumeros").style.display = "none";                      //Esconde a div "jogoNumeros"
         document.getElementById("interacao2").style.display = "block";                      //Mostra a div "interacao2"
-        document.getElementById("voltar2").style.display = "none";                          //Esconde o botão "voltar2"
-        document.getElementById("voltar1").style.display = "block";                         //Mostra o botão "voltar1"
+        document.getElementById("voltar").style.display = "none";                           //Esconde o botão "voltar"
     }
 
 };
