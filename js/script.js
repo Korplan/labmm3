@@ -31,8 +31,6 @@ var certas = 0;
 //----------JOGO PALAVRAS----------
 var feitas = [];        //Array que armazena os index do array "palavras" que já sairam
 var palavra;            //guarda palavra sorteada (=palavra para completar no jogo)
-var palavras = [];      //Array com palavras do jogo
-
 
 //----------JOGO NUMEROS----------
 var numMax = 5;
@@ -52,6 +50,18 @@ var jogo = 0;                   // 0 - Menu
 // var jogo_memoria = false;       //Esconde jogo memória
 var atual = [];                 //Interação por Point and Wait
 var over = false;               //Interação por Point and Wait
+
+var palavras = [];      //Array com frutas disponíveis nos jogos
+palavras[0] = ["a", "mei", "xa"];
+palavras[1] = ["a", "na", "nás"];
+palavras[2] = ["ce", "nou", "ra"];
+palavras[3] = ["ce", "re", "ja"];
+palavras[4] = ["ma", "çã"];
+palavras[5] = ["mir", "ti", "lo"];
+palavras[6] = ["mo", "ran", "go"];
+palavras[7] = ["la", "ran", "ja"];
+palavras[8] = ["pe", "ra"];
+palavras[9] = ["ba", "na", "na"];
 
 //----------DEBUG----------//
 function print(s) {
@@ -638,19 +648,9 @@ function loadJogoPalavras() {
     document.body.style.backgroundImage = "url('img/Frutas!-21.png')";
     document.body.style.backgroundImage = "cover";
 
-
     document.getElementById("settings").style.color = "#363636";
     var silabas = ["ba", "na", "mo", "ja", "a", "la", "tar", "pol", "sor", "cur", "ve", "ga", "ção", "tra", "du", "tor"];   //Array com sílabas "erradas"
     var hipoteses = [];                         //Array com sílabas de opção
-    palavras[0] = ["ba", "na", "na"];           //0 = Banana
-    palavras[1] = ["la", "ran", "ja"];          //1 = Laranja
-    palavras[2] = ["mo", "ran", "go"];          //2 = Morango
-    palavras[3] = ["ce", "nou", "ra"];          //3 = Cenoura
-    palavras[4] = ["ma", "ra", "cu", "já"];     //4 = Maracujá
-    palavras[5] = ["pe", "ra"];                 //5 = Pera
-    palavras[6] = ["ma", "çã"];                 //6 = Maçã
-    palavras[7] = ["a", "na", "nás"];           //7 = Ananás
-    palavras[8] = ["ce", "re", "ja"];           //8 = Cereja
 
     document.getElementById("palavraIncompleta").innerHTML = "";        //O innerHTML do elemento palavraIncompleta está vazio
 
@@ -659,7 +659,7 @@ function loadJogoPalavras() {
         print("ciclo");
     } while (feitas.indexOf(palavra) != -1);                             //Enquanto forem sorteadas palavras que já tenham saído é sorteada nova palavra (se o elemento de index # existir no array feitas repete ciclo)
 
-    document.getElementById("imgPal").innerHTML = "<img style='width: 100%' src='img/frutas/" + palavras[palavra].join("") + ".png'/>";
+    document.getElementById("imgPal").innerHTML = "<img style='width: 100%' src='img/frutas/" + numParaFruta(palavra) + ".png'/>";
 
     var retira = Math.floor(Math.random() * palavras[palavra].length);  //Retira (retira sílaba de palavra) = Sorteio entre 0 e palavra.lenght do elemento sorteado acima
 
@@ -844,12 +844,12 @@ function loadJogoNumeros() {
 
 
     document.getElementById('settings').style.color = "#363636";
-    var frutas = ["maca", "pera", "cenoura", "laranja"];                //array com as furtas
-    var f1, f2, fErrada1, fErrada2;                                     //variaveis que guardan fruta1, fruta2, frutaErrada1 e frutaErrada2
-    do {
-        f1 = frutas[Math.floor(Math.random() * frutas.length)];
-        f2 = frutas[Math.floor(Math.random() * frutas.length)];
-    } while (f1 == f2);                                                 //escolhe duas frutas diferentes, aleatoriamente
+    // var frutas = ["maca", "pera", "cenoura", "laranja"];                //array com as frutas
+    var f1, f2, fErrada1, fErrada2;                                     //variaveis que guardam fruta1, fruta2, frutaErrada1 e frutaErrada2
+    // do {
+        f1 = numParaFruta(Math.floor(Math.random() * palavras.length));
+        f2 = numParaFruta(Math.floor(Math.random() * palavras.length));
+    // } while (f1 == f2);                                                 //escolhe duas frutas diferentes, aleatoriamente
 
     var sumo = document.getElementById("sumo");
 
@@ -860,29 +860,32 @@ function loadJogoNumeros() {
     document.getElementById("num2").classList.add('jogo-num-bola');                                             //calcula as frutas que faltam até ao numero maximo
 
     switch (f1 + "_" + f2) {                                                            //verifica as frutas sorteadas e coloca no HTML a respetiva imagem
-        case 'maca_pera':
-        case 'pera_maca':
+        case 'ameixa_ananas':
+        case 'ananas_ameixa':
             sumo.innerHTML = "<img src='img/jogoNumeros/sumo1.png'>";
             break;
-        case 'maca_cenoura':
-        case 'cenoura_maca':
+        case 'ameixa_cenoura':
+        case 'cenoura_ameixa':
             sumo.innerHTML = "<img src='img/jogoNumeros/sumo2.png'>";
             break;
-        case 'maca_laranja':
-        case 'laranja_maca':
+        case 'ameixa_cereja':
+        case 'cereja_ameixa':
             sumo.innerHTML = "<img src='img/jogoNumeros/sumo3.png'>";
             break;
-        case 'pera_cenoura':
-        case 'cenoura_pera':
+        case 'ameixa_laranja':
+        case 'laranja_ameixa':
             sumo.innerHTML = "<img src='img/jogoNumeros/sumo4.png'>";
             break;
-        case 'pera_laranja':
-        case 'laranja_pera':
+        case 'ameixa_maca':
+        case 'maca_ameixa':
             sumo.innerHTML = "<img src='img/jogoNumeros/sumo5.png'>";
             break;
-        case 'cenoura_laranja':
-        case 'laranja_cenoura':
+        case 'ameixa_mirtilo':
+        case 'mirtilo_ameixa':
             sumo.innerHTML = "<img src='img/jogoNumeros/sumo6.png'>";
+            break;
+        default:
+            print("ERRO: não existe a combinação de frutas " + f1 + "_" + f2);
             break;
     }
 
@@ -915,5 +918,33 @@ function loadJogoNumeros() {
                 document.getElementById("op" + l).innerHTML += "<img src='img/frutas/" + f2 + ".png'>";
             }
         }
+    }
+}
+
+function numParaFruta(num) {
+    switch (num) {
+        case 0:
+            return "ameixa";
+        case 1:
+            return "ananas";
+        case 2:
+            return "cenoura";
+        case 3:
+            return "cereja";
+        case 4:
+            return "maca";
+        case 5:
+            return "mirtilo";
+        case 6:
+            return "morango";
+        case 7:
+            return "laranja";
+        case 8:
+            return "pera";
+        case 9:
+            return "banana";
+        default:
+            print("ERRO: numParaFruta");
+            break;
     }
 }
