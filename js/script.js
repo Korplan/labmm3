@@ -2,10 +2,10 @@
 var debug = true;                               //(mostrar ou não) Prints na consola
 
 //----------AUDIO---------------
-var musica = new Audio();
+var musica = new Audio();                       // Música de fundo
 musica.src = "sound/ukulele.mp3";
-musica.loop = true;
-musicaOn = true;
+musica.loop = true;                             // Colocar música em loop
+musicaOn = true;                                // Variável que controla se a música está ligada ou desligada
 
 //----------VOICE2TEXT----------
 var speechRecognition;
@@ -83,14 +83,16 @@ function print(s) {
 window.onload = function () {
     var temp = "";                                                                      //Elimina classes acrescentadas ao elemento "voz"
 
-    musica.play();
+    musica.play();                                                                      //Coloca a tocar a música de fundo
+
+    document.getElementById("menu_musica").click();                                     //Simula clique no "menu-musica" do menu lateral
 
     document.getElementById("menu_musica").onclick = function () {
-        if(musicaOn){
+        if(musicaOn){                                                                   //Se a música estiver ligada, desliga
             musicaOn = false;
             musica.pause();
         }
-        else {
+        else {                                                                          //Se a música estiver desligada, liga
             musicaOn = true;
             musica.load();
             musica.play();
