@@ -8,7 +8,7 @@ ATENÇÃO
 DESIGN
 -aprovar design					                [prioridade alta] - feito
 -criar logótipo (depois de escolher o nome)		[prioridade média]
--autoria no menu nav			            	[prioridade baixa]
+-autoria no menu nav			            	[prioridade baixa] - a ser feito (Inês)
 -desenhar as frutas + canvas		            [prioridade alta] - feito (Inês)
 -desenhar fundo + cursor cores		            [prioridade alta] - a ser feito (Inês)
 -escolher mascote (icon ajuda)			       	[prioridade alta]

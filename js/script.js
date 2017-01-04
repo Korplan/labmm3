@@ -652,7 +652,6 @@ function loadJogoPalavras() {
     document.body.style.backgroundImage = "url('img/Frutas!-21.png')";
     document.body.style.backgroundImage = "cover";
 
-    document.getElementById("settings").style.color = "#363636";
     var silabas = ["ba", "na", "mo", "ja", "a", "la", "tar", "pol", "sor", "cur", "ve", "ga", "ção", "tra", "du", "tor"];   //Array com sílabas "erradas"
     var hipoteses = [];                         //Array com sílabas de opção
 
@@ -896,7 +895,6 @@ function loadJogoNumeros() {
     document.body.style.backgroundImage = "url('img/Frutas!-24.png')";
     document.body.style.backgroundImage = "cover";
 
-    document.getElementById('settings').style.color = "#363636";
     var f1, f2, fErrada1, fErrada2;                                     //variaveis que guardam fruta1, fruta2, frutaErrada1 e frutaErrada2
     do {
         f1 = numParaFruta(Math.floor(Math.random() * palavras.length));

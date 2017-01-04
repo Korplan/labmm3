@@ -385,11 +385,16 @@ h1{
     }
 }
 
-#btn-back{
+#voltar{
     color: #FFF;
     position: absolute;
     top: 0;
     right: 0;
     padding: 10px;
     cursor: pointer;
+}
+
+#authors{
+    font-size: 0.8em;
+    line-height: 0.3em;
 }
