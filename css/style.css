@@ -21,12 +21,12 @@ h1{
 .grey{
     background-color: grey;
 }
+
 .white_elem{
     background-color: white;
 }
 
 /*----------ELEMENTOS--------*/
-
 /*Margens e Espaçamentos*/
 .margin_top_bottom{
     Margin-top: 20vh;
@@ -43,8 +43,7 @@ h1{
     box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.3);
 }
 
-#sel_cont,
-.click_container{
+#sel_cont, .click_container{
     position: absolute;
     /*display: block;*/
     /*margin: auto;*/
@@ -62,7 +61,55 @@ h1{
     width: 70%;
 }
 
-/*----------OUTROS--------*/
+/*Navegação*/
+#settings{
+    color: #FFF;
+    position: absolute;
+    padding: 10px;
+    top: 0;
+    left: 0;
+}
+
+.side-nav .collapsible li label{
+    margin-left: 32px;
+}
+
+.side-nav .collapsible-body {
+    padding: 0 32px;
+    line-height: 1.3em;
+}
+
+@media only screen and (max-width: 992px){
+    .side-nav .collapsible li label{
+        margin-left: 16px;
+    }
+    .side-nav .collapsible-body {
+        padding: 0 16px;
+        line-height: 1.3em;
+    }
+}
+
+/*Botão voltar*/
+#voltar{
+    color: #FFF;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px;
+    cursor: pointer;
+}
+
+/*Autoria*/
+#authors{
+    font-size: 0.8em;
+    line-height: 0.3em;
+}
+
+.icon{
+    height: 80%;
+    width: 80%;
+}
+
 /*Inativos*/
 .inativo{
     background-color: grey;
@@ -78,26 +125,11 @@ h1{
     width: 80%;
 }
 
-/*Navegação*/
-#settings{
-    color: #FFF;
-    position: absolute;
-    padding: 10px;
-}
-
-.voltar{
-    color: #FFF;
-    position: absolute;
-    top: 0;
-    right: 0;
-}
-
 .line-height{
     line-height: 1.3em;
 }
 
 /*----------JOGO MEMÓRIA--------*/
-
 /*Carta*/
 .menuIcon, .carta{
     height: 250px;
@@ -213,8 +245,8 @@ h1{
     left: 70px;
     transition: background-color 1s ease;
 }
-/*----------JOGO NUMEROS--------*/
 
+/*----------JOGO NUMEROS--------*/
 .jogo-num-bola{
     border-radius: 70px;
     background-color: #ef5350;
@@ -233,41 +265,9 @@ h1{
 }
 
 /*----------OUTROS--------*/
-
 /*Classe de Teste*/
 .selected{
     border: 2px solid red;
-}
-
-.icon{
-    height: 80%;
-    width: 80%;
-}
-
-.side-nav .collapsible li label{
-    margin-left: 32px;
-}
-
-.side-nav .collapsible-body {
-    padding: 0 32px;
-    line-height: 1.3em;
-}
-
-@media only screen and (max-width: 992px){
-    .side-nav .collapsible li label{
-        margin-left: 16px;
-    }
-    .side-nav .collapsible-body {
-        padding: 0 16px;
-        line-height: 1.3em;
-    }
-}
-
-#settings{
-    color: #FFF;
-    position: absolute;
-    top: 0;
-    left: 0;
 }
 
 .silaba{
@@ -291,7 +291,6 @@ h1{
 }
 
 /*----------ANIMAÇÕES--------*/
-
 /*Escolheu a opção certa (Saída em Zoom para baixo)*/
 @keyframes zoomOut {
     40% {
@@ -327,24 +326,6 @@ h1{
 
     to {
         opacity: 0;
-    }
-}
-
-/*Escolheu a opção errada (Tremer)*/
-@keyframes shake {
-    from, to {
-        -webkit-transform: translate3d(0, 0, 0);
-        transform: translate3d(0, 0, 0);
-    }
-
-    10%, 30%, 50%, 70%, 90% {
-        -webkit-transform: translate3d(-10px, 0, 0);
-        transform: translate3d(-10px, 0, 0);
-    }
-
-    20%, 40%, 60%, 80% {
-        -webkit-transform: translate3d(10px, 0, 0);
-        transform: translate3d(10px, 0, 0);
     }
 }
 
@@ -385,11 +366,77 @@ h1{
     }
 }
 
-#btn-back{
-    color: #FFF;
-    position: absolute;
-    top: 0;
-    right: 0;
-    padding: 10px;
-    cursor: pointer;
+/*Escolheu a opção errada (Tremer)*/
+@keyframes shake {
+    from, to {
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+    }
+
+    10%, 30%, 50%, 70%, 90% {
+        -webkit-transform: translate3d(-10px, 0, 0);
+        transform: translate3d(-10px, 0, 0);
+    }
+
+    20%, 40%, 60%, 80% {
+        -webkit-transform: translate3d(10px, 0, 0);
+        transform: translate3d(10px, 0, 0);
+    }
 }
+
+/*Escolheu a opção certa (Saída em Zoom Simples)*/
+@keyframes zoomIn {
+    from {
+        opacity: 0;
+        -webkit-transform: scale3d(.3, .3, .3);
+        transform: scale3d(.3, .3, .3);
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+/*Escolheu a opção certa (Tada!)*/
+@keyframes tada {
+    from {
+        -webkit-transform: scale3d(1, 1, 1);
+        transform: scale3d(1, 1, 1);
+    }
+
+    10%, 20% {
+        -webkit-transform: scale3d(.9, .9, .9) rotate3d(0, 0, 1, -3deg);
+        transform: scale3d(.9, .9, .9) rotate3d(0, 0, 1, -3deg);
+    }
+
+    30%, 50%, 70%, 90% {
+        -webkit-transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);
+        transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);
+    }
+
+    40%, 60%, 80% {
+        -webkit-transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);
+        transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);
+    }
+
+    to {
+        -webkit-transform: scale3d(1, 1, 1);
+        transform: scale3d(1, 1, 1);
+    }
+}
+
+/*Aparece palvra incompleta (Entrada em Fade in da esquerda)*/
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        -webkit-transform: translate3d(-100%, 0, 0);
+        transform: translate3d(-100%, 0, 0);
+    }
+
+    to {
+        opacity: 1;
+        -webkit-transform: none;
+        transform: none;
+    }
+}
+/*----------OUTROS--------*/

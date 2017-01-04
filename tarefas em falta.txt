@@ -1,35 +1,43 @@
-﻿Última atualização: 04h20
-Podem existir tarefas que não constam na lista e convém irmos falando para saber quem está a fazer o quê e atualizar a lista frequentemente :)
+Última atualização: 03/01, 23h40
+Podem existir tarefas que não constam na lista e convém irmos falando para saber quem está a fazer o quê e atualizar a lista frequentemente (já que não é em tempo real xD) :)
+
+ATALHOS PHP EVENTUALMENTE ÚTEIS (Default)
+-Comentar                                       ctrl + shift + / (do teclado de numerico)
+-Colapsar tudo                                  ctrl + shift + - (do teclado de numerico)
+-Expandir tudo                                  ctrl + shift + + (do teclado de numerico)
 
 ATENÇÃO
--comentar o código (em especial JS)			[prioridade muito alta] - a ser feito (Inês, Joel)
--escrever o relatório					[prioridade alta] - a ser feito (Inês)
+-comentar o código (em especial JS)			    [prioridade muito alta] - a ser feito (Inês, Joel)
+-escrever o relatório					        [prioridade alta] - a ser feito (Inês)
 
 DESIGN
--aprovar design					[prioridade alta]
+-aprovar design					                [prioridade alta] - feito
 -criar logótipo (depois de escolher o nome)		[prioridade média]
--autoria no menu nav			            		[prioridade baixa]
--desenhar as frutas + fundo + cursor cores	(+canvas)		[prioridade alta] - a ser feito (Inês)
--animar os icons + instruções				[prioridade média/baixa]
--escolher mascote (icon ajuda)				[prioridade alta]
+-autoria no menu nav			            	[prioridade baixa] - a ser feito (Inês)
+-desenhar as frutas + canvas		            [prioridade alta] - feito (Inês)
+-desenhar fundo + cursor cores		            [prioridade alta] - a ser feito (Inês)
+-escolher mascote (icon ajuda)			       	[prioridade alta]
 
 PROGRAMAÇAO
--responsive (PC, tablet, telemóvel)		        	[prioridade média] - a ser feito (Joel, Inês)
+-responsive (PC, tablet, telemóvel)		        	    [prioridade média] - a ser feito (Joel, Inês)
 -paralax no fundo nas transiçoes entre cenários	    	[prioridade baixa]
--navegaçao por apontar e esperar		        	[prioridade alta] - a ser feito (Joel)
--leitura de ecrã					[prioridade alta]
--colocar sons e música de fundo			[prioridade média]
--colocar instruções (modal)				[prioridade média/alta]
--botão ajuda					[prioridade alta]
--botão retroceder					[prioridade alta] - a ser feito (Cláudia A)
+-navegaçao por apontar e esperar		        	    [prioridade alta] - a ser feito (Joel)
+-leitura de ecrã					                    [prioridade alta] - em espera, 1º tem de se fazer PaW e varrimento
+-colocar sons e música de fundo			                [prioridade média] - a ser feito (Cláudia A)
+-colocar instruções (modal)				                [prioridade média/alta]
+-botão ajuda					                        [prioridade alta]
+-botão retroceder					                    [prioridade alta] - a ser feito (Cláudia A)
 -colocar animações na interação com os elementos		[prioridade média/alta] - a ser feito (Inês)
 
-	JOGO MEMORIA	
-	-mais níveis (com mais cartas/ mais difícil)		[prioridade alta] - a ser feito (Joel)
-	
+	JOGO MEMORIA
+	-mais níveis (com mais cartas)              		[prioridade alta] - feito!!!  (Joel)
+	-mais níveis (mais difícil)	                    	[prioridade baixa/media]
+
 	JOGO NUMEROS
-	-implementar interação 			[prioridade alta]
-	-mais níveis (mais difícil)			[prioridade alta/média]
+	-implementar interação 			                    [prioridade alta]
+	-mais níveis (mais difícil)			                [prioridade alta/média]
 	
 	JOGO CORES
-	-ver canvas para pintar as figuras	            	[prioridade média/alta] - a ser feito (Inês)
+	-ver canvas para pintar as figuras	            	[prioridade média/alta] - feito (Inês)
+	-validar respostas              	            	[prioridade alta] - a ser feito (Joel)
+
