@@ -39,5 +39,5 @@ PROGRAMAÇAO
 	
 	JOGO CORES
 	-ver canvas para pintar as figuras	            	[prioridade média/alta] - feito (Inês)
-	-validar respostas              	            	[prioridade alta] - a ser feito (Joel)
+	-validar respostas              	            	[prioridade alta] - feito (Joel)
 

@@ -1,21 +1,22 @@
 //----------VARIÁVEIS GLOBAIS----------//
-var debug = true;                               //(mostrar ou não) Prints na consola
+var debug = true;                                           //(mostrar ou não) Prints na consola
 
 //----------AUDIO---------------
-var musica = new Audio();                       // Música de fundo
+var musica = document.createElement("Audio");               // Música de fundo
 musica.src = "sound/ukulele.mp3";
-musica.volume = 0.8;                            // Volume da música
-musica.loop = true;                             // Colocar música em loop
+musica.volume = 0.8;                                        // Volume da música
+musica.loop = true;                                         // Colocar música em loop
+var musicaOn = false;                                        // Variável que controla se a música está ligada ou desligada
 
-musicaOn = true;                                // Variável que controla se a música está ligada ou desligada
-
-var somVirarCarta = new Audio();                // Som do virar de carta (jogo da memória)
+var somVirarCarta = document.createElement("Audio");        // Som do virar de carta (jogo da memória)
 somVirarCarta.src = "sound/whoosh.mp3";
+somVirarCarta.volume = 0.5;
 
-var somSolucaoCorreta = new Audio();            // Som das soluções corretas
+var somSolucaoCorreta = document.createElement("Audio");    // Som das soluções corretas
 somSolucaoCorreta.src = "sound/bell.mp3";
+somSolucaoCorreta.volume = 0.5;
 
-efeitosSonorosOn = true;                        // Variável que controla se os efeitos sonoros estão ligados ou desligados.
+var efeitosSonorosOn = false;                               // Variável que controla se os efeitos sonoros estão ligados ou desligados.
 
 //----------VOICE2TEXT----------
 var speechRecognition;
@@ -31,17 +32,16 @@ var pitch = 1;
 var selecting;  //
 var sprite = 0;
 var anim = false;
-var elem = "";
 
 //----------VARRIMENTO----------
 var varrimento;
-var local;
 
 //----------JOGO MEMORIA----------
 var memoCartas = [];                            //Array pares de cartas
 var par = false;                                //Quando selecionas uma carta passa a true para usar como comparação
 var ultimo = "";
-var memMax = 4;                                 //numero maximo de cartas
+var memInicial = 4;                             //numero inicial de cartas
+var memMax = 12;                                //numero maximo de cartas
 var certas = 0;
 
 //----------JOGO PALAVRAS----------
@@ -54,7 +54,7 @@ var numMax = 5;         //Número máximo de elementos por opção
 //----------JOGO CORES----------
 var corMuda = '#fff';               //Variável que vai guardar as diferentes cores para pintar as frutas
 var sorteiaDesenho;                 //Sorteio do elemento a desenhar (canvas)
-var limpa=false;                    //Variável que diz se foi clicado o botão de limpar cores ou não
+var limpa = false;                    //Variável que diz se foi clicado o botão de limpar cores ou não
 
 //----------GERAL----------
 var interacao;                  // 0 - Point Wait
@@ -68,8 +68,7 @@ var jogo = 0;                   // 0 - Menu
                                 // 4 - Jogo Cores
 
 // var jogo_memoria = false;       //Esconde jogo memória
-var atual = [];                 //Interação por Point and Wait
-var over = false;               //Interação por Point and Wait
+
 
 var palavras = [];      //Array com frutas disponíveis nos jogos
 palavras[0] = ["a", "mei", "xa"];
@@ -93,33 +92,25 @@ function print(s) {
 window.onload = function () {
     var temp = "";                                                                      //Elimina classes acrescentadas ao elemento "voz"
 
-    musica.play();                                                                      //Coloca a tocar a música de fundo
-
-    document.getElementById("menu_musica").click();                                     //Simula clique no "menu-musica" do menu lateral
-
     document.getElementById("menu_musica").onclick = function () {
-        if(musicaOn){                                                                   //Se a música estiver ligada, desliga música
+        if (musicaOn) {                                                                   //Se a música estiver ligada, desliga
             musicaOn = false;
             musica.pause();
         }
-        else {                                                                          //Se a música estiver desligada, liga música
+        else {                                                                          //Se a música estiver desligada, liga
             musicaOn = true;
             musica.load();
             musica.play();
         }
     };
 
-    document.getElementById("menu_sons").click();                                       //Simula clique no "menu-sons" do menu lateral
+    document.getElementById("menu_musica").click();                                     //Simula clique no "menu-musica" do menu lateral
 
     document.getElementById("menu_sons").onclick = function () {
-        if(efeitosSonorosOn){                                                           //Se os efeitos sonoros estiverem ligados, desliga efeitos sonoros
-            efeitosSonorosOn = false
-        }
-        else {                                                                          //Se os efeitos sonoros estiverem desligados, liga efeitos sonoros
-            efeitosSonorosOn = true;
-        }
+        efeitosSonorosOn = !efeitosSonorosOn;
     };
 
+    document.getElementById("menu_sons").click();                                       //Simula clique no "menu-sons" do menu lateral
 
     if (!('webkitSpeechRecognition' in window)) {                                       //Verifica se o browser suporta v2t (voz para texto)
         print("O browser não é compatível com reconhecimento de voz");                  //Escreve na consola (ver função "print")
@@ -148,7 +139,7 @@ window.onload = function () {
     document.getElementById("point_wait").onclick = function () {                       //Ao clicar no elemento "point_wait"
         document.getElementById("interacao1").style.display = "none";                   //Esconde a div "interacao1" (div de seleção de interação)
         document.getElementById("interacao2").style.display = "block";                  //Mostra a div "interacao2" (div de seleção de Jogos)
-        loadPointAndWait();
+        loadPointAndWait(checkJogo());
         interacao = 0;                                                                  //0 = Interação por Point and Wait (ver vars globais)
         menu();
     };
@@ -164,7 +155,7 @@ window.onload = function () {
         document.getElementById("interacao1").style.display = "none";                   //Esconde a div "interacao1" (div de seleção de interação)
         document.getElementById("interacao2").style.display = "block";                  //Mostra a div "interacao2" (div de seleção de Jogos)
         interacao = 2;                                                                  //2 = Interação por varrimento (ver vars globais)
-        loadVarrimento();
+        loadVarrimento(checkJogo());
         menu();
     };
 
@@ -179,7 +170,7 @@ window.onload = function () {
                 document.getElementsByClassName("mostraNum")[i].style.display = "block";
         switch (interacao) {
             case 0:
-                loadPointAndWait();
+                loadPointAndWait(checkJogo());
                 break;
             case 2:
                 loadVarrimento();
@@ -195,10 +186,10 @@ window.onload = function () {
         loadJogoPalavras();
         switch (interacao) {
             case 0:
-                loadPointAndWait();
+                loadPointAndWait(checkJogo());
                 break;
             case 2:
-                loadVarrimento();
+                loadVarrimento(checkJogo());
                 break;
         }
     };
@@ -211,10 +202,10 @@ window.onload = function () {
         loadJogoCores();
         switch (interacao) {
             case 0:
-                loadPointAndWait();
+                loadPointAndWait(checkJogo());
                 break;
             case 2:
-                loadVarrimento();
+                loadVarrimento(checkJogo());
                 break;
         }
     };
@@ -227,10 +218,10 @@ window.onload = function () {
         loadJogoNumeros();
         switch (interacao) {
             case 0:
-                loadPointAndWait();
+                loadPointAndWait(checkJogo());
                 break;
             case 2:
-                loadVarrimento();
+                loadVarrimento(checkJogo());
                 break;
         }
     };
@@ -270,6 +261,7 @@ window.onload = function () {
         document.getElementById("jogoNumeros").style.display = "none";                      //Esconde a div "jogoNumeros"
         document.getElementById("interacao2").style.display = "block";                      //Mostra a div "interacao2"
         document.getElementById("voltar").style.display = "none";                           //Esconde o botão "voltar"
+        jogo = 0;
     }
 
 };
@@ -284,10 +276,10 @@ function menu() {
                 try {
                     speechRecognition.abort();                                                  //Pára o reconhecimento por voz
                     stop = true;
-                    clearVarrimento(local);
+                    clearVarrimento(checkJogo());
                 } catch (err) {
                 }
-                loadPointAndWait();
+                loadPointAndWait(checkJogo());
                 if (jogo == 1)
                     for (var i = 0; i < document.getElementsByClassName("mostraNum")[i].length; i++)
                         document.getElementsByClassName("mostraNum")[i].style.display = "none";
@@ -299,10 +291,10 @@ function menu() {
                 try {
                     speechRecognition.abort();                                                  //Pára o reconhecimento por voz
                     stop = true;
-                    clearVarrimento(local);
+                    clearVarrimento(checkJogo());
                 } catch (err) {
                 }
-                unloadPointAndWait();
+                unloadPointAndWait(checkJogo());
                 if (jogo == 1)
                     for (var i = 0; i < document.getElementsByClassName("mostraNum")[i].length; i++)
                         document.getElementsByClassName("mostraNum")[i].style.display = "none";
@@ -316,8 +308,8 @@ function menu() {
                     stop = true;
                 } catch (err) {
                 }
-                unloadPointAndWait();
-                loadVarrimento();
+                unloadPointAndWait(checkJogo());
+                loadVarrimento(checkJogo());
                 if (jogo == 1)
                     for (var i = 0; i < document.getElementsByClassName("mostraNum")[i].length; i++)
                         document.getElementsByClassName("mostraNum")[i].style.display = "none";
@@ -328,9 +320,9 @@ function menu() {
                 document.getElementById("menu_voz").click();
                 loadVoiceRec();                                                                 //Inicia o reconhecimento por voz
                 stop = false;
-                unloadPointAndWait();
+                unloadPointAndWait(checkJogo());
                 try {
-                    clearVarrimento(local);
+                    clearVarrimento(checkJogo());
                 } catch (err) {
                 }
                 if (jogo == 1)
@@ -342,49 +334,38 @@ function menu() {
 }
 
 //----------POINTandWAIT----------//
-function loadPointAndWait() {
-    var elements = document.getElementsByClassName("clickable");
+function loadPointAndWait(local) {
+    sprite = 0;
+    var elements = local.getElementsByClassName("clickable");
 
     for (var i = 0; i < elements.length; i++) {
-        elements[i].onmouseover = function () {
-            if (!over) {
-                elem = this;
-                atual[i] = this.innerHTML;
-                over = true;
-                this.innerHTML += "<div id='sel_cont'><img id='selecionada' src='img/PaW/0.png'></div>";
-                if (!anim) {
-                    sprite = 0;
-                    selecting = setInterval("select(elem)", 500);
-                    anim = true;
-                }
-            }
-        };
-        elements[i].onmouseout = function () {
-            if (over) {
-                over = false;
-                this.innerHTML = atual[i];
-                if (anim) {
-                    clearInterval(selecting);
-                    anim = false;
-                }
-            }
-        }
+        elements[i].style.cursor = "url('img/PaW/0.png'), pointer";
+        elements[i].setAttribute("onmouseover", "select(this)");
+        elements[i].setAttribute("onmouseout", "clearInterval(selecting); anim=false; sprite=0");
     }
 }
 
 function select(elem) {
-    sprite++;
-    document.getElementById("selecionada").src = "img/PaW/" + sprite + ".png";
-    if (sprite == 8) {
-        print(elem);
-        clearInterval(selecting);
-        anim = false;
-        // elem.click();
+    print("select");
+    if (!anim) {
+        anim = true;
+        selecting = setInterval(function () {
+            sprite++;
+            print(sprite);
+            elem.style.cursor = "url('img/PaW/" + sprite + ".png'), pointer";
+            if (sprite == 8) {
+                print(elem);
+                clearInterval(selecting);
+                anim = false;
+                sprite = 0;
+                elem.click();
+            }
+        }, 500);
     }
 }
 
-function unloadPointAndWait() {
-    var elements = document.getElementsByClassName("clickable");
+function unloadPointAndWait(local) {
+    var elements = local.getElementsByClassName("clickable");
 
     for (var i = 0; i < elements.length; i++) {
         elements[i].onmouseover = null;
@@ -392,26 +373,24 @@ function unloadPointAndWait() {
     }
 }
 
-//----------VARRIMENTO----------//
-function loadVarrimento() {
-    var i = -1;
+function checkJogo() {
     switch (jogo) {
         case 0:
-            local = document.getElementById("interacao2");
-            break;
+            return document.getElementById("interacao2");
         case 1:
-            local = document.getElementById("jogoMemoria");
-            break;
+            return document.getElementById("jogoMemoria");
         case 2:
-            local = document.getElementById("jogoNumeros");
-            break;
+            return document.getElementById("jogoNumeros");
         case 3:
-            local = document.getElementById("jogoPalavras");
-            break;
+            return document.getElementById("jogoPalavras");
         case 4:
-            local = document.getElementById("jogoCores");
-            break;
+            return document.getElementById("jogoCores");
     }
+}
+
+//----------VARRIMENTO----------//
+function loadVarrimento(local) {
+    var i = -1;
     clearVarrimento(local);
 
     // document.onclick = function(){
@@ -440,8 +419,8 @@ function loadVarrimento() {
 function clearVarrimento(loc) {
     clearInterval(varrimento);
     for (var j = 0; j < loc.getElementsByClassName("clickable").length; j++) {
-        local.getElementsByClassName("clickable")[j].classList.remove("z-depth-4");
-        local.getElementsByClassName("clickable")[j].classList.add("z-depth-1");
+        loc.getElementsByClassName("clickable")[j].classList.remove("z-depth-4");
+        loc.getElementsByClassName("clickable")[j].classList.add("z-depth-1");
     }
     // loc.getElementsByClassName("clickable")[j].style.border = "";
 }
@@ -482,8 +461,8 @@ function loadVoiceRec() {
         print("certeza: " + event.results[0][0].confidence);
         if ((command == "cancela" || command == "cancelar") && debug)
             stop = true;
-        else
-        // selectItem();
+        else {
+            // selectItem();
             switch (jogo) {
                 case 0:             //MENU
                     switch (command) {
@@ -542,6 +521,9 @@ function loadVoiceRec() {
                     }
                     break;
             }
+            if (jogo > 0 && (command == "voltar" || command == "volta" || command == "fechar" || command == "fecha"))
+                document.getElementById("voltar").click();
+        }
     };
     speechRecognition.onspeechend = function () {
         speechRecognition.stop();
@@ -623,7 +605,7 @@ function jogoMemoria() {
     document.getElementById("memoTab").innerHTML = "";
     certas = 0;
     var x = 1;
-    for (var m = 0; m < memMax; m += 2) {
+    for (var m = 0; m < memInicial; m += 2) {
         memoCartas[m] = memoCartas[m + 1] = x;
         x++;
     }
@@ -642,7 +624,7 @@ function jogoMemoria() {
     //     document.getElementById("memoTab").innerHTML +=
     //         "<div class='flip' id='line" + id + "'></div>";
 
-    for (var id2 = 0; id2 < memMax; id2++) {                             //Criar elementos (cartas) com id "item#"
+    for (var id2 = 0; id2 < memInicial; id2++) {                             //Criar elementos (cartas) com id "item#"
         document.getElementById("memoTab").innerHTML +=
             "<div class='col s6 m4 l3'><div class='rounded carta valign-wrapper clickable card grey' style='height: 250px; width: 200px;' id='item" + (numCartas + 1) + "'>" +
             "<div class='center-block face front'><span class='mostraNum' style='display: none'>" + (numCartas + 1) + "</span></div>" +
@@ -651,7 +633,7 @@ function jogoMemoria() {
         numCartas++;                                //Soma 1 carta às cartas colocadas
     }
 
-    for (var j = 1; j <= memMax; j++) {
+    for (var j = 1; j <= memInicial; j++) {
         document.getElementById("item" + j).setAttribute("onclick", "flip(" + j + ")"); //Cada carta é atribuido um evento onclick com a função "flip(#);"
     }
 }
@@ -663,7 +645,8 @@ function flip(id) {                                                     //Funç�
     document.getElementById("item" + id).onclick = null;                //Desativa o clique na carta
     document.getElementById("item" + id).onmouseover = null;            //Desativa o onmouseover da carta
 
-    if(efeitosSonorosOn){                                               //Se os efeitos sonoros estiverem ligados, toca o som de virar carta
+    if (efeitosSonorosOn) {                                               //Se os efeitos sonoros estiverem ligados, toca o som de virar carta
+        somVirarCarta.load();
         somVirarCarta.play();
     }
 
@@ -683,15 +666,16 @@ function flip(id) {                                                     //Funç�
             ultimo = "";
         } else {
             certas += 2;
-            if(efeitosSonorosOn){                                                                       //Se os efeitos sonoros estiverem ligados, toca o som de solução correta
+            if (efeitosSonorosOn) {                                                                       //Se os efeitos sonoros estiverem ligados, toca o som de solução correta
+                somSolucaoCorreta.load();
                 somSolucaoCorreta.play();
             }
         }
         par = !par; //se par==true passa a par=false e se par==false passa a par=true
-        if (certas == memMax) {
+        if (certas == memInicial) {
             print("GANHASTE!!");
-            if (memMax < 10)
-                memMax += 2;
+            if (memInicial < memMax)
+                memInicial += 2;
             setTimeout("jogoMemoria()", 5000);
         }
     }, 1000);
@@ -748,14 +732,15 @@ function loadJogoPalavras() {
 
 
     setTimeout(function () {
+        document.getElementById("palavraIncompleta").style.visibility = "visible";
         document.getElementById("palavraIncompleta").style.animation = "fadeInLeft 0.8s";
-    },2000);
+    }, 2000);
 
-/*
-    for(i=0; i<document.getElementById("opcoes").getElementsByTagName("div").length; i++){
-        document.getElementById("opcoes").getElementsByTagName("div")[i].style.animation = "zoomIn 0.8s";
-    }
-*/
+    /*
+     for(i=0; i<document.getElementById("opcoes").getElementsByTagName("div").length; i++){
+     document.getElementById("opcoes").getElementsByTagName("div")[i].style.animation = "zoomIn 0.8s";
+     }
+     */
     document.getElementById("certo").onclick = function () {                                                //Ao clicar no elemento "certo" (sílaba certa)
         document.getElementById("silaba-falta").innerHTML = document.getElementById("certo").innerHTML;     //Substituir o espaço a completar pela sílaba certa
         document.getElementById("certo").style.animation = "tada 0.8s";                                //Animar o elemento "certo" durante 0.8segundos através da animação "bounceOut" (ver .css)
@@ -776,7 +761,7 @@ function loadJogoPalavras() {
         document.getElementById("silaba-falta").innerHTML = document.getElementById("certo").innerHTML;     //Substituir o espaço a completar pela sílaba certa
         document.getElementById("silaba-falta").style.animation = "tada 0.8s";
         document.getElementById("certo").style.animation = "tada 0.8s";                                //Animar o elemento "certo" durante 0.8segundos através da animação "bounceOut" (ver .css)
-        }
+    }
 }
 
 //----------JOGO CORES----------//
@@ -784,12 +769,15 @@ function loadJogoCores() {
     document.body.style.backgroundImage = "url('img/Frutas!-19.png')";
     document.body.style.backgroundImage = "cover";
 
-    if(!limpa){
+    if (!limpa) {
         corMuda = '#fff';
         sorteiaDesenho = parseInt(Math.random() * (palavras.length));              //Sorteia uma fruta a desenhar
         desenha();
     }
-    limpa=false;
+    limpa = false;
+
+    document.getElementById("corFinal").style.backgroundColor = "#ffffff";      //Cor final passa a branco
+    document.getElementById("corFinal").style.cursor = "default";               //ponteiro passa ao estilo default
 
     var final;
     var numCores = 0;
@@ -894,14 +882,17 @@ function loadJogoCores() {
         }
     };
     document.getElementById("apagar").onclick = function () {                       //Ao clicar no elemento "apagar"
-        document.getElementById("corFinal").style.backgroundColor = "#ffffff";      //Cor final passa a branco
-        document.getElementById("corFinal").style.cursor = "default";               //ponteiro passa ao estilo default
-        limpa=true;
+        limpa = true;
         loadJogoCores();
     };
     document.getElementById("corFinal").onclick = function () {     //Ao clicar no elemtno "cor Final"
-        corMuda = document.getElementById("corFinal").style.backgroundColor;
-        desenha();
+        if (this.classList.contains("clickable")) {
+            corMuda = document.getElementById("corFinal").style.backgroundColor;
+            if (desenha()) {
+                alert("GANHASTE");
+                setTimeout("loadJogoCores()", 5000);
+            }
+        }
     };
 }
 
@@ -920,44 +911,44 @@ function rgbToHex(col) {
     }
 }
 
-function desenha () {
+function desenha() {
     var canvas = document.getElementById("canvas");         //Desenha em canvas a fruta
     canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);       //Desenha em canvas a fruta
     var ctx = canvas.getContext("2d");                                       //Desenha em canvas a fruta
+    print(sorteiaDesenho);
     switch (sorteiaDesenho) {                                                   //Desenha em canvas a fruta sorteada
         case 0:
             desenhaAmeixa(ctx);
-            break;
+            return rgbToHex(corMuda) == "#c2185b";
         case 1:
             desenhaAnanas(ctx);
-            break;
+            return rgbToHex(corMuda) == "#f4b400";
         case 2:
             desenhaCenoura(ctx);
-            break;
+            return rgbToHex(corMuda) == "#d84315";
         case 3:
             desenhaCereja(ctx);
-            break;
+            return rgbToHex(corMuda) == "#c2185b";
         case 4:
             desenhaMaca(ctx);
-            break;
+            return rgbToHex(corMuda) == "#43a047";
         case 5:
             desenhaMirtilo(ctx);
-            break;
+            return rgbToHex(corMuda) == "#7b1fa2";
         case 6:
             desenhaMorango(ctx);
-            break;
+            return rgbToHex(corMuda) == "#c2185b";
         case 7:
             desenhaLaranja(ctx);
-            break;
+            return rgbToHex(corMuda) == "#d84315";
         case 8:
             desenhaPera(ctx);
-            break;
+            return rgbToHex(corMuda) == "#f4b400";
         case 9:
-            desenhaBanana(ctx);
-            break;
+            // desenhaBanana(ctx);
+            return rgbToHex(corMuda) == "#f4b400";
     }
 }
-
 
 //----------JOGO NÚMEROS----------//
 function loadJogoNumeros() {
@@ -976,7 +967,7 @@ function loadJogoNumeros() {
     document.getElementById("fruta2").innerHTML = "<img src='img/frutas/" + f2 + ".png'>";                      //coloca a imagem respetiva a fruta2 escolhida
     var num1 = document.getElementById("num1").innerHTML = Math.floor(Math.random() * (numMax - 1)) + 1;        //gera um número aleatorio entre 1 e o num Máximo, coloca-o no HTML e guarda na variavel
     var num2 = document.getElementById("num2").innerHTML = numMax - num1;                                       //calcula as frutas que faltam até ao numero maximo
-    document.getElementById("num2").classList.add('jogo-num-bola');                                             //calcula as frutas que faltam até ao numero maximo
+    document.getElementById("num2").classList.add('jogo-num-bola');
 
     switch (f1 + "_" + f2) {                                                            //verifica as frutas sorteadas e coloca no HTML a respetiva imagem
         case 'ameixa_ananas':
@@ -1116,7 +1107,7 @@ function loadJogoNumeros() {
             sumo.innerHTML = "<img src='img/jogoNumeros/sumo7.png'>";
             break;
         default:
-            print("ERRO: não existe a combinação de frutas " + f1 + "_" + f2 + "nem" + f2 + "_" + f1 );
+            print("ERRO: não existe a combinação de frutas " + f1 + "_" + f2 + "nem" + f2 + "_" + f1);
             break;
     }
 
@@ -1134,12 +1125,13 @@ function loadJogoNumeros() {
         document.getElementById("op" + opCerta).innerHTML += "<img src='img/frutas/" + f2 + ".png'>";
     }
 
+    var temp = 0;
     for (var l = 1; l <= 3; l++) {                      //coloca as imagens das frutas em cada uma das posiçoes com respostas erradas
         if (l != opCerta) {                             //as erradas sao colocadas num sitio diferente da opção certa
             do {
                 fErrada1 = Math.floor(Math.random() * (numMax - 1) + 1);
-            } while (fErrada1 == num1);                   //sorteia um número diferente do correto
-
+            } while (fErrada1 == num1 || temp == fErrada1);                   //sorteia um número diferente do correto
+            temp = fErrada1;
             fErrada2 = numMax - fErrada1;               //calcula o numero de 2as frutas
 
             for (var k = 0; k < fErrada1; k++) {        //coloca as imagens das frutas na posição respetiva
@@ -1148,6 +1140,7 @@ function loadJogoNumeros() {
             for (var n = 0; n < fErrada2; n++) {
                 document.getElementById("op" + l).innerHTML += "<img src='img/frutas/" + f2 + ".png'>";
             }
+            print(num1 + "=" + fErrada1);
         }
     }
 }

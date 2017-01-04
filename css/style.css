@@ -79,13 +79,23 @@ h1{
     line-height: 1.3em;
 }
 
+/*Autoria*/
+#authors{
+    padding: 0 32px;
+    font-size: 0.8em;
+    line-height: 1.3em;
+    margin-top: 10px;
+}
+
 @media only screen and (max-width: 992px){
     .side-nav .collapsible li label{
         margin-left: 16px;
     }
     .side-nav .collapsible-body {
         padding: 0 16px;
-        line-height: 1.3em;
+    }
+    #authors{
+        padding: 0 16px;
     }
 }
 
@@ -97,12 +107,6 @@ h1{
     right: 0;
     padding: 10px;
     cursor: pointer;
-}
-
-/*Autoria*/
-#authors{
-    font-size: 0.8em;
-    line-height: 0.3em;
 }
 
 .icon{

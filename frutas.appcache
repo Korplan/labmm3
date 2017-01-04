@@ -1,0 +1,37 @@
+CACHE MANIFEST
+# 04-01-2017 v1.0
+
+img/frutas/ameixa.png
+img/frutas/ananas.png
+img/frutas/cenoura.png
+img/frutas/cereja.png
+img/frutas/laranja.png
+img/frutas/maca.png
+img/frutas/mirtilo.png
+img/frutas/morango.png
+img/frutas/pera.png
+img/frutas!-19.png
+img/frutas!-21.png
+img/frutas!-23.png
+img/frutas!-24.png
+img/logo.png
+img/fundo.png
+img/icons/brush.png
+img/icons/icon_cores.png
+img/icons/icon_memoria.png
+img/icons/icon_numeros.png
+img/icons/icon_palavras.png
+sound/ukulele.mp3
+sound/whoosh.mp3
+sound/bell.mp3
+#index.html
+#js/jquery-3.1.1.min.js
+#js/materialize.min.js
+#js/script.js
+#css/materialize.css
+#css/style.css
+
+NETWORK:
+*
+
+FALLBACK:
