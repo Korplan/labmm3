@@ -269,12 +269,10 @@ window.onload = function () {
         jogo = 0;
     }
 
+    document.getElementById("instructions").onclick = function () {                         //Esconde o menu
+        document.getElementById("slide-out").style = "transform: translateX(-100%)";
+    };
 };
-//----------INSTRUÇÕES---------//
-//document.getElementById("instructions").onclick = function () {
-//    console.log("passou aqui");
-//    document.getElementById("slide-out").display = "none";
-//};
 
 //----------CONTROLOS----------//
 function menu() {
