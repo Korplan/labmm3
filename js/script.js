@@ -7,6 +7,9 @@ musica.src = "sound/ukulele.mp3";
 musica.loop = true;                             // Colocar música em loop
 musicaOn = true;                                // Variável que controla se a música está ligada ou desligada
 
+var somVirarCarta = new Audio();
+somVirarCarta.src = "sound/whoosh.mp3";
+
 //----------VOICE2TEXT----------
 var speechRecognition;
 var stop = false;
@@ -640,6 +643,8 @@ function flip(id) {                                                     //Funç�
     document.getElementById("item" + id).classList.remove("clickable"); //Procura o item com o # recebido e retira-lhe a classe "clickable"
     document.getElementById("item" + id).onclick = null;                //Desativa o clique na carta
     document.getElementById("item" + id).onmouseover = null;            //Desativa o onmouseover da carta
+
+    somVirarCarta.play();
 
     // if (jogo_memoria) {                 //Se jogo_memoria=true
     setTimeout(function () {        //Ocorre 1 vez passado 1segundo
