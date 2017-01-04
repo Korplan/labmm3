@@ -130,6 +130,7 @@ window.onload = function () {
         document.getElementById("interacao2").style.display = "none";                   //Esconde a div "interacao2" (div de seleção de Jogos)
         document.getElementById("jogoMemoria").style.display = "block";                 //Mostra a div "jogoMemoria"
         document.getElementById("voltar").style.display = "block";                      //Mostra o botão "voltar"
+        document.getElementById("help").style.display = "block";                        //Mostra o botão "ajuda"
         jogo = 1;
         jogoMemoria();
         if (interacao == 3)
@@ -149,6 +150,7 @@ window.onload = function () {
         document.getElementById("interacao2").style.display = "none";                   //Esconde a div "interacao2" (div de seleção de Jogos)
         document.getElementById("jogoPalavras").style.display = "block";                //Mostra a div "jogoPalavras"
         document.getElementById("voltar").style.display = "block";                      //Mostra o botão "voltar"
+        document.getElementById("help").style.display = "block";                        //Mostra o botão "ajuda"
         jogo = 3;
         loadJogoPalavras();
         switch (interacao) {
@@ -165,6 +167,7 @@ window.onload = function () {
         document.getElementById("interacao2").style.display = "none";                   //Esconde a div "interacao2" (div de seleção de Jogos)
         document.getElementById("jogoCores").style.display = "block";                   //Mostra a div "jogoCores"
         document.getElementById("voltar").style.display = "block";                      //Mostra o botão "voltar"
+        document.getElementById("help").style.display = "block";                        //Mostra o botão "ajuda"
         jogo = 4;
         loadJogoCores();
         switch (interacao) {
@@ -181,6 +184,7 @@ window.onload = function () {
         document.getElementById("interacao2").style.display = "none";                   //Esconde a div "interacao2" (div de seleção de Jogos)
         document.getElementById("jogoNumeros").style.display = "block";                 //Mostra a div "jogoCores"
         document.getElementById("voltar").style.display = "block";                      //Mostra o botão "voltar"
+        document.getElementById("help").style.display = "block";                        //Mostra o botão "ajuda"
         jogo = 2;
         loadJogoNumeros();
         switch (interacao) {
@@ -228,6 +232,7 @@ window.onload = function () {
         document.getElementById("jogoNumeros").style.display = "none";                      //Esconde a div "jogoNumeros"
         document.getElementById("interacao2").style.display = "block";                      //Mostra a div "interacao2"
         document.getElementById("voltar").style.display = "none";                           //Esconde o botão "voltar"
+        document.getElementById("help").style.display = "none";                             //Esconde o botão "ajuda"
     }
 
 };
