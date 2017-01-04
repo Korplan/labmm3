@@ -278,6 +278,11 @@ window.onload = function () {
     }
 
 };
+//----------INSTRUÇÕES---------//
+//document.getElementById("instructions").onclick = function () {
+//    console.log("passou aqui");
+//    document.getElementById("slide-out").display = "none";
+//};
 
 //----------CONTROLOS----------//
 function menu() {
