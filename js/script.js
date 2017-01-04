@@ -33,19 +33,18 @@ var feitas = [];        //Array que armazena os index do array "palavras" que j�
 var palavra;            //guarda palavra sorteada (=palavra para completar no jogo)
 
 //----------JOGO NUMEROS----------
-var numMax = 5;
+var numMax = 5;         //Número máximo de elementos por opção
 
 //----------JOGO CORES----------
-var corMuda = '#fff';             //Variável que vai guardar as diferentes cores para pintar as frutas
-var sorteiaDesenho;
-var limpa=false;
+var corMuda = '#fff';               //Variável que vai guardar as diferentes cores para pintar as frutas
+var sorteiaDesenho;                 //Sorteio do elemento a desenhar (canvas)
+var limpa=false;                    //Variável que diz se foi clicado o botão de limpar cores ou não
 
 //----------GERAL----------
 var interacao;                  // 0 - Point Wait
                                 // 1 - Point Click
                                 // 2 - Varrimento
                                 // 3 - Voz
-
 var jogo = 0;                   // 0 - Menu
                                 // 1 - Jogo Memoria
                                 // 2 - Jogo Numeros
@@ -618,6 +617,7 @@ function jogoMemoria() {
 function flip(id) {                                                     //Função "flip()" que recebe como parâmetro o # da carta
     print(id);                                                          //Escreve na consola o # da carta
     document.getElementById("item" + id).classList.add("flipped");      //Procura o item com o # recebido e adiciona-lhe a classe "flipped"
+    document.getElementById("item" + id).classList.remove("clickable"); //Procura o item com o # recebido e retira-lhe a classe "clickable"
     document.getElementById("item" + id).onclick = null;                //Desativa o clique na carta
     document.getElementById("item" + id).onmouseover = null;            //Desativa o onmouseover da carta
 
@@ -628,7 +628,9 @@ function flip(id) {                                                     //Funç�
 
         else if (document.getElementById("item" + ultimo).getElementsByTagName("div")[1].innerHTML != document.getElementById("item" + id).getElementsByTagName("div")[1].innerHTML) {      //Senão, se par==true, ou seja, foram viradas duas cartas, verifica-se se uma é igual à outra. Então, o conteúdo (innerHTML) da div 1 (elemento de índice 1 do array "getElementsByTagName("div")") do elemento "itemultimo" (última carta virada) é igual ao conteudo (innerHTML) da div 1 (elemento de índice 1 do array "getElementsByTagName("div")") do elemento "itemid" (primeira carta virada)
             document.getElementById("item" + ultimo).classList.remove("flipped");                       //Verifica a lista de classes do elemento "item ultimo" e remove a classe "flipped"
+            document.getElementById("item" + ultimo).classList.add("clickable");                       //Verifica a lista de classes do elemento "item ultimo" e remove a classe "flipped"
             document.getElementById("item" + id).classList.remove("flipped");                           //Verifica a lista de classes do elemento "item id" e remove a classe "flipped"
+            document.getElementById("item" + id).classList.add("clickable");                           //Verifica a lista de classes do elemento "item id" e remove a classe "flipped"
             document.getElementById("item" + ultimo).setAttribute("onclick", "flip(" + ultimo + ")");   //Adiciona a função (anteriormente retirada) "flip(ultimo)"
             document.getElementById("item" + id).setAttribute("onclick", "flip(" + id + ")");           //Adiciona a função (anteriormente retirada) "flip(id)"
             ultimo = "";
@@ -676,7 +678,6 @@ function loadJogoPalavras() {
         }
     }
 
-
     for (var k = 0; k < 3; k++) {                                               //Nº de opções = 3 no máximo
         var random = silabas[Math.floor(Math.random() * silabas.length)];       //Random = ao index sorteado do array "silabas" entre 0 e nº de index máximo
         if (random != palavras[palavra][retira]) {                              //Se a sílaba sorteada for diferente da sílaba retirada (que constitui a palavra a completar)
@@ -694,9 +695,21 @@ function loadJogoPalavras() {
         return 0.5 - Math.random()
     });
     document.getElementById("opcoes").innerHTML = hipoteses.join("");                                       //O innerHTML do elemento "opcoes" contém o array hipoteses com elemntos separados por espaço
+
+
+    setTimeout(function () {
+        document.getElementById("palavraIncompleta").style.animation = "fadeInLeft 0.8s";
+    },2000);
+
+/*
+    for(i=0; i<document.getElementById("opcoes").getElementsByTagName("div").length; i++){
+        document.getElementById("opcoes").getElementsByTagName("div")[i].style.animation = "zoomIn 0.8s";
+    }
+*/
     document.getElementById("certo").onclick = function () {                                                //Ao clicar no elemento "certo" (sílaba certa)
         document.getElementById("silaba-falta").innerHTML = document.getElementById("certo").innerHTML;     //Substituir o espaço a completar pela sílaba certa
-        document.getElementById("certo").style.animation = "shake 0.8s";                                //Animar o elemento "certo" durante 0.8segundos através da animação "bounceOut" (ver .css)
+        document.getElementById("certo").style.animation = "tada 0.8s";                                //Animar o elemento "certo" durante 0.8segundos através da animação "bounceOut" (ver .css)
+        document.getElementById("silaba-falta").style.animation = "tada 0.8s";
 
         feitas.push(palavra);                                                   //Insere no fim do array "feitas" o index da palavra
         print(feitas.length + " / " + palavras.length);
@@ -708,6 +721,12 @@ function loadJogoPalavras() {
                 loadJogoPalavras();                                                 //Repete o jogo
         }, 2000);
     };
+
+    document.getElementById("opcoes").onclick = function () {                                                //Ao clicar no elemento "certo" (sílaba certa)
+        document.getElementById("silaba-falta").innerHTML = document.getElementById("certo").innerHTML;     //Substituir o espaço a completar pela sílaba certa
+        document.getElementById("silaba-falta").style.animation = "tada 0.8s";
+        document.getElementById("certo").style.animation = "tada 0.8s";                                //Animar o elemento "certo" durante 0.8segundos através da animação "bounceOut" (ver .css)
+        }
 }
 
 //----------JOGO CORES----------//
@@ -912,7 +931,7 @@ function loadJogoNumeros() {
     switch (f1 + "_" + f2) {                                                            //verifica as frutas sorteadas e coloca no HTML a respetiva imagem
         case 'ameixa_ananas':
         case 'ananas_ameixa':
-            sumo.innerHTML = "<img src='img/jogoNumeros/sumo1.png'>";
+            sumo.innerHTML = "<img src='img/jogoNumeros/sumo2.png'>";
             break;
         case 'ameixa_cenoura':
         case 'cenoura_ameixa':
@@ -920,22 +939,134 @@ function loadJogoNumeros() {
             break;
         case 'ameixa_cereja':
         case 'cereja_ameixa':
-            sumo.innerHTML = "<img src='img/jogoNumeros/sumo3.png'>";
+            sumo.innerHTML = "<img src='img/jogoNumeros/sumo7.png'>";
             break;
         case 'ameixa_laranja':
         case 'laranja_ameixa':
-            sumo.innerHTML = "<img src='img/jogoNumeros/sumo4.png'>";
+            sumo.innerHTML = "<img src='img/jogoNumeros/sumo2.png'>";
             break;
         case 'ameixa_maca':
         case 'maca_ameixa':
-            sumo.innerHTML = "<img src='img/jogoNumeros/sumo5.png'>";
+            sumo.innerHTML = "<img src='img/jogoNumeros/sumo2.png'>";
             break;
         case 'ameixa_mirtilo':
         case 'mirtilo_ameixa':
+            sumo.innerHTML = "<img src='img/jogoNumeros/sumo4.png'>";
+            break;
+        case 'ananas_cenoura':
+        case 'cenoura_ananas':
+            sumo.innerHTML = "<img src='img/jogoNumeros/sumo5.png'>";
+            break;
+        case 'ananas_cereja':
+        case 'cereja_ananas':
+            sumo.innerHTML = "<img src='img/jogoNumeros/sumo5.png'>";
+            break;
+        case 'ananas_laranja':
+        case 'laranja_ananas':
+            sumo.innerHTML = "<img src='img/jogoNumeros/sumo5.png'>";
+            break;
+        case 'ananas_maca':
+        case 'maca_ananas':
+            sumo.innerHTML = "<img src='img/jogoNumeros/sumo5.png'>";
+            break;
+        case 'ananas_mirtilo':
+        case 'mirtilo_ananas':
+            sumo.innerHTML = "<img src='img/jogoNumeros/sumo5.png'>";
+            break;
+        case 'ananas_morango':
+        case 'morango_ananas':
+            sumo.innerHTML = "<img src='img/jogoNumeros/sumo5.png'>";
+            break;
+        case 'ananas_pera':
+        case 'pera_ananas':
+            sumo.innerHTML = "<img src='img/jogoNumeros/sumo5.png'>";
+            break;
+        case 'cenoura_cereja':
+        case 'pera_a':
             sumo.innerHTML = "<img src='img/jogoNumeros/sumo6.png'>";
             break;
+        case 'cenoura_laranja':
+        case 'laranja_cenoura':
+            sumo.innerHTML = "<img src='img/jogoNumeros/sumo6.png'>";
+            break;
+        case 'cenoura_maca':
+        case 'maca_cenoura':
+            sumo.innerHTML = "<img src='img/jogoNumeros/sumo2.png'>";
+            break;
+        case 'cenoura_mirtilo':
+        case 'mirtilo_cenoura':
+            sumo.innerHTML = "<img src='img/jogoNumeros/sumo6.png'>";
+            break;
+        case 'cenoura_morango':
+        case 'morango_cenoura':
+            sumo.innerHTML = "<img src='img/jogoNumeros/sumo6.png'>";
+            break;
+        case 'cenoura_pera':
+        case 'pera_cenoura':
+            sumo.innerHTML = "<img src='img/jogoNumeros/sumo2.png'>";
+            break;
+        case 'cereja_laranja':
+        case 'laranja_cereja':
+            sumo.innerHTML = "<img src='img/jogoNumeros/sumo6.png'>";
+            break;
+        case 'cereja_maca':
+        case 'maca_cereja':
+            sumo.innerHTML = "<img src='img/jogoNumeros/sumo6.png'>";
+            break;
+        case 'cereja_mirtilo':
+        case 'mirtilo_cereja':
+            sumo.innerHTML = "<img src='img/jogoNumeros/sumo6.png'>";
+            break;
+        case 'cereja_morango':
+        case 'morango_cereja':
+            sumo.innerHTML = "<img src='img/jogoNumeros/sumo6.png'>";
+            break;
+        case 'cereja_pera':
+        case 'pera_cereja':
+            sumo.innerHTML = "<img src='img/jogoNumeros/sumo6.png'>";
+            break;
+        case 'laranja_maca':
+        case 'maca_laranja':
+            sumo.innerHTML = "<img src='img/jogoNumeros/sumo1.png'>";
+            break;
+        case 'laranja_mirtilo':
+        case 'mirtilo_laranja':
+            sumo.innerHTML = "<img src='img/jogoNumeros/sumo6.png'>";
+            break;
+        case 'laranja_morango':
+        case 'morango_laranja':
+            sumo.innerHTML = "<img src='img/jogoNumeros/sumo6.png'>";
+            break;
+        case 'laranja_pera':
+        case 'pera_laranja':
+            sumo.innerHTML = "<img src='img/jogoNumeros/sumo1.png'>";
+            break;
+        case 'maca_mirtilo':
+        case 'mirtilo_maca':
+            sumo.innerHTML = "<img src='img/jogoNumeros/sumo4.png'>";
+            break;
+        case 'maca_morango':
+        case 'morango_maca':
+            sumo.innerHTML = "<img src='img/jogoNumeros/sumo1.png'>";
+            break;
+        case 'maca_pera':
+        case 'pera_maca':
+            sumo.innerHTML = "<img src='img/jogoNumeros/sumo1.png'>";
+            break;
+        case 'mirtilo_morango':
+        case 'morango_mirtilo':
+            sumo.innerHTML = "<img src='img/jogoNumeros/sumo4.png'>";
+            break;
+        case 'mirtilo_pera':
+        case 'pera_mirtilo':
+            sumo.innerHTML = "<img src='img/jogoNumeros/sumo4.png'>";
+            break;
+        case 'morango_pera':
+        case 'pera_morango':
+            sumo.innerHTML = "<img src='img/jogoNumeros/sumo7.png'>";
+            break;
         default:
-            print("ERRO: não existe a combinação de frutas " + f1 + "_" + f2);
+            print("ERRO: não existe a combinação de frutas " + f1 + "_" + f2 + "nem" + f2 + "_" + f1 );
             break;
     }
 

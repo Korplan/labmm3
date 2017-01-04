@@ -1,6 +1,11 @@
 Última atualização: 03/01, 23h40
 Podem existir tarefas que não constam na lista e convém irmos falando para saber quem está a fazer o quê e atualizar a lista frequentemente (já que não é em tempo real xD) :)
 
+ATALHOS PHP EVENTUALMENTE ÚTEIS (Default)
+-Comentar                                       ctrl + shift + / (do teclado de numerico)
+-Colapsar tudo                                  ctrl + shift + - (do teclado de numerico)
+-Expandir tudo                                  ctrl + shift + + (do teclado de numerico)
+
 ATENÇÃO
 -comentar o código (em especial JS)			    [prioridade muito alta] - a ser feito (Inês, Joel)
 -escrever o relatório					        [prioridade alta] - a ser feito (Inês)
@@ -35,3 +40,4 @@ PROGRAMAÇAO
 	JOGO CORES
 	-ver canvas para pintar as figuras	            	[prioridade média/alta] - feito (Inês)
 	-validar respostas              	            	[prioridade alta] - a ser feito (Joel)
+
