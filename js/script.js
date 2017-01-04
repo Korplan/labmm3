@@ -4,11 +4,18 @@ var debug = true;                               //(mostrar ou não) Prints na co
 //----------AUDIO---------------
 var musica = new Audio();                       // Música de fundo
 musica.src = "sound/ukulele.mp3";
+musica.volume = 0.8;                            // Volume da música
 musica.loop = true;                             // Colocar música em loop
+
 musicaOn = true;                                // Variável que controla se a música está ligada ou desligada
 
-var somVirarCarta = new Audio();
+var somVirarCarta = new Audio();                // Som do virar de carta (jogo da memória)
 somVirarCarta.src = "sound/whoosh.mp3";
+
+var somSolucaoCorreta = new Audio();            // Som das soluções corretas
+somSolucaoCorreta.src = "sound/bell.mp3";
+
+efeitosSonorosOn = true;                        // Variável que controla se os efeitos sonoros estão ligados ou desligados.
 
 //----------VOICE2TEXT----------
 var speechRecognition;
@@ -91,16 +98,28 @@ window.onload = function () {
     document.getElementById("menu_musica").click();                                     //Simula clique no "menu-musica" do menu lateral
 
     document.getElementById("menu_musica").onclick = function () {
-        if(musicaOn){                                                                   //Se a música estiver ligada, desliga
+        if(musicaOn){                                                                   //Se a música estiver ligada, desliga música
             musicaOn = false;
             musica.pause();
         }
-        else {                                                                          //Se a música estiver desligada, liga
+        else {                                                                          //Se a música estiver desligada, liga música
             musicaOn = true;
             musica.load();
             musica.play();
         }
     };
+
+    document.getElementById("menu_sons").click();                                       //Simula clique no "menu-sons" do menu lateral
+
+    document.getElementById("menu_sons").onclick = function () {
+        if(efeitosSonorosOn){                                                           //Se os efeitos sonoros estiverem ligados, desliga efeitos sonoros
+            efeitosSonorosOn = false
+        }
+        else {                                                                          //Se os efeitos sonoros estiverem desligados, liga efeitos sonoros
+            efeitosSonorosOn = true;
+        }
+    };
+
 
     if (!('webkitSpeechRecognition' in window)) {                                       //Verifica se o browser suporta v2t (voz para texto)
         print("O browser não é compatível com reconhecimento de voz");                  //Escreve na consola (ver função "print")
@@ -644,7 +663,10 @@ function flip(id) {                                                     //Funç�
     document.getElementById("item" + id).onclick = null;                //Desativa o clique na carta
     document.getElementById("item" + id).onmouseover = null;            //Desativa o onmouseover da carta
 
-    somVirarCarta.play();
+    if(efeitosSonorosOn){                                               //Se os efeitos sonoros estiverem ligados, toca o som de virar carta
+        somVirarCarta.play();
+    }
+
 
     // if (jogo_memoria) {                 //Se jogo_memoria=true
     setTimeout(function () {        //Ocorre 1 vez passado 1segundo
@@ -661,6 +683,9 @@ function flip(id) {                                                     //Funç�
             ultimo = "";
         } else {
             certas += 2;
+            if(efeitosSonorosOn){                                                                       //Se os efeitos sonoros estiverem ligados, toca o som de solução correta
+                somSolucaoCorreta.play();
+            }
         }
         par = !par; //se par==true passa a par=false e se par==false passa a par=true
         if (certas == memMax) {
