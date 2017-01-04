@@ -70,6 +70,15 @@ h1{
     left: 0;
 }
 
+#help{
+    color: #FFF;
+    position: absolute;
+    padding: 10px;
+    top: 0;
+    left: 75px;
+    cursor: pointer;
+}
+
 .side-nav .collapsible li label{
     margin-left: 32px;
 }
@@ -109,6 +118,23 @@ h1{
     cursor: pointer;
 }
 
+/*Instruções*/
+#instructions_text {
+    font-size: 0.8em;
+    padding-left: 10px !important;
+    padding-top: 0;
+    display: inline-block;
+    text-align: justify;
+}
+
+a#instructions{
+    border-radius: 10px;
+    background-color: #ddd;
+    text-align: center;
+    width: 180px;
+    margin-left: 45px;
+}
+
 .icon{
     height: 80%;
     width: 80%;
@@ -122,6 +148,10 @@ h1{
 .modal{
     color: #363636;
     margin-top: 20vh;
+}
+
+#modal2{
+    margin-top: 5vh;
 }
 
 .icon{
