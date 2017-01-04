@@ -1,6 +1,12 @@
 //----------VARIÁVEIS GLOBAIS----------//
 var debug = true;                               //(mostrar ou não) Prints na consola
 
+//----------AUDIO---------------
+var musica = new Audio();
+musica.src = "sound/ukulele.mp3";
+musica.loop = true;
+musicaOn = true;
+
 //----------VOICE2TEXT----------
 var speechRecognition;
 var stop = false;
@@ -77,7 +83,19 @@ function print(s) {
 window.onload = function () {
     var temp = "";                                                                      //Elimina classes acrescentadas ao elemento "voz"
 
-    //document.getElementById("btn-back").onclick=retroceder;                             //Botão de retroceder para o menu principal
+    musica.play();
+
+    document.getElementById("menu_musica").onclick = function () {
+        if(musicaOn){
+            musicaOn = false;
+            musica.pause();
+        }
+        else {
+            musicaOn = true;
+            musica.load();
+            musica.play();
+        }
+    };
 
     if (!('webkitSpeechRecognition' in window)) {                                       //Verifica se o browser suporta v2t (voz para texto)
         print("O browser não é compatível com reconhecimento de voz");                  //Escreve na consola (ver função "print")
