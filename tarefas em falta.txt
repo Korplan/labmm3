@@ -17,6 +17,7 @@ DESIGN
 -desenhar as frutas + canvas		            [prioridade alta] - feito (Inês)
 -desenhar fundo + cursor cores + banana         [prioridade alta] - a ser feito (Inês)
 -escolher mascote (icon ajuda)			       	[prioridade média]
+-ver o design para o point and wait             [prioridade média/alta]
 
 PROGRAMAÇAO
 -responsive (PC, tablet, telemóvel)		        	    [prioridade média] - a ser feito (Joel, Inês)
@@ -30,9 +31,8 @@ PROGRAMAÇAO
 -botão retroceder					                    [prioridade alta] - a ser feito (Cláudia A)
 -colocar animações na interação com os elementos		[prioridade média/alta] - a ser feito (Inês)
 -colocar animações ao ganhar jogos              		[prioridade média/alta] - a ser feito (Inês)
--colocar gifs instroções de jogos                 		[prioridade média/baixa] - a ser feito (Inês)
--mudar as instruções de sitio (hipotese)          		[prioridade alta]
--ver o design para o point and wait               		[prioridade média/alta]
+-colocar gifs instruções de jogos                 		[prioridade média/baixa] - a ser feito (Inês)
+-mudar as instruções de sitio (sugestão)          		[prioridade alta]
 
 	JOGO MEMORIA
 	-mais níveis (com mais cartas)              		[prioridade alta] - feito!!!  (Joel)
@@ -47,7 +47,6 @@ PROGRAMAÇAO
 	JOGO CORES
 	-ver canvas para pintar as figuras	            	[prioridade média/alta] - feito (Inês)
 	-ajustar cores                  	            	[prioridade alta]
-	-ajustar cores                  	            	[prioridade alta] -
 	-validar respostas              	            	[prioridade alta] - feito (Joel)
 
 

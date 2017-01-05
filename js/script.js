@@ -640,7 +640,7 @@ function jogoMemoria() {
         document.getElementById("item" + j).setAttribute("onclick", "flip(" + j + ")"); //Cada carta é atribuido um evento onclick com a função "flip(#);"
     }
 
-    for(var i=0; ;i++){
+    for(var i=0; i <= memInicial;i++){
         document.getElementById('memoTab').getElementsByClassName('carta')[i].style.animation="zoomIn 0.8s";
     }
 }
@@ -673,8 +673,9 @@ function flip(id) {                                                     //Funç�
             ultimo = "";
         } else {
             certas += 2;
-            document.getElementById("item" + ultimo).style.animation="tada 0.8s";
-            document.getElementById("item" + id).style.animation="tada 0.8s";
+
+            document.getElementById("item" + ultimo).style.animation="tadaMemo 0.8s";
+            document.getElementById("item" + id).style.animation="tadaMemo 0.8s";
 
             if (efeitosSonorosOn) {                                                                       //Se os efeitos sonoros estiverem ligados, toca o som de solução correta
                 somSolucaoCorreta.load();
@@ -802,7 +803,10 @@ function loadJogoCores() {
         corMuda = '#fff';
         sorteiaDesenho = parseInt(Math.random() * (palavras.length));              //Sorteia uma fruta a desenhar
         desenha();
+        /*document.getElementById('imagem').style.visibility="hidden";*/
+        document.getElementById('imagem').style.animation="zoomIn 0.8s";
     }
+    document.getElementById('imagem').style.animation="";
     limpa = false;
 
     document.getElementById("corFinal").style.backgroundColor = "#ffffff";      //Cor final passa a branco

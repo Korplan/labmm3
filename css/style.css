@@ -132,11 +132,6 @@ a#instructions{
     cursor: pointer;
 }
 
-.icon{
-    height: 80%;
-    width: 80%;
-}
-
 /*Inativos*/
 .inativo{
     background-color: grey !important;
@@ -454,6 +449,34 @@ a#instructions{
     to {
         -webkit-transform: scale3d(1, 1, 1);
         transform: scale3d(1, 1, 1);
+    }
+}
+
+/*Escolheu a opção certa (Tada!) JOGO MEMORIA*/
+@keyframes tadaMemo {
+    from {
+        -webkit-transform: scale3d(1, 1, 1) rotatey(180deg);
+        transform: scale3d(1, 1, 1) rotatey(180deg);
+    }
+
+    10%, 20% {
+        -webkit-transform: scale3d(.9, .9, .9) rotate3d(0, 0, 1, -3deg) rotatey(180deg);
+        transform: scale3d(.9, .9, .9) rotate3d(0, 0, 1, -3deg) rotatey(180deg);
+    }
+
+    30%, 50%, 70%, 90% {
+        -webkit-transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg) rotatey(180deg);
+        transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg) rotatey(180deg);
+    }
+
+    40%, 60%, 80% {
+        -webkit-transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg) rotatey(180deg);
+        transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg) rotatey(180deg);
+    }
+
+    to {
+        -webkit-transform: scale3d(1, 1, 1) rotatey(180deg);
+        transform: scale3d(1, 1, 1) rotatey(180deg);
     }
 }
 
