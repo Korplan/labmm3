@@ -277,6 +277,27 @@ window.onload = function () {
     // document.getElementById("instructions").onclick = function () {                         //Esconde o menu
     //     document.getElementById("slide-out").style = "transform: translateX(-100%)";
     // };
+
+    document.getElementById("help").onclick = function () {                                 //Ao clicar no botão ajuda
+        switch (jogo) {
+            case 1:
+                document.getElementById("modal_memoria").style.display = "block";           //Se estiver no jogo da memória mostra o modal_memoria
+                break;
+
+            case 2:
+                document.getElementById("modal_numeros").style.display = "block";           //Se estiver no jogo dos números mostra o modal_numeros
+                console.log(document.getElementById("modal_numeros").style.display);
+                break;
+
+            case 3:
+                document.getElementById("modal_palavras").style.display = "block";          //Se estiver no jogo das palavras mostra o modal_palavras
+                break;
+
+            case 4:
+                document.getElementById("modal_cores").style.display = "block";             //Se estiver no jogo das cores mostra o modal_cores
+                break;
+        }
+    };
 };
 
 //----------CONTROLOS----------//
