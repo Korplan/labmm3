@@ -70,25 +70,32 @@
         <div class="row">
             <div class="col m3 s6 l3 center">
                 <div class="rounded menuIcon valign-wrapper z-depth-1 clickable white_elem" id="btn_num">
-                    <div class="center-block click_container"><img src="img/icons/icon_numeros.png" class="icon"/></div>
+                    <div class="center-block click_container"
+                         style="background-image: url('img/icons/icon_numeros.png'); background-size: 100% 100%; height: 90%; width: 100%;"></div>
                 </div>
                 <p>Números</p>
             </div>
             <div class="col m3 s6 l3 center">
                 <div class="rounded menuIcon valign-wrapper z-depth-1 clickable white_elem" id="btn_palavras">
-                    <div class="center-block click_container"><img src="img/icons/icon_palavras.png" class="icon"/></div>
+                    <div class="center-block click_container"
+                         style="background-image: url('img/icons/icon_palavras.png'); background-size: 100% 100%; height: 90%; width: 100%;">
+                    </div>
                 </div>
                 <p>Palavras</p>
             </div>
             <div class="col m3 s6 l3 center">
                 <div class="rounded menuIcon valign-wrapper z-depth-1 clickable white_elem" id="btn_mem">
-                    <div class="center-block click_container"><img src="img/icons/icon_memoria.png" class="icon"/></div>
+                    <div class="center-block click_container"
+                         style="background-image: url('img/icons/icon_memoria.png'); background-size: 100% 100%; height: 90%; width: 100%;">
+                    </div>
                 </div>
                 <p>Memória</p>
             </div>
             <div class="col m3 s6 l3 center">
                 <div class="rounded menuIcon valign-wrapper z-depth-1 clickable white_elem" id="btn_cores">
-                    <div class="center-block click_container"><img src="img/icons/icon_cores.png" class="icon"/></div>
+                    <div class="center-block click_container"
+                         style="background-image: url('img/icons/icon_cores.png'); background-size: 100% 100%; height: 90%; width: 100%;">
+                    </div>
                 </div>
                 <p>Cores</p>
             </div>
@@ -140,13 +147,15 @@
                     <div class="col m6 z-depth-1 clickable" id="cor3"></div>
                     <div class="col m6">
                         <div class="center z-depth-1 clickable" id="apagar">
-                            <i class="material-icons tiny" style="color:#000;">close</i>
+                            <i class="material-icons medium" style="color:#000;">close</i>
                         </div>
                     </div>
                     <div class="cores-lig z-depth-1" id="cores-lig-3"></div>
                 </div>
             </div>
-            <div class="col m6" id="imagem" style="border: solid 1px red"><canvas id="canvas" width="405" height="460"></canvas></div>
+            <div class="col m6" id="imagem" style="border: solid 1px red">
+                <canvas id="canvas" width="405" height="460"></canvas>
+            </div>
         </div>
     </div>
 </div>
@@ -162,8 +171,12 @@
                     <div class="col m6" id="fruta2"></div>
                 </div>
                 <div class="row center">
-                    <div class="col m6"><div id="num1" class='jogo-num-bola center'></div></div>
-                    <div class="col m6 center"><div id="num2" class='jogo-num-bola '></div></div>
+                    <div class="col m6">
+                        <div id="num1" class='jogo-num-bola center'></div>
+                    </div>
+                    <div class="col m6 center">
+                        <div id="num2" class='jogo-num-bola '></div>
+                    </div>
                 </div>
             </div>
             <div class="col m6" id="sumo"></div>
@@ -208,12 +221,15 @@
         <h5>MEMÓRIA</h5>
         <p>O desafio neste jogo consiste em encontrar os pares escondidos nas cartas.
             Cada vez que o jogador selecione uma carta ela irá virar-se e mostrar a fruta ou legume.
-            Quando o par for encontrado, essas cartas ficarão visíveis, mas quando errar as cartas voltam a vira-se ocultando a fruta ou legume.
+            Quando o par for encontrado, essas cartas ficarão visíveis, mas quando errar as cartas voltam a vira-se
+            ocultando a fruta ou legume.
             Quando o jogador conseguir descobrir todos os pares passa para a fase seguinte.</p><br/>
         <h5>CORES</h5>
         <p>No jogo das cores é apresentada a imagem de uma fruta ou legume.
-            O jogador deverá selecionar uma ou duas cores primárias por forma a obter a cor correta da fruta ou legume apresentada.
-            Após selecionar a(s) cor(es) necessárias, terá que selecionar a cor por forma a pintar a fruta ou legume.
+            O jogador deverá selecionar uma ou duas cores primárias por forma a obter a cor correta da fruta ou
+            legume apresentada.
+            Após selecionar a(s) cor(es) necessárias, terá que selecionar a cor por forma a pintar a fruta ou
+            legume.
             Caso acerte passa para a fase seguinte, caso erre terá que tentar novamente.</p><br/><br/>
         <p>Em cada um dos jogos estará disponível no canto superior esquerdo um ícone de acesso à ajuda <i
                 class="material-icons tiny">help</i>.</p>
@@ -335,17 +351,23 @@
             <li>
                 <input class="collapsible-header" name="menu" type="radio" id="menu_paw">
                 <label for="menu_paw">Apontar e esperar</label>
-                <div class="collapsible-body">O utilizador tem que colocar o cursor sobre o item a selecionar e esperar que o temporizador pare.</div>
+                <div class="collapsible-body">O utilizador tem que colocar o cursor sobre o item a selecionar e
+                    esperar que o temporizador pare.
+                </div>
             </li>
             <li>
                 <input class="collapsible-header" name="menu" type="radio" id="menu_cursor">
                 <label for="menu_cursor">Cursor</label>
-                <div class="collapsible-body">O utilizador tem que colocar o cursor sobre o item a selecionar e clicar.</div>
+                <div class="collapsible-body">O utilizador tem que colocar o cursor sobre o item a selecionar e
+                    clicar.
+                </div>
             </li>
             <li>
                 <input class="collapsible-header" name="menu" type="radio" id="menu_varrimento">
                 <label for="menu_varrimento">Varrimento</label>
-                <div class="collapsible-body">Os itens são selecionados automaticamente e o utilizador só tem que parar no pretendido.</div>
+                <div class="collapsible-body">Os itens são selecionados automaticamente e o utilizador só tem que
+                    parar no pretendido.
+                </div>
             </li>
             <li>
                 <input class="collapsible-header" name="menu" type="radio" id="menu_voz">
@@ -362,7 +384,8 @@
 -->
     <a href="#" class="waves-effect waves-dark btn red lighten-1" data-target="modal2" id="instructions">instruções de Jogos</a>
     <li id="authors">
-        <span class="center">Autoria de Cláudia Amaro, Cláudia Ribeiro, Inês Margarido e Joel Seabra.<br />Frutas! &copy; 2017</span>
+            <span class="center">Autoria de Cláudia Amaro, Cláudia Ribeiro, Inês Margarido e Joel Seabra.<br/>Frutas! &copy;
+                2017</span>
     </li>
 </ul>
 </div>
@@ -374,7 +397,6 @@
 <!-- Modais -->
 <script>
     $(document).ready(function () {
-        $('.modal').modal();
         $('.modal').modal();
     });
     $(".button-collapse").sideNav();

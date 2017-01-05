@@ -1,6 +1,7 @@
 CACHE MANIFEST
-# 04-01-2017 v1.0
+# 05-01-2017 v1.0
 
+CACHE:
 img/frutas/ameixa.png
 img/frutas/ananas.png
 img/frutas/cenoura.png
@@ -24,12 +25,14 @@ img/icons/icon_palavras.png
 sound/ukulele.mp3
 sound/whoosh.mp3
 sound/bell.mp3
-#index.html
-#js/jquery-3.1.1.min.js
-#js/materialize.min.js
-#js/script.js
-#css/materialize.css
-#css/style.css
+sound/whoosh2.mp3
+sound/wrong.mp3
+index.html
+js/jquery-3.1.1.min.js
+js/materialize.min.js
+js/script.js
+css/materialize.css
+css/style.css
 
 NETWORK:
 *

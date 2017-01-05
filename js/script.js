@@ -6,7 +6,7 @@ var musica = document.createElement("Audio");               // Música de fundo
 musica.src = "sound/ukulele.mp3";
 musica.volume = 0.8;                                        // Volume da música
 musica.loop = true;                                         // Colocar música em loop
-var musicaOn = false;                                        // Variável que controla se a música está ligada ou desligada
+var musicaOn = true;                                        // Variável que controla se a música está ligada ou desligada
 
 var somVirarCarta = document.createElement("Audio");        // Som do virar de carta (jogo da memória)
 somVirarCarta.src = "sound/whoosh.mp3";
@@ -30,6 +30,7 @@ var stop = false;
 var volume = 1;
 var speed = 1;
 var pitch = 1;
+var aLer = false;
 
 //----------POINTandWAIT----------
 var selecting;  //
@@ -48,7 +49,7 @@ var memMax = 12;                                //numero maximo de cartas
 var certas = 0;
 
 //----------JOGO PALAVRAS----------
-var feitas = [];        //Array que armazena os index do array "palavras" que já sairam
+var palavrasFeitas = [];        //Array que armazena os index do array "palavras" que já sairam
 var palavra;            //guarda palavra sorteada (=palavra para completar no jogo)
 
 //----------JOGO NUMEROS----------
@@ -58,6 +59,7 @@ var numMax = 5;         //Número máximo de elementos por opção
 var corMuda = '#fff';               //Variável que vai guardar as diferentes cores para pintar as frutas
 var sorteiaDesenho;                 //Sorteio do elemento a desenhar (canvas)
 var limpa = false;                    //Variável que diz se foi clicado o botão de limpar cores ou não
+var coresFeitas = [];
 
 //----------GERAL----------
 var interacao;                  // 0 - Point Wait
@@ -70,9 +72,6 @@ var jogo = 0;                   // 0 - Menu
                                 // 2 - Jogo Numeros
                                 // 3 - Jogo Palavras
                                 // 4 - Jogo Cores
-
-// var jogo_memoria = false;            //Esconde jogo memória
-
 
 var palavras = [];                      //Array com frutas disponíveis nos jogos
 palavras[0] = ["a", "mei", "xa"];
@@ -99,18 +98,18 @@ var velBody3 = 0.5;                           //velocidade do parallax do elemen
 window.onload = function () {
     var temp = "";                                                                      //Elimina classes acrescentadas ao elemento "voz"
 
-    document.body.style.backgroundPositionX="33.3%";
-    document.getElementById('bodyn2').style.backgroundPositionX="33.3%";
-    document.getElementById('bodyn3').style.backgroundPositionX="33.3%";
+    document.body.style.backgroundPositionX = "33.3%";
+    document.getElementById('bodyn2').style.backgroundPositionX = "33.3%";
+    document.getElementById('bodyn3').style.backgroundPositionX = "33.3%";
 
     var intParallax = setInterval(function () {
-        if(parseFloat(document.getElementById('bodyn2').style.backgroundPositionX)<100){
-            document.body.style.backgroundPositionX=parseFloat(document.body.style.backgroundPositionX) + velBody1 + "%";
-            document.getElementById('bodyn2').style.backgroundPositionX=parseFloat(document.getElementById('bodyn2').style.backgroundPositionX) + velBody2 + "%";
-            document.getElementById('bodyn3').style.backgroundPositionX=parseFloat(document.getElementById('bodyn3').style.backgroundPositionX) + velBody3 + "%";
+        if (parseFloat(document.getElementById('bodyn2').style.backgroundPositionX) < 100) {
+            document.body.style.backgroundPositionX = parseFloat(document.body.style.backgroundPositionX) + velBody1 + "%";
+            document.getElementById('bodyn2').style.backgroundPositionX = parseFloat(document.getElementById('bodyn2').style.backgroundPositionX) + velBody2 + "%";
+            document.getElementById('bodyn3').style.backgroundPositionX = parseFloat(document.getElementById('bodyn3').style.backgroundPositionX) + velBody3 + "%";
         }
-        else{
-            clearInterval("intParallax")
+        else {
+            clearInterval(intParallax);
         }
     }, 100);
 
@@ -126,6 +125,8 @@ window.onload = function () {
         }
     };
 
+    document.getElementById("menu_musica").click();                                     //Simula clique no "menu-musica" do menu lateral
+
     document.getElementById("menu_sons").onclick = function () {
         efeitosSonorosOn = !efeitosSonorosOn;
     };
@@ -137,7 +138,6 @@ window.onload = function () {
         temp = document.getElementById("voz").getAttribute("class") + " inativo";       //Desativa a interação por voz na página de seleção de interação
         document.getElementById("voz").setAttribute("class", temp);                     //Acrescenta a class "inativo" ao elemento "voz"
         document.getElementById("menu_voz").style.display = "none";                     //Desativa a interação por voz no menu de seleção de interação
-
     } else
         document.getElementById("voz").onclick = function () {                          //Ao clicar no elemento "voz"
             document.getElementById("interacao1").style.display = "none";               //Esconde a div "interacao1" (div de seleção de interação)
@@ -150,13 +150,11 @@ window.onload = function () {
     if (!('speechSynthesis' in window)) {
         print("O browser não suporta síntese de voz");
     } else {
+        print("t2v ready");
         document.getElementById("menu_leitor").onclick = function () {
-            if (!leitorEcra)
-                contentReader("Voz ativada");
-            // else
-            // desativa o leitor
             leitorEcra = !leitorEcra;
-
+            if (leitorEcra)
+                contentReader("Voz ativada");
         };
         document.getElementById("menu_leitor").click();
     }
@@ -284,15 +282,39 @@ window.onload = function () {
     };
 
     document.getElementById("voltar").onclick = function () {
-        document.getElementById("jogoMemoria").style.display = "none";                      //Esconde a div "jogoMemoria"
-        document.getElementById("jogoPalavras").style.display = "none";                     //Esconde a div "jogoPalavras"
-        document.getElementById("jogoCores").style.display = "none";                        //Esconde a div "jogoCores"
-        document.getElementById("jogoNumeros").style.display = "none";                      //Esconde a div "jogoNumeros"
+        switch (jogo) {
+            case 1:
+                document.getElementById("jogoMemoria").style.display = "none";                      //Esconde a div "jogoMemoria"
+                break;
+            case 2:
+                document.getElementById("jogoNumeros").style.display = "none";                      //Esconde a div "jogoNumeros"
+                break;
+            case 3:
+                document.getElementById("jogoPalavras").style.display = "none";                     //Esconde a div "jogoPalavras"
+                palavrasFeitas = [];
+                break;
+            case 4:
+                document.getElementById("jogoCores").style.display = "none";                        //Esconde a div "jogoCores"
+                coresFeitas = [];
+                break;
+            default:
+                print("ERRO:isto não deveria acontecer aqui_" + jogo);
+                break;
+        }
         document.getElementById("interacao2").style.display = "block";                      //Mostra a div "interacao2"
         document.getElementById("voltar").style.display = "none";                           //Esconde o botão "voltar"
         document.getElementById("help").style.display = "none";                             //Esconde o botão "ajuda"
         jogo = 0;
     };
+
+    document.getElementById('btn_num').addEventListener('mouseover', onMouseOver, true);
+    document.getElementById('btn_num').addEventListener('mouseout', onMouseOut, true);
+    document.getElementById("btn_palavras").addEventListener('mouseover', onMouseOver, true);
+    document.getElementById("btn_palavras").addEventListener('mouseout', onMouseOut, true);
+    document.getElementById("btn_cores").addEventListener('mouseover', onMouseOver, true);
+    document.getElementById("btn_cores").addEventListener('mouseout', onMouseOut, true);
+    document.getElementById("btn_mem").addEventListener('mouseover', onMouseOver, true);
+    document.getElementById("btn_mem").addEventListener('mouseout', onMouseOut, true);
 
     // document.getElementById("instructions").onclick = function () {                         //Esconde o menu
     //     document.getElementById("slide-out").style = "transform: translateX(-100%)";
@@ -320,6 +342,50 @@ window.onload = function () {
     };
 };
 
+function onMouseOver(event) {
+    //this is the original element the event handler was assigned to
+    var e = event.toElement || event.relatedTarget;
+    if (e.parentNode != this || e == this) {
+        print("not");
+        return;
+    }
+    print(this.id);
+    if (!aLer) {
+        aLer = true;
+        switch (this.id) {
+            case 'btn_num':
+                contentReader("Jogo dos números");
+                break;
+            case 'btn_palavras':
+                contentReader("Jogo das palavras");
+                break;
+            case 'btn_mem':
+                contentReader("Jogo da memória");
+                break;
+            case 'btn_cores':
+                contentReader("Jogo das cores");
+                break;
+            default:
+                print("ERRO:elemento não listado");
+                break;
+        }
+    }
+}
+
+function onMouseOut(event) {
+    //this is the original element the event handler was assigned to
+    var e = event.toElement || event.relatedTarget;
+    if (e.parentNode == this || e == this) {
+        return;
+    }
+    aLer = false;
+    try {
+        speechSynthesis.cancel();
+    } catch (err) {
+        print("leitor não ativo");
+    }
+}
+
 //----------CONTROLOS----------//
 function menu() {
     print(interacao);
@@ -330,10 +396,15 @@ function menu() {
                 try {
                     speechRecognition.abort();                                                  //Pára o reconhecimento por voz
                     stop = true;
+                } catch (err) {
+                    print("voiceRec não iniciado");
+                }
+                try {
                     clearVarrimento(checkJogo());
                 } catch (err) {
+                    print("varrimento não iniciado");
                 }
-                if(leitorEcra)
+                if (leitorEcra)
                     contentReader("Apontar e esperar");
                 loadPointAndWait(checkJogo());
                 if (jogo == 1)
@@ -347,15 +418,19 @@ function menu() {
                 try {
                     speechRecognition.abort();                                                  //Pára o reconhecimento por voz
                     stop = true;
+                } catch (err) {
+                    print("voiceRec não iniciado");
+                }
+                try {
                     clearVarrimento(checkJogo());
                 } catch (err) {
+                    print("varrimento não iniciado");
                 }
-                if(leitorEcra)
-                    contentReader("cursor");
+                contentReader("cursor");
                 unloadPointAndWait(checkJogo());
                 if (jogo == 1)
-                    for (var i = 0; i < document.getElementsByClassName("mostraNum")[i].length; i++)
-                        document.getElementsByClassName("mostraNum")[i].style.display = "none";
+                    for (var j = 0; i < document.getElementsByClassName("mostraNum")[j].length; i++)
+                        document.getElementsByClassName("mostraNum")[j].style.display = "none";
             }
             break;
         case 2:
@@ -365,14 +440,15 @@ function menu() {
                     speechRecognition.abort();                                                  //Pára o reconhecimento por voz
                     stop = true;
                 } catch (err) {
+                    print("voiceRec não iniciado");
                 }
-                if(leitorEcra)
+                if (leitorEcra)
                     contentReader("varrimento");
                 unloadPointAndWait(checkJogo());
                 loadVarrimento(checkJogo());
                 if (jogo == 1)
-                    for (var i = 0; i < document.getElementsByClassName("mostraNum")[i].length; i++)
-                        document.getElementsByClassName("mostraNum")[i].style.display = "none";
+                    for (var k = 0; i < document.getElementsByClassName("mostraNum")[k].length; i++)
+                        document.getElementsByClassName("mostraNum")[k].style.display = "none";
             }
             break;
         case 3:
@@ -384,12 +460,13 @@ function menu() {
                 try {
                     clearVarrimento(checkJogo());
                 } catch (err) {
+                    print("varrimento não iniciado");
                 }
-                if(leitorEcra)
+                if (leitorEcra)
                     contentReader("controlo por voz");
                 if (jogo == 1)
-                    for (var i = 0; i < document.getElementsByClassName("mostraNum")[i].length; i++)
-                        document.getElementsByClassName("mostraNum")[i].style.display = "block";
+                    for (var l = 0; i < document.getElementsByClassName("mostraNum")[l].length; i++)
+                        document.getElementsByClassName("mostraNum")[l].style.display = "block";
             }
             break;
     }
@@ -610,17 +687,17 @@ function loadVoiceRec() {
 }
 
 function contentReader(text) {
-    print("t2v ready");
+    if (leitorEcra) {
+        var msg = new SpeechSynthesisUtterance();
+        msg.text = text;
 
-    var msg = new SpeechSynthesisUtterance();
-    msg.text = text;
+        msg.lang = "pt-PT";
+        msg.volume = volume;
+        msg.rate = speed;
+        msg.pitch = pitch;
 
-    msg.lang = "pt-BR";
-    msg.volume = volume;
-    msg.rate = speed;
-    msg.pitch = pitch;
-
-    speechSynthesis.speak(msg);
+        speechSynthesis.speak(msg);
+    }
 }
 
 //----------JOGO MEMÓRIA----------//
@@ -660,8 +737,8 @@ function jogoMemoria() {
         document.getElementById("item" + j).setAttribute("onclick", "flip(" + j + ")"); //Cada carta é atribuido um evento onclick com a função "flip(#);"
     }
 
-    for(var i=0; i <= memInicial;i++){
-        document.getElementById('memoTab').getElementsByClassName('carta')[i].style.animation="zoomIn 0.8s";
+    for (var i = 0; i <= memInicial; i++) {
+        document.getElementById('memoTab').getElementsByClassName('carta')[i].style.animation = "zoomIn 0.8s";
     }
 }
 
@@ -694,8 +771,8 @@ function flip(id) {                                                     //Funç�
         } else {
             certas += 2;
 
-            document.getElementById("item" + ultimo).style.animation="tadaMemo 0.8s";
-            document.getElementById("item" + id).style.animation="tadaMemo 0.8s";
+            document.getElementById("item" + ultimo).style.animation = "tadaMemo 0.8s";
+            document.getElementById("item" + id).style.animation = "tadaMemo 0.8s";
 
             if (efeitosSonorosOn) {                                                                       //Se os efeitos sonoros estiverem ligados, toca o som de resposta correta
                 somRespostaCorreta.load();
@@ -727,7 +804,7 @@ function loadJogoPalavras() {
     do {
         palavra = Math.floor(Math.random() * palavras.length);          //Palavra = sorteio de index entre 0 e 8 (=palavras.lenght)
         print("ciclo");
-    } while (feitas.indexOf(palavra) != -1);                             //Enquanto forem sorteadas palavras que já tenham saído é sorteada nova palavra (se o elemento de index # existir no array feitas repete ciclo)
+    } while (palavrasFeitas.indexOf(palavra) != -1);                             //Enquanto forem sorteadas palavras que já tenham saído é sorteada nova palavra (se o elemento de index # existir no array feitas repete ciclo)
 
     document.getElementById("imgPal").innerHTML = "<img style='width: 100%' src='img/frutas/" + numParaFruta(palavra) + ".png'/>";
 
@@ -776,8 +853,8 @@ function loadJogoPalavras() {
     }, 1000);
     document.getElementById("palavraIncompleta").style.animation = "";
 
-    for (var i = 0; i < document.getElementById("opcoes").getElementsByTagName("div").length; i++) {
-        document.getElementById("opcoes").getElementsByTagName("div")[i].style.visibility = "hidden";           //Esconde os elementos "silaba" antes da animação
+    for (var m = 0; m < document.getElementById("opcoes").getElementsByTagName("div").length; m++) {
+        document.getElementById("opcoes").getElementsByTagName("div")[m].style.visibility = "hidden";           //Esconde os elementos "silaba" antes da animação
     }
     setTimeout(function () {
         for (var i = 0; i < document.getElementById("opcoes").getElementsByTagName("div").length; i++) {
@@ -786,21 +863,18 @@ function loadJogoPalavras() {
         }
     }, 2000);                                                                                                   //Delay de 2seg.
 
-    for (var i = 0; i < document.getElementById("opcoes").getElementsByClassName("opcao").length; i++) {
-        document.getElementsByClassName("opcao")[i].onclick = function () {                                                //Ao clicar no elemento "certo" (sílaba certa)
+    for (var l = 0; l < document.getElementById("opcoes").getElementsByClassName("opcao").length; l++) {
+        document.getElementsByClassName("opcao")[l].onclick = function () {                                                //Ao clicar no elemento "certo" (sílaba certa)
             if (this == document.getElementById("certo")) {
                 document.getElementById("silaba-falta").innerHTML = document.getElementById("certo").innerHTML;     //Mostra palavra completa
-                document.getElementById("silaba-falta").style.backgroundColor='#fff';     //Mostra palavra completa
+                document.getElementById("silaba-falta").style.backgroundColor = '#fff';     //Mostra palavra completa
                 document.getElementById("certo").style.animation = "tada 0.8s";                                     //Animar o elemento "certo" durante 0.8segundos através da animação "bounceOut" (ver .css)
                 document.getElementById("silaba-falta").style.animation = "tada 0.8s";
-                if (efeitosSonorosOn) {                                               //Se os efeitos sonoros estiverem ligados, toca o som de resposta correta
-                    somRespostaCorreta.load();
-                    somRespostaCorreta.play();
-                }
-                feitas.push(palavra);                                                   //Insere no fim do array "feitas" o index da palavra
-                print(feitas.length + " / " + palavras.length);
+
+                palavrasFeitas.push(palavra);                                                   //Insere no fim do array "palavrasFeitas" o index da palavra
+                print(palavrasFeitas.length + " / " + palavras.length);
                 setTimeout(function () {
-                    if (palavras.length == feitas.length) {                                 //Se tiverem saído/ sido completadas todas as palavras
+                    if (palavras.length == palavrasFeitas.length) {                                 //Se tiverem saído/ sido completadas todas as palavras
                         alert("não ha mais");
                         document.getElementById("certo").onclick = null;                    //Bloqueia o clique no elemento "certo"
                     } else                                                                  //Senão
@@ -810,10 +884,6 @@ function loadJogoPalavras() {
             }
             else {
                 this.style.animation = "shake 0.8s";
-                if (efeitosSonorosOn) {                                                                       //Se os efeitos sonoros estiverem ligados, toca o som de resposta errada
-                    somRespostaErrada.load();
-                    somRespostaErrada.play();
-                }
                 this.classList.remove('clickable');
                 this.classList.add('inativo');
             }
@@ -828,12 +898,14 @@ function loadJogoCores() {
 
     if (!limpa) {
         corMuda = '#fff';
-        sorteiaDesenho = parseInt(Math.random() * (palavras.length));              //Sorteia uma fruta a desenhar
+        do {                     //Sorteia uma fruta a desenhar
+            sorteiaDesenho = parseInt(Math.random() * (palavras.length));
+        } while (coresFeitas.indexOf(sorteiaDesenho) != -1);
         desenha();
         /*document.getElementById('imagem').style.visibility="hidden";*/
-        document.getElementById('imagem').style.animation="zoomIn 0.8s";
+        document.getElementById('imagem').style.animation = "zoomIn 0.8s";
     }
-    document.getElementById('imagem').style.animation="";
+    document.getElementById('imagem').style.animation = "";
     limpa = false;
 
     document.getElementById("corFinal").style.backgroundColor = "#ffffff";      //Cor final passa a branco
@@ -848,6 +920,78 @@ function loadJogoCores() {
     document.getElementById("cor2").classList.add('clickable');
     document.getElementById("cor3").classList.add('clickable');
     document.getElementById("corFinal").classList.remove('clickable');
+    document.getElementById("cor1").onmouseover = function () {
+        contentReader("magenta");
+    };
+    document.getElementById("cor1").onmouseout = function () {
+        try {
+            speechSynthesis.cancel();
+        } catch (err) {
+            print("leitor não ativo");
+        }
+    };
+    document.getElementById("cor2").onmouseover = function () {
+        contentReader("azul");
+    };
+    document.getElementById("cor2").onmouseout = function () {
+        try {
+            speechSynthesis.cancel();
+        } catch (err) {
+            print("leitor não ativo");
+        }
+    };
+    document.getElementById("cor3").onmouseover = function () {
+        contentReader("amarelo");
+    };
+    document.getElementById("cor3").onmouseout = function () {
+        try {
+            speechSynthesis.cancel();
+        } catch (err) {
+            print("leitor não ativo");
+        }
+    };
+    document.getElementById("corFinal").onmouseover = function () {
+        switch (rgbToHex(this.style.backgroundColor)) {
+            case '#ffffff':
+                contentReader("Escolhe uma cor");
+                break;
+            case '#d84315':
+                contentReader("cor de laranja");
+                break;
+            case '#7b1fa2':
+                contentReader("lilás");
+                break;
+            case '#43a047':
+                contentReader("verde");
+                break;
+            default:
+                print("ERRO:cor inválida: " + rgbToHex(this.style.backgroundColor));
+                break;
+        }
+        print("in");
+    };
+    document.getElementById("corFinal").onmouseout = function () {
+        try {
+            speechSynthesis.cancel();
+        } catch (err) {
+            print("leitor não ativo");
+        }
+        print("out");
+    };
+    document.getElementById("apagar").onmouseover = function () {
+        contentReader("apagar");
+    };
+    document.getElementById("apagar").onmouseout = function () {
+        try {
+            speechSynthesis.cancel();
+        } catch (err) {
+            print("leitor não ativo");
+        }
+    };
+
+    // document.getElementById("cor2").classList.add('clickable');
+    // document.getElementById("cor3").classList.add('clickable');
+    // document.getElementById("corFinal").classList.remove('clickable');
 
     document.getElementById("cor1").onclick = function () {     //Ao clicar no elemtno "cor1" (=mangenta)
         numCores++;
@@ -950,7 +1094,11 @@ function loadJogoCores() {
             corMuda = document.getElementById("corFinal").style.backgroundColor;
             if (desenha()) {
                 alert("GANHASTE");
-                setTimeout("loadJogoCores()", 5000);
+                coresFeitas.push(sorteiaDesenho);
+                print(coresFeitas.length + "/" + palavras.length);
+                if (coresFeitas.length != palavras.length) {
+                    setTimeout("loadJogoCores()", 5000);
+                } else alert("não há mais");
             }
         }
     };
