@@ -92,9 +92,27 @@ function print(s) {
         console.log(s);                 //Faz print na consola dos parâmetros recebidos
 }
 
+var velBody1 = 0.1;                           //velocidade do parallax do elemento body 1
+var velBody2 = 0.3;                           //velocidade do parallax do elemento body 1
+var velBody3 = 0.5;                           //velocidade do parallax do elemento body 1
 //----------NO CARREGAMENTO----------//
 window.onload = function () {
     var temp = "";                                                                      //Elimina classes acrescentadas ao elemento "voz"
+
+    document.body.style.backgroundPositionX="33.3%";
+    document.getElementById('bodyn2').style.backgroundPositionX="33.3%";
+    document.getElementById('bodyn3').style.backgroundPositionX="33.3%";
+
+    var intParallax = setInterval(function () {
+        if(parseFloat(document.getElementById('bodyn2').style.backgroundPositionX)<100){
+            document.body.style.backgroundPositionX=parseFloat(document.body.style.backgroundPositionX) + velBody1 + "%";
+            document.getElementById('bodyn2').style.backgroundPositionX=parseFloat(document.getElementById('bodyn2').style.backgroundPositionX) + velBody2 + "%";
+            document.getElementById('bodyn3').style.backgroundPositionX=parseFloat(document.getElementById('bodyn3').style.backgroundPositionX) + velBody3 + "%";
+        }
+        else{
+            clearInterval("intParallax")
+        }
+    }, 100);
 
     document.getElementById("menu_musica").onclick = function () {
         if (musicaOn) {                                                                   //Se a música estiver ligada, desliga

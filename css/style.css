@@ -1,8 +1,51 @@
 /*----------GERAL--------*/
+/*
+* {
+    scrollbar-face-color: #646464;
+    scrollbar-highlight-color: #646464;
+    scrollbar-3dlight-color: #646464;
+    scrollbar-darkshadow-color: #646464;
+    scrollbar-shadow-color: #646464;
+    scrollbar-arrow-color: #646464;
+    scrollbar-track-color: #646464;
+}
+::-webkit-scrollbar {
+    width: 10px;
+    background: #cfcfcf;
+}
+::-webkit-scrollbar-thumb {
+    background: #9e9e9e;
+}
+*/
+::selection{
+    background: none;
+}
+
 body{
-    background: url('../img/fundo.png'), #74c043;
-    background-size: cover;
-    /*color: #fff;*/
+    background: url('../img/fundo_fundo-n1.png');
+    background-position-x: 33.3%;       /*Posição da imagem (em relação ao topo)*/
+    background-position-y: 33.3%;       /*Posição da imagem (em relação à esquerda)*/
+    background-repeat: no-repeat;       /*Não repete (não é padrão)*/
+    background-size: 250%;             /*Tamanho do body*/
+    overflow: hidden;                   /*evita o scroll */
+}
+#bodyn2{
+    background: url('../img/fundo_fundo-n2.png');
+    background-position-x: 33.3%;       /*Posição da imagem (em relação ao topo)*/
+    background-position-y: 33.3%;       /*Posição da imagem (em relação à esquerda)*/
+    background-repeat: no-repeat;       /*Não repete (não é padrão)*/
+    background-size: 250%;             /*Tamanho da imagem*/
+    height: 100vh;                      /*Tamanho do #bodyn2*/
+    overflow: hidden;                   /*evita o scroll */
+}
+#bodyn3{
+    background: url('../img/fundo_fundo-n3.png');
+    background-position-x: 33.3%;       /*Posição da imagem (em relação ao topo)*/
+    background-position-y: 33.3%;       /*Posição da imagem (em relação à esquerda)*/
+    background-repeat: no-repeat;       /*Não repete (não é padrão)*/
+    background-size: 250%;             /*Tamanho da imagem*/
+    height: 100vh;                      /*Tamanho do #bodyn3*/
+    overflow: hidden;                   /*evita o scroll */
 }
 
 /*Borda redonda*/
