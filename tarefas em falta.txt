@@ -2,32 +2,37 @@
 Podem existir tarefas que não constam na lista e convém irmos falando para saber quem está a fazer o quê e atualizar a lista frequentemente (já que não é em tempo real xD) :)
 
 ATALHOS PHP EVENTUALMENTE ÚTEIS (Default)
--Comentar                                       ctrl + shift + / (do teclado de numerico)
--Colapsar tudo                                  ctrl + shift + - (do teclado de numerico)
--Expandir tudo                                  ctrl + shift + + (do teclado de numerico)
+-Comentar                                       ctrl + shift + / (do teclado numerico)
+-Colapsar tudo                                  ctrl + shift + - (do teclado numerico)
+-Expandir tudo                                  ctrl + shift + + (do teclado numerico)
 
 ATENÇÃO
--comentar o código (em especial JS)			    [prioridade muito alta] - a ser feito (Inês, Joel)
+-comentar o código (em especial JS)			    [prioridade muito alta] - a ser feito (Inês, Joel, Cláudia A e Cláudia R)
 -escrever o relatório					        [prioridade alta] - a ser feito (Inês)
 
 DESIGN
 -aprovar design					                [prioridade alta] - feito
 -criar logótipo (depois de escolher o nome)		[prioridade média]
--autoria no menu nav			            	[prioridade baixa] - a ser feito (Inês)
+-autoria no menu nav			            	[prioridade baixa] - feito (Inês e Joel)
 -desenhar as frutas + canvas		            [prioridade alta] - feito (Inês)
--desenhar fundo + cursor cores		            [prioridade alta] - a ser feito (Inês)
--escolher mascote (icon ajuda)			       	[prioridade alta]
+-desenhar fundo + cursor cores + banana         [prioridade alta] - a ser feito (Inês)
+-escolher mascote (icon ajuda)			       	[prioridade média]
 
 PROGRAMAÇAO
 -responsive (PC, tablet, telemóvel)		        	    [prioridade média] - a ser feito (Joel, Inês)
 -paralax no fundo nas transiçoes entre cenários	    	[prioridade baixa]
 -navegaçao por apontar e esperar		        	    [prioridade alta] - feito (Joel)
--leitura de ecrã					                    [prioridade alta] - em espera, 1º tem de se fazer PaW e varrimento
+-leitura de ecrã					                    [prioridade alta] - a ser feito (Joel)
 -colocar sons e música de fundo			                [prioridade média] - a ser feito (Cláudia A)
+-colocar botões bonitos       			                [prioridade média]
 -colocar instruções (modal)				                [prioridade média/alta] - a ser feito (Cláudia R)
 -botão ajuda					                        [prioridade alta] - a ser feito (Cláudia R)
 -botão retroceder					                    [prioridade alta] - a ser feito (Cláudia A)
 -colocar animações na interação com os elementos		[prioridade média/alta] - a ser feito (Inês)
+-colocar animações ao ganhar jogos              		[prioridade média/alta] - a ser feito (Inês)
+-colocar gifs instroções de jogos                 		[prioridade média/baixa] - a ser feito (Inês)
+-mudar as instruções de sitio (hipotese)          		[prioridade alta]
+-ver o design para o point and wait               		[prioridade média/alta]
 
 	JOGO MEMORIA
 	-mais níveis (com mais cartas)              		[prioridade alta] - feito!!!  (Joel)
@@ -36,8 +41,13 @@ PROGRAMAÇAO
 	JOGO NUMEROS
 	-implementar interação 			                    [prioridade alta]
 	-mais níveis (mais difícil)			                [prioridade alta/média]
-	
+	-alinhar elementos      			                [prioridade média/alta]
+	-ajustar cores             			                [prioridade média/alta]
+
 	JOGO CORES
 	-ver canvas para pintar as figuras	            	[prioridade média/alta] - feito (Inês)
+	-ajustar cores                  	            	[prioridade alta]
+	-ajustar cores                  	            	[prioridade alta] -
 	-validar respostas              	            	[prioridade alta] - feito (Joel)
+
 

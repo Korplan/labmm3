@@ -106,13 +106,13 @@
 <!-- Página - Jogo palavras -->
 <div id="jogoPalavras" style="display: none">
     <h1 class="center">Jogo das Palavras</h1>
-    <div class="container">
+    <div class="container" id="jogoPalavrasCont">
         <h1 class="center"></h1>
         <div class="row">
             <div id="imgPal" class="col m4 offset-m4"></div>
         </div>
         <div class="row center">
-            <div class="col m8 offset-m2" id="palavraIncompleta" style="visibility: hidden"></div>
+            <div class="col m8 offset-m2" id="palavraIncompleta"></div>
         </div>
         <div class="row center">
             <div class="col m10 offset-m1" id="opcoes"></div>
@@ -180,13 +180,16 @@
     <div class="modal-content">
         <h4>ALTERAR O TIPO DE INTERAÇÃO</h4>
         <p>Pode alterar a qualquer momento o tipo de interação no menu de opções <i
-                class="material-icons tiny">settings</i>.</p><br/><br/>
+                class="material-icons tiny">settings</i>.</p>
+<!--
+        <br/><br/>
         <h4>INSTRUÇÕES PARA O USO DOS JOGOS</h4>
         <p>Pode aceder a qualquer momento às instruções para o uso dos jogos no menu de opções <i
                 class="material-icons tiny">settings</i>.</p>
+-->
     </div>
     <div class="modal-footer">
-        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Continuar</a>
+        <a href="#!" class="modal-action modal-close waves-effect waves-dark btn-flat">Continuar</a>
     </div>
 </div>
 
@@ -217,7 +220,7 @@
                 class="material-icons tiny">help</i>.</p>
     </div>
     <div class="modal-footer">
-        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Fechar</a>
+        <a href="#!" class="modal-action modal-close waves-effect waves-dark btn-flat">Fechar</a>
     </div>
 </div>
 
@@ -287,11 +290,13 @@
             </li>
         </ul>
     </li>
+<!--
     <li><a class="subheader" style="color: #ef5350">INSTRUÇÕES DOS JOGOS</a></li>
     <li id="instructions_text">
         <span class="center">Para saber mais sobre o modo de funcionamento dos vários jogos disponíveis, por favor clique no botão abaixo.</span>
     </li>
-    <a href="#" class="waves-effect waves-red btn-flat" data-target="modal2" id="instructions">Ver instruções</a>
+-->
+    <a href="#" class="waves-effect waves-dark btn red lighten-1" data-target="modal2" id="instructions">instruções de Jogos</a>
     <li id="authors">
         <span class="center">Autoria de Cláudia Amaro, Cláudia Ribeiro, Inês Margarido e Joel Seabra.<br />Frutas! &copy; 2017</span>
     </li>

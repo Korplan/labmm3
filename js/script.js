@@ -618,6 +618,10 @@ function jogoMemoria() {
     for (var j = 1; j <= memInicial; j++) {
         document.getElementById("item" + j).setAttribute("onclick", "flip(" + j + ")"); //Cada carta é atribuido um evento onclick com a função "flip(#);"
     }
+
+    for(var i=0; ;i++){
+        document.getElementById('memoTab').getElementsByClassName('carta')[i].style.animation="zoomIn 0.8s";
+    }
 }
 
 function flip(id) {                                                     //Função "flip()" que recebe como parâmetro o # da carta
@@ -648,6 +652,9 @@ function flip(id) {                                                     //Funç�
             ultimo = "";
         } else {
             certas += 2;
+            document.getElementById("item" + ultimo).style.animation="tada 0.8s";
+            document.getElementById("item" + id).style.animation="tada 0.8s";
+
             if (efeitosSonorosOn) {                                                                       //Se os efeitos sonoros estiverem ligados, toca o som de solução correta
                 somSolucaoCorreta.load();
                 somSolucaoCorreta.play();
@@ -658,7 +665,7 @@ function flip(id) {                                                     //Funç�
             print("GANHASTE!!");
             if (memInicial < memMax)
                 memInicial += 2;
-            setTimeout("jogoMemoria()", 5000);
+            setTimeout("jogoMemoria()", 1000);
         }
     }, 1000);
     print(ultimo);
@@ -682,6 +689,14 @@ function loadJogoPalavras() {
 
     document.getElementById("imgPal").innerHTML = "<img style='width: 100%' src='img/frutas/" + numParaFruta(palavra) + ".png'/>";
 
+    document.getElementById("imgPal").style.visibility = "hidden";
+    setTimeout(function () {
+        document.getElementById("imgPal").style.visibility = "visible";
+        document.getElementById("imgPal").style.animation = "zoomIn 0.8s";   //Anima a imagem
+    }, 2000);
+    document.getElementById("imgPal").style.animation = "";   //Anima a imagem
+
+
     var retira = Math.floor(Math.random() * palavras[palavra].length);  //Retira (retira sílaba de palavra) = Sorteio entre 0 e palavra.lenght do elemento sorteado acima
 
     for (var i = 0; i < palavras[palavra].length; i++) {                //Enquanto i for menor que o número de sílabas/indexs da(o) palavra/array "palavras[#]"
@@ -697,7 +712,7 @@ function loadJogoPalavras() {
     for (var k = 0; k < 3; k++) {                                               //Nº de opções = 3 no máximo
         var random = silabas[Math.floor(Math.random() * silabas.length)];       //Random = ao index sorteado do array "silabas" entre 0 e nº de index máximo
         if (random != palavras[palavra][retira]) {                              //Se a sílaba sorteada for diferente da sílaba retirada (que constitui a palavra a completar)
-            hipoteses[k] = "<div class='silaba opcao clickable'>" + random + "</div>";  //É colocada num array "hipoteses" de index igual a K (=3)
+            hipoteses[k] = "<div class='silaba opcao clickable z-depth-1'>" + random + "</div>";  //É colocada num array "hipoteses" de index igual a K (=3)
             silabas.splice(silabas.indexOf(random), 1);                         //retira do array "silabas" o elemento que já saiu (evita repetiçoes de silabas erradas)
         }
         else {
@@ -706,43 +721,54 @@ function loadJogoPalavras() {
         print(random);
         print(palavras[palavra][retira]);
     }
-    hipoteses[k] = "<div id='certo' class='silaba opcao clickable'>" + palavras[palavra][retira] + "</div>";    //Último index do array "hipoteses" é a sílaba certa para completar a palavra
+    hipoteses[k] = "<div id='certo' class='silaba opcao clickable z-depth-1'>" + palavras[palavra][retira] + "</div>";    //Último index do array "hipoteses" é a sílaba certa para completar a palavra
     hipoteses.sort(function () {                                                                        //Dispõe em index aleatorios as sílabas do array (para que as opções )
         return 0.5 - Math.random()
     });
     document.getElementById("opcoes").innerHTML = hipoteses.join("");                                       //O innerHTML do elemento "opcoes" contém o array hipoteses com elemntos separados por espaço
 
-
+    document.getElementById("palavraIncompleta").style.visibility = "hidden";
     setTimeout(function () {
         document.getElementById("palavraIncompleta").style.visibility = "visible";
         document.getElementById("palavraIncompleta").style.animation = "fadeInLeft 0.8s";
-    }, 2000);
+    }, 1000);
+    document.getElementById("palavraIncompleta").style.animation = "";
 
-    /*
-     for(i=0; i<document.getElementById("opcoes").getElementsByTagName("div").length; i++){
-     document.getElementById("opcoes").getElementsByTagName("div")[i].style.animation = "zoomIn 0.8s";
-     }
-     */
-    document.getElementById("certo").onclick = function () {                                                //Ao clicar no elemento "certo" (sílaba certa)
-        document.getElementById("silaba-falta").innerHTML = document.getElementById("certo").innerHTML;     //Substituir o espaço a completar pela sílaba certa
-        document.getElementById("certo").style.animation = "tada 0.8s";                                //Animar o elemento "certo" durante 0.8segundos através da animação "bounceOut" (ver .css)
-        document.getElementById("silaba-falta").style.animation = "tada 0.8s";
+    for (var i = 0; i < document.getElementById("opcoes").getElementsByTagName("div").length; i++) {
+        document.getElementById("opcoes").getElementsByTagName("div")[i].style.visibility = "hidden";           //Esconde os elementos "silaba" antes da animação
+    }
+    setTimeout(function () {
+        for (var i = 0; i < document.getElementById("opcoes").getElementsByTagName("div").length; i++) {
+            document.getElementById("opcoes").getElementsByTagName("div")[i].style.visibility = "visible";      //Mostra os elementos "silaba" antes da animação
+            document.getElementById("opcoes").getElementsByTagName("div")[i].style.animation = "zoomIn 0.8s";   //Anima os elementos "silaba"
+        }
+    }, 2000);                                                                                                   //Delay de 2seg.
 
-        feitas.push(palavra);                                                   //Insere no fim do array "feitas" o index da palavra
-        print(feitas.length + " / " + palavras.length);
-        setTimeout(function () {
-            if (palavras.length == feitas.length) {                                 //Se tiverem saído/ sido completadas todas as palavras
-                alert("não ha mais");
-                document.getElementById("certo").onclick = null;                    //Bloqueia o clique no elemento "certo"
-            } else                                                                  //Senão
-                loadJogoPalavras();                                                 //Repete o jogo
-        }, 2000);
-    };
+    for (var i = 0; i < document.getElementById("opcoes").getElementsByClassName("opcao").length; i++) {
+        document.getElementsByClassName("opcao")[i].onclick = function () {                                                //Ao clicar no elemento "certo" (sílaba certa)
+            if (this == document.getElementById("certo")) {
+                document.getElementById("silaba-falta").innerHTML = document.getElementById("certo").innerHTML;     //Mostra palavra completa
+                document.getElementById("silaba-falta").style.backgroundColor='#fff';     //Mostra palavra completa
+                document.getElementById("certo").style.animation = "tada 0.8s";                                     //Animar o elemento "certo" durante 0.8segundos através da animação "bounceOut" (ver .css)
+                document.getElementById("silaba-falta").style.animation = "tada 0.8s";
 
-    document.getElementById("opcoes").onclick = function () {                                                //Ao clicar no elemento "certo" (sílaba certa)
-        document.getElementById("silaba-falta").innerHTML = document.getElementById("certo").innerHTML;     //Substituir o espaço a completar pela sílaba certa
-        document.getElementById("silaba-falta").style.animation = "tada 0.8s";
-        document.getElementById("certo").style.animation = "tada 0.8s";                                //Animar o elemento "certo" durante 0.8segundos através da animação "bounceOut" (ver .css)
+                feitas.push(palavra);                                                   //Insere no fim do array "feitas" o index da palavra
+                print(feitas.length + " / " + palavras.length);
+                setTimeout(function () {
+                    if (palavras.length == feitas.length) {                                 //Se tiverem saído/ sido completadas todas as palavras
+                        alert("não ha mais");
+                        document.getElementById("certo").onclick = null;                    //Bloqueia o clique no elemento "certo"
+                    } else                                                                  //Senão
+                        loadJogoPalavras();                                                 //Repete o jogo
+                    document.getElementById("jogoPalavrasCont").style.animation = "";
+                }, 2000);
+            }
+            else {
+                this.style.animation = "shake 0.8s";
+                this.classList.remove('clickable');
+                this.classList.add('inativo');
+            }
+        };
     }
 }
 
