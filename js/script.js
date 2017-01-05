@@ -6,7 +6,7 @@ var musica = document.createElement("Audio");               // Música de fundo
 musica.src = "sound/ukulele.mp3";
 musica.volume = 0.8;                                        // Volume da música
 musica.loop = true;                                         // Colocar música em loop
-var musicaOn = false;                                        // Variável que controla se a música está ligada ou desligada
+var musicaOn = true;                                        // Variável que controla se a música está ligada ou desligada
 
 var somVirarCarta = document.createElement("Audio");        // Som do virar de carta (jogo da memória)
 somVirarCarta.src = "sound/whoosh.mp3";
@@ -23,7 +23,6 @@ var speechRecognition;
 var stop = false;
 
 //----------TEXT2VOICE----------
-var voices = [];
 var volume = 1;
 var speed = 1;
 var pitch = 1;
@@ -61,16 +60,17 @@ var interacao;                  // 0 - Point Wait
                                 // 1 - Point Click
                                 // 2 - Varrimento
                                 // 3 - Voz
+var leitorEcra = false;
 var jogo = 0;                   // 0 - Menu
                                 // 1 - Jogo Memoria
                                 // 2 - Jogo Numeros
                                 // 3 - Jogo Palavras
                                 // 4 - Jogo Cores
 
-// var jogo_memoria = false;       //Esconde jogo memória
+// var jogo_memoria = false;            //Esconde jogo memória
 
 
-var palavras = [];      //Array com frutas disponíveis nos jogos
+var palavras = [];                      //Array com frutas disponíveis nos jogos
 palavras[0] = ["a", "mei", "xa"];
 palavras[1] = ["a", "na", "nás"];
 palavras[2] = ["ce", "nou", "ra"];
@@ -84,8 +84,8 @@ palavras[9] = ["ba", "na", "na"];
 
 //----------DEBUG----------//
 function print(s) {
-    if (debug)                  //Se debug==true
-        console.log(s);         //Faz print na consola dos parâmetros recebidos
+    if (debug)                          //Se debug==true
+        console.log(s);                 //Faz print na consola dos parâmetros recebidos
 }
 
 //----------NO CARREGAMENTO----------//
@@ -127,14 +127,19 @@ window.onload = function () {
         };
 
     // verifica se o browser suporta t2v
-    // if (!('speechSynthesis' in window)) {
-    //     print("O browser não suporta síntese de voz");
-    //     temp = document.getElementById("leitor").getAttribute("class") + " inativo";
-    //     document.getElementById("leitor").setAttribute("class", temp);
-    // } else
-    //     document.getElementById("leitor").onclick = function () {
-    //         loadContentReader();
-    //     };
+    if (!('speechSynthesis' in window)) {
+        print("O browser não suporta síntese de voz");
+    } else {
+        document.getElementById("menu_leitor").onclick = function () {
+            if (!leitorEcra)
+                contentReader("Voz ativada");
+            // else
+            // desativa o leitor
+            leitorEcra = !leitorEcra;
+
+        };
+        document.getElementById("menu_leitor").click();
+    }
 
     document.getElementById("point_wait").onclick = function () {                       //Ao clicar no elemento "point_wait"
         document.getElementById("interacao1").style.display = "none";                   //Esconde a div "interacao1" (div de seleção de interação)
@@ -267,11 +272,11 @@ window.onload = function () {
         document.getElementById("voltar").style.display = "none";                           //Esconde o botão "voltar"
         document.getElementById("help").style.display = "none";                             //Esconde o botão "ajuda"
         jogo = 0;
-    }
-
-    document.getElementById("instructions").onclick = function () {                         //Esconde o menu
-        document.getElementById("slide-out").style = "transform: translateX(-100%)";
     };
+
+    // document.getElementById("instructions").onclick = function () {                         //Esconde o menu
+    //     document.getElementById("slide-out").style = "transform: translateX(-100%)";
+    // };
 };
 
 //----------CONTROLOS----------//
@@ -287,6 +292,8 @@ function menu() {
                     clearVarrimento(checkJogo());
                 } catch (err) {
                 }
+                if(leitorEcra)
+                    contentReader("Apontar e esperar");
                 loadPointAndWait(checkJogo());
                 if (jogo == 1)
                     for (var i = 0; i < document.getElementsByClassName("mostraNum")[i].length; i++)
@@ -302,6 +309,8 @@ function menu() {
                     clearVarrimento(checkJogo());
                 } catch (err) {
                 }
+                if(leitorEcra)
+                    contentReader("cursor");
                 unloadPointAndWait(checkJogo());
                 if (jogo == 1)
                     for (var i = 0; i < document.getElementsByClassName("mostraNum")[i].length; i++)
@@ -316,6 +325,8 @@ function menu() {
                     stop = true;
                 } catch (err) {
                 }
+                if(leitorEcra)
+                    contentReader("varrimento");
                 unloadPointAndWait(checkJogo());
                 loadVarrimento(checkJogo());
                 if (jogo == 1)
@@ -333,6 +344,8 @@ function menu() {
                     clearVarrimento(checkJogo());
                 } catch (err) {
                 }
+                if(leitorEcra)
+                    contentReader("controlo por voz");
                 if (jogo == 1)
                     for (var i = 0; i < document.getElementsByClassName("mostraNum")[i].length; i++)
                         document.getElementsByClassName("mostraNum")[i].style.display = "block";
@@ -347,9 +360,9 @@ function loadPointAndWait(local) {
     var elements = local.getElementsByClassName("clickable");
 
     for (var i = 0; i < elements.length; i++) {
-        elements[i].style.cursor = "url('img/PaW/0.png'), pointer";
+        elements[i].style.cursor = "url('img/PaW/0.png') 64 64, pointer";
         elements[i].setAttribute("onmouseover", "select(this)");
-        elements[i].setAttribute("onmouseout", "clearInterval(selecting); anim=false; sprite=0");
+        elements[i].setAttribute("onmouseout", "this.style.cursor = \"url('img/PaW/0.png') 64 64, pointer\"; clearInterval(selecting); anim=false; sprite=0");
     }
 }
 
@@ -360,7 +373,7 @@ function select(elem) {
         selecting = setInterval(function () {
             sprite++;
             print(sprite);
-            elem.style.cursor = "url('img/PaW/" + sprite + ".png'), pointer";
+            elem.style.cursor = "url('img/PaW/" + sprite + ".png') 64 64, pointer";
             if (sprite == 8) {
                 print(elem);
                 clearInterval(selecting);
@@ -424,11 +437,11 @@ function loadVarrimento(local) {
     }, 1000);
 }
 
-function clearVarrimento(loc) {
+function clearVarrimento(local) {
     clearInterval(varrimento);
-    for (var j = 0; j < loc.getElementsByClassName("clickable").length; j++) {
-        loc.getElementsByClassName("clickable")[j].classList.remove("z-depth-4");
-        loc.getElementsByClassName("clickable")[j].classList.add("z-depth-1");
+    for (var j = 0; j < local.getElementsByClassName("clickable").length; j++) {
+        local.getElementsByClassName("clickable")[j].classList.remove("z-depth-4");
+        local.getElementsByClassName("clickable")[j].classList.add("z-depth-1");
     }
     // loc.getElementsByClassName("clickable")[j].style.border = "";
 }
@@ -555,58 +568,19 @@ function loadVoiceRec() {
     print("v2t ready");
 }
 
-// function loadContentReader() {
-//     loadVoices();
-//     // Chrome carrega as vozes assincronamente
-//     window.speechSynthesis.onvoiceschanged = function (e) {
-//         loadVoices();
-//     };
-//     document.getElementById("voice").removeAttribute("hidden");
-//     document.getElementById("output").removeAttribute("readonly");
-//     document.getElementById("t2v").removeAttribute("disabled");
-//
-//     document.getElementById("t2v").onclick = function () {
-//         speak(document.getElementById("output").value);
-//     };
-//     print("t2v ready");
-// }
-//
-// function loadVoices() {
-//
-//     voices = speechSynthesis.getVoices();
-//
-//     // para cada uma das vozes
-//     for (var i = 0; i < voices.length; i++) {
-//         // cria um novo elemento "option"
-//         var option = document.createElement('option');
-//
-//         // define o "value" e o "innerHTML"
-//         option.value = voices[i].name;
-//         option.innerHTML = voices[i].name;
-//         option.lang = voices[i].lang;
-//
-//         // adiciona à lista de vozes disponíveis
-//         document.getElementById('voice').appendChild(option);
-//     }
-//
-// }
-//
-// function speak(text) {
-//     var msg = new SpeechSynthesisUtterance();
-//     msg.text = text;
-//
-//     msg.volume = volume;
-//     msg.rate = speed;
-//     msg.pitch = pitch;
-//
-//     var selOption = document.getElementById("voice").options[document.getElementById("voice").selectedIndex].value;
-//     for (var i = 0; i < voices.length; i++) {
-//         if (voices[i].name === selOption) {
-//             msg.voice = voices[i];
-//         }
-//     }
-//     speechSynthesis.speak(msg);
-// }
+function contentReader(text) {
+    print("t2v ready");
+
+    var msg = new SpeechSynthesisUtterance();
+    msg.text = text;
+
+    msg.lang = "pt-BR";
+    msg.volume = volume;
+    msg.rate = speed;
+    msg.pitch = pitch;
+
+    speechSynthesis.speak(msg);
+}
 
 //----------JOGO MEMÓRIA----------//
 function jogoMemoria() {
@@ -1180,7 +1154,6 @@ function numParaFruta(num) {
             break;
     }
 }
-
 
 //----------CANVAS----------//
 
