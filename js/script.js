@@ -6,15 +6,19 @@ var musica = document.createElement("Audio");               // Música de fundo
 musica.src = "sound/ukulele.mp3";
 musica.volume = 0.8;                                        // Volume da música
 musica.loop = true;                                         // Colocar música em loop
-var musicaOn = true;                                        // Variável que controla se a música está ligada ou desligada
+var musicaOn = false;                                        // Variável que controla se a música está ligada ou desligada
 
 var somVirarCarta = document.createElement("Audio");        // Som do virar de carta (jogo da memória)
 somVirarCarta.src = "sound/whoosh.mp3";
 somVirarCarta.volume = 0.5;
 
-var somSolucaoCorreta = document.createElement("Audio");    // Som das soluções corretas
-somSolucaoCorreta.src = "sound/bell.mp3";
-somSolucaoCorreta.volume = 0.5;
+var somRespostaCorreta = document.createElement("Audio");    // Som das respostas corretas
+somRespostaCorreta.src = "sound/bell.mp3";
+somRespostaCorreta.volume = 0.5;
+
+var somRespostaErrada = document.createElement("Audio");    // Som das respostas erradas
+somRespostaErrada.src = "sound/wrong.mp3";
+somRespostaErrada.volume = 0.4;
 
 var efeitosSonorosOn = false;                               // Variável que controla se os efeitos sonoros estão ligados ou desligados.
 
@@ -103,8 +107,6 @@ window.onload = function () {
             musica.play();
         }
     };
-
-    document.getElementById("menu_musica").click();                                     //Simula clique no "menu-musica" do menu lateral
 
     document.getElementById("menu_sons").onclick = function () {
         efeitosSonorosOn = !efeitosSonorosOn;
@@ -655,9 +657,9 @@ function flip(id) {                                                     //Funç�
             document.getElementById("item" + ultimo).style.animation="tada 0.8s";
             document.getElementById("item" + id).style.animation="tada 0.8s";
 
-            if (efeitosSonorosOn) {                                                                       //Se os efeitos sonoros estiverem ligados, toca o som de solução correta
-                somSolucaoCorreta.load();
-                somSolucaoCorreta.play();
+            if (efeitosSonorosOn) {                                                                       //Se os efeitos sonoros estiverem ligados, toca o som de resposta correta
+                somRespostaCorreta.load();
+                somRespostaCorreta.play();
             }
         }
         par = !par; //se par==true passa a par=false e se par==false passa a par=true
@@ -751,7 +753,10 @@ function loadJogoPalavras() {
                 document.getElementById("silaba-falta").style.backgroundColor='#fff';     //Mostra palavra completa
                 document.getElementById("certo").style.animation = "tada 0.8s";                                     //Animar o elemento "certo" durante 0.8segundos através da animação "bounceOut" (ver .css)
                 document.getElementById("silaba-falta").style.animation = "tada 0.8s";
-
+                if (efeitosSonorosOn) {                                               //Se os efeitos sonoros estiverem ligados, toca o som de resposta correta
+                    somRespostaCorreta.load();
+                    somRespostaCorreta.play();
+                }
                 feitas.push(palavra);                                                   //Insere no fim do array "feitas" o index da palavra
                 print(feitas.length + " / " + palavras.length);
                 setTimeout(function () {
@@ -765,6 +770,10 @@ function loadJogoPalavras() {
             }
             else {
                 this.style.animation = "shake 0.8s";
+                if (efeitosSonorosOn) {                                                                       //Se os efeitos sonoros estiverem ligados, toca o som de resposta errada
+                    somRespostaErrada.load();
+                    somRespostaErrada.play();
+                }
                 this.classList.remove('clickable');
                 this.classList.add('inativo');
             }
