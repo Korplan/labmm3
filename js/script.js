@@ -1,7 +1,7 @@
 //----------VARIÁVEIS GLOBAIS----------//
 var debug = true;                                           //(mostrar ou não) Prints na consola
 
-//----------AUDIO---------------
+//----------AUDIO--------------
 var musica = document.createElement("Audio");               // Música de fundo
 musica.src = "sound/ukulele.mp3";
 musica.volume = 0.8;                                        // Volume da música
