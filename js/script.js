@@ -14,7 +14,7 @@ somVirarCarta.volume = 0.3;
 
 var somRespostaCorreta = document.createElement("Audio");    // Som das respostas corretas
 somRespostaCorreta.src = "sound/bell.mp3";
-somRespostaCorreta.volume = 0.2;
+somRespostaCorreta.volume = 0.3;
 
 var somRespostaErrada = document.createElement("Audio");    // Som das respostas erradas
 somRespostaErrada.src = "sound/wrong.mp3";
@@ -107,6 +107,10 @@ window.onload = function () {
 
     /*parallaxInicio();*/
 
+    // musica.play();  //temporariamente desligado
+
+    document.getElementById("menu_musica").click();                                     //Simula clique no "menu-musica" do menu lateral
+
     document.getElementById("menu_musica").onclick = function () {
         if (musicaOn) {                                                                 //Se a música estiver ligada, desliga
             musicaOn = false;
@@ -119,9 +123,8 @@ window.onload = function () {
         }
     };
 
-    document.getElementById("menu_musica").click();                                     //Simula clique no "menu-musica" do menu lateral
 
-    //musica.play();  //temporariamente desligado
+
 
     document.getElementById("menu_sons").onclick = function () {                        //Liga ou desliga efeitos sonoros
         efeitosSonorosOn = !efeitosSonorosOn;
