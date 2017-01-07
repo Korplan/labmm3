@@ -107,8 +107,10 @@ window.onload = function () {
 
     /*parallaxInicio();*/
 
+    document.getElementById("menu_musica").click();                                     //Simula clique no "menu-musica" do menu lateral
+
     document.getElementById("menu_musica").onclick = function () {
-        if (musicaOn) {                                                                   //Se a música estiver ligada, desliga
+        if (musicaOn) {                                                                 //Se a música estiver ligada, desliga
             musicaOn = false;
             musica.pause();
         }
@@ -119,9 +121,9 @@ window.onload = function () {
         }
     };
 
-    document.getElementById("menu_musica").click();                                     //Simula clique no "menu-musica" do menu lateral
+    musica.play();  //temporariamente desligado
 
-    document.getElementById("menu_sons").onclick = function () {
+    document.getElementById("menu_sons").onclick = function () {                        //Liga ou desliga efeitos sonoros
         efeitosSonorosOn = !efeitosSonorosOn;
     };
 
