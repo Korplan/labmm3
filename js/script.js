@@ -30,12 +30,12 @@ var stop = false;
 var volume = 1;
 var speed = 1;
 var pitch = 1;
-var aLer = false;
+var leitorEcra = true;
 
 //----------POINTandWAIT----------
-var selecting;  //
 var sprite = 0;
 var anim = false;
+var select_animation;
 
 //----------VARRIMENTO----------
 var varrimento;
@@ -66,7 +66,6 @@ var interacao;                  // 0 - Point Wait
                                 // 1 - Point Click
                                 // 2 - Varrimento
                                 // 3 - Voz
-var leitorEcra = false;
 var jogo = 0;                   // 0 - Menu
                                 // 1 - Jogo Memoria
                                 // 2 - Jogo Numeros
@@ -94,6 +93,7 @@ function print(s) {
 var velBody1 = 0.1;                           //velocidade do parallax do elemento body 1
 var velBody2 = 0.3;                           //velocidade do parallax do elemento body 1
 var velBody3 = 0.5;                           //velocidade do parallax do elemento body 1
+
 //----------NO CARREGAMENTO----------//
 window.onload = function () {
     var temp = "";                                                                      //Elimina classes acrescentadas ao elemento "voz"
@@ -162,7 +162,6 @@ window.onload = function () {
     document.getElementById("point_wait").onclick = function () {                       //Ao clicar no elemento "point_wait"
         document.getElementById("interacao1").style.display = "none";                   //Esconde a div "interacao1" (div de seleção de interação)
         document.getElementById("interacao2").style.display = "block";                  //Mostra a div "interacao2" (div de seleção de Jogos)
-        loadPointAndWait(checkJogo());
         interacao = 0;                                                                  //0 = Interação por Point and Wait (ver vars globais)
         menu();
     };
@@ -192,14 +191,8 @@ window.onload = function () {
         if (interacao == 3)
             for (var i = 0; i < document.getElementsByClassName("mostraNum")[i].length; i++)
                 document.getElementsByClassName("mostraNum")[i].style.display = "block";
-        switch (interacao) {
-            case 0:
-                loadPointAndWait(checkJogo());
-                break;
-            case 2:
-                loadVarrimento();
-                break;
-        }
+        if (interacao == 2)
+            loadVarrimento(checkJogo());
     };
 
     document.getElementById("btn_palavras").onclick = function () {                     //Ao clicar no elemento "btn_palavras"
@@ -209,14 +202,8 @@ window.onload = function () {
         document.getElementById("help").style.display = "block";                        //Mostra o botão "ajuda"
         jogo = 3;
         loadJogoPalavras();
-        switch (interacao) {
-            case 0:
-                loadPointAndWait(checkJogo());
-                break;
-            case 2:
-                loadVarrimento(checkJogo());
-                break;
-        }
+        if (interacao == 2)
+            loadVarrimento(checkJogo());
     };
 
     document.getElementById("btn_cores").onclick = function () {                        //Ao clicar no elemento "btn_cores"
@@ -226,14 +213,8 @@ window.onload = function () {
         document.getElementById("help").style.display = "block";                        //Mostra o botão "ajuda"
         jogo = 4;
         loadJogoCores();
-        switch (interacao) {
-            case 0:
-                loadPointAndWait(checkJogo());
-                break;
-            case 2:
-                loadVarrimento(checkJogo());
-                break;
-        }
+        if (interacao == 2)
+            loadVarrimento(checkJogo());
     };
 
     document.getElementById("btn_num").onclick = function () {                        //Ao clicar no elemento "btn_cores"
@@ -243,14 +224,8 @@ window.onload = function () {
         document.getElementById("help").style.display = "block";                        //Mostra o botão "ajuda"
         jogo = 2;
         loadJogoNumeros();
-        switch (interacao) {
-            case 0:
-                loadPointAndWait(checkJogo());
-                break;
-            case 2:
-                loadVarrimento(checkJogo());
-                break;
-        }
+        if (interacao == 2)
+            loadVarrimento(checkJogo());
     };
 
     document.getElementById("menu_paw").onclick = function () {                     //Ao clicar na opção de interação "apontar e esperar"
@@ -316,9 +291,9 @@ window.onload = function () {
     document.getElementById("btn_mem").addEventListener('mouseover', onMouseOver, true);
     document.getElementById("btn_mem").addEventListener('mouseout', onMouseOut, true);
 
-    // document.getElementById("instructions").onclick = function () {                         //Esconde o menu
-    //     document.getElementById("slide-out").style = "transform: translateX(-100%)";
-    // };
+// document.getElementById("instructions").onclick = function () {                         //Esconde o menu
+//     document.getElementById("slide-out").style = "transform: translateX(-100%)";
+// };
 
     document.getElementById("help").onclick = function () {                                 //Ao clicar no botão ajuda
         switch (jogo) {
@@ -340,7 +315,8 @@ window.onload = function () {
                 break;
         }
     };
-};
+}
+;
 
 function onMouseOver(event) {
     //this is the original element the event handler was assigned to
@@ -350,8 +326,7 @@ function onMouseOver(event) {
         return;
     }
     print(this.id);
-    if (!aLer) {
-        aLer = true;
+    if (leitorEcra) {
         switch (this.id) {
             case 'btn_num':
                 contentReader("Jogo dos números");
@@ -370,7 +345,10 @@ function onMouseOver(event) {
                 break;
         }
     }
-}
+    if (interacao == 0)
+    // print("isto");
+        loadPointAndWait(this);
+}                  //evita a deteção de "mouseover" nas divs internas
 
 function onMouseOut(event) {
     //this is the original element the event handler was assigned to
@@ -378,13 +356,18 @@ function onMouseOut(event) {
     if (e.parentNode == this || e == this) {
         return;
     }
-    aLer = false;
-    try {
-        speechSynthesis.cancel();
-    } catch (err) {
-        print("leitor não ativo");
+    if (leitorEcra) {
+        try {
+            speechSynthesis.cancel();
+        } catch (err) {
+            print("leitor não ativo");
+        }
     }
-}
+    if (interacao == 0) {
+        clearInterval(select_animation);
+        // this.getElementsByClassName("click")[0].style.background = "url(img/PaW/0.png) center no-repeat";
+    }
+}                   //evita a deteção de "mouseout" nas divs internas
 
 //----------CONTROLOS----------//
 function menu() {
@@ -404,9 +387,7 @@ function menu() {
                 } catch (err) {
                     print("varrimento não iniciado");
                 }
-                if (leitorEcra)
-                    contentReader("Apontar e esperar");
-                loadPointAndWait(checkJogo());
+                contentReader("Apontar e esperar");
                 if (jogo == 1)
                     for (var i = 0; i < document.getElementsByClassName("mostraNum")[i].length; i++)
                         document.getElementsByClassName("mostraNum")[i].style.display = "none";
@@ -427,7 +408,7 @@ function menu() {
                     print("varrimento não iniciado");
                 }
                 contentReader("cursor");
-                unloadPointAndWait(checkJogo());
+                // unloadPointAndWait(checkJogo());
                 if (jogo == 1)
                     for (var j = 0; i < document.getElementsByClassName("mostraNum")[j].length; i++)
                         document.getElementsByClassName("mostraNum")[j].style.display = "none";
@@ -442,9 +423,8 @@ function menu() {
                 } catch (err) {
                     print("voiceRec não iniciado");
                 }
-                if (leitorEcra)
-                    contentReader("varrimento");
-                unloadPointAndWait(checkJogo());
+                contentReader("varrimento");
+                // unloadPointAndWait(checkJogo());
                 loadVarrimento(checkJogo());
                 if (jogo == 1)
                     for (var k = 0; i < document.getElementsByClassName("mostraNum")[k].length; i++)
@@ -456,14 +436,13 @@ function menu() {
                 document.getElementById("menu_voz").click();
                 loadVoiceRec();                                                                 //Inicia o reconhecimento por voz
                 stop = false;
-                unloadPointAndWait(checkJogo());
+                // unloadPointAndWait(checkJogo());
                 try {
                     clearVarrimento(checkJogo());
                 } catch (err) {
                     print("varrimento não iniciado");
                 }
-                if (leitorEcra)
-                    contentReader("controlo por voz");
+                contentReader("controlo por voz");
                 if (jogo == 1)
                     for (var l = 0; i < document.getElementsByClassName("mostraNum")[l].length; i++)
                         document.getElementsByClassName("mostraNum")[l].style.display = "block";
@@ -473,44 +452,47 @@ function menu() {
 }
 
 //----------POINTandWAIT----------//
-function loadPointAndWait(local) {
-    sprite = 0;
-    var elements = local.getElementsByClassName("clickable");
+// function loadPointAndWait(local) {
+//     if(menu != 0)
+//     var elements = local.getElementsByClassName("clickable");
+//
+//     for (var i = 0; i < elements.length; i++) {
+//         elements[i].addEventListener('mouseover', onMouseOver, true);
+//
+//         // elements[i].style.cursor = "url('img/PaW/0.png') 64 64, pointer";
+//         // elements[i].setAttribute("onmouseover", "select(this)");
+//         // elements[i].setAttribute("onmouseout", "this.style.cursor = \"url('img/PaW/0.png') 64 64, pointer\"; clearInterval(selecting); anim=false; sprite=0");
+//     }
+// }
 
-    for (var i = 0; i < elements.length; i++) {
-        elements[i].style.cursor = "url('img/PaW/0.png') 64 64, pointer";
-        elements[i].setAttribute("onmouseover", "select(this)");
-        elements[i].setAttribute("onmouseout", "this.style.cursor = \"url('img/PaW/0.png') 64 64, pointer\"; clearInterval(selecting); anim=false; sprite=0");
-    }
-}
-
-function select(elem) {
-    print("select");
+function loadPointAndWait(elem) {
     if (!anim) {
+        sprite = 1;
         anim = true;
-        selecting = setInterval(function () {
-            sprite++;
+        // elem.getElementsByTagName("div")[0].innerHTML = ;
+        select_animation = setInterval(function () {
+            elem.getElementsByClassName("click")[0].style.background = "url(img/PaW/" + sprite + ".png) center no-repeat";
             print(sprite);
-            elem.style.cursor = "url('img/PaW/" + sprite + ".png') 64 64, pointer";
-            if (sprite == 8) {
-                print(elem);
-                clearInterval(selecting);
+            sprite++;
+            if (sprite == 11) {
+                clearInterval(select_animation);
                 anim = false;
                 sprite = 0;
                 elem.click();
+                elem.getElementsByClassName("click")[0].style.background = "url(img/PaW/" + sprite + ".png) center no-repeat";
             }
         }, 500);
     }
 }
 
-function unloadPointAndWait(local) {
-    var elements = local.getElementsByClassName("clickable");
-
-    for (var i = 0; i < elements.length; i++) {
-        elements[i].onmouseover = null;
-        elements[i].onmouseout = null;
-    }
-}
+// function unloadPointAndWait(local) {
+//     var elements = local.getElementsByClassName("clickable");
+//
+//     for (var i = 0; i < elements.length; i++) {
+//         elements[i].onmouseover = null;
+//         elements[i].onmouseout = null;
+//     }
+// }
 
 function checkJogo() {
     switch (jogo) {
@@ -704,7 +686,7 @@ function contentReader(text) {
 function jogoMemoria() {
     document.getElementById("memoTab").innerHTML = "";
     certas = 0;
-    var x = 1;
+    var x = 0;
     for (var m = 0; m < memInicial; m += 2) {
         memoCartas[m] = memoCartas[m + 1] = x;
         x++;
@@ -726,9 +708,9 @@ function jogoMemoria() {
 
     for (var id2 = 0; id2 < memInicial; id2++) {                             //Criar elementos (cartas) com id "item#"
         document.getElementById("memoTab").innerHTML +=
-            "<div class='col s6 m4 l3'><div class='rounded carta valign-wrapper clickable card grey' style='height: 250px; width: 200px;' id='item" + (numCartas + 1) + "'>" +
-            "<div class='center-block face front'><span class='mostraNum' style='display: none'>" + (numCartas + 1) + "</span></div>" +
-            "<div class='face back'>" + memoCartas[numCartas] + "</div>" +
+            "<div class='col s6 m4 l3'><div class='rounded carta valign-wrapper clickable card' style='height: 250px; width: 200px;' id='item" + (numCartas + 1) + "'>" +
+            "<div class='center-block face front click'><span class='mostraNum' style='display: none'>" + (numCartas + 1) + "</span></div>" +
+            "<div class='face back' style=\"background: url('img/frutas/" + numParaFruta(memoCartas[numCartas]) + ".png') center no-repeat; background-size: 100% auto\"></div>" +
             "</div></div>";
         numCartas++;                                //Soma 1 carta às cartas colocadas
     }
@@ -754,13 +736,12 @@ function flip(id) {                                                     //Funç�
         somVirarCarta.play();
     }
 
-
     // if (jogo_memoria) {                 //Se jogo_memoria=true
     setTimeout(function () {        //Ocorre 1 vez passado 1segundo
         if (!par)                   //Se for virada a primeira carta ainda não há um par
             ultimo = id;            //logo ultimo (var que guarda  aultima carta virada) = ao # da carta recebido
 
-        else if (document.getElementById("item" + ultimo).getElementsByTagName("div")[1].innerHTML != document.getElementById("item" + id).getElementsByTagName("div")[1].innerHTML) {      //Senão, se par==true, ou seja, foram viradas duas cartas, verifica-se se uma é igual à outra. Então, o conteúdo (innerHTML) da div 1 (elemento de índice 1 do array "getElementsByTagName("div")") do elemento "itemultimo" (última carta virada) é igual ao conteudo (innerHTML) da div 1 (elemento de índice 1 do array "getElementsByTagName("div")") do elemento "itemid" (primeira carta virada)
+        else if (document.getElementById("item" + ultimo).getElementsByTagName("div")[1].style.backgroundImage != document.getElementById("item" + id).getElementsByTagName("div")[1].style.backgroundImage) {      //Senão, se par==true, ou seja, foram viradas duas cartas, verifica-se se uma é igual à outra. Então, o conteúdo (innerHTML) da div 1 (elemento de índice 1 do array "getElementsByTagName("div")") do elemento "itemultimo" (última carta virada) é igual ao conteudo (innerHTML) da div 1 (elemento de índice 1 do array "getElementsByTagName("div")") do elemento "itemid" (primeira carta virada)
             document.getElementById("item" + ultimo).classList.remove("flipped");                       //Verifica a lista de classes do elemento "item ultimo" e remove a classe "flipped"
             document.getElementById("item" + ultimo).classList.add("clickable");                       //Verifica a lista de classes do elemento "item ultimo" e remove a classe "flipped"
             document.getElementById("item" + id).classList.remove("flipped");                           //Verifica a lista de classes do elemento "item id" e remove a classe "flipped"
@@ -1093,11 +1074,11 @@ function loadJogoCores() {
         if (this.classList.contains("clickable")) {
             corMuda = document.getElementById("corFinal").style.backgroundColor;
             if (desenha()) {
-                alert("GANHASTE");
+                // alert("GANHASTE");
                 coresFeitas.push(sorteiaDesenho);
                 print(coresFeitas.length + "/" + palavras.length);
                 if (coresFeitas.length != palavras.length) {
-                    setTimeout("loadJogoCores()", 5000);
+                    setTimeout("loadJogoCores()", 1000);
                 } else alert("não há mais");
             }
         }
