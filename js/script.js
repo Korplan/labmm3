@@ -121,7 +121,7 @@ window.onload = function () {
         }
     };
 
-    musica.play();  //temporariamente desligado
+    // musica.play();  //temporariamente desligado
 
     document.getElementById("menu_sons").onclick = function () {                        //Liga ou desliga efeitos sonoros
         efeitosSonorosOn = !efeitosSonorosOn;
