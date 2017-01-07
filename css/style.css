@@ -112,7 +112,7 @@ h1{
     left: 0;
 }
 
-#help{
+.help{
     color: #FFF;
     position: absolute;
     padding: 10px;
@@ -182,8 +182,13 @@ a#instructions{
     margin-top: 20vh;
 }
 
-#modal2{
-    margin-top: 5vh;
+#modal_instrucoes{
+    margin-top: 5vh !important;
+}
+
+.modal_ajuda{
+    color: #363636;
+    margin-top: 10vh !important;
 }
 
 .icon{

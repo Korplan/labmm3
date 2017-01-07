@@ -107,8 +107,6 @@ window.onload = function () {
 
     /*parallaxInicio();*/
 
-    document.getElementById("menu_musica").click();                                     //Simula clique no "menu-musica" do menu lateral
-
     document.getElementById("menu_musica").onclick = function () {
         if (musicaOn) {                                                                 //Se a música estiver ligada, desliga
             musicaOn = false;
@@ -121,7 +119,9 @@ window.onload = function () {
         }
     };
 
-    // musica.play();  //temporariamente desligado
+    document.getElementById("menu_musica").click();                                     //Simula clique no "menu-musica" do menu lateral
+
+    musica.play();  //temporariamente desligado
 
     document.getElementById("menu_sons").onclick = function () {                        //Liga ou desliga efeitos sonoros
         efeitosSonorosOn = !efeitosSonorosOn;
@@ -182,7 +182,7 @@ window.onload = function () {
         document.getElementById("interacao2").style.display = "none";                   //Esconde a div "interacao2" (div de seleção de Jogos)
         document.getElementById("jogoMemoria").style.display = "block";                 //Mostra a div "jogoMemoria"
         document.getElementById("voltar").style.display = "block";                      //Mostra o botão "voltar"
-        document.getElementById("help").style.display = "block";                        //Mostra o botão "ajuda"
+        document.getElementById("help_memoria").style.display = "block";                        //Mostra o botão "ajuda"
         jogo = 1;
         jogoMemoria();
         if (interacao == 3)
@@ -196,7 +196,7 @@ window.onload = function () {
         document.getElementById("interacao2").style.display = "none";                   //Esconde a div "interacao2" (div de seleção de Jogos)
         document.getElementById("jogoPalavras").style.display = "block";                //Mostra a div "jogoPalavras"
         document.getElementById("voltar").style.display = "block";                      //Mostra o botão "voltar"
-        document.getElementById("help").style.display = "block";                        //Mostra o botão "ajuda"
+        document.getElementById("help_palavras").style.display = "block";                        //Mostra o botão "ajuda"
         jogo = 3;
         loadJogoPalavras();
         if (interacao == 2)
@@ -207,7 +207,7 @@ window.onload = function () {
         document.getElementById("interacao2").style.display = "none";                   //Esconde a div "interacao2" (div de seleção de Jogos)
         document.getElementById("jogoCores").style.display = "block";                   //Mostra a div "jogoCores"
         document.getElementById("voltar").style.display = "block";                      //Mostra o botão "voltar"
-        document.getElementById("help").style.display = "block";                        //Mostra o botão "ajuda"
+        document.getElementById("help_cores").style.display = "block";                        //Mostra o botão "ajuda"
         jogo = 4;
         loadJogoCores();
         if (interacao == 2)
@@ -218,7 +218,7 @@ window.onload = function () {
         document.getElementById("interacao2").style.display = "none";                   //Esconde a div "interacao2" (div de seleção de Jogos)
         document.getElementById("jogoNumeros").style.display = "block";                 //Mostra a div "jogoCores"
         document.getElementById("voltar").style.display = "block";                      //Mostra o botão "voltar"
-        document.getElementById("help").style.display = "block";                        //Mostra o botão "ajuda"
+        document.getElementById("help_numeros").style.display = "block";                        //Mostra o botão "ajuda"
         jogo = 2;
         loadJogoNumeros();
         if (interacao == 2)
@@ -276,7 +276,10 @@ window.onload = function () {
         }
         document.getElementById("interacao2").style.display = "block";                      //Mostra a div "interacao2"
         document.getElementById("voltar").style.display = "none";                           //Esconde o botão "voltar"
-        document.getElementById("help").style.display = "none";                             //Esconde o botão "ajuda"
+        document.getElementById("help_numeros").style.display = "none";                             //Esconde o botão "ajuda"
+        document.getElementById("help_palavras").style.display = "none";                             //Esconde o botão "ajuda"
+        document.getElementById("help_memoria").style.display = "none";                             //Esconde o botão "ajuda"
+        document.getElementById("help_cores").style.display = "none";                             //Esconde o botão "ajuda"
         jogo = 0;
     };
 
@@ -293,7 +296,7 @@ window.onload = function () {
 //     document.getElementById("slide-out").style = "transform: translateX(-100%)";
 // };
 
-    document.getElementById("help").onclick = function () {                                 //Ao clicar no botão ajuda
+    /*document.getElementById("help").onclick = function () {                                 //Ao clicar no botão ajuda
         switch (jogo) {
             case 1:
                 document.getElementById("modal_memoria").style.display = "block";           //Se estiver no jogo da memória mostra o modal_memoria
@@ -312,9 +315,8 @@ window.onload = function () {
                 document.getElementById("modal_cores").style.display = "block";             //Se estiver no jogo das cores mostra o modal_cores
                 break;
         }
-    };
-}
-;
+    };*/ // PARA APAGAR (Em princípio) - Tem de ser através do data-target
+};
 
 function onMouseOver(event) {
     //this is the original element the event handler was assigned to
