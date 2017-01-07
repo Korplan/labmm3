@@ -4,21 +4,21 @@ var debug = true;                                           //(mostrar ou não) 
 //----------AUDIO--------------
 var musica = document.createElement("Audio");               // Música de fundo
 musica.src = "sound/ukulele.mp3";
-musica.volume = 0.8;                                        // Volume da música
+musica.volume = 0.3;                                        // Volume da música
 musica.loop = true;                                         // Colocar música em loop
 var musicaOn = true;                                        // Variável que controla se a música está ligada ou desligada
 
 var somVirarCarta = document.createElement("Audio");        // Som do virar de carta (jogo da memória)
 somVirarCarta.src = "sound/whoosh.mp3";
-somVirarCarta.volume = 0.5;
+somVirarCarta.volume = 0.3;
 
 var somRespostaCorreta = document.createElement("Audio");    // Som das respostas corretas
 somRespostaCorreta.src = "sound/bell.mp3";
-somRespostaCorreta.volume = 0.5;
+somRespostaCorreta.volume = 0.2;
 
 var somRespostaErrada = document.createElement("Audio");    // Som das respostas erradas
 somRespostaErrada.src = "sound/wrong.mp3";
-somRespostaErrada.volume = 0.4;
+somRespostaErrada.volume = 0.2;
 
 var efeitosSonorosOn = false;                               // Variável que controla se os efeitos sonoros estão ligados ou desligados.
 
@@ -838,6 +838,10 @@ function loadJogoPalavras() {
                 document.getElementById("silaba-falta").style.backgroundColor = '#fff';     //Mostra palavra completa
                 document.getElementById("certo").style.animation = "tada 0.8s";                                     //Animar o elemento "certo" durante 0.8segundos através da animação "bounceOut" (ver .css)
                 document.getElementById("silaba-falta").style.animation = "tada 0.8s";
+                if (efeitosSonorosOn) {                                                                       //Se os efeitos sonoros estiverem ligados, toca o som de resposta correta
+                    somRespostaCorreta.load();
+                    somRespostaCorreta.play();
+                }
 
                 palavrasFeitas.push(palavra);                                                   //Insere no fim do array "palavrasFeitas" o index da palavra
                 print(palavrasFeitas.length + " / " + palavras.length);
@@ -851,6 +855,10 @@ function loadJogoPalavras() {
             }
             else {
                 this.style.animation = "shake 0.8s";
+                if (efeitosSonorosOn) {                                                                       //Se os efeitos sonoros estiverem ligados, toca o som de resposta errada
+                    somRespostaErrada.load();
+                    somRespostaErrada.play();
+                }
                 this.classList.remove('clickable');
                 this.classList.add('inativo');
             }
@@ -1057,20 +1065,27 @@ function loadJogoCores() {
                 break;
         }
     };
-    document.getElementById("apagar").onclick = function () {                       //Ao clicar no elemento "apagar"
+    document.getElementById("apagar").onclick = function () {           //Ao clicar no elemento "apagar"
         limpa = true;
         loadJogoCores();
     };
-    document.getElementById("corFinal").onclick = function () {     //Ao clicar no elemtno "cor Final"
+    document.getElementById("corFinal").onclick = function () {         //Ao clicar no elemtno "cor Final"
         if (this.classList.contains("clickable")) {
             corMuda = document.getElementById("corFinal").style.backgroundColor;
             if (desenha()) {
                 print("GANHASTE");
+                if (efeitosSonorosOn) {                                 //Se os efeitos sonoros estiverem ligados, toca o som de resposta correta
+                    somRespostaCorreta.load();
+                    somRespostaCorreta.play();
+                }
                 coresFeitas.push(sorteiaDesenho);
                 print(coresFeitas.length + "/" + palavras.length);
                 if (coresFeitas.length != palavras.length) {
                     setTimeout("loadJogoCores()", 1000);
                 } else alert("não há mais");
+            } else if (efeitosSonorosOn) {                             //Se os efeitos sonoros estiverem ligados, toca o som de resposta correta
+                somRespostaErrada.load();
+                somRespostaErrada.play();
             }
         }
     };
