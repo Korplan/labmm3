@@ -26,27 +26,29 @@ body{
     background-position-x: 33.3%;       /*Posição da imagem (em relação ao topo)*/
     background-position-y: 33.3%;       /*Posição da imagem (em relação à esquerda)*/
     background-repeat: no-repeat;       /*Não repete (não é padrão)*/
-    background-size: 250%;             /*Tamanho do body*/
-    overflow: hidden;                   /*evita o scroll */
+    background-size: cover;             /*Tamanho do body*/
 }
+/*
 #bodyn2{
     background: url('../img/fundo_fundo-n2.png');
-    background-position-x: 33.3%;       /*Posição da imagem (em relação ao topo)*/
-    background-position-y: 33.3%;       /*Posição da imagem (em relação à esquerda)*/
-    background-repeat: no-repeat;       /*Não repete (não é padrão)*/
-    background-size: 250%;             /*Tamanho da imagem*/
-    height: 100vh;                      /*Tamanho do #bodyn2*/
-    overflow: hidden;                   /*evita o scroll */
+    background-position-x: 33.3%;       !*Posição da imagem (em relação ao topo)*!
+    background-position-y: 33.3%;       !*Posição da imagem (em relação à esquerda)*!
+    background-repeat: no-repeat;       !*Não repete (não é padrão)*!
+    background-size: 100%;             !*Tamanho da imagem*!
+    height: 100vh;                      !*Tamanho do #bodyn2*!
+    z-index: -2;
 }
 #bodyn3{
     background: url('../img/fundo_fundo-n3.png');
-    background-position-x: 33.3%;       /*Posição da imagem (em relação ao topo)*/
-    background-position-y: 33.3%;       /*Posição da imagem (em relação à esquerda)*/
-    background-repeat: no-repeat;       /*Não repete (não é padrão)*/
-    background-size: 250%;             /*Tamanho da imagem*/
-    height: 100vh;                      /*Tamanho do #bodyn3*/
-    overflow: hidden;                   /*evita o scroll */
+    background-position-x: 33.3%;       !*Posição da imagem (em relação ao topo)*!
+    background-position-y: 33.3%;       !*Posição da imagem (em relação à esquerda)*!
+    background-repeat: no-repeat;       !*Não repete (não é padrão)*!
+    background-size: 100%;             !*Tamanho da imagem*!
+    height: 100vh;                      !*Tamanho do #bodyn3*!
+    z-index: -2;
+    animation-fill-mode:both;
 }
+*/
 
 /*Borda redonda*/
 .rounded{
@@ -229,7 +231,10 @@ a#instructions{
 /*Frente Carta*/
 .flip .card .front {
     z-index: 1;
-    background-color: #00acc1;
+    background-color: #f4756b;
+    /*
+    background-color: #ef6c00;
+    */
     /*background-image: url("");*/
     color: #363636;
     cursor: pointer;
@@ -282,7 +287,7 @@ a#instructions{
     cursor: pointer;
     margin: 50px 0 0 75px;
     background: url("../img/icons/x.png") #FFF center no-repeat;
-    background-size: 95% auto;
+    background-size: 30% auto;
 }
 
 .cores-lig{
@@ -290,7 +295,7 @@ a#instructions{
     height: 20px;
     background-color: #FFFFFF;
     position: relative;
-    z-index: -10;
+    z-index: -1;
 }
 
 #cores-lig-1 {
@@ -316,11 +321,14 @@ a#instructions{
 /*----------JOGO NUMEROS--------*/
 .jogo-num-bola{
     border-radius: 70px;
-    background-color: #ef5350;
+    background: none;
+    /*background-color: #ef5350;*/
     color: #fff;
-    /*padding: 25px;*/
+    font-size: 40px;
+    /*
     height: 70px;
     width: 70px;
+    */
 }
 
 #jogoNumeros img{
@@ -538,6 +546,11 @@ a#instructions{
     from {
         -webkit-transform: translate3d(-100%, 0, 0);
         transform: translate3d(-100%, 0, 0);
+        opacity: 0;
+    }
+
+    10%{
+        opacity: 1;
     }
 
     to {
@@ -546,4 +559,90 @@ a#instructions{
         transform: none;
     }
 }
+
+
+@keyframes parallaxDir1 {
+    from {
+        background-position-x: 33.3%;       /*Posição da imagem (em relação ao topo)*/
+    }
+
+    to {
+        background-position-x: 60%;       /*Posição da imagem (em relação ao topo)*/
+    }
+}
+@keyframes parallaxDir2 {
+    from {
+        background-position-x: 33.3%;       /*Posição da imagem (em relação ao topo)*/
+    }
+
+    to {
+        background-position-x: 80%;       /*Posição da imagem (em relação ao topo)*/
+    }
+}
+@keyframes parallaxDir3 {
+    from {
+        background-position-x: 33.3%;       /*Posição da imagem (em relação ao topo)*/
+    }
+
+    to {
+        background-position-x: 100%;       /*Posição da imagem (em relação ao topo)*/
+    }
+}
+@keyframes parallaxEsq1 {
+    from {
+        background-position-x: 33.3%;       /*Posição da imagem (em relação ao topo)*/
+    }
+
+    to {
+        background-position-x: 40%;       /*Posição da imagem (em relação ao topo)*/
+    }
+}
+@keyframes parallaxEsq2 {
+    from {
+        background-position-x: 33.3%;       /*Posição da imagem (em relação ao topo)*/
+    }
+
+    to {
+        background-position-x: 20%;       /*Posição da imagem (em relação ao topo)*/
+    }
+}
+@keyframes parallaxEsq3 {
+    from {
+        background-position-x: 33.3%;       /*Posição da imagem (em relação ao topo)*/
+    }
+
+    to {
+        background-position-x: 0%;       /*Posição da imagem (em relação ao topo)*/
+    }
+}
+
+@keyframes parallaxBaixo1 {
+    from {
+        background-position-y: 33.3%;       /*Posição da imagem (em relação ao topo)*/
+    }
+
+    to {
+        background-position-y: 60%;       /*Posição da imagem (em relação ao topo)*/
+    }
+}
+@keyframes parallaxBaixo2 {
+    from {
+        background-position-y: 33.3%;       /*Posição da imagem (em relação ao topo)*/
+    }
+
+    to {
+        background-position-y: 80%;       /*Posição da imagem (em relação ao topo)*/
+    }
+}
+@keyframes parallaxBaixo3 {
+    from {
+        background-position-y: 33.3%;       /*Posição da imagem (em relação ao topo)*/
+    }
+
+    to {
+        background-position-y: 100%;       /*Posição da imagem (em relação ao topo)*/
+    }
+}
+
 /*----------OUTROS--------*/
+/*animation-direction: alternate;     Do the animation once, then do the animation backwards*/

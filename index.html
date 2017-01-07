@@ -10,11 +10,9 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
-<div id="bodyn2">
-    <div id="bodyn3">
-        <!-- Menu (botão) -->
-        <a href="#" data-activates="slide-out" class="button-collapse" id="settings"><i
-                class="material-icons medium">settings</i></a>
+<!-- Menu (botão) -->
+<a href="#" data-activates="slide-out" class="button-collapse" id="settings"><i
+        class="material-icons medium">settings</i></a>
 
         <!-- Ajuda (botão) -->
         <a href="#" class="button" id="help" style="display: none"><i
@@ -137,7 +135,7 @@
         <div id="jogoCores" style="display: none">
             <h1 class="center">Jogo das Cores</h1>
             <div class="container">
-                <div class="row">
+                <div class="row" id="paleta">
                     <div class="col m6">
                         <div class="row">
                             <div class="col m6 z-depth-1 clickable" id="cor1">
@@ -168,43 +166,41 @@
                             <div class="cores-lig z-depth-1" id="cores-lig-3"></div>
                         </div>
                     </div>
-                    <div class="col m6" id="imagem" style="border: solid 1px red">
+                    <div class="col m6" id="imagem" >
                         <canvas id="canvas" width="405" height="460"></canvas>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Página - Jogo números -->
-        <div id="jogoNumeros" style="display: none">
-            <h1 class="center">Jogo dos Números</h1>
-            <div class="row">
-                <div class="col m6">
-                    <div class="col m6">
-                        <div class="row">
-                            <div class="col m6" id="fruta1"></div>
-                            <div class="col m6" id="fruta2"></div>
-                        </div>
-                        <div class="row center">
-                            <div class="col m6">
-                                <div id="num1" class='jogo-num-bola center'></div>
-                            </div>
-                            <div class="col m6 center">
-                                <div id="num2" class='jogo-num-bola '></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col m6" id="sumo"></div>
+<!-- Página - Jogo números -->
+<div id="jogoNumeros" style="display: none">
+    <h1 class="center">Jogo dos Números</h1>
+    <div class="row" style="padding: 5% 5% 0 5%">
+        <div class="col m6">
+            <div class="col m6" style="margin-top: 25%">
+                <div class="row">
+                    <div class="col m6" id="fruta1"></div>
+                    <div class="col m6" id="fruta2"></div>
                 </div>
-                <div class="col m6" id="op-num">
-                    <div class="row clickable rounded" id="op1">
-
+                <div class="row center">
+                    <div class="col m6">
+                        <div id="num1" class='jogo-num-bola'></div>
                     </div>
-                    <div class="row clickable rounded" id="op2"></div>
-                    <div class="row clickable rounded" id="op3"></div>
+                    <div class="col m6 center">
+                        <div id="num2" class='jogo-num-bola'></div>
+                    </div>
                 </div>
             </div>
+            <div class="col m6" id="sumo"></div>
         </div>
+        <div class="col m6" id="op-num">
+            <div class="row clickable rounded z-depth-1 white" id="op1"></div>
+            <div class="row clickable rounded z-depth-1 white" id="op2"></div>
+            <div class="row clickable rounded z-depth-1 white" id="op3"></div>
+        </div>
+    </div>
+</div>
 
         <!-- Modal - Alterar Interação -->
         <div id="modal1" class="modal">
@@ -418,10 +414,8 @@
             <li id="authors">
             <span class="center">Autoria de Cláudia Amaro, Cláudia Ribeiro, Inês Margarido e Joel Seabra.<br/>Frutas! &copy;
                 2017</span>
-            </li>
-        </ul>
-    </div>
-</div>
+    </li>
+</ul>
 
 <script src="js/jquery-3.1.1.min.js"></script>
 <script src="js/materialize.min.js"></script>

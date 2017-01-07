@@ -72,6 +72,9 @@ var jogo = 0;                   // 0 - Menu
                                 // 3 - Jogo Palavras
                                 // 4 - Jogo Cores
 
+// var jogo_memoria = false;            //Esconde jogo memória
+
+
 var palavras = [];                      //Array com frutas disponíveis nos jogos
 palavras[0] = ["a", "mei", "xa"];
 palavras[1] = ["a", "na", "nás"];
@@ -85,33 +88,24 @@ palavras[8] = ["pe", "ra"];
 palavras[9] = ["ba", "na", "na"];
 
 //----------DEBUG----------//
+//Função que gera feedback na consola
 function print(s) {
     if (debug)                          //Se debug==true
         console.log(s);                 //Faz print na consola dos parâmetros recebidos
 }
 
-var velBody1 = 0.1;                           //velocidade do parallax do elemento body 1
-var velBody2 = 0.3;                           //velocidade do parallax do elemento body 1
-var velBody3 = 0.5;                           //velocidade do parallax do elemento body 1
+/*
+ var velBody1 = 0.05;                           //velocidade do parallax do elemento body 1
+ var velBody2 = 0.1;                           //velocidade do parallax do elemento body 2
+ var velBody3 = 0.15;                           //velocidade do parallax do elemento body 3
+ var vel = 5;                           //velocidade do parallax do elemento body 3
+ */
 
 //----------NO CARREGAMENTO----------//
 window.onload = function () {
     var temp = "";                                                                      //Elimina classes acrescentadas ao elemento "voz"
 
-    document.body.style.backgroundPositionX = "33.3%";
-    document.getElementById('bodyn2').style.backgroundPositionX = "33.3%";
-    document.getElementById('bodyn3').style.backgroundPositionX = "33.3%";
-
-    var intParallax = setInterval(function () {
-        if (parseFloat(document.getElementById('bodyn2').style.backgroundPositionX) < 100) {
-            document.body.style.backgroundPositionX = parseFloat(document.body.style.backgroundPositionX) + velBody1 + "%";
-            document.getElementById('bodyn2').style.backgroundPositionX = parseFloat(document.getElementById('bodyn2').style.backgroundPositionX) + velBody2 + "%";
-            document.getElementById('bodyn3').style.backgroundPositionX = parseFloat(document.getElementById('bodyn3').style.backgroundPositionX) + velBody3 + "%";
-        }
-        else {
-            clearInterval(intParallax);
-        }
-    }, 100);
+    /*parallaxInicio();*/
 
     document.getElementById("menu_musica").onclick = function () {
         if (musicaOn) {                                                                   //Se a música estiver ligada, desliga
@@ -182,6 +176,7 @@ window.onload = function () {
     };
 
     document.getElementById("btn_mem").onclick = function () {                          //Ao clicar no elemento "btn_mem"
+        /*parallaxDir();*/
         document.getElementById("interacao2").style.display = "none";                   //Esconde a div "interacao2" (div de seleção de Jogos)
         document.getElementById("jogoMemoria").style.display = "block";                 //Mostra a div "jogoMemoria"
         document.getElementById("voltar").style.display = "block";                      //Mostra o botão "voltar"
@@ -257,6 +252,7 @@ window.onload = function () {
     };
 
     document.getElementById("voltar").onclick = function () {
+        /*parallaxEsq();*/
         switch (jogo) {
             case 1:
                 document.getElementById("jogoMemoria").style.display = "none";                      //Esconde a div "jogoMemoria"
@@ -370,6 +366,7 @@ function onMouseOut(event) {
 }                   //evita a deteção de "mouseout" nas divs internas
 
 //----------CONTROLOS----------//
+//Função que
 function menu() {
     print(interacao);
     switch (interacao) {                                                                    //Se interação for
@@ -494,6 +491,7 @@ function loadPointAndWait(elem) {
 //     }
 // }
 
+//Função que
 function checkJogo() {
     switch (jogo) {
         case 0:
@@ -510,6 +508,7 @@ function checkJogo() {
 }
 
 //----------VARRIMENTO----------//
+//Função que
 function loadVarrimento(local) {
     var i = -1;
     clearVarrimento(local);
@@ -537,6 +536,7 @@ function loadVarrimento(local) {
     }, 1000);
 }
 
+//Função que
 function clearVarrimento(local) {
     clearInterval(varrimento);
     for (var j = 0; j < local.getElementsByClassName("clickable").length; j++) {
@@ -547,6 +547,7 @@ function clearVarrimento(local) {
 }
 
 //----------VOZ----------//
+//Função que
 function loadVoiceRec() {
     speechRecognition = new webkitSpeechRecognition();
     // var colors = [ '1' , '2' , '3', '4', '5', '6', '7', '8'];
@@ -668,6 +669,7 @@ function loadVoiceRec() {
     print("v2t ready");
 }
 
+//Função que
 function contentReader(text) {
     if (leitorEcra) {
         var msg = new SpeechSynthesisUtterance();
@@ -683,6 +685,7 @@ function contentReader(text) {
 }
 
 //----------JOGO MEMÓRIA----------//
+//Função que carrega o jogo
 function jogoMemoria() {
     document.getElementById("memoTab").innerHTML = "";
     certas = 0;
@@ -692,19 +695,11 @@ function jogoMemoria() {
         x++;
     }
 
-    document.body.style.backgroundImage = "url('img/Frutas!-23.png')";
-    document.body.style.backgroundImage = "cover";
-
-
     // jogo_memoria = true;                                                //Mostrar jogo
     memoCartas.sort(function () {                                       //Define posições aleatorias para os elementos do array
         return 0.5 - Math.random()
     });
     var numCartas = 0;                                                  //Numeros de cartas colocadas no tabuleiro
-
-    // for (var id = 0; id < 2; id++) {                                    //Criar linhas com id "line#" até 2 (para ecrã M)
-    //     document.getElementById("memoTab").innerHTML +=
-    //         "<div class='flip' id='line" + id + "'></div>";
 
     for (var id2 = 0; id2 < memInicial; id2++) {                             //Criar elementos (cartas) com id "item#"
         document.getElementById("memoTab").innerHTML +=
@@ -715,6 +710,8 @@ function jogoMemoria() {
         numCartas++;                                //Soma 1 carta às cartas colocadas
     }
 
+
+
     for (var j = 1; j <= memInicial; j++) {
         document.getElementById("item" + j).setAttribute("onclick", "flip(" + j + ")"); //Cada carta é atribuido um evento onclick com a função "flip(#);"
     }
@@ -724,6 +721,7 @@ function jogoMemoria() {
     }
 }
 
+//Função que roda as cartas
 function flip(id) {                                                     //Função "flip()" que recebe como parâmetro o # da carta
     print(id);                                                          //Escreve na consola o # da carta
     document.getElementById("item" + id).classList.add("flipped");      //Procura o item com o # recebido e adiciona-lhe a classe "flipped"
@@ -765,7 +763,7 @@ function flip(id) {                                                     //Funç�
             print("GANHASTE!!");
             if (memInicial < memMax)
                 memInicial += 2;
-            setTimeout("jogoMemoria()", 1000);
+            setTimeout("jogoMemoria()", 2000);
         }
     }, 1000);
     print(ultimo);
@@ -773,9 +771,8 @@ function flip(id) {                                                     //Funç�
 }
 
 //----------JOGO PALAVRAS----------//
+//Função que carrega o jogo
 function loadJogoPalavras() {
-    document.body.style.backgroundImage = "url('img/Frutas!-21.png')";
-    document.body.style.backgroundImage = "cover";
 
     var silabas = ["ba", "na", "mo", "ja", "a", "la", "tar", "pol", "sor", "cur", "ve", "ga", "ção", "tra", "du", "tor"];   //Array com sílabas "erradas"
     var hipoteses = [];                         //Array com sílabas de opção
@@ -789,13 +786,10 @@ function loadJogoPalavras() {
 
     document.getElementById("imgPal").innerHTML = "<img style='width: 100%' src='img/frutas/" + numParaFruta(palavra) + ".png'/>";
 
-    document.getElementById("imgPal").style.visibility = "hidden";
-    setTimeout(function () {
-        document.getElementById("imgPal").style.visibility = "visible";
-        document.getElementById("imgPal").style.animation = "zoomIn 0.8s";   //Anima a imagem
-    }, 2000);
-    document.getElementById("imgPal").style.animation = "";   //Anima a imagem
-
+    /*Animação da imagem*/
+    document.getElementById("imgPal").style.animation = "zoomIn 0.8s";
+    document.getElementById("imgPal").style.animationFillMode = "both";
+    document.getElementById("imgPal").style.animationDelay = "1s";
 
     var retira = Math.floor(Math.random() * palavras[palavra].length);  //Retira (retira sílaba de palavra) = Sorteio entre 0 e palavra.lenght do elemento sorteado acima
 
@@ -827,22 +821,15 @@ function loadJogoPalavras() {
     });
     document.getElementById("opcoes").innerHTML = hipoteses.join("");                                       //O innerHTML do elemento "opcoes" contém o array hipoteses com elemntos separados por espaço
 
-    document.getElementById("palavraIncompleta").style.visibility = "hidden";
-    setTimeout(function () {
-        document.getElementById("palavraIncompleta").style.visibility = "visible";
-        document.getElementById("palavraIncompleta").style.animation = "fadeInLeft 0.8s";
-    }, 1000);
-    document.getElementById("palavraIncompleta").style.animation = "";
+    document.getElementById("palavraIncompleta").style.animation = "zoomIn 0.8s";
+    document.getElementById("palavraIncompleta").style.animationDelay = "1s";
+    document.getElementById("palavraIncompleta").style.animationFillMode = "both";
 
-    for (var m = 0; m < document.getElementById("opcoes").getElementsByTagName("div").length; m++) {
-        document.getElementById("opcoes").getElementsByTagName("div")[m].style.visibility = "hidden";           //Esconde os elementos "silaba" antes da animação
+    for (i = 0; i < document.getElementById("opcoes").getElementsByTagName("div").length; i++) {
+        document.getElementById("opcoes").getElementsByTagName("div")[i].style.animation = "zoomIn 0.8s";
+        document.getElementById("opcoes").getElementsByTagName("div")[i].style.animationDelay = "1s";
+        document.getElementById("opcoes").getElementsByTagName("div")[i].style.animationFillMode = "both";
     }
-    setTimeout(function () {
-        for (var i = 0; i < document.getElementById("opcoes").getElementsByTagName("div").length; i++) {
-            document.getElementById("opcoes").getElementsByTagName("div")[i].style.visibility = "visible";      //Mostra os elementos "silaba" antes da animação
-            document.getElementById("opcoes").getElementsByTagName("div")[i].style.animation = "zoomIn 0.8s";   //Anima os elementos "silaba"
-        }
-    }, 2000);                                                                                                   //Delay de 2seg.
 
     for (var l = 0; l < document.getElementById("opcoes").getElementsByClassName("opcao").length; l++) {
         document.getElementsByClassName("opcao")[l].onclick = function () {                                                //Ao clicar no elemento "certo" (sílaba certa)
@@ -860,7 +847,6 @@ function loadJogoPalavras() {
                         document.getElementById("certo").onclick = null;                    //Bloqueia o clique no elemento "certo"
                     } else                                                                  //Senão
                         loadJogoPalavras();                                                 //Repete o jogo
-                    document.getElementById("jogoPalavrasCont").style.animation = "";
                 }, 2000);
             }
             else {
@@ -873,9 +859,13 @@ function loadJogoPalavras() {
 }
 
 //----------JOGO CORES----------//
+//Função que carrega o jogo
 function loadJogoCores() {
-    document.body.style.backgroundImage = "url('img/Frutas!-19.png')";
-    document.body.style.backgroundImage = "cover";
+
+    document.getElementById('paleta').style.animation = "";
+    document.getElementById('paleta').style.animation = "zoomIn 0.8s";
+    document.getElementById('paleta').style.animationDelay = "1s";
+    document.getElementById('paleta').style.animationFillMode = "both";
 
     if (!limpa) {
         corMuda = '#fff';
@@ -883,8 +873,9 @@ function loadJogoCores() {
             sorteiaDesenho = parseInt(Math.random() * (palavras.length));
         } while (coresFeitas.indexOf(sorteiaDesenho) != -1);
         desenha();
-        /*document.getElementById('imagem').style.visibility="hidden";*/
         document.getElementById('imagem').style.animation = "zoomIn 0.8s";
+        document.getElementById('imagem').style.animationDelay = "1s";
+        document.getElementById('imagem').style.animationFillMode = "both";
     }
     document.getElementById('imagem').style.animation = "";
     limpa = false;
@@ -1074,7 +1065,7 @@ function loadJogoCores() {
         if (this.classList.contains("clickable")) {
             corMuda = document.getElementById("corFinal").style.backgroundColor;
             if (desenha()) {
-                // alert("GANHASTE");
+                print("GANHASTE");
                 coresFeitas.push(sorteiaDesenho);
                 print(coresFeitas.length + "/" + palavras.length);
                 if (coresFeitas.length != palavras.length) {
@@ -1100,6 +1091,7 @@ function rgbToHex(col) {
     }
 }
 
+//Função que desenha o elemento
 function desenha() {
     var canvas = document.getElementById("canvas");         //Desenha em canvas a fruta
     canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);       //Desenha em canvas a fruta
@@ -1134,15 +1126,14 @@ function desenha() {
             desenhaPera(ctx);
             return rgbToHex(corMuda) == "#f4b400";
         case 9:
-            // desenhaBanana(ctx);
+            desenhaBanana(ctx);
             return rgbToHex(corMuda) == "#f4b400";
     }
 }
 
 //----------JOGO NÚMEROS----------//
+//Função que carrega o jogo
 function loadJogoNumeros() {
-    document.body.style.backgroundImage = "url('img/Frutas!-24.png')";
-    document.body.style.backgroundImage = "cover";
 
     var f1, f2, fErrada1, fErrada2;                                     //variaveis que guardam fruta1, fruta2, frutaErrada1 e frutaErrada2
     do {
@@ -1332,8 +1323,41 @@ function loadJogoNumeros() {
             print(num1 + "=" + fErrada1);
         }
     }
+
+    document.getElementById("fruta1").style.animation = "zoomIn 0.8s";
+    document.getElementById("fruta1").style.animationDelay = "1s";
+    document.getElementById("fruta1").style.animationFillMode = "both";
+
+    document.getElementById("fruta2").style.animation = "zoomIn 0.8s";
+    document.getElementById("fruta2").style.animationDelay = "1s";
+    document.getElementById("fruta2").style.animationFillMode = "both";
+
+    document.getElementById("num2").style.animation = "zoomIn 0.8s";
+    document.getElementById("num2").style.animationDelay = "1s";
+    document.getElementById("num2").style.animationFillMode = "both";
+
+    document.getElementById("num1").style.animation = "zoomIn 0.8s";
+    document.getElementById("num1").style.animationDelay = "1s";
+    document.getElementById("num1").style.animationFillMode = "both";
+
+    document.getElementById("sumo").style.animation = "zoomIn 0.8s";
+    document.getElementById("sumo").style.animationDelay = "1s";
+    document.getElementById("sumo").style.animationFillMode = "both";
+
+    document.getElementById("op1").style.animation = "zoomIn 0.8s";
+    document.getElementById("op1").style.animationDelay = "1s";
+    document.getElementById("op1").style.animationFillMode = "both";
+
+    document.getElementById("op2").style.animation = "zoomIn 0.8s";
+    document.getElementById("op2").style.animationDelay = "1s";
+    document.getElementById("op2").style.animationFillMode = "both";
+
+    document.getElementById("op3").style.animation = "zoomIn 0.8s";
+    document.getElementById("op3").style.animationDelay = "1s";
+    document.getElementById("op3").style.animationFillMode = "both";
 }
 
+//Função que
 function numParaFruta(num) {
     switch (num) {
         case 0:
@@ -1361,6 +1385,58 @@ function numParaFruta(num) {
             break;
     }
 }
+
+//----------PARALLAX----------//
+function parallaxInicio() {
+    document.body.style.backgroundPositionY = "33.3%";
+    document.body.style.backgroundPositionX = "33.3%";
+
+    document.getElementById('bodyn2').style.backgroundPositionY = "33.3%";
+    document.getElementById("bodyn2").style.backgroundPositionX = "33.3%";
+
+    document.getElementById('bodyn3').style.backgroundPositionY = "33.3%";
+    document.getElementById("bodyn3").style.backgroundPositionX = "33.3%";
+}
+function parallaxDir() {
+    document.body.style.animation = "parallaxDir1 7s";
+    document.body.style.animationDelay = "1s";
+    document.body.style.animationFillMode = "both";
+
+    document.getElementById("bodyn2").style.animation = "parallaxDir2 7s";
+    document.getElementById("bodyn2").style.animationDelay = "1s";
+    document.getElementById("bodyn2").style.animationFillMode = "both";
+
+    document.getElementById("bodyn3").style.animation = "parallaxDir3 7s";
+    document.getElementById("bodyn3").style.animationDelay = "1s";
+    document.getElementById("bodyn3").style.animationFillMode = "both";
+}
+function parallaxEsq() {
+    document.body.style.animation = "parallaxEsq1 7s";
+    document.body.style.animationDelay = "1s";
+    document.body.style.animationFillMode = "both";
+
+    document.getElementById("bodyn2").style.animation = "parallaxEsq2 7s";
+    document.getElementById("bodyn2").style.animationDelay = "1s";
+    document.getElementById("bodyn2").style.animationFillMode = "both";
+
+    document.getElementById("bodyn3").style.animation = "parallaxEsq3 7s";
+    document.getElementById("bodyn3").style.animationDelay = "1s";
+    document.getElementById("bodyn3").style.animationFillMode = "both";
+}
+function parallaxBaixo() {
+    document.body.style.animation = "ines1 7s";
+    document.body.style.animationDelay = "1s";
+    document.body.style.animationFillMode = "both";
+
+    document.getElementById("bodyn2").style.animation = "ines2 7s";
+    document.getElementById("bodyn2").style.animationDelay = "1s";
+    document.getElementById("bodyn2").style.animationFillMode = "both";
+
+    document.getElementById("bodyn3").style.animation = "ines3 7s";
+    document.getElementById("bodyn3").style.animationDelay = "1s";
+    document.getElementById("bodyn3").style.animationFillMode = "both";
+}
+
 
 //----------CANVAS----------//
 
@@ -3650,6 +3726,195 @@ function desenhaPera(ctx) {
     ctx.lineCap = "butt";
     ctx.lineJoin = "miter";
     ctx.miterLimit = 10.0;
+    ctx.stroke();
+    ctx.restore();
+    ctx.restore();
+    ctx.restore();
+}
+
+function desenhaBanana(ctx) {
+
+    // banana/banana
+    ctx.save();
+
+    // banana/banana/corpo
+    ctx.save();
+    ctx.beginPath();
+    ctx.moveTo(234.9, 437.2);
+    ctx.bezierCurveTo(233.3, 436.6, 231.7, 436.0, 230.0, 435.5);
+    ctx.bezierCurveTo(226.4, 434.2, 222.7, 432.9, 219.0, 431.5);
+    ctx.lineTo(219.0, 429.1);
+    ctx.bezierCurveTo(222.7, 430.4, 226.4, 431.8, 230.0, 433.1);
+    ctx.bezierCurveTo(232.0, 433.8, 233.9, 434.4, 235.9, 435.1);
+    ctx.bezierCurveTo(235.9, 435.1, 235.9, 435.1, 235.9, 435.2);
+    ctx.bezierCurveTo(238.5, 430.6, 242.2, 426.7, 246.6, 424.4);
+    ctx.bezierCurveTo(234.5, 418.6, 228.2, 407.0, 221.7, 395.8);
+    ctx.bezierCurveTo(212.5, 380.4, 200.4, 369.7, 185.7, 359.8);
+    ctx.bezierCurveTo(161.7, 343.5, 141.7, 326.8, 128.8, 300.2);
+    ctx.bezierCurveTo(115.9, 273.7, 110.9, 244.3, 110.3, 215.0);
+    ctx.bezierCurveTo(110.2, 211.2, 110.2, 207.4, 110.2, 203.5);
+    ctx.bezierCurveTo(110.7, 170.7, 115.6, 138.1, 117.7, 105.3);
+    ctx.bezierCurveTo(118.3, 96.3, 118.5, 87.2, 117.8, 78.1);
+    ctx.bezierCurveTo(117.0, 68.8, 114.4, 59.9, 113.2, 50.7);
+    ctx.bezierCurveTo(112.2, 43.1, 112.8, 36.2, 115.4, 29.0);
+    ctx.bezierCurveTo(118.1, 21.5, 121.5, 14.8, 121.5, 6.8);
+    ctx.bezierCurveTo(116.3, 11.1, 108.2, 10.2, 102.2, 7.9);
+    ctx.bezierCurveTo(100.5, 7.2, 96.6, 5.3, 94.7, 3.0);
+    ctx.bezierCurveTo(92.9, 21.0, 78.7, 34.1, 67.2, 47.2);
+    ctx.bezierCurveTo(52.1, 64.6, 39.6, 84.2, 29.8, 105.1);
+    ctx.bezierCurveTo(16.5, 133.3, 8.0, 163.6, 3.6, 194.5);
+    ctx.bezierCurveTo(2.2, 204.7, 1.2, 214.9, 0.6, 225.2);
+    ctx.bezierCurveTo(-2.0, 269.9, 3.8, 314.7, 25.5, 354.4);
+    ctx.bezierCurveTo(48.1, 395.6, 83.0, 425.8, 123.7, 443.1);
+    ctx.bezierCurveTo(158.2, 457.8, 196.8, 463.2, 235.8, 458.2);
+    ctx.bezierCurveTo(231.4, 451.8, 231.8, 443.9, 234.9, 437.2);
+    ctx.closePath();
+    ctx.fillStyle = corMuda;
+    ctx.fill();
+
+    // banana/banana/fundo
+    ctx.beginPath();
+    ctx.moveTo(94.8, 1.5);
+    ctx.bezierCurveTo(95.4, 6.1, 103.6, 8.7, 107.1, 9.5);
+    ctx.bezierCurveTo(112.0, 10.6, 117.5, 10.9, 121.8, 7.9);
+    ctx.bezierCurveTo(118.1, 5.3, 114.2, 3.2, 109.9, 2.0);
+    ctx.bezierCurveTo(106.6, 1.0, 98.8, -1.2, 94.8, 0.9);
+    ctx.bezierCurveTo(94.8, 0.9, 94.8, 0.9, 94.8, 0.9);
+    ctx.bezierCurveTo(94.8, 1.0, 94.9, 1.0, 94.9, 1.1);
+    ctx.bezierCurveTo(94.9, 1.2, 94.8, 1.4, 94.8, 1.5);
+    ctx.closePath();
+    ctx.fillStyle = "rgb(89, 74, 65)";
+    ctx.fill();
+
+    // banana/banana/topo
+    ctx.beginPath();
+    ctx.moveTo(234.1, 439.6);
+    ctx.bezierCurveTo(231.8, 446.5, 233.5, 452.3, 234.9, 459.2);
+    ctx.bezierCurveTo(243.4, 448.2, 245.4, 437.9, 246.3, 424.4);
+    ctx.bezierCurveTo(240.7, 428.0, 236.2, 433.1, 234.1, 439.6);
+    ctx.closePath();
+    ctx.fill();
+
+    // banana/banana/risca2
+    ctx.beginPath();
+    ctx.moveTo(116.6, 362.3);
+    ctx.bezierCurveTo(116.3, 361.9, 115.6, 362.5, 116.0, 363.0);
+    ctx.bezierCurveTo(145.9, 401.7, 190.3, 421.3, 235.2, 437.4);
+    ctx.lineTo(235.2, 435.0);
+    ctx.bezierCurveTo(191.1, 418.9, 146.7, 399.5, 116.6, 362.3);
+    ctx.closePath();
+    ctx.fillStyle = "rgb(213, 164, 41)";
+    ctx.fill();
+
+    // banana/banana/rica1
+    ctx.beginPath();
+    ctx.moveTo(102.5, 17.5);
+    ctx.bezierCurveTo(102.5, 17.0, 101.8, 17.1, 101.7, 17.5);
+    ctx.bezierCurveTo(100.2, 40.8, 77.4, 58.6, 80.1, 82.2);
+    ctx.bezierCurveTo(80.2, 83.1, 81.5, 83.2, 81.5, 82.2);
+    ctx.bezierCurveTo(82.5, 58.6, 103.7, 41.3, 102.5, 17.5);
+    ctx.closePath();
+    ctx.fill();
+
+    // banana/banana/olhos
+
+    // banana/banana/olhos/olhos
+    ctx.save();
+
+    // banana/banana/olhos/olhos/Group
+    ctx.save();
+
+    // banana/banana/olhos/olhos/Group/Path
+    ctx.save();
+    ctx.beginPath();
+    ctx.moveTo(45.1, 202.2);
+    ctx.bezierCurveTo(45.1, 214.5, 37.8, 224.5, 28.8, 224.5);
+    ctx.bezierCurveTo(19.9, 224.5, 12.6, 214.5, 12.6, 202.2);
+    ctx.bezierCurveTo(12.6, 189.8, 19.9, 179.8, 28.8, 179.8);
+    ctx.bezierCurveTo(37.8, 179.8, 45.1, 189.8, 45.1, 202.2);
+    ctx.closePath();
+    ctx.fillStyle = "rgb(255, 255, 255)";
+    ctx.fill();
+    ctx.stroke();
+
+    // banana/banana/olhos/olhos/Group/Clip Group
+
+    // banana/banana/olhos/olhos/Group/Clip Group/Clipping Path
+    ctx.save();
+    ctx.beginPath();
+    ctx.moveTo(45.1, 202.2);
+    ctx.bezierCurveTo(45.1, 214.5, 37.8, 224.5, 28.8, 224.5);
+    ctx.bezierCurveTo(19.9, 224.5, 12.6, 214.5, 12.6, 202.2);
+    ctx.bezierCurveTo(12.6, 189.8, 19.9, 179.8, 28.8, 179.8);
+    ctx.bezierCurveTo(37.8, 179.8, 45.1, 189.8, 45.1, 202.2);
+    ctx.closePath();
+    ctx.clip();
+
+    // banana/banana/olhos/olhos/Group/Clip Group/Path
+    ctx.beginPath();
+    ctx.moveTo(42.7, 210.5);
+    ctx.bezierCurveTo(42.7, 220.6, 37.5, 228.9, 31.2, 228.9);
+    ctx.bezierCurveTo(24.8, 228.9, 19.7, 220.6, 19.7, 210.5);
+    ctx.bezierCurveTo(19.7, 200.3, 24.8, 192.1, 31.2, 192.1);
+    ctx.bezierCurveTo(37.5, 192.1, 42.7, 200.3, 42.7, 210.5);
+    ctx.closePath();
+    ctx.fillStyle = "rgb(41, 43, 53)";
+    ctx.fill();
+    ctx.stroke();
+
+    // banana/banana/olhos/olhos/Group
+    ctx.restore();
+    ctx.restore();
+
+    // banana/banana/olhos/olhos/Group/Path
+    ctx.save();
+    ctx.beginPath();
+    ctx.moveTo(106.0, 201.6);
+    ctx.bezierCurveTo(106.0, 214.0, 98.7, 224.0, 89.7, 224.0);
+    ctx.bezierCurveTo(80.7, 224.0, 73.5, 214.0, 73.5, 201.6);
+    ctx.bezierCurveTo(73.5, 189.3, 80.7, 179.3, 89.7, 179.3);
+    ctx.bezierCurveTo(98.7, 179.3, 106.0, 189.3, 106.0, 201.6);
+    ctx.closePath();
+    ctx.fillStyle = "rgb(255, 255, 255)";
+    ctx.fill();
+    ctx.stroke();
+
+    // banana/banana/olhos/olhos/Group/Clip Group
+
+    // banana/banana/olhos/olhos/Group/Clip Group/Clipping Path
+    ctx.save();
+    ctx.beginPath();
+    ctx.moveTo(106.0, 201.6);
+    ctx.bezierCurveTo(106.0, 214.0, 98.7, 224.0, 89.7, 224.0);
+    ctx.bezierCurveTo(80.7, 224.0, 73.5, 214.0, 73.5, 201.6);
+    ctx.bezierCurveTo(73.5, 189.3, 80.7, 179.3, 89.7, 179.3);
+    ctx.bezierCurveTo(98.7, 179.3, 106.0, 189.3, 106.0, 201.6);
+    ctx.closePath();
+    ctx.clip();
+
+    // banana/banana/olhos/olhos/Group/Clip Group/Path
+    ctx.beginPath();
+    ctx.moveTo(97.6, 208.2);
+    ctx.bezierCurveTo(97.6, 218.4, 92.5, 226.6, 86.1, 226.6);
+    ctx.bezierCurveTo(79.8, 226.6, 74.6, 218.4, 74.6, 208.2);
+    ctx.bezierCurveTo(74.6, 198.1, 79.8, 189.8, 86.1, 189.8);
+    ctx.bezierCurveTo(92.5, 189.8, 97.6, 198.1, 97.6, 208.2);
+    ctx.closePath();
+    ctx.fillStyle = "rgb(41, 43, 53)";
+    ctx.fill();
+    ctx.stroke();
+
+    // banana/banana/olhos/boca
+    ctx.restore();
+    ctx.restore();
+    ctx.restore();
+    ctx.beginPath();
+    ctx.moveTo(48.0, 257.9);
+    ctx.bezierCurveTo(55.4, 265.1, 67.2, 265.0, 74.4, 257.7);
+    ctx.lineWidth = 2.8;
+    ctx.strokeStyle = "rgb(116, 76, 40)";
+    ctx.lineCap = "round";
+    ctx.lineJoin = "round";
     ctx.stroke();
     ctx.restore();
     ctx.restore();
