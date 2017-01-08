@@ -6,7 +6,7 @@ var musica = document.createElement("Audio");               // Música de fundo
 musica.src = "sound/ukulele.mp3";
 musica.volume = 0.3;                                        // Volume da música
 musica.loop = true;                                         // Colocar música em loop
-var musicaOn = true;                                        // Variável que controla se a música está ligada ou desligada
+var musicaOn = false;                                        // Variável que controla se a música está ligada ou desligada
 
 var somVirarCarta = document.createElement("Audio");        // Som do virar de carta (jogo da memória)
 somVirarCarta.src = "sound/whoosh.mp3";
@@ -30,7 +30,7 @@ var stop = false;
 var volume = 1;
 var speed = 1;
 var pitch = 1;
-var leitorEcra = true;
+var leitorEcra = false;
 
 //----------POINTandWAIT----------
 var sprite = 0;
@@ -72,9 +72,6 @@ var jogo = 0;                   // 0 - Menu
                                 // 3 - Jogo Palavras
                                 // 4 - Jogo Cores
 
-// var jogo_memoria = false;            //Esconde jogo memória
-
-
 var palavras = [];                      //Array com frutas disponíveis nos jogos
 palavras[0] = ["a", "mei", "xa"];
 palavras[1] = ["a", "na", "nás"];
@@ -107,10 +104,6 @@ window.onload = function () {
 
     /*parallaxInicio();*/
 
-    // musica.play();  //temporariamente desligado
-
-    document.getElementById("menu_musica").click();                                     //Simula clique no "menu-musica" do menu lateral
-
     document.getElementById("menu_musica").onclick = function () {
         if (musicaOn) {                                                                 //Se a música estiver ligada, desliga
             musicaOn = false;
@@ -123,8 +116,7 @@ window.onload = function () {
         }
     };
 
-
-
+    document.getElementById("menu_musica").click();                                     //Simula clique no "menu-musica" do menu lateral
 
     document.getElementById("menu_sons").onclick = function () {                        //Liga ou desliga efeitos sonoros
         efeitosSonorosOn = !efeitosSonorosOn;
@@ -300,25 +292,25 @@ window.onload = function () {
 // };
 
     /*document.getElementById("help").onclick = function () {                                 //Ao clicar no botão ajuda
-        switch (jogo) {
-            case 1:
-                document.getElementById("modal_memoria").style.display = "block";           //Se estiver no jogo da memória mostra o modal_memoria
-                break;
+     switch (jogo) {
+     case 1:
+     document.getElementById("modal_memoria").style.display = "block";           //Se estiver no jogo da memória mostra o modal_memoria
+     break;
 
-            case 2:
-                document.getElementById("modal_numeros").style.display = "block";           //Se estiver no jogo dos números mostra o modal_numeros
-                console.log(document.getElementById("modal_numeros").style.display);
-                break;
+     case 2:
+     document.getElementById("modal_numeros").style.display = "block";           //Se estiver no jogo dos números mostra o modal_numeros
+     console.log(document.getElementById("modal_numeros").style.display);
+     break;
 
-            case 3:
-                document.getElementById("modal_palavras").style.display = "block";          //Se estiver no jogo das palavras mostra o modal_palavras
-                break;
+     case 3:
+     document.getElementById("modal_palavras").style.display = "block";          //Se estiver no jogo das palavras mostra o modal_palavras
+     break;
 
-            case 4:
-                document.getElementById("modal_cores").style.display = "block";             //Se estiver no jogo das cores mostra o modal_cores
-                break;
-        }
-    };*/ // PARA APAGAR (Em princípio) - Tem de ser através do data-target
+     case 4:
+     document.getElementById("modal_cores").style.display = "block";             //Se estiver no jogo das cores mostra o modal_cores
+     break;
+     }
+     };*/ // PARA APAGAR (Em princípio) - Tem de ser através do data-target
 };
 
 function onMouseOver(event) {
@@ -349,8 +341,7 @@ function onMouseOver(event) {
         }
     }
     if (interacao == 0)
-    // print("isto");
-        loadPointAndWait(this);
+        pointWait(this);
 }                  //evita a deteção de "mouseover" nas divs internas
 
 function onMouseOut(event) {
@@ -368,7 +359,8 @@ function onMouseOut(event) {
     }
     if (interacao == 0) {
         clearInterval(select_animation);
-        // this.getElementsByClassName("click")[0].style.background = "url(img/PaW/0.png) center no-repeat";
+        this.getElementsByClassName("click")[0].style.background = "url(img/PaW/0.png) center no-repeat";
+        anim = false;
     }
 }                   //evita a deteção de "mouseout" nas divs internas
 
@@ -411,8 +403,12 @@ function menu() {
                 } catch (err) {
                     print("varrimento não iniciado");
                 }
+                // try {
+                //     unloadPointAndWait(checkJogo());
+                // } catch (err){
+                //     print("PaW não iniciado");
+                // }
                 contentReader("cursor");
-                // unloadPointAndWait(checkJogo());
                 if (jogo == 1)
                     for (var j = 0; i < document.getElementsByClassName("mostraNum")[j].length; i++)
                         document.getElementsByClassName("mostraNum")[j].style.display = "none";
@@ -456,20 +452,16 @@ function menu() {
 }
 
 //----------POINTandWAIT----------//
-// function loadPointAndWait(local) {
-//     if(menu != 0)
-//     var elements = local.getElementsByClassName("clickable");
-//
-//     for (var i = 0; i < elements.length; i++) {
-//         elements[i].addEventListener('mouseover', onMouseOver, true);
-//
-//         // elements[i].style.cursor = "url('img/PaW/0.png') 64 64, pointer";
-//         // elements[i].setAttribute("onmouseover", "select(this)");
-//         // elements[i].setAttribute("onmouseout", "this.style.cursor = \"url('img/PaW/0.png') 64 64, pointer\"; clearInterval(selecting); anim=false; sprite=0");
-//     }
-// }
+function loadPointAndWait(local) {
+    var elements = local.getElementsByClassName("clickable");
 
-function loadPointAndWait(elem) {
+    for (var i = 0; i < elements.length; i++) {
+        elements[i].addEventListener('mouseover', onMouseOver, true);
+        elements[i].addEventListener('mouseout', onMouseOut, true);
+    }
+}
+
+function pointWait(elem) {
     if (!anim) {
         sprite = 1;
         anim = true;
@@ -493,8 +485,8 @@ function loadPointAndWait(elem) {
 //     var elements = local.getElementsByClassName("clickable");
 //
 //     for (var i = 0; i < elements.length; i++) {
-//         elements[i].onmouseover = null;
-//         elements[i].onmouseout = null;
+//         elements[i].removeEventListener('mouseover', onMouseOver, true);
+//         elements[i].removeEventListener('mouseout', onMouseOut, true);
 //     }
 // }
 
@@ -718,14 +710,16 @@ function jogoMemoria() {
     }
 
 
-
     for (var j = 1; j <= memInicial; j++) {
         document.getElementById("item" + j).setAttribute("onclick", "flip(" + j + ")"); //Cada carta é atribuido um evento onclick com a função "flip(#);"
     }
 
-    for (var i = 0; i <= memInicial; i++) {
-        document.getElementById('memoTab').getElementsByClassName('carta')[i].style.animation = "zoomIn 0.8s";
-    }
+    // for (var i = 0; i <= memInicial; i++) {
+    //     document.getElementById('memoTab').getElementsByClassName('carta')[i].style.animation = "zoomIn 0.8s";
+    // }
+
+    if (interacao == 0)
+        loadPointAndWait(checkJogo());
 }
 
 //Função que roda as cartas
@@ -1309,7 +1303,7 @@ function loadJogoNumeros() {
             sumo.innerHTML = "<img src='img/jogoNumeros/sumo7.png'>";
             break;
         default:
-            print("ERRO: não existe a combinação de frutas " + f1 + "_" + f2 + "nem" + f2 + "_" + f1);
+            print("ERRO: não existe a combinação de frutas " + f1 + "_" + f2 + " nem " + f2 + "_" + f1);
             break;
     }
 
@@ -1326,6 +1320,11 @@ function loadJogoNumeros() {
     for (var j = 0; j < num2; j++) {
         document.getElementById("op" + opCerta).innerHTML += "<img src='img/frutas/" + f2 + ".png'>";
     }
+    document.getElementById("op" + opCerta).onclick = function(){
+        somRespostaCorreta.load();
+        somRespostaCorreta.play();
+        setTimeout("loadJogoNumeros()", 1000);
+    };
 
     var temp = 0;
     for (var l = 1; l <= 3; l++) {                      //coloca as imagens das frutas em cada uma das posiçoes com respostas erradas
@@ -1343,6 +1342,10 @@ function loadJogoNumeros() {
                 document.getElementById("op" + l).innerHTML += "<img src='img/frutas/" + f2 + ".png'>";
             }
             print(num1 + "=" + fErrada1);
+            document.getElementById("op" + l).onclick = function(){
+                somRespostaErrada.load();
+                somRespostaErrada.play();
+            };
         }
     }
 
