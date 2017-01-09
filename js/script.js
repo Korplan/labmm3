@@ -71,6 +71,7 @@ var jogo = 0;                   // 0 - Menu
                                 // 2 - Jogo Numeros
                                 // 3 - Jogo Palavras
                                 // 4 - Jogo Cores
+var nome = "";
 
 var palavras = [];                      //Array com frutas disponíveis nos jogos
 palavras[0] = ["a", "mei", "xa"];
@@ -286,6 +287,10 @@ window.onload = function () {
     document.getElementById("btn_cores").addEventListener('mouseout', onMouseOut, true);
     document.getElementById("btn_mem").addEventListener('mouseover', onMouseOver, true);
     document.getElementById("btn_mem").addEventListener('mouseout', onMouseOut, true);
+    document.getElementById("btn_nome").onclick = function(){
+        nome = document.getElementById("nome").value;
+        print(nome);
+    };
 
 // document.getElementById("instructions").onclick = function () {                         //Esconde o menu
 //     document.getElementById("slide-out").style = "transform: translateX(-100%)";
@@ -450,6 +455,16 @@ function menu() {
             break;
     }
 }
+
+function win(){
+    var frases = ["Parabéns "+nome+", ganhaste o jogo!", "Bem jogado "+nome+"! Ganhaste!"];
+    contentReader(frases[Math.floor(Math.random()*frases.length)]);
+}
+
+function lose(){
+    var frases = ["Tenta outra vez!", "Essa não é a resposta certa"];
+    contentReader(frases[Math.floor(Math.random()*frases.length)]);
+}k
 
 //----------POINTandWAIT----------//
 function loadPointAndWait(local) {
@@ -762,6 +777,7 @@ function flip(id) {                                                     //Funç�
         par = !par; //se par==true passa a par=false e se par==false passa a par=true
         if (certas == memInicial) {
             print("GANHASTE!!");
+            win();
             if (memInicial < memMax)
                 memInicial += 2;
             setTimeout("jogoMemoria()", 2000);
