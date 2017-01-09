@@ -89,7 +89,7 @@ h1{
     width: 100%;
     height: 100%;
     /*background: url('../img/PaW/0.png') center no-repeat;*/
-    background-size: 60% auto;
+    background-size: 75% auto !important;
     z-index: 1000;
 }
 
@@ -212,6 +212,10 @@ a#instructions{
     color: #363636;
 }
 
+.carta{
+    background: #f4756b;
+}
+
 /*Rodar Cartas*/
 .flip {
     -webkit-perspective: 4000px;                /*Roda segundo determinada perspetiva - simula o ângulo em que é virada*/
@@ -240,7 +244,7 @@ a#instructions{
 /*Frente Carta*/
 .flip .card .front {
     z-index: 1;
-    background-color: #f4756b;
+    /*background: #f4756b;*/
     /*
     background-color: #ef6c00;
     */

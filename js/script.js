@@ -1,13 +1,12 @@
 //----------VARIÁVEIS GLOBAIS----------//
 var debug = true;                                           //(mostrar ou não) Prints na consola
-var nome_utilizador = "";
 
 //----------AUDIO--------------
 var musica = document.createElement("Audio");               // Música de fundo
 musica.src = "sound/ukulele.mp3";
 musica.volume = 0.3;                                        // Volume da música
 musica.loop = true;                                         // Colocar música em loop
-var musicaOn = false;                                        // Variável que controla se a música está ligada ou desligada
+var musicaOn = true;                                        // Variável que controla se a música está ligada ou desligada
 
 var somVirarCarta = document.createElement("Audio");        // Som do virar de carta (jogo da memória)
 somVirarCarta.src = "sound/whoosh.mp3";
@@ -61,6 +60,13 @@ var corMuda = '#fff';               //Variável que vai guardar as diferentes co
 var sorteiaDesenho;                 //Sorteio do elemento a desenhar (canvas)
 var limpa = false;                    //Variável que diz se foi clicado o botão de limpar cores ou não
 var coresFeitas = [];
+var branco = "#ffffff";
+var amarelo = "#f4b400";
+var azul = "#00b0ff";
+var magenta = "#c2185b";
+var roxo = "#7b1fa2";
+var laranja = "#d84315";
+var verde = "#43a047";
 
 //----------GERAL----------
 var interacao;                  // 0 - Point Wait
@@ -290,7 +296,7 @@ window.onload = function () {
     document.getElementById("btn_cores").addEventListener('mouseout', onMouseOut, true);
     document.getElementById("btn_mem").addEventListener('mouseover', onMouseOver, true);
     document.getElementById("btn_mem").addEventListener('mouseout', onMouseOut, true);
-    document.getElementById("btn_nome").onclick = function(){
+    document.getElementById("btn_nome").onclick = function () {
         nome = document.getElementById("nome").value;
         print(nome);
     };
@@ -343,9 +349,48 @@ function onMouseOver(event) {
             case 'btn_cores':
                 contentReader("Jogo das cores");
                 break;
+            case 'cor1':
+                contentReader("magenta");
+                break;
+            case 'cor2':
+                contentReader("azul");
+                break;
+            case 'cor3':
+                contentReader("amarelo");
+                break;
+            case 'apagar':
+                contentReader("apagar");
+                break;
+            case 'corFinal':
+                switch (rgbToHex(this.style.backgroundColor)) {
+                    case branco:
+                        contentReader("Escolhe uma cor");
+                        break;
+                    case laranja:
+                        contentReader("cor de laranja");
+                        break;
+                    case roxo:
+                        contentReader("lilás");
+                        break;
+                    case verde:
+                        contentReader("verde");
+                        break;
+                    case magenta:
+                        contentReader("magenta");
+                        break;
+                    case azul:
+                        contentReader("azul");
+                        break;
+                    case amarelo:
+                        contentReader("amarelo");
+                        break;
+                    default:
+                        print("ERRO:cor inválida: " + rgbToHex(this.style.backgroundColor));
+                        break;
+                }
+                break;
             default:
                 print("ERRO:elemento não listado");
-                break;
         }
     }
     if (interacao == 0)
@@ -459,15 +504,15 @@ function menu() {
     }
 }
 
-function win(){
-    var frases = ["Parabéns "+nome+", ganhaste o jogo!", "Bem jogado "+nome+"! Ganhaste!"];
-    contentReader(frases[Math.floor(Math.random()*frases.length)]);
+function win() {
+    var frases = ["Parabéns " + nome + ", ganhaste o jogo!", "Bem jogado " + nome + "! Ganhaste!"];
+    contentReader(frases[Math.floor(Math.random() * frases.length)]);
 }
 
-function lose(){
+function lose() {
     var frases = ["Tenta outra vez!", "Essa não é a resposta certa"];
-    contentReader(frases[Math.floor(Math.random()*frases.length)]);
-}k
+    contentReader(frases[Math.floor(Math.random() * frases.length)]);
+}
 
 //----------POINTandWAIT----------//
 function loadPointAndWait(local) {
@@ -722,7 +767,7 @@ function jogoMemoria() {
         document.getElementById("memoTab").innerHTML +=
             "<div class='col s6 m4 l3'><div class='rounded carta valign-wrapper clickable card' style='height: 250px; width: 200px;' id='item" + (numCartas + 1) + "'>" +
             "<div class='center-block face front click'><span class='mostraNum' style='display: none'>" + (numCartas + 1) + "</span></div>" +
-            "<div class='face back' style=\"background: url('img/frutas/" + numParaFruta(memoCartas[numCartas]) + ".png') center no-repeat; background-size: 100% auto\"></div>" +
+            "<div class='face back' style=\"background: url('img/frutas/" + numParaFruta(memoCartas[numCartas]) + ".png') center no-repeat #FFF; background-size: 100% auto\"></div>" +
             "</div></div>";
         numCartas++;                                //Soma 1 carta às cartas colocadas
     }
@@ -920,74 +965,16 @@ function loadJogoCores() {
     document.getElementById("cor2").classList.add('clickable');
     document.getElementById("cor3").classList.add('clickable');
     document.getElementById("corFinal").classList.remove('clickable');
-    document.getElementById("cor1").onmouseover = function () {
-        contentReader("magenta");
-    };
-    document.getElementById("cor1").onmouseout = function () {
-        try {
-            speechSynthesis.cancel();
-        } catch (err) {
-            print("leitor não ativo");
-        }
-    };
-    document.getElementById("cor2").onmouseover = function () {
-        contentReader("azul");
-    };
-    document.getElementById("cor2").onmouseout = function () {
-        try {
-            speechSynthesis.cancel();
-        } catch (err) {
-            print("leitor não ativo");
-        }
-    };
-    document.getElementById("cor3").onmouseover = function () {
-        contentReader("amarelo");
-    };
-    document.getElementById("cor3").onmouseout = function () {
-        try {
-            speechSynthesis.cancel();
-        } catch (err) {
-            print("leitor não ativo");
-        }
-    };
-    document.getElementById("corFinal").onmouseover = function () {
-        switch (rgbToHex(this.style.backgroundColor)) {
-            case '#ffffff':
-                contentReader("Escolhe uma cor");
-                break;
-            case '#d84315':
-                contentReader("cor de laranja");
-                break;
-            case '#7b1fa2':
-                contentReader("lilás");
-                break;
-            case '#43a047':
-                contentReader("verde");
-                break;
-            default:
-                print("ERRO:cor inválida: " + rgbToHex(this.style.backgroundColor));
-                break;
-        }
-        print("in");
-    };
-    document.getElementById("corFinal").onmouseout = function () {
-        try {
-            speechSynthesis.cancel();
-        } catch (err) {
-            print("leitor não ativo");
-        }
-        print("out");
-    };
-    document.getElementById("apagar").onmouseover = function () {
-        contentReader("apagar");
-    };
-    document.getElementById("apagar").onmouseout = function () {
-        try {
-            speechSynthesis.cancel();
-        } catch (err) {
-            print("leitor não ativo");
-        }
-    };
+    document.getElementById("cor1").addEventListener("mouseover", onMouseOver, true);
+    document.getElementById("cor1").addEventListener("mouseout", onMouseOut, true);
+    document.getElementById("cor2").addEventListener("mouseover", onMouseOver, true);
+    document.getElementById("cor2").addEventListener("mouseout", onMouseOut, true);
+    document.getElementById("cor3").addEventListener("mouseover", onMouseOver, true);
+    document.getElementById("cor3").addEventListener("mouseout", onMouseOut, true);
+    document.getElementById("corFinal").addEventListener("mouseover", onMouseOver, true);
+    document.getElementById("corFinal").addEventListener("mouseout", onMouseOut, true);
+    document.getElementById("apagar").addEventListener("mouseover", onMouseOver, true);
+    document.getElementById("apagar").addEventListener("mouseout", onMouseOut, true);
 
     // document.getElementById("cor2").classList.add('clickable');
     // document.getElementById("cor3").classList.add('clickable');
@@ -998,6 +985,8 @@ function loadJogoCores() {
         document.getElementById("corFinal").classList.add('clickable');
         document.getElementById("cor1").onclick = null;
         document.getElementById("cor1").classList.remove('clickable');
+        document.getElementById("cor1").removeEventListener("mouseover", onMouseOver, true);
+        document.getElementById("cor1").removeEventListener("mouseout", onMouseOut, true);
         if (numCores == 2) {
             document.getElementById("cor2").onclick = null;
             document.getElementById("cor2").classList.remove('clickable');
@@ -1011,14 +1000,14 @@ function loadJogoCores() {
 
         //Note que: As verificações são feitas em rgb mas as cores usadas estão em hex(ver função rgbToHex).
         switch (rgbToHex(final.style.backgroundColor)) {        //Verifica a cor do elemento "cor final"
-            case '#ffffff':                                     //No caso de estar em branco (início)
-                final.style.backgroundColor = "#c2185b";        //Cor final passa a magenta
+            case branco:                                     //No caso de estar em branco (início)
+                final.style.background = magenta;        //Cor final passa a magenta
                 break;
-            case '#00b0ff':                                     //No caso de estar em azul
-                final.style.backgroundColor = "#7b1fa2";        //Cor final passa a roxo
+            case azul:                                     //No caso de estar em azul
+                final.style.background = roxo;        //Cor final passa a roxo
                 break;
-            case '#f4b400':                                     //No caso de estar em amarelo
-                final.style.backgroundColor = "#d84315";        //Cor final passa a laranja
+            case amarelo:                                     //No caso de estar em amarelo
+                final.style.background = laranja;        //Cor final passa a laranja
                 break;
             default:
                 print("nada");
@@ -1030,6 +1019,8 @@ function loadJogoCores() {
         document.getElementById("corFinal").classList.add('clickable');
         document.getElementById("cor2").onclick = null;
         document.getElementById("cor2").classList.remove('clickable');
+        document.getElementById("cor2").removeEventListener("mouseover", onMouseOver, true);
+        document.getElementById("cor2").removeEventListener("mouseout", onMouseOut, true);
         if (numCores == 2) {
             document.getElementById("cor1").onclick = null;
             document.getElementById("cor1").classList.remove('clickable');
@@ -1042,13 +1033,13 @@ function loadJogoCores() {
         console.log(rgbToHex(final.style.backgroundColor));
         switch (rgbToHex(final.style.backgroundColor)) {
             case '#ffffff':
-                final.style.backgroundColor = "#00b0ff";
+                final.style.background = "#00b0ff";
                 break;
             case '#c2185b':
-                final.style.backgroundColor = "#7b1fa2";
+                final.style.background = "#7b1fa2";
                 break;
             case '#f4b400':
-                final.style.backgroundColor = "#43a047";
+                final.style.background = "#43a047";
                 break;
             default:
                 console.log("nada");
@@ -1060,6 +1051,8 @@ function loadJogoCores() {
         document.getElementById("corFinal").classList.add('clickable');
         document.getElementById("cor3").onclick = null;
         document.getElementById("cor3").classList.remove('clickable');
+        document.getElementById("cor3").removeEventListener("mouseover", onMouseOver, true);
+        document.getElementById("cor3").removeEventListener("mouseout", onMouseOut, true);
         if (numCores == 2) {
             document.getElementById("cor2").onclick = null;
             document.getElementById("cor2").classList.remove('clickable');
@@ -1072,13 +1065,13 @@ function loadJogoCores() {
         console.log(final.style.backgroundColor);
         switch (rgbToHex(final.style.backgroundColor)) {
             case '#ffffff':
-                final.style.backgroundColor = "#f4b400";
+                final.style.background = "#f4b400";
                 break;
             case '#00b0ff':
-                final.style.backgroundColor = "#43a047";
+                final.style.background = "#43a047";
                 break;
             case '#c2185b':
-                final.style.backgroundColor = "#d84315";
+                final.style.background = "#d84315";
                 break;
             default:
                 console.log("nada");
@@ -1339,7 +1332,7 @@ function loadJogoNumeros() {
     for (var j = 0; j < num2; j++) {
         document.getElementById("op" + opCerta).innerHTML += "<img src='img/frutas/" + f2 + ".png'>";
     }
-    document.getElementById("op" + opCerta).onclick = function(){
+    document.getElementById("op" + opCerta).onclick = function () {
         somRespostaCorreta.load();
         somRespostaCorreta.play();
         setTimeout("loadJogoNumeros()", 1000);
@@ -1361,7 +1354,7 @@ function loadJogoNumeros() {
                 document.getElementById("op" + l).innerHTML += "<img src='img/frutas/" + f2 + ".png'>";
             }
             print(num1 + "=" + fErrada1);
-            document.getElementById("op" + l).onclick = function(){
+            document.getElementById("op" + l).onclick = function () {
                 somRespostaErrada.load();
                 somRespostaErrada.play();
             };
