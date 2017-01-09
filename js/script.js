@@ -1,5 +1,6 @@
 //----------VARIÁVEIS GLOBAIS----------//
 var debug = true;                                           //(mostrar ou não) Prints na consola
+var nome_utilizador = "";
 
 //----------AUDIO--------------
 var musica = document.createElement("Audio");               // Música de fundo
@@ -98,7 +99,7 @@ function print(s) {
  var vel = 5;                           //velocidade do parallax do elemento body 3
  */
 
-//----------NO CARREGAMENTO----------//
+//----------NO CARREGAMENTO-----------//
 window.onload = function () {
     var temp = "";                                                                      //Elimina classes acrescentadas ao elemento "voz"
 
@@ -115,6 +116,8 @@ window.onload = function () {
             musica.play();
         }
     };
+
+    document.getElementById("abrir_modal_nome").click();                                //Abre o modal do nome do utilizador
 
     document.getElementById("menu_musica").click();                                     //Simula clique no "menu-musica" do menu lateral
 
