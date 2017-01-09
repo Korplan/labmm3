@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
-<!-- Menu (botão) -->
+<!-- Menu lateral (botão) -->
 <a href="#" data-activates="slide-out" class="button-collapse" id="settings"><i
         class="material-icons medium">settings</i></a>
 
@@ -28,9 +28,13 @@
         class="material-icons medium">help</i></a>
 
 <!-- Voltar (botão) -->
-
 <a href="#" class="button" id="voltar" style="display: none"><i
         class="material-icons medium">close</i></a>
+
+<!--No Carregamento-->
+<div class="progress" style="display:none">
+    <div class="determinate" style="width: 70%"></div>
+</div>
 
 <!--botão invisível-->
 <a href="#" class="waves-effect waves-dark btn lighten-1" data-target="modal_user"
@@ -232,17 +236,22 @@
     </div>
 </div>
 
-
 <!-- Modal - Alterar Interação -->
 <div id="modal1" class="modal">
     <div class="modal-content">
-        <h4>ALTERAR O TIPO DE INTERAÇÃO</h4>
-        <p>Pode alterar a qualquer momento o tipo de interação no menu de opções <i
-                class="material-icons tiny">settings</i>.</p>
-        <br/><br/>
-        <h4>INSTRUÇÕES PARA O USO DOS JOGOS</h4>
-        <p>Pode aceder a qualquer momento às instruções para o uso dos jogos no menu de opções <i
-                class="material-icons tiny">settings</i>.</p>
+        <video width="100%" height="auto" autoplay loop>
+            <source src="inst_memo.mp4" type="video/mp4">
+            O teu browser não suporta o video de instruções.
+        </video>
+        <!--
+                <h4>ALTERAR O TIPO DE INTERAÇÃO</h4>
+                <p>Pode alterar a qualquer momento o tipo de interação no menu de opções <i
+                        class="material-icons tiny">settings</i>.</p>
+                <br/><br/>
+                <h4>INSTRUÇÕES PARA O USO DOS JOGOS</h4>
+                <p>Pode aceder a qualquer momento às instruções para o uso dos jogos no menu de opções <i
+                        class="material-icons tiny">settings</i>.</p>
+        -->
     </div>
     <div class="modal-footer">
         <a href="#!" class="modal-action modal-close waves-effect waves-dark btn-flat">Continuar</a>
@@ -362,15 +371,24 @@
     </div>
 </div>
 
-
-<!-- Menu -->
+<!-- Menu lateral-->
 <ul id="slide-out" class="side-nav">
     <li>
         <div class="userView center">
             <img src="img/logo.png" style="width: 50%">
         </div>
     </li>
-    <li><a class="subheader" style="color: #ef5350">SOM</a></li>
+    <li>
+        <div class="switch">
+            <a>Instruções
+                <label>
+                    <input type="checkbox">
+                    <span class="lever" id="menu_instrucoes"></span>
+                </label>
+            </a>
+        </div>
+
+    </li>
     <li>
         <div class="switch">
             <a>Leitura de ecrã
@@ -442,8 +460,8 @@
             <span class="center">Para saber mais sobre o modo de funcionamento dos vários jogos disponíveis, por favor clique no botão abaixo.</span>
         </li>
     -->
-    <a href="#" class="waves-effect waves-dark btn red lighten-1" data-target="modal_instrucoes" id="instructions">instruções
-        de Jogos</a>
+    <!--<a href="#" class="waves-effect waves-dark btn red lighten-1" data-target="modal_instrucoes" id="instructions">instruções
+        de Jogos</a>-->
     <li id="authors">
             <span class="center">Autoria de Cláudia Amaro, Cláudia Ribeiro, Inês Margarido e Joel Seabra.<br/>Frutas! &copy;
                 2017</span>
