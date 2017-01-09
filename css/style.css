@@ -191,6 +191,10 @@ a#instructions{
     margin-top: 10vh !important;
 }
 
+#modal_user {
+    margin-top: 32vh !important;
+}
+
 .icon{
     height: 80%;
     width: 80%;
@@ -200,7 +204,7 @@ a#instructions{
     line-height: 1.3em;
 }
 
-/*----------JOGO MEMÓRIA--------*/
+/*----------JOGO MEMÓRIA---------*/
 /*Carta*/
 .menuIcon, .carta{
     /*width: 200px;*/
