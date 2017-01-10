@@ -1,6 +1,7 @@
 //----------VARIÁVEIS GLOBAIS----------//
 var debug = true;                                           //(mostrar ou não) Prints na consola
 var nome_utilizador = "";
+var instrucoes=true;                                        //(mostrar ou não) Instruções no inicio dos jogos
 
 //----------AUDIO--------------
 var musica = document.createElement("Audio");               // Música de fundo
@@ -52,7 +53,7 @@ var certas = 0;                                 //Número de pares certos
 //----------JOGO PALAVRAS----------
 var palavrasFeitas = [];            //Array que armazena os index do array "palavras" que já sairam
 var palavra;                        //Guarda palavra sorteada (=palavra para completar no jogo)
-var palavrasCertas=0;
+var palavrasCertas = 0;
 //----------JOGO NUMEROS----------
 var numMax = 5;                     //Número máximo de elementos por opção
 
@@ -446,10 +447,12 @@ function menu() {
     }
 }
 
-
+//----------MENSAGENS----------//
 function win() {
     var frases = ["Parabéns " + nome + ", ganhaste!", "Bem jogado " + nome + "!", "Ganhaste o jogo, " + nome + "!"];
     contentReader(frases[Math.floor(Math.random() * frases.length)]);                             //Lê uma frase personalizada do array acima
+}
+
 function lose() {
     var frases = ["Tenta outra vez, " + nome + "!", "Essa não é a resposta certa.", "Tenta outra resposta, " + nome + "."];
     contentReader(frases[Math.floor(Math.random() * frases.length)]);                               //Lê uma frase personalizada do array acima
@@ -810,83 +813,35 @@ function loadJogoPalavras() {
         }
     }
 
-    switch(palavrasCertas){         //Consoante o nº de respostas corretas muda de nível
+    switch (palavrasCertas) {         //Consoante o nº de respostas corretas muda de nível
         case 0:
-        case 1:
-        case 2:
-            nivel=1;
+            nivel = 1;
             break;
         case 3:
-        case 4:
-        case 5:
-            nivel=2;
+            nivel = 2;
             break;
         case 6:
-        case 7:
-        case 8:
-            nivel=3;
+            nivel = 3;
             break;
     }
 
-    switch(nivel){      //Consoante o aumento do nível, o nº de opções aumenta
-        case 1:
-            for (var k = 0; k < 1; k++) {                                               //Nº de opções = 2
-                var random = silabas[Math.floor(Math.random() * silabas.length)];       //Random = ao index sorteado do array "silabas" entre 0 e nº de index máximo
-                if (random != palavras[palavra][retira]) {                              //Se a sílaba sorteada for diferente da sílaba retirada (que constitui a palavra a completar)
-                    hipoteses[k] = "<div class='silaba opcao clickable z-depth-1'>" + random + "</div>";  //É colocada num array "hipoteses" de index igual a K (=3)
-                    silabas.splice(silabas.indexOf(random), 1);                         //retira do array "silabas" o elemento que já saiu (evita repetiçoes de silabas erradas)
-                }
-                else {
-                    k--;                                                                //É decrementado um k para poder repetir o ciclo com o mesmo valor de k
-                }
-                print(random);
-                print(palavras[palavra][retira]);
-            }
-            hipoteses[k] = "<div id='certo' class='silaba opcao clickable z-depth-1'>" + palavras[palavra][retira] + "</div>";    //Último index do array "hipoteses" é a sílaba certa para completar a palavra
-            hipoteses.sort(function () {                                                                        //Dispõe em index aleatorios as sílabas do array (para que as opções )
-                return 0.5 - Math.random()
-            });
-            document.getElementById("opcoes").innerHTML = hipoteses.join("");                                       //O innerHTML do elemento "opcoes" contém o array hipoteses com elemntos separados por espaço
-            break;
-        case 2:
-            for (var k = 0; k < 2; k++) {                                               //Nº de opções 3
-                var random = silabas[Math.floor(Math.random() * silabas.length)];       //Random = ao index sorteado do array "silabas" entre 0 e nº de index máximo
-                if (random != palavras[palavra][retira]) {                              //Se a sílaba sorteada for diferente da sílaba retirada (que constitui a palavra a completar)
-                    hipoteses[k] = "<div class='silaba opcao clickable z-depth-1'>" + random + "</div>";  //É colocada num array "hipoteses" de index igual a K (=3)
-                    silabas.splice(silabas.indexOf(random), 1);                         //retira do array "silabas" o elemento que já saiu (evita repetiçoes de silabas erradas)
-                }
-                else {
-                    k--;                                                                //É decrementado um k para poder repetir o ciclo com o mesmo valor de k
-                }
-                print(random);
-                print(palavras[palavra][retira]);
-            }
-            hipoteses[k] = "<div id='certo' class='silaba opcao clickable z-depth-1'>" + palavras[palavra][retira] + "</div>";    //Último index do array "hipoteses" é a sílaba certa para completar a palavra
-            hipoteses.sort(function () {                                                                        //Dispõe em index aleatorios as sílabas do array (para que as opções )
-                return 0.5 - Math.random()
-            });
-            document.getElementById("opcoes").innerHTML = hipoteses.join("");                                       //O innerHTML do elemento "opcoes" contém o array hipoteses com elemntos separados por espaço
-            break;
-        case 3:
-            for (var k = 0; k < 3; k++) {                                               //Nº de opções 4
-                var random = silabas[Math.floor(Math.random() * silabas.length)];       //Random = ao index sorteado do array "silabas" entre 0 e nº de index máximo
-                if (random != palavras[palavra][retira]) {                              //Se a sílaba sorteada for diferente da sílaba retirada (que constitui a palavra a completar)
-                    hipoteses[k] = "<div class='silaba opcao clickable z-depth-1'>" + random + "</div>";  //É colocada num array "hipoteses" de index igual a K (=3)
-                    silabas.splice(silabas.indexOf(random), 1);                         //retira do array "silabas" o elemento que já saiu (evita repetiçoes de silabas erradas)
-                }
-                else {
-                    k--;                                                                //É decrementado um k para poder repetir o ciclo com o mesmo valor de k
-                }
-                print(random);
-                print(palavras[palavra][retira]);
-            }
-            hipoteses[k] = "<div id='certo' class='silaba opcao clickable z-depth-1'>" + palavras[palavra][retira] + "</div>";    //Último index do array "hipoteses" é a sílaba certa para completar a palavra
-            hipoteses.sort(function () {                                                                        //Dispõe em index aleatorios as sílabas do array (para que as opções )
-                return 0.5 - Math.random()
-            });
-            document.getElementById("opcoes").innerHTML = hipoteses.join("");                                       //O innerHTML do elemento "opcoes" contém o array hipoteses com elemntos separados por espaço
-            break;
+    for (var k = 0; k < nivel; k++) {                                           //Consoante o aumento do nível, o nº de opções aumenta
+        var random = silabas[Math.floor(Math.random() * silabas.length)];       //Random = ao index sorteado do array "silabas" entre 0 e nº de index máximo
+        if (random != palavras[palavra][retira]) {                              //Se a sílaba sorteada for diferente da sílaba retirada (que constitui a palavra a completar)
+            hipoteses[k] = "<div class='silaba opcao clickable z-depth-1'>" + random + "</div>";  //É colocada num array "hipoteses" de index igual a K (=3)
+            silabas.splice(silabas.indexOf(random), 1);                         //retira do array "silabas" o elemento que já saiu (evita repetiçoes de silabas erradas)
+        }
+        else {
+            k--;                                                                //É decrementado um k para poder repetir o ciclo com o mesmo valor de k
+        }
+        print(random);
+        print(palavras[palavra][retira]);
     }
+    hipoteses[k] = "<div id='certo' class='silaba opcao clickable z-depth-1'>" + palavras[palavra][retira] + "</div>";    //Último index do array "hipoteses" é a sílaba certa para completar a palavra
+    hipoteses.sort(function () {                                                                        //Dispõe em index aleatorios as sílabas do array (para que as opções )
+        return 0.5 - Math.random()
+    });
+    document.getElementById("opcoes").innerHTML = hipoteses.join("");                                       //O innerHTML do elemento "opcoes" contém o array hipoteses com elemntos separados por espaço
 
     document.getElementById("palavraIncompleta").style.animation = "zoomIn 0.8s";
     document.getElementById("palavraIncompleta").style.animationDelay = "1s";
@@ -937,6 +892,8 @@ function loadJogoPalavras() {
 //----------JOGO CORES----------//
 //Função que carrega o jogo
 function loadJogoCores() {
+    document.getElementById('body_memoria').style.animation = "movEsquerda 3s";
+    body.style.animation = "movEsquerda2 3s";
 
     document.getElementById('paleta').style.animation = "";
     document.getElementById('paleta').style.animation = "zoomIn 0.8s";
@@ -1231,8 +1188,46 @@ function loadJogoNumeros() {
     var num1 = document.getElementById("num1").innerHTML = Math.floor(Math.random() * (numMax - 1)) + 1;        //gera um número aleatorio entre 1 e o num Máximo, coloca-o no HTML e guarda na variavel
     var num2 = document.getElementById("num2").innerHTML = numMax - num1;                                       //calcula as frutas que faltam até ao numero maximo
     document.getElementById("num2").classList.add('jogo-num-bola');
+    document.getElementById("num2").classList.add('aparece');
 
     switch (f1 + "_" + f2) {                                                            //verifica as frutas sorteadas e coloca no HTML a respetiva imagem
+        case 'banana_ameixa':
+        case 'ameixa_banana':
+            sumo.innerHTML = "<img src='img/jogoNumeros/sumo2.png'>";
+            break;
+        case 'banana_ananas':
+        case 'ananas_banana':
+            sumo.innerHTML = "<img src='img/jogoNumeros/sumo5.png'>";
+            break;
+        case 'banana_cereja':
+        case 'cereja_banana':
+            sumo.innerHTML = "<img src='img/jogoNumeros/sumo2.png'>";
+            break;
+        case 'banana_cenoura':
+        case 'cenoura_banana':
+            sumo.innerHTML = "<img src='img/jogoNumeros/sumo2.png'>";
+            break;
+        case 'banana_laranja':
+        case 'laranja_banana':
+            sumo.innerHTML = "<img src='img/jogoNumeros/sumo2.png'>";
+            break;
+        case 'banana_maca':
+        case 'maca_banana':
+            sumo.innerHTML = "<img src='img/jogoNumeros/sumo1.png'>";
+            break;
+        case 'banana_mirtilo':
+        case 'mirtilo_banana':
+            sumo.innerHTML = "<img src='img/jogoNumeros/sumo4.png'>";
+            break;
+        case 'banana_morango':
+        case 'morango_banana':
+            sumo.innerHTML = "<img src='img/jogoNumeros/sumo7.png'>";
+            break;
+        case 'banana_pera':
+        case 'pera_banana':
+            sumo.innerHTML = "<img src='img/jogoNumeros/sumo1.png'>";
+            break;
+
         case 'ameixa_ananas':
         case 'ananas_ameixa':
             sumo.innerHTML = "<img src='img/jogoNumeros/sumo2.png'>";
@@ -1374,7 +1369,6 @@ function loadJogoNumeros() {
             break;
     }
 
-
     document.getElementById("op1").innerHTML = "";              //limpa o innerHTML do elemento
     document.getElementById("op2").innerHTML = "";              //limpa o innerHTML do elemento
     document.getElementById("op3").innerHTML = "";              //limpa o innerHTML do elemento
@@ -1399,8 +1393,32 @@ function loadJogoNumeros() {
         somRespostaCorreta.play();
         this.style.animation = "tada 0.8s";
         this.style.animationFillMode = "both";
+        document.getElementById("fruta1").click();
+        document.getElementById("fruta2").click();
+        document.getElementById("sumo").click();
+        document.getElementById("num1").click();
+        /*document.getElementById("num2").click();*/
         setTimeout("loadJogoNumeros()", 3000);
     };
+
+    document.getElementById("fruta1").setAttribute('animation', 'zoomOut 0.8s');
+    document.getElementById("fruta1").setAttribute('animationFillMode', 'both');
+
+/*
+    document.getElementById("fruta2").onclick = function () {
+        document.getElementById("fruta2").style.animation = "shake 0s";
+    };
+    document.getElementById("num1").onclick = function () {
+        document.getElementById("num1").style.animation = "shake 0s";
+    };
+    document.getElementById("num2").onclick = function () {
+        document.getElementById("num2").style.animation = "shake 0s";
+    };
+    document.getElementById("sumo").onclick = function () {
+        document.getElementById("sumo").style.animation = "shake 0s";
+    };
+*/
+
 
     var temp = 0;
     for (var l = 1; l <= 3; l++) {                      //coloca as imagens das frutas em cada uma das posiçoes com respostas erradas
@@ -1437,9 +1455,11 @@ function loadJogoNumeros() {
     document.getElementById("fruta2").style.animationDelay = "1s";
     document.getElementById("fruta2").style.animationFillMode = "both";
 
+/*
     document.getElementById("num2").style.animation = "zoomIn 0.8s";
     document.getElementById("num2").style.animationDelay = "1s";
     document.getElementById("num2").style.animationFillMode = "both";
+*/
 
     document.getElementById("num1").style.animation = "zoomIn 0.8s";
     document.getElementById("num1").style.animationDelay = "1s";
