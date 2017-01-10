@@ -943,8 +943,6 @@ function loadJogoPalavras() {
 //----------JOGO CORES----------//
 //Função que carrega o jogo
 function loadJogoCores() {
-    document.getElementById('body_memoria').style.animation = "movEsquerda 3s";
-    body.style.animation = "movEsquerda2 3s";
 
     document.getElementById('paleta').style.animation = "";
     document.getElementById('paleta').style.animation = "zoomIn 0.8s";
