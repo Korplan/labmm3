@@ -264,6 +264,21 @@ a#instructions{
 }
 
 /*----------JOGO CORES--------*/
+#apresentacao{
+    font-size: 20px;
+    font-weight: bold;
+    width: auto;
+    height: auto;
+    border-radius: 10px;
+    background-color: lightgoldenrodyellow;
+    position: relative;
+    top: 50px;
+}
+
+#declaracao {
+    padding: 0px;
+}
+
 #cor1, #cor2, #cor3{
     border-radius: 50px;
     width: 100px;

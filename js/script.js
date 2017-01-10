@@ -67,6 +67,7 @@ var vermelho = "#be1e2c";
 var roxo = "#7b1fa2";
 var laranja = "#f37e2b";
 var verde = "#54b430";
+var fala;
 
 //----------GERAL----------
 var interacao;                  // 0 - Point Wait
@@ -947,6 +948,7 @@ function loadJogoCores() {
             sorteiaDesenho = parseInt(Math.random() * (palavras.length));
         } while (coresFeitas.indexOf(sorteiaDesenho) != -1);
         desenha();
+        document.getElementById('declaracao').innerHTML = "Olá Francisco! " + fala;
         document.getElementById('imagem').style.animation = "zoomIn 0.8s";
         document.getElementById('imagem').style.animationDelay = "1s";
         document.getElementById('imagem').style.animationFillMode = "both";
@@ -1130,33 +1132,43 @@ function desenha() {
     switch (sorteiaDesenho) {                                                   //Desenha em canvas a fruta sorteada
         case 0:
             desenhaAmeixa(ctx);
+            fala = "Eu sou a ameixa e sou vermelha.";
             return rgbToHex(corMuda) == "#be1e2c";
         case 1:
             desenhaAnanas(ctx);
+            fala = "Eu sou o ananás e sou amarelo.";
             return rgbToHex(corMuda) == "#f9dd2a";
         case 2:
             desenhaCenoura(ctx);
+            fala = "Eu sou a cenoura e sou cor de laranja.";
             return rgbToHex(corMuda) == "#f37e2b";
         case 3:
             desenhaCereja(ctx);
+            fala = "Nós somos as cerejas e somos vermelhas.";
             return rgbToHex(corMuda) == "#be1e2c";
         case 4:
             desenhaMaca(ctx);
+            fala = "Eu sou a maçã e sou verde.";
             return rgbToHex(corMuda) == "#54b430";
         case 5:
             desenhaMirtilo(ctx);
+            fala = "Eu sou o mirtilo e sou azul.";
             return rgbToHex(corMuda) == "#27408b";
         case 6:
             desenhaMorango(ctx);
+            fala = "Eu sou o morango e sou vermelho.";
             return rgbToHex(corMuda) == "#be1e2c";
         case 7:
             desenhaLaranja(ctx);
+            fala = "Eu sou a laranja e sou cor de laranja.";
             return rgbToHex(corMuda) == "#f37e2b";
         case 8:
             desenhaPera(ctx);
+            fala = "Eu sou a pêra e sou amarela.";
             return rgbToHex(corMuda) == "#f9dd2a";
         case 9:
             desenhaBanana(ctx);
+            fala = "Eu sou a banana e sou amarela.";
             return rgbToHex(corMuda) == "#f9dd2a";
     }
 }
