@@ -264,6 +264,16 @@ a#instructions{
 }
 
 /*----------JOGO CORES--------*/
+#triangulo {
+    width: 0;
+    height: 0;
+    border-left: 30px solid transparent;
+    border-right: 30px solid transparent;
+    border-bottom: 60px solid white;
+}
+
+
+
 #apresentacao{
     font-size: 20px;
     font-weight: bold;
@@ -273,10 +283,6 @@ a#instructions{
     background-color: white;
     position: relative;
     top: 50px;
-}
-
-#declaracao {
-    padding: 0px;
 }
 
 #cor1, #cor2, #cor3{
