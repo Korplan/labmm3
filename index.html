@@ -32,10 +32,14 @@
 <a href="#" class="button" id="voltar" style="display: none"><i
         class="material-icons medium">close</i></a>
 
-<!--botão invisível-->
-<a href="#" class="waves-effect waves-dark btn lighten-1" data-target="modal_user"
-   id="abrir_modal_nome" style="opacity: 0">Obter
-    Ajuda</a>
+    <!--No Carregamento-->
+    <div class="progress" style="display:none">
+        <div class="determinate" style="width: 70%"></div>
+    </div>
+
+    <!--botão invisível-->
+    <a href="#" class="waves-effect waves-dark btn indigo lighten-1" style="display: none" data-target="modal_user"
+       id="abrir_modal_nome"></a>
 
 
 <!-- Página - Escolher interação -->
@@ -145,46 +149,47 @@
     </div>
 </div>
 
-<!-- Página - Jogo cores -->
-<div id="jogoCores" style="display: none">
-    <h1 class="center">Jogo das Cores</h1>
-    <div class="container">
-        <div class="row" id="paleta">
-            <div class="col m6">
-                <div class="row">
-                    <div class="col m6 z-depth-1 clickable" id="cor1">
-                        <div class="click">
-                        </div>
-                    </div>
-                    <div class="cores-lig z-depth-1" id="cores-lig-1"></div>
-                </div>
-                <div class="row">
-                    <div class="col m6 z-depth-1 clickable" id="cor2">
-                        <div class="click">
-                        </div>
-                    </div>
-                    <div class="col m6 z-depth-1" id="corFinal" style="background: #FFF">
-                        <div class="click">
-                        </div>
-                    </div>
-                    <div class="cores-lig z-depth-1" id="cores-lig-2"></div>
-                </div>
-                <div class="row">
-                    <div class="col m6 z-depth-1 clickable" id="cor3">
-                        <div class="click">
-                        </div>
-                    </div>
-                    <div class="col m6">
-                        <div class="center z-depth-1 clickable" id="apagar">
+    <!-- Página - Jogo cores -->
+    <div id="jogoCores" style="display: none">
+        <h1 class="center">Jogo das Cores</h1>
+        <div class="container">
+            <div class="row" id="paleta">
+                <div class="col m6">
+                    <div class="row">
+                        <div class="col m6 z-depth-1 clickable" id="cor1">
                             <div class="click">
                             </div>
                         </div>
+                        <div class="cores-lig z-depth-1" id="cores-lig-1"></div>
                     </div>
-                    <div class="cores-lig z-depth-1" id="cores-lig-3"></div>
+                    <div class="row">
+                        <div class="col m6 z-depth-1 clickable" id="cor2">
+                            <div class="click">
+                            </div>
+                        </div>
+                        <div class="col m6 z-depth-1" id="corFinal" style="background: #FFF">
+                            <div class="click">
+                            </div>
+                        </div>
+                        <div class="cores-lig z-depth-1" id="cores-lig-2"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col m6 z-depth-1 clickable" id="cor3">
+                            <div class="click">
+                            </div>
+                        </div>
+                        <div class="col m6">
+                            <div class="center z-depth-1 clickable" id="apagar">
+                                <div class="click">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cores-lig z-depth-1" id="cores-lig-3"></div>
+                    </div>
                 </div>
-            </div>
-            <div class="col m6" id="imagem">
-                <canvas id="canvas" width="405" height="460"></canvas>
+                <div class="col m6" id="imagem">
+                    <canvas id="canvas" width="405" height="460"></canvas>
+                </div>
             </div>
             <div class="col m6">
                 <div class="col m6">
@@ -194,7 +199,6 @@
             </div>
         </div>
     </div>
-</div>
 
 <!-- Página - Jogo números -->
 <div id="jogoNumeros" style="display: none">
@@ -221,6 +225,7 @@
             <div class="row clickable rounded z-depth-1 white" id="op1"></div>
             <div class="row clickable rounded z-depth-1 white" id="op2"></div>
             <div class="row clickable rounded z-depth-1 white" id="op3"></div>
+            <div class="row clickable rounded z-depth-1 white" id="op4"></div>
         </div>
     </div>
 </div>
@@ -255,55 +260,49 @@
     </div>
 </div>
 
-<!-- Modal - Instruções -->
-<div id="modal_instrucoes" class="modal">
-    <div class="modal-content">
-        <h4>INSTRUÇÕES PARA O USO DOS JOGOS</h4><br/>
-        <h5>NÚMEROS</h5>
-        <p>Neste jogo é apresentado um sumo composto por um conjunto de frutas e/ou legumes.
-            O jogador terá que escolher a combinação de frutas/legumes correnta de entre as opções apresentadas.
-            Caso acerte passa para a fase seguinte, caso erre terá que tentar novamente.</p><br/>
-        <h5>PALAVRAS</h5>
-        <p>Neste jogo é apresentada uma imagem de uma fruta ou legume.
-            Neste caso, o jogador deverá completar a palavra, que se encontra dividida em sílabas.
-            Para tal deverá escolher uma das síladas disponíveis.
-            Caso acerte passa para a fase seguinte, caso erre terá que tentar novamente.</p><br/>
-        <h5>MEMÓRIA</h5>
-        <p>O desafio neste jogo consiste em encontrar os pares escondidos nas cartas.
-            Cada vez que o jogador selecione uma carta ela irá virar-se e mostrar a fruta ou legume.
-            Quando o par for encontrado, essas cartas ficarão visíveis, mas quando errar as cartas voltam a
-            vira-se
-            ocultando a fruta ou legume.
-            Quando o jogador conseguir descobrir todos os pares passa para a fase seguinte.</p><br/>
-        <h5>CORES</h5>
-        <p>No jogo das cores é apresentada a imagem de uma fruta ou legume.
-            O jogador deverá selecionar uma ou duas cores primárias por forma a obter a cor correta da fruta ou
-            legume apresentada.
-            Após selecionar a(s) cor(es) necessárias, terá que selecionar a cor por forma a pintar a fruta ou
-            legume.
-            Caso acerte passa para a fase seguinte, caso erre terá que tentar novamente.</p><br/><br/>
-        <p>Em cada um dos jogos estará disponível no canto superior esquerdo um ícone de acesso à ajuda <i
-                class="material-icons tiny">help</i>.</p>
-    </div>
-    <div class="modal-footer">
-        <a href="#!" class="modal-action modal-close waves-effect waves-dark btn-flat">Fechar</a>
-    </div>
-</div>
+<!--&lt;!&ndash; Modal - Instruções &ndash;&gt;-->
+<!--<div id="modal_instrucoes" class="modal">-->
+    <!--<div class="modal-content">-->
+        <!--<h4>INSTRUÇÕES PARA O USO DOS JOGOS</h4><br/>-->
+        <!--<h5>NÚMEROS</h5>-->
+        <!--<p>Neste jogo é apresentado um sumo composto por um conjunto de frutas e/ou legumes.-->
+            <!--O jogador terá que escolher a combinação de frutas/legumes correnta de entre as opções apresentadas.-->
+            <!--Caso acerte passa para a fase seguinte, caso erre terá que tentar novamente.</p><br/>-->
+        <!--<h5>PALAVRAS</h5>-->
+        <!--<p>Neste jogo é apresentada uma imagem de uma fruta ou legume.-->
+            <!--Neste caso, o jogador deverá completar a palavra, que se encontra dividida em sílabas.-->
+            <!--Para tal deverá escolher uma das síladas disponíveis.-->
+            <!--Caso acerte passa para a fase seguinte, caso erre terá que tentar novamente.</p><br/>-->
+        <!--<h5>MEMÓRIA</h5>-->
+        <!--<p>O desafio neste jogo consiste em encontrar os pares escondidos nas cartas.-->
+            <!--Cada vez que o jogador selecione uma carta ela irá virar-se e mostrar a fruta ou legume.-->
+            <!--Quando o par for encontrado, essas cartas ficarão visíveis, mas quando errar as cartas voltam a-->
+            <!--vira-se-->
+            <!--ocultando a fruta ou legume.-->
+            <!--Quando o jogador conseguir descobrir todos os pares passa para a fase seguinte.</p><br/>-->
+        <!--<h5>CORES</h5>-->
+        <!--<p>No jogo das cores é apresentada a imagem de uma fruta ou legume.-->
+            <!--O jogador deverá selecionar uma ou duas cores primárias por forma a obter a cor correta da fruta ou-->
+            <!--legume apresentada.-->
+            <!--Após selecionar a(s) cor(es) necessárias, terá que selecionar a cor por forma a pintar a fruta ou-->
+            <!--legume.-->
+            <!--Caso acerte passa para a fase seguinte, caso erre terá que tentar novamente.</p><br/><br/>-->
+        <!--<p>Em cada um dos jogos estará disponível no canto superior esquerdo um ícone de acesso à ajuda <i-->
+                <!--class="material-icons tiny">help</i>.</p>-->
+    <!--</div>-->
+    <!--<div class="modal-footer">-->
+        <!--<a href="#!" class="modal-action modal-close waves-effect waves-dark btn-flat">Fechar</a>-->
+    <!--</div>-->
+<!--</div>-->
 
 <!-- Modal_numeros - Ajuda no jogo dos números -->
 <div id="modal_numeros" class="modal modal_ajuda">
     <div class="modal-content">
-        <h4>AJUDA</h4><br/>
-        <p>No menu de ajuda são disponibilizadas duas opções:<br/>
-            1. Obter ajuda, eliminando uma das alternativas erradas - através do botão "Obter Ajuda";<br/>
-            2. Obter a resposta correta - através do botão "Obter Solução".</p><br/>
-        <p>Nota que se for selecionada a opção "Obter Solução" o jogador não passará ao nível seguinte de
-            dificuldade.</p><br/><br/>
-        <a href="#" class="waves-effect waves-dark btn lighten-1" data-target="modal_instrucoes"
-           id="obter_ajuda_numeros">Obter
-            Ajuda</a>
-        <a href="#" class="waves-effect waves-dark btn red lighten-1" data-target="modal_instrucoes"
-           id="obter_solucao_numeros">Obter Solução</a>
+        <h4>COMO JOGAR</h4><br/>
+        <video width="90%" height="auto" autoplay loop>
+            <source src="inst_memo.mp4" type="video/mp4">
+            O teu browser não suporta o video de instruções.
+        </video>
     </div>
     <div class="modal-footer">
         <a href="#!" class="modal-action modal-close waves-effect waves-dark btn-flat">Fechar</a>
@@ -313,16 +312,11 @@
 <!-- Modal_palavras - Ajuda no jogo dos palavras -->
 <div id="modal_palavras" class="modal modal_ajuda">
     <div class="modal-content">
-        <h4>AJUDA</h4><br/>
-        <p>No menu de ajuda são disponibilizadas duas opções:<br/>
-            1. Obter ajuda, eliminando uma das alternativas erradas - através do botão "Obter Ajuda";<br/>
-            2. Obter a resposta correta - através do botão "Obter Solução".</p><br/>
-        <p>Nota que se for selecionada a opção "Obter Solução" o jogador não passará ao nível seguinte de
-            dificuldade.</p><br/><br/>
-        <a href="#" class="waves-effect waves-dark btn lighten-1" data-target="modal_instrucoes"
-           id="obter_ajuda_palavras">Obter Ajuda</a>
-        <a href="#" class="waves-effect waves-dark btn red lighten-1" data-target="modal_instrucoes"
-           id="obter_solucao_palavras">Obter Solução</a>
+        <h4>COMO JOGAR</h4><br/>
+        <video width="90%" height="auto" autoplay loop>
+            <source src="inst_memo.mp4" type="video/mp4">
+            O teu browser não suporta o video de instruções.
+        </video>
     </div>
     <div class="modal-footer">
         <a href="#!" class="modal-action modal-close waves-effect waves-dark btn-flat">Fechar</a>
@@ -332,17 +326,11 @@
 <!-- Modal_memoria - Ajuda no jogo da memória -->
 <div id="modal_memoria" class="modal modal_ajuda">
     <div class="modal-content">
-        <h4>AJUDA</h4><br/>
-        <p>No menu de ajuda são disponibilizadas duas opções:<br/>
-            1. Obter ajuda, eliminando uma das alternativas erradas - através do botão "Obter Ajuda";<br/>
-            2. Obter a resposta correta - através do botão "Obter Solução".</p><br/>
-        <p>Nota que se for selecionada a opção "Obter Solução" o jogador não passará ao nível seguinte de
-            dificuldade.</p><br/><br/>
-        <a href="#" class="waves-effect waves-dark btn lighten-1" data-target="modal_instrucoes"
-           id="obter_ajuda_memoria">Obter
-            Ajuda</a>
-        <a href="#" class="waves-effect waves-dark btn red lighten-1" data-target="modal_instrucoes"
-           id="obter_solucao_memoria">Obter Solução</a>
+        <h4>COMO JOGAR</h4><br/>
+        <video width="90%" height="auto" autoplay loop>
+            <source src="inst_memo.mp4" type="video/mp4">
+            O teu browser não suporta o video de instruções.
+        </video>
     </div>
     <div class="modal-footer">
         <a href="#!" class="modal-action modal-close waves-effect waves-dark btn-flat">Fechar</a>
@@ -352,119 +340,123 @@
 <!-- Modal_cores - Ajuda no jogo das cores -->
 <div id="modal_cores" class="modal modal_ajuda">
     <div class="modal-content">
-        <h4>AJUDA</h4><br/>
-        <p>No menu de ajuda são disponibilizadas duas opções:<br/>
-            1. Obter ajuda, eliminando uma das alternativas erradas - através do botão "Obter Ajuda";<br/>
-            2. Obter a resposta correta - através do botão "Obter Solução".</p><br/>
-        <p>Nota que se for selecionada a opção "Obter Solução" o jogador não passará ao nível seguinte de
-            dificuldade.</p><br/><br/>
-        <a href="#" class="waves-effect waves-dark btn lighten-1" data-target="modal_instrucoes" id="obter_ajuda_cores">Obter
-            Ajuda</a>
-        <a href="#" class="waves-effect waves-dark btn red lighten-1" data-target="modal_instrucoes"
-           id="obter_solucao_cores">Obter Solução</a>
+        <h4>COMO JOGAR</h4><br/>
+        <video width="90%" height="auto" autoplay loop>
+            <source src="inst_memo.mp4" type="video/mp4">
+            O teu browser não suporta o video de instruções.
+        </video>
     </div>
     <div class="modal-footer">
         <a href="#!" class="modal-action modal-close waves-effect waves-dark btn-flat">Fechar</a>
     </div>
 </div>
 
+        <!-- Menu lateral-->
+        <ul id="slide-out" class="side-nav">
+            <li>
+                <div class="userView center">
+                    <img src="img/logo.png" style="width: 50%">
+                </div>
+            </li>
+            <li>
+                <div class="switch">
+                    <a>Instruções
+                        <label>
+                            <input type="checkbox">
+                            <span class="lever" id="menu_instrucoes"></span>
+                        </label>
+                    </a>
+                </div>
 
-<!-- Menu -->
-<ul id="slide-out" class="side-nav">
-    <li>
-        <div class="userView center">
-            <img src="img/logo.png" style="width: 50%">
-        </div>
-    </li>
-    <li><a class="subheader" style="color: #ef5350">SOM</a></li>
-    <li>
-        <div class="switch">
-            <a>Leitura de ecrã
-                <label>
-                    <input type="checkbox">
-                    <span class="lever" id="menu_leitor"></span>
-                </label>
-            </a>
-        </div>
+            </li>
+            <li>
+                <div class="switch">
+                    <a>Leitura de ecrã
+                        <label>
+                            <input type="checkbox">
+                            <span class="lever" id="menu_leitor"></span>
+                        </label>
+                    </a>
+                </div>
 
-    </li>
-    <li>
-        <div class="switch">
-            <a>Música
-                <label>
-                    <input type="checkbox">
-                    <span class="lever" id="menu_musica">
+            </li>
+            <li>
+                <div class="switch">
+                    <a>Música
+                        <label>
+                            <input type="checkbox">
+                            <span class="lever" id="menu_musica">
                     </span>
-                </label>
-            </a>
-        </div>
-    </li>
-    <li>
-        <div class="switch">
-            <a>Efeitos sonoros
-                <label>
-                    <input type="checkbox">
-                    <span class="lever" id="menu_sons">
+                        </label>
+                    </a>
+                </div>
+            </li>
+            <li>
+                <div class="switch">
+                    <a>Efeitos sonoros
+                        <label>
+                            <input type="checkbox">
+                            <span class="lever" id="menu_sons">
                     </span>
-                </label>
-            </a>
-        </div>
-    </li>
-    <li><a class="subheader" style="color: #ef5350">NAVEGAÇÃO</a></li>
-    <li style="color: #000">
-        <ul class="collapsible" data-collapsible="accordion">
-            <li>
-                <input class="collapsible-header" name="menu" type="radio" id="menu_paw">
-                <label for="menu_paw">Apontar e esperar</label>
-                <div class="collapsible-body">O utilizador tem que colocar o cursor sobre o item a selecionar e
-                    esperar que o temporizador pare.
+                        </label>
+                    </a>
                 </div>
             </li>
-            <li>
-                <input class="collapsible-header" name="menu" type="radio" id="menu_cursor">
-                <label for="menu_cursor">Cursor</label>
-                <div class="collapsible-body">O utilizador tem que colocar o cursor sobre o item a selecionar e
-                    clicar.
-                </div>
+            <li><a class="subheader" style="color: #ef5350">NAVEGAÇÃO</a></li>
+            <li style="color: #000">
+                <ul class="collapsible" data-collapsible="accordion">
+                    <li>
+                        <input class="collapsible-header" name="menu" type="radio" id="menu_paw">
+                        <label for="menu_paw">Apontar e esperar</label>
+                        <div class="collapsible-body">O utilizador tem que colocar o cursor sobre o item a selecionar e
+                            esperar que o temporizador pare.
+                        </div>
+                    </li>
+                    <li>
+                        <input class="collapsible-header" name="menu" type="radio" id="menu_cursor">
+                        <label for="menu_cursor">Cursor</label>
+                        <div class="collapsible-body">O utilizador tem que colocar o cursor sobre o item a selecionar e
+                            clicar.
+                        </div>
+                    </li>
+                    <li>
+                        <input class="collapsible-header" name="menu" type="radio" id="menu_varrimento">
+                        <label for="menu_varrimento">Varrimento</label>
+                        <div class="collapsible-body">Os itens são selecionados automaticamente e o utilizador só tem
+                            que
+                            parar no pretendido.
+                        </div>
+                    </li>
+                    <li>
+                        <input class="collapsible-header" name="menu" type="radio" id="menu_voz">
+                        <label for="menu_voz">Controlo por voz</label>
+                        <div class="collapsible-body">O utilizador apenas tem que falar para selecionar itens.</div>
+                    </li>
+                </ul>
             </li>
-            <li>
-                <input class="collapsible-header" name="menu" type="radio" id="menu_varrimento">
-                <label for="menu_varrimento">Varrimento</label>
-                <div class="collapsible-body">Os itens são selecionados automaticamente e o utilizador só tem
-                    que
-                    parar no pretendido.
-                </div>
-            </li>
-            <li>
-                <input class="collapsible-header" name="menu" type="radio" id="menu_voz">
-                <label for="menu_voz">Controlo por voz</label>
-                <div class="collapsible-body">O utilizador apenas tem que falar para selecionar itens.</div>
-            </li>
-        </ul>
-    </li>
-    <!--
-        <li><a class="subheader" style="color: #ef5350">INSTRUÇÕES DOS JOGOS</a></li>
-        <li id="instructions_text">
-            <span class="center">Para saber mais sobre o modo de funcionamento dos vários jogos disponíveis, por favor clique no botão abaixo.</span>
-        </li>
-    -->
-    <a href="#" class="waves-effect waves-dark btn red lighten-1" data-target="modal_instrucoes" id="instructions">instruções
-        de Jogos</a>
-    <li id="authors">
+            <!--
+                <li><a class="subheader" style="color: #ef5350">INSTRUÇÕES DOS JOGOS</a></li>
+                <li id="instructions_text">
+                    <span class="center">Para saber mais sobre o modo de funcionamento dos vários jogos disponíveis, por favor clique no botão abaixo.</span>
+                </li>
+            -->
+            <!--<a href="#" class="waves-effect waves-dark btn red lighten-1" data-target="modal_instrucoes" id="instructions">instruções
+                de Jogos</a>-->
+            <li id="authors">
             <span class="center">Autoria de Cláudia Amaro, Cláudia Ribeiro, Inês Margarido e Joel Seabra.<br/>Frutas! &copy;
                 2017</span>
-    </li>
-</ul>
+            </li>
+        </ul>
+    </div>
+    <script src="js/jquery-3.1.1.min.js"></script>
+    <script src="js/materialize.min.js"></script>
 
-<script src="js/jquery-3.1.1.min.js"></script>
-<script src="js/materialize.min.js"></script>
-
-<!-- Modais -->
-<script>
-    $(document).ready(function () {
-        $('.modal').modal();
-    });
-    $(".button-collapse").sideNav();
-</script>
+    <!-- Modais -->
+    <script>
+        $(document).ready(function () {
+            $('.modal').modal();
+        });
+        $(".button-collapse").sideNav();
+    </script>
 </body>
 </html>
