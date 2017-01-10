@@ -55,7 +55,9 @@ var palavrasFeitas = [];            //Array que armazena os index do array "pala
 var palavra;                        //Guarda palavra sorteada (=palavra para completar no jogo)
 var palavrasCertas = 0;
 //----------JOGO NUMEROS----------
-var numMax = 5;                     //Número máximo de elementos por opção
+var numMax = 5;         //Número máximo de elementos por opção
+var nivel = 1;          //guarda o número do nível
+var ronda = 1;          //guarda o número da ronda do jogo
 
 //----------JOGO CORES----------
 var corMuda = '#fff';               //Variável que vai guardar as diferentes cores para pintar as frutas (começa a branco)
@@ -1235,6 +1237,8 @@ function desenha() {
 //Função que carrega o jogo
 function loadJogoNumeros() {
 
+    print("ronda: " + ronda);
+
     var f1, f2, fErrada1, fErrada2;                                     //variaveis que guardam fruta1, fruta2, frutaErrada1 e frutaErrada2
     do {
         f1 = numParaFruta(Math.floor(Math.random() * palavras.length));
@@ -1432,15 +1436,8 @@ function loadJogoNumeros() {
     document.getElementById("op1").innerHTML = "";              //limpa o innerHTML do elemento
     document.getElementById("op2").innerHTML = "";              //limpa o innerHTML do elemento
     document.getElementById("op3").innerHTML = "";              //limpa o innerHTML do elemento
-    document.getElementById("op1").classList.add("clickable");
-    document.getElementById("op1").classList.remove("inativo");
-    document.getElementById("op2").classList.add("clickable");
-    document.getElementById("op2").classList.remove("inativo");
-    document.getElementById("op3").classList.add("clickable");
-    document.getElementById("op3").classList.remove("inativo");
 
-
-    var opCerta = Math.floor(Math.random() * 3 + 1);                //escolhe a posição onde vai colocar a hipotese certa
+    var opCerta = Math.floor(Math.random() * (nivel + 1) + 1);                //escolhe a posição onde vai colocar a hipotese certa
 
     for (var i = 0; i < num1; i++) {                    //coloca as imagens das frutas na posição da resposta correta
         document.getElementById("op" + opCerta).innerHTML += "<img src='img/frutas/" + f1 + ".png'>";
@@ -1448,9 +1445,18 @@ function loadJogoNumeros() {
     for (var j = 0; j < num2; j++) {
         document.getElementById("op" + opCerta).innerHTML += "<img src='img/frutas/" + f2 + ".png'>";
     }
+
     document.getElementById("op" + opCerta).onclick = function () {
         somRespostaCorreta.load();
         somRespostaCorreta.play();
+        if (ronda < 9) {
+            ronda++;
+            setTimeout("loadJogoNumeros()", 1000);
+        }
+        else {
+            document.getElementById("abrir_modal_nome").click();
+        }
+        print("ronda: " + ronda);
         this.style.animation = "tada 0.8s";
         this.style.animationFillMode = "both";
         document.getElementById("fruta1").click();
@@ -1460,6 +1466,8 @@ function loadJogoNumeros() {
         /*document.getElementById("num2").click();*/
         setTimeout("loadJogoNumeros()", 3000);
     };
+
+    //criação dos 3 níveis
 
     document.getElementById("fruta1").setAttribute('animation', 'zoomOut 0.8s');
     document.getElementById("fruta1").setAttribute('animationFillMode', 'both');
@@ -1481,7 +1489,21 @@ function loadJogoNumeros() {
 
 
     var temp = 0;
-    for (var l = 1; l <= 3; l++) {                      //coloca as imagens das frutas em cada uma das posiçoes com respostas erradas
+
+    switch (ronda) {         //Consoante o nº da ronda (o qual é incrementado pelo nº de respostas corretas) muda de nível
+        case 1:
+            nivel = 1;
+            break;
+        case 4:
+            nivel = 2;
+            break;
+        case 7:
+            nivel = 3;
+            break;
+    }
+
+
+    for (var l = 1; l <= nivel + 1; l++) {                  //Sorteia o nº de opções erradas (de acordo com o nível em que está) e coloca as imagens das frutas em cada uma das posiçoes com respostas erradas
         if (l != opCerta) {                             //as erradas sao colocadas num sitio diferente da opção certa
             do {
                 fErrada1 = Math.floor(Math.random() * (numMax - 1) + 1);
@@ -1540,6 +1562,10 @@ function loadJogoNumeros() {
     document.getElementById("op3").style.animation = "zoomIn 0.8s";
     document.getElementById("op3").style.animationDelay = "1s";
     document.getElementById("op3").style.animationFillMode = "both";
+
+    document.getElementById("op4").style.animation = "zoomIn 0.8s";
+    document.getElementById("op4").style.animationDelay = "1s";
+    document.getElementById("op4").style.animationFillMode = "both";
 }
 
 //Função que
