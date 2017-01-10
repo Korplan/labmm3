@@ -68,6 +68,7 @@ var roxo = "#7b1fa2";
 var laranja = "#f37e2b";
 var verde = "#54b430";
 var fala;
+var falaCompleta;
 
 //----------GERAL----------
 var interacao;                  // 0 - Point Wait
@@ -949,9 +950,14 @@ function loadJogoCores() {
         } while (coresFeitas.indexOf(sorteiaDesenho) != -1);
         desenha();
         document.getElementById('declaracao').innerHTML = "Olá Francisco! " + fala;
+        falaCompleta = document.getElementById('declaracao').innerHTML;
         document.getElementById('imagem').style.animation = "zoomIn 0.8s";
         document.getElementById('imagem').style.animationDelay = "1s";
         document.getElementById('imagem').style.animationFillMode = "both";
+        setTimeout("contentReader(falaCompleta)",500);
+        document.getElementById('declaracao').onmouseover = function (){
+            contentReader(falaCompleta);
+        }
     }
     document.getElementById('imagem').style.animation = "";
     limpa = false;
@@ -1066,7 +1072,6 @@ function loadJogoCores() {
         final = document.getElementById("corFinal");
         document.getElementById("corFinal").style.cursor = "url('img/icons/brush.png'), pointer";
         console.log(final.style.backgroundColor);
-        debugger;
         switch (rgbToHex(final.style.backgroundColor)) {
             case '#ffffff':
                 final.style.background = "#f9dd2a";
