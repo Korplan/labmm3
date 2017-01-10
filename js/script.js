@@ -61,12 +61,12 @@ var sorteiaDesenho;                 //Sorteio do elemento a desenhar (canvas)
 var limpa = false;                    //Variável que diz se foi clicado o botão de limpar cores ou não
 var coresFeitas = [];
 var branco = "#ffffff";
-var amarelo = "#f4b400";
-var azul = "#00b0ff";
-var magenta = "#c2185b";
+var amarelo = "#f9dd2a";
+var azul = "#27408b";
+var vermelho = "#be1e2c";
 var roxo = "#7b1fa2";
-var laranja = "#d84315";
-var verde = "#43a047";
+var laranja = "#f37e2b";
+var verde = "#54b430";
 
 //----------GERAL----------
 var interacao;                  // 0 - Point Wait
@@ -350,7 +350,7 @@ function onMouseOver(event) {
                 contentReader("Jogo das cores");
                 break;
             case 'cor1':
-                contentReader("magenta");
+                contentReader("vermelho");
                 break;
             case 'cor2':
                 contentReader("azul");
@@ -375,8 +375,8 @@ function onMouseOver(event) {
                     case verde:
                         contentReader("verde");
                         break;
-                    case magenta:
-                        contentReader("magenta");
+                    case vermelho:
+                        contentReader("vermelho");
                         break;
                     case azul:
                         contentReader("azul");
@@ -682,7 +682,7 @@ function loadVoiceRec() {
                     break;
                 case 4:             //Cores
                     switch (command) {
-                        case 'magenta':
+                        case 'vermelho':
                             document.getElementById("cor1").click();
                             break;
                         case 'azul':
@@ -993,7 +993,7 @@ function loadJogoCores() {
             document.getElementById("cor3").onclick = null;
             document.getElementById("cor3").classList.remove('clickable');
         }
-        document.getElementById('cores-lig-1').style.backgroundColor = "#c2185b";
+        document.getElementById('cores-lig-1').style.backgroundColor = "#be1e2c";
         final = document.getElementById("corFinal");            //Var que guarda o elemento "cor final"
         document.getElementById("corFinal").style.cursor = "url('img/icons/brush.png'), pointer";   //O estilo do cursor quando está sobre a corFinal muda para a imagem de um pincel
         print(rgbToHex(final.style.backgroundColor));
@@ -1001,7 +1001,7 @@ function loadJogoCores() {
         //Note que: As verificações são feitas em rgb mas as cores usadas estão em hex(ver função rgbToHex).
         switch (rgbToHex(final.style.backgroundColor)) {        //Verifica a cor do elemento "cor final"
             case branco:                                     //No caso de estar em branco (início)
-                final.style.background = magenta;        //Cor final passa a magenta
+                final.style.background = vermelho;        //Cor final passa a vermelho
                 break;
             case azul:                                     //No caso de estar em azul
                 final.style.background = roxo;        //Cor final passa a roxo
@@ -1027,19 +1027,19 @@ function loadJogoCores() {
             document.getElementById("cor3").onclick = null;
             document.getElementById("cor3").classList.remove('clickable');
         }
-        document.getElementById('cores-lig-2').style.backgroundColor = "#00b0ff";
+        document.getElementById('cores-lig-2').style.backgroundColor = "#27408b";
         final = document.getElementById("corFinal");
         document.getElementById("corFinal").style.cursor = "url('img/icons/brush.png'), pointer";
         console.log(rgbToHex(final.style.backgroundColor));
         switch (rgbToHex(final.style.backgroundColor)) {
             case '#ffffff':
-                final.style.background = "#00b0ff";
+                final.style.background = "#27408b";
                 break;
-            case '#c2185b':
+            case '#be1e2c':
                 final.style.background = "#7b1fa2";
                 break;
-            case '#f4b400':
-                final.style.background = "#43a047";
+            case '#f9dd2a':
+                final.style.background = "#54b430";
                 break;
             default:
                 console.log("nada");
@@ -1059,19 +1059,20 @@ function loadJogoCores() {
             document.getElementById("cor1").onclick = null;
             document.getElementById("cor1").classList.remove('clickable');
         }
-        document.getElementById('cores-lig-3').style.backgroundColor = "#f4b400";
+        document.getElementById('cores-lig-3').style.backgroundColor = "#f9dd2a";
         final = document.getElementById("corFinal");
         document.getElementById("corFinal").style.cursor = "url('img/icons/brush.png'), pointer";
         console.log(final.style.backgroundColor);
+        debugger;
         switch (rgbToHex(final.style.backgroundColor)) {
             case '#ffffff':
-                final.style.background = "#f4b400";
+                final.style.background = "#f9dd2a";
                 break;
-            case '#00b0ff':
-                final.style.background = "#43a047";
+            case '#27408b':
+                final.style.background = "#54b430";
                 break;
-            case '#c2185b':
-                final.style.background = "#d84315";
+            case '#be1e2c':
+                final.style.background = "#f37e2b";
                 break;
             default:
                 console.log("nada");
@@ -1128,34 +1129,34 @@ function desenha() {
     switch (sorteiaDesenho) {                                                   //Desenha em canvas a fruta sorteada
         case 0:
             desenhaAmeixa(ctx);
-            return rgbToHex(corMuda) == "#c2185b";
+            return rgbToHex(corMuda) == "#be1e2c";
         case 1:
             desenhaAnanas(ctx);
-            return rgbToHex(corMuda) == "#f4b400";
+            return rgbToHex(corMuda) == "#f9dd2a";
         case 2:
             desenhaCenoura(ctx);
-            return rgbToHex(corMuda) == "#d84315";
+            return rgbToHex(corMuda) == "#f37e2b";
         case 3:
             desenhaCereja(ctx);
-            return rgbToHex(corMuda) == "#c2185b";
+            return rgbToHex(corMuda) == "#be1e2c";
         case 4:
             desenhaMaca(ctx);
-            return rgbToHex(corMuda) == "#43a047";
+            return rgbToHex(corMuda) == "#54b430";
         case 5:
             desenhaMirtilo(ctx);
-            return rgbToHex(corMuda) == "#7b1fa2";
+            return rgbToHex(corMuda) == "#27408b";
         case 6:
             desenhaMorango(ctx);
-            return rgbToHex(corMuda) == "#c2185b";
+            return rgbToHex(corMuda) == "#be1e2c";
         case 7:
             desenhaLaranja(ctx);
-            return rgbToHex(corMuda) == "#d84315";
+            return rgbToHex(corMuda) == "#f37e2b";
         case 8:
             desenhaPera(ctx);
-            return rgbToHex(corMuda) == "#f4b400";
+            return rgbToHex(corMuda) == "#f9dd2a";
         case 9:
             desenhaBanana(ctx);
-            return rgbToHex(corMuda) == "#f4b400";
+            return rgbToHex(corMuda) == "#f9dd2a";
     }
 }
 

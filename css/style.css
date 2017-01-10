@@ -188,7 +188,7 @@ a#instructions{
 
 .modal_ajuda{
     color: #363636;
-    margin-top: 10vh !important;
+    margin-top: 5vh !important;
 }
 
 #modal_user {
@@ -272,15 +272,15 @@ a#instructions{
 }
 
 #cor1{
-    background-color: #c2185b;
+    background-color: #be1e2c;
 }
 
 #cor2{
-    background-color: #00b0ff;
+    background-color: #27408B;
 }
 
 #cor3{
-    background-color: #f4b400;
+    background-color: #f9dd2a;
 }
 
 #corFinal{
