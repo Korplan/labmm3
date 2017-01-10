@@ -27,13 +27,16 @@ body{
     background-size: cover;             /*Tamanho do body*/
     overflow: hidden;
 }
+/*
 #body_memoria{
     background: url('../img/fundo-06.png');
-    background-position-x: 100%;       /*Posição da imagem (em relação ao topo)*/
-    background-position-y: 0;       /*Posição da imagem (em relação à esquerda)*/
-    background-repeat: no-repeat;       /*Não repete (não é padrão)*/
-    background-size: cover;             /*Tamanho do body*/
+    background-position-x: 100%;       !*Posição da imagem (em relação ao topo)*!
+    background-position-y: 0;       !*Posição da imagem (em relação à esquerda)*!
+    background-repeat: no-repeat;       !*Não repete (não é padrão)*!
+    background-size: cover;             !*Tamanho do body*!
+    z-index:-10;
 }
+*/
 /*
 #bodyn2{
     background: url('../img/fundo_fundo-n2.png');
