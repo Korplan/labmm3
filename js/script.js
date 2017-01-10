@@ -1015,7 +1015,7 @@ function loadJogoCores() {
             case '#ffffff':
                 contentReader("Escolhe uma cor");
                 break;
-            case '#d84315':
+            case '#f37e2b':
                 contentReader("cor de laranja");
                 break;
             case '#7b1fa2':
@@ -1072,13 +1072,13 @@ function loadJogoCores() {
         //Note que: As verificações são feitas em rgb mas as cores usadas estão em hex(ver função rgbToHex).
         switch (rgbToHex(final.style.backgroundColor)) {        //Verifica a cor do elemento "cor final"
             case branco:                                     //No caso de estar em branco (início)
-                final.style.background = vermelho;        //Cor final passa a vermelho
+                final.style.background = "#be1e2c";        //Cor final passa a vermelho
                 break;
-            case '#00b0ff':                                     //No caso de estar em azul
+            case '#27408b':                                     //No caso de estar em azul
                 final.style.backgroundColor = "#7b1fa2";        //Cor final passa a roxo
                 break;
-            case '#f4b400':                                     //No caso de estar em amarelo
-                final.style.backgroundColor = "#d84315";        //Cor final passa a laranja
+            case '#f9dd2a':                                     //No caso de estar em amarelo
+                final.style.backgroundColor = "#f37e2b";        //Cor final passa a laranja
                 break;
             default:
                 print("nada");
