@@ -124,7 +124,8 @@ window.onload = function () {
         }
     };
 
-    document.getElementById("abrir_modal_nome").click();                                //Abre o modal do nome do utilizador
+    document.getElementById("abrir_modal_nome").click();                                //Simula clique no botão invisível "abrir-modal-nome" e abre o modal do nome do utilizador
+    document.getElementById("abrir_modal_nome").style.display = "none";                 //"Elimina" botão invisível
 
     document.getElementById("menu_musica").click();                                     //Simula clique no "menu-musica" do menu lateral
 
