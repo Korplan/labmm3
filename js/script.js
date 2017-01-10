@@ -63,6 +63,13 @@ var sorteiaDesenho;                 //Sorteio do elemento a desenhar (canvas)
 var limpa = false;                    //Variável que diz se foi clicado o botão de limpar cores ou não
 var coresFeitas = [];
 var branco = "#ffffff";
+var amarelo = "#f9dd2a";
+var azul = "#27408b";
+var vermelho = "#be1e2c";
+var roxo = "#7b1fa2";
+var laranja = "#f37e2b";
+var verde = "#54b430";
+var fala;
 
 //----------GERAL----------
 var interacao;                  // 0 - Point Wait
@@ -112,7 +119,8 @@ window.onload = function () {
         }
     };
 
-    document.getElementById("abrir_modal_nome").click();                                //Simula clique e abre o modal do nome do utilizador
+    document.getElementById("abrir_modal_nome").click();                                //Simula clique no botão invisível "abrir-modal-nome" e abre o modal do nome do utilizador
+    document.getElementById("abrir_modal_nome").style.display = "none";                 //"Elimina" botão invisível
 
     document.getElementById("menu_musica").click();                                     //Simula clique no "menu-musica" do menu lateral
 
@@ -332,6 +340,46 @@ function onMouseOver(event) {                           //??
                 break;
             case 'btn_cores':
                 contentReader("Jogo das cores");
+                break;
+            case 'cor1':
+                contentReader("vermelho");
+                break;
+            case 'cor2':
+                contentReader("azul");
+                break;
+            case 'cor3':
+                contentReader("amarelo");
+                break;
+            case 'apagar':
+                contentReader("apagar");
+                break;
+            case 'corFinal':
+                switch (rgbToHex(this.style.backgroundColor)) {
+                    case branco:
+                        contentReader("Escolhe uma cor");
+                        break;
+                    case laranja:
+                        contentReader("cor de laranja");
+                        break;
+                    case roxo:
+                        contentReader("lilás");
+                        break;
+                    case verde:
+                        contentReader("verde");
+                        break;
+                    case vermelho:
+                        contentReader("vermelho");
+                        break;
+                    case azul:
+                        contentReader("azul");
+                        break;
+                    case amarelo:
+                        contentReader("amarelo");
+                        break;
+                    default:
+                        print("ERRO:cor inválida: " + rgbToHex(this.style.backgroundColor));
+                        break;
+                }
                 break;
             default:
                 print("ERRO:elemento não listado");
@@ -626,7 +674,7 @@ function loadVoiceRec() {
                     break;
                 case 4:             //Cores
                     switch (command) {
-                        case 'magenta':
+                        case 'vermelho':
                             document.getElementById("cor1").click();
                             break;
                         case 'azul':
@@ -906,6 +954,7 @@ function loadJogoCores() {
             sorteiaDesenho = parseInt(Math.random() * (palavras.length));
         } while (coresFeitas.indexOf(sorteiaDesenho) != -1);
         desenha();
+        document.getElementById('declaracao').innerHTML = "Olá Francisco! " + fala;
         document.getElementById('imagem').style.animation = "zoomIn 0.8s";
         document.getElementById('imagem').style.animationDelay = "1s";
         document.getElementById('imagem').style.animationFillMode = "both";
@@ -1009,15 +1058,15 @@ function loadJogoCores() {
             document.getElementById("cor3").onclick = null;
             document.getElementById("cor3").classList.remove('clickable');
         }
-        document.getElementById('cores-lig-1').style.backgroundColor = "#c2185b";
+        document.getElementById('cores-lig-1').style.backgroundColor = "#be1e2c";
         final = document.getElementById("corFinal");            //Var que guarda o elemento "cor final"
         document.getElementById("corFinal").style.cursor = "url('img/icons/brush.png'), pointer";   //O estilo do cursor quando está sobre a corFinal muda para a imagem de um pincel
         print(rgbToHex(final.style.backgroundColor));
 
         //Note que: As verificações são feitas em rgb mas as cores usadas estão em hex(ver função rgbToHex).
         switch (rgbToHex(final.style.backgroundColor)) {        //Verifica a cor do elemento "cor final"
-            case '#ffffff':                                     //No caso de estar em branco (início)
-                final.style.backgroundColor = "#c2185b";        //Cor final passa a magenta
+            case branco:                                     //No caso de estar em branco (início)
+                final.style.background = vermelho;        //Cor final passa a vermelho
                 break;
             case '#00b0ff':                                     //No caso de estar em azul
                 final.style.backgroundColor = "#7b1fa2";        //Cor final passa a roxo
@@ -1041,19 +1090,19 @@ function loadJogoCores() {
             document.getElementById("cor3").onclick = null;
             document.getElementById("cor3").classList.remove('clickable');
         }
-        document.getElementById('cores-lig-2').style.backgroundColor = "#00b0ff";
+        document.getElementById('cores-lig-2').style.backgroundColor = "#27408b";
         final = document.getElementById("corFinal");
         document.getElementById("corFinal").style.cursor = "url('img/icons/brush.png'), pointer";
         console.log(rgbToHex(final.style.backgroundColor));
         switch (rgbToHex(final.style.backgroundColor)) {
             case '#ffffff':
-                final.style.backgroundColor = "#00b0ff";
+                final.style.background = "#27408b";
                 break;
-            case '#c2185b':
-                final.style.backgroundColor = "#7b1fa2";
+            case '#be1e2c':
+                final.style.background = "#7b1fa2";
                 break;
-            case '#f4b400':
-                final.style.backgroundColor = "#43a047";
+            case '#f9dd2a':
+                final.style.background = "#54b430";
                 break;
             default:
                 console.log("nada");
@@ -1071,19 +1120,20 @@ function loadJogoCores() {
             document.getElementById("cor1").onclick = null;
             document.getElementById("cor1").classList.remove('clickable');
         }
-        document.getElementById('cores-lig-3').style.backgroundColor = "#f4b400";
+        document.getElementById('cores-lig-3').style.backgroundColor = "#f9dd2a";
         final = document.getElementById("corFinal");
         document.getElementById("corFinal").style.cursor = "url('img/icons/brush.png'), pointer";
         console.log(final.style.backgroundColor);
+        debugger;
         switch (rgbToHex(final.style.backgroundColor)) {
             case '#ffffff':
-                final.style.backgroundColor = "#f4b400";
+                final.style.background = "#f9dd2a";
                 break;
-            case '#00b0ff':
-                final.style.backgroundColor = "#43a047";
+            case '#27408b':
+                final.style.background = "#54b430";
                 break;
-            case '#c2185b':
-                final.style.backgroundColor = "#d84315";
+            case '#be1e2c':
+                final.style.background = "#f37e2b";
                 break;
             default:
                 console.log("nada");
@@ -1140,34 +1190,44 @@ function desenha() {
     switch (sorteiaDesenho) {                                                   //Desenha em canvas a fruta sorteada
         case 0:
             desenhaAmeixa(ctx);
-            return rgbToHex(corMuda) == "#c2185b";
+            fala = "Eu sou a ameixa e sou vermelha.";
+            return rgbToHex(corMuda) == "#be1e2c";
         case 1:
             desenhaAnanas(ctx);
-            return rgbToHex(corMuda) == "#f4b400";
+            fala = "Eu sou o ananás e sou amarelo.";
+            return rgbToHex(corMuda) == "#f9dd2a";
         case 2:
             desenhaCenoura(ctx);
-            return rgbToHex(corMuda) == "#d84315";
+            fala = "Eu sou a cenoura e sou cor de laranja.";
+            return rgbToHex(corMuda) == "#f37e2b";
         case 3:
             desenhaCereja(ctx);
-            return rgbToHex(corMuda) == "#c2185b";
+            fala = "Nós somos as cerejas e somos vermelhas.";
+            return rgbToHex(corMuda) == "#be1e2c";
         case 4:
             desenhaMaca(ctx);
-            return rgbToHex(corMuda) == "#43a047";
+            fala = "Eu sou a maçã e sou verde.";
+            return rgbToHex(corMuda) == "#54b430";
         case 5:
             desenhaMirtilo(ctx);
-            return rgbToHex(corMuda) == "#7b1fa2";
+            fala = "Eu sou o mirtilo e sou azul.";
+            return rgbToHex(corMuda) == "#27408b";
         case 6:
             desenhaMorango(ctx);
-            return rgbToHex(corMuda) == "#c2185b";
+            fala = "Eu sou o morango e sou vermelho.";
+            return rgbToHex(corMuda) == "#be1e2c";
         case 7:
             desenhaLaranja(ctx);
-            return rgbToHex(corMuda) == "#d84315";
+            fala = "Eu sou a laranja e sou cor de laranja.";
+            return rgbToHex(corMuda) == "#f37e2b";
         case 8:
             desenhaPera(ctx);
-            return rgbToHex(corMuda) == "#f4b400";
+            fala = "Eu sou a pêra e sou amarela.";
+            return rgbToHex(corMuda) == "#f9dd2a";
         case 9:
             desenhaBanana(ctx);
-            return rgbToHex(corMuda) == "#f4b400";
+            fala = "Eu sou a banana e sou amarela.";
+            return rgbToHex(corMuda) == "#f9dd2a";
     }
 }
 
