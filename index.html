@@ -3,11 +3,13 @@
 <html lang="pt">
 <head>
     <meta charset="UTF-8">
-    <title>Frutas!</title>
+    <title>Cenourinha e Amigos!</title>
     <link href="css/materialize.css" type="text/css" rel="stylesheet">
     <link href="css/style.css" type="text/css" rel="stylesheet">
     <script src="js/script.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="shortcut icon" href="img/favicon3.ico" type="image/x-icon">
+    <link rel="icon" href="img/favicon3.ico" type="image/x-icon">
 </head>
 <body>
 <!-- Menu (botão) --->
@@ -33,21 +35,21 @@
         class="material-icons medium">close</i></a>
 
 <!--No Carregamento-->
-<div id="load" class="center white" style="padding-top:10%; display:none;">
-    <video width="500px" autoplay>
-        <source src="logo.mp4" type="video/mp4">
+<div id="load" class="center white" style="padding-top:7%;">
+    <video width="40%" autoplay>
+        <source src="videos/logo.mp4" type="video/mp4">
     </video>
-    <div class="progress green lighten-4" style="width: 30%; margin-left: 35%">
-        <div class="determinate green darken-1" id="barraLoad"></div>
+    <div class="progress">
+        <div class="determinate" id="barraLoad"></div>
     </div>
 </div>
 
-    <!--botões invisíveis-->
-    <a href="#" class="waves-effect waves-dark btn indigo lighten-1" style="display: none" data-target="modal_user"
-       id="abrir_modal_nome"></a>
+<!--botões invisíveis-->
+<a href="#" class="waves-effect waves-dark btn indigo lighten-1" style="display: none" data-target="modal_user"
+   id="abrir_modal_nome"></a>
 
-    <a href="#" class="waves-effect waves-dark btn indigo lighten-1" style="display: none" data-target="modal_parabens"
-       id="abrir_modal_parabens"></a>
+<a href="#" class="waves-effect waves-dark btn indigo lighten-1" style="display: none" data-target="modal_parabens"
+   id="abrir_modal_parabens"></a>
 
 
 <!-- Página - Escolher interação -->
@@ -200,9 +202,9 @@
             </div>
             <div class="col m6">
                 <div class="col m6">
-                    <div id="triangulo" style = "margin-left: 5%"></div>
+                    <div id="triangulo" style="margin-left: 5%"></div>
                 </div>
-                <div class="col m6" id="apresentacao" style="margin-top: -15%"><p id="declaracao">Olá Francisco. Eu sou a pêra e sou amarela.</p></div>
+                <div class="col m6" id="apresentacao" style="margin-top: -15%"><p id="declaracao"></p></div>
             </div>
         </div>
     </div>
@@ -259,106 +261,104 @@
         <h4>ALTERAR DEFINIÇÕES</h4>
         <p>Pode alterar a qualquer momento as definições no menu "Definições" <i
                 class="material-icons tiny">settings</i>.</p>
-<!--
-        <br/><br/>
-        <h4>INSTRUÇÕES PARA O USO DOS JOGOS</h4>
-        <p>Pode aceder a qualquer momento às instruções para o uso dos jogos no menu de opções <i
-                class="material-icons tiny">settings</i>.</p>
--->
     </div>
     <div class="modal-footer">
         <a href="#!" class="modal-action modal-close waves-effect waves-dark btn-flat">Continuar</a>
     </div>
 </div>
 
-<!--&lt;!&ndash; Modal - Instruções &ndash;&gt;-->
-<!--<div id="modal_instrucoes" class="modal">-->
-    <!--<div class="modal-content">-->
-        <!--<h4>INSTRUÇÕES PARA O USO DOS JOGOS</h4><br/>-->
-        <!--<h5>NÚMEROS</h5>-->
-        <!--<p>Neste jogo é apresentado um sumo composto por um conjunto de frutas e/ou legumes.-->
-            <!--O jogador terá que escolher a combinação de frutas/legumes correnta de entre as opções apresentadas.-->
-            <!--Caso acerte passa para a fase seguinte, caso erre terá que tentar novamente.</p><br/>-->
-        <!--<h5>PALAVRAS</h5>-->
-        <!--<p>Neste jogo é apresentada uma imagem de uma fruta ou legume.-->
-            <!--Neste caso, o jogador deverá completar a palavra, que se encontra dividida em sílabas.-->
-            <!--Para tal deverá escolher uma das síladas disponíveis.-->
-            <!--Caso acerte passa para a fase seguinte, caso erre terá que tentar novamente.</p><br/>-->
-        <!--<h5>MEMÓRIA</h5>-->
-        <!--<p>O desafio neste jogo consiste em encontrar os pares escondidos nas cartas.-->
-            <!--Cada vez que o jogador selecione uma carta ela irá virar-se e mostrar a fruta ou legume.-->
-            <!--Quando o par for encontrado, essas cartas ficarão visíveis, mas quando errar as cartas voltam a-->
-            <!--vira-se-->
-            <!--ocultando a fruta ou legume.-->
-            <!--Quando o jogador conseguir descobrir todos os pares passa para a fase seguinte.</p><br/>-->
-        <!--<h5>CORES</h5>-->
-        <!--<p>No jogo das cores é apresentada a imagem de uma fruta ou legume.-->
-            <!--O jogador deverá selecionar uma ou duas cores primárias por forma a obter a cor correta da fruta ou-->
-            <!--legume apresentada.-->
-            <!--Após selecionar a(s) cor(es) necessárias, terá que selecionar a cor por forma a pintar a fruta ou-->
-            <!--legume.-->
-            <!--Caso acerte passa para a fase seguinte, caso erre terá que tentar novamente.</p><br/><br/>-->
-        <!--<p>Em cada um dos jogos estará disponível no canto superior esquerdo um ícone de acesso à ajuda <i-->
-                <!--class="material-icons tiny">help</i>.</p>-->
-    <!--</div>-->
-    <!--<div class="modal-footer">-->
-        <!--<a href="#!" class="modal-action modal-close waves-effect waves-dark btn-flat">Fechar</a>-->
-    <!--</div>-->
-<!--</div>-->
-
 <!-- Modal_numeros - Ajuda no jogo dos números -->
-<div id="modal_numeros" class="modal modal_ajuda">
+<div id="modal_numeros" class="modal modal_ajuda modal-fixed-footer">
     <div class="modal-content">
         <h4>COMO JOGAR</h4><br/>
         <video width="90%" height="auto" autoplay loop>
-            <source src="inst_memo.mp4" type="video/mp4">
-            O teu browser não suporta o video de instruções.
+            <source src="videos/numeros.mp4" type="video/mp4">
+            <p>O teu browser não suporta o video de instruções.</p>
+            <p>Neste jogo é apresentado um sumo composto por um conjunto de frutas e/ou legumes. O jogador terá que
+                escolher a combinação de frutas/legumes correnta de entre as opções apresentadas. Caso acerte passa para
+                a fase seguinte, caso erre terá que tentar novamente.</p>
         </video>
+        <p>Comandos por voz:</br>
+            - Selecionar uma opção: Dizer o número da opção pretendida (nº1 a contar do topo);</br>
+            - Fechar jogo: "Fecha", "Fechar", "Sair", "Voltar";</br>
+            - Ajuda/ Instruções: "Ajuda";</br>
+        </p>
     </div>
     <div class="modal-footer">
-        <a href="#!" class="modal-action modal-close waves-effect waves-dark btn-flat">Fechar</a>
+        <a href="#!" class="modal-action modal-close waves-effect waves-dark btn-flat">Percebi</a>
     </div>
 </div>
 
 <!-- Modal_palavras - Ajuda no jogo dos palavras -->
-<div id="modal_palavras" class="modal modal_ajuda">
+<div id="modal_palavras" class="modal modal_ajuda modal-fixed-footer">
     <div class="modal-content">
         <h4>COMO JOGAR</h4><br/>
-        <video width="90%" height="auto" autoplay loop>
-            <source src="inst_memo.mp4" type="video/mp4">
-            O teu browser não suporta o video de instruções.
+        <video width="40%" height="auto" autoplay loop>
+            <source src="videos/palavras.mp4" type="video/mp4">
+            <p>O teu browser não suporta o video de instruções.</p>
+            <p>Neste jogo é apresentada uma imagem de uma fruta ou legume. Neste caso, o jogador deverá
+                completar a palavra, que se encontra dividida em sílabas. Para tal deverá escolher uma das
+                síladas disponíveis. Caso acerte passa para a fase seguinte, caso erre terá que tentar
+                novamente.</p>
         </video>
+        <p>Comandos por voz:</br>
+            - Completar uma palavra: Dizer a palavra completa;</br>
+            - Fechar jogo: "Fecha", "Fechar", "Sair", "Voltar";</br>
+            - Ajuda/ Instruções: "Ajuda";</br>
+        </p>
     </div>
     <div class="modal-footer">
-        <a href="#!" class="modal-action modal-close waves-effect waves-dark btn-flat">Fechar</a>
+        <a href="#!" class="modal-action modal-close waves-effect waves-dark btn-flat">Percebi</a>
     </div>
 </div>
 
 <!-- Modal_memoria - Ajuda no jogo da memória -->
-<div id="modal_memoria" class="modal modal_ajuda">
+<div id="modal_memoria" class="modal modal_ajuda modal-fixed-footer">
     <div class="modal-content">
         <h4>COMO JOGAR</h4><br/>
-        <video width="90%" height="auto" autoplay loop>
-            <source src="inst_memo.mp4" type="video/mp4">
-            O teu browser não suporta o video de instruções.
+        <video width="100%" height="auto" autoplay loop>
+            <source src="videos/memoria.mp4" type="video/mp4">
+            <p>O teu browser não suporta o video de instruções.</p>
+            <p>O desafio neste jogo consiste em encontrar os pares escondidos nas cartas. Cada vez que o
+                jogador selecione uma carta ela irá virar-se e mostrar a fruta ou legume. Quando o par for
+                encontrado, essas cartas ficarão visíveis, mas quando errar as cartas voltam a vira-se
+                ocultando a fruta ou legume. Quando o jogador conseguir descobrir todos os pares passa para
+                a fase seguinte.</p>
         </video>
+        <p>Comandos por voz:</br>
+            - Selecionar uma carta: Dizer o número da carta pretendida (nº1 a contar da esquerda);</br>
+            - Fechar jogo: "Fecha", "Fechar", "Sair", "Voltar";</br>
+            - Ajuda/ Instruções: "Ajuda";</br>
+        </p>
     </div>
     <div class="modal-footer">
-        <a href="#!" class="modal-action modal-close waves-effect waves-dark btn-flat">Fechar</a>
+        <a href="#!" class="modal-action modal-close waves-effect waves-dark btn-flat">Percebi</a>
     </div>
 </div>
 
 <!-- Modal_cores - Ajuda no jogo das cores -->
-<div id="modal_cores" class="modal modal_ajuda">
+<div id="modal_cores" class="modal modal_ajuda modal-fixed-footer">
     <div class="modal-content">
         <h4>COMO JOGAR</h4><br/>
-        <video width="90%" height="auto" autoplay loop>
-            <source src="inst_memo.mp4" type="video/mp4">
-            O teu browser não suporta o video de instruções.
+        <video width="70%" height="auto" autoplay loop>
+            <source src="videos/cores.mp4" type="video/mp4">
+            <p>O teu browser não suporta o video de instruções.</p>
+            <p>No jogo das cores é apresentada a imagem de uma fruta ou legume. O jogador deverá selecionar
+                uma ou duas cores primárias por forma a obter a cor correta da fruta ou legume apresentada.
+                Após selecionar a(s) cor(es) necessárias, terá que selecionar a cor por forma a pintar a
+                fruta ou legume. Caso acerte passa para a fase seguinte, caso erre terá que tentar
+                novamente.</p>
         </video>
+        <p style="margin-top: 5%">Comandos por voz:</br>
+            - Selecionar uma cor: Dizer o nome da cor pretendida ("azul", "amarelo", "vermelho", "roxo", "verde", "laranja");</br>
+            - Limpar: "Limpa", "Limpar", "Apagar", "Apaga";</br>
+            - Pintar com a cor: "Pinta", "Pintar";</br>
+            - Fechar jogo: "Fecha", "Fechar", "Sair", "Voltar";</br>
+            - Ajuda/ Instruções: "Ajuda";</br>
+        </p>
     </div>
     <div class="modal-footer">
-        <a href="#!" class="modal-action modal-close waves-effect waves-dark btn-flat">Fechar</a>
+        <a href="#!" class="modal-action modal-close waves-effect waves-dark btn-flat">Percebi</a>
     </div>
 </div>
 
@@ -373,7 +373,8 @@
         <br/><br/>
     </div>
     <div class="modal-footer">
-        <a href="#!" id="fechar_modal_parabens" class="modal-action modal-close waves-effect waves-dark btn-flat">Fechar</a>
+        <a href="#!" id="fechar_modal_parabens"
+           class="modal-action modal-close waves-effect waves-dark btn-flat">Fechar</a>
     </div>
 </div>
 
@@ -434,21 +435,24 @@
             <li>
                 <input class="collapsible-header" name="menu" type="radio" id="menu_paw">
                 <label for="menu_paw">Apontar e esperar</label>
-                <div class="collapsible-body">O utilizador tem que colocar o cursor sobre o item a selecionar e
+                <div class="collapsible-body">O utilizador tem que colocar o cursor sobre o item a
+                    selecionar e
                     esperar que o temporizador pare.
                 </div>
             </li>
             <li>
                 <input class="collapsible-header" name="menu" type="radio" id="menu_cursor">
                 <label for="menu_cursor">Cursor</label>
-                <div class="collapsible-body">O utilizador tem que colocar o cursor sobre o item a selecionar e
+                <div class="collapsible-body">O utilizador tem que colocar o cursor sobre o item a
+                    selecionar e
                     clicar.
                 </div>
             </li>
             <li>
                 <input class="collapsible-header" name="menu" type="radio" id="menu_varrimento">
                 <label for="menu_varrimento">Varrimento</label>
-                <div class="collapsible-body">Os itens são selecionados automaticamente e o utilizador só tem
+                <div class="collapsible-body">Os itens são selecionados automaticamente e o utilizador só
+                    tem
                     que
                     parar no pretendido.
                 </div>
@@ -460,14 +464,6 @@
             </li>
         </ul>
     </li>
-    <!--
-        <li><a class="subheader" style="color: #ef5350">INSTRUÇÕES DOS JOGOS</a></li>
-        <li id="instructions_text">
-            <span class="center">Para saber mais sobre o modo de funcionamento dos vários jogos disponíveis, por favor clique no botão abaixo.</span>
-        </li>
-    -->
-    <!--<a href="#" class="waves-effect waves-dark btn red lighten-1" data-target="modal_instrucoes" id="instructions">instruções
-        de Jogos</a>-->
     <li id="authors">
     <span class="center">Autoria de Cláudia Amaro, Cláudia Ribeiro, Inês Margarido e Joel Seabra.<br/>Frutas! &copy;
         2017</span>
