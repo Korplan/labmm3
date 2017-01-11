@@ -27,6 +27,11 @@ body{
     background-size: cover;             /*Tamanho do body*/
     overflow: hidden;
 }
+
+.container p {
+    font-size: 18px;
+}
+
 /*
 #body_memoria{
     background: url('../img/fundo-06.png');
@@ -66,7 +71,7 @@ body{
 
 /*Títulos*/
 h1{
-    font-size: 20px;
+    font-size: 28px;
     text-transform: uppercase;
     /*color: #fff;*/
 }
@@ -207,10 +212,6 @@ a#instructions{
     top: 28px;
     left: 93vh;
 }
-
-/*#modal_user {*/
-    /*margin-top: 32vh !important;*/
-/*}*/
 
 .icon{
     height: 80%;

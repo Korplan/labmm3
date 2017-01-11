@@ -216,6 +216,9 @@ window.onload = function () {
                 document.getElementsByClassName("mostraNum")[i].style.display = "block";
         if (interacao == 2)                                                                     //Se interação por varrimento estiver ativa...
             loadVarrimento(checkJogo());
+        if (instrucoes) {
+            document.getElementById("help_memoria").click();
+        }
     };
 
     document.getElementById("btn_palavras").onclick = function () {                     //Ao clicar no elemento "btn_palavras"
@@ -227,6 +230,9 @@ window.onload = function () {
         loadJogoPalavras();
         if (interacao == 2)                                                             //Se interação por varrimento estiver ativa...
             loadVarrimento(checkJogo());
+        if (instrucoes) {
+            document.getElementById("help_palavras").click();
+        }
     };
 
     document.getElementById("btn_cores").onclick = function () {                        //Ao clicar no elemento "btn_cores"
@@ -238,6 +244,9 @@ window.onload = function () {
         loadJogoCores();
         if (interacao == 2)                                                             //Se interação por varrimento estiver ativa...
             loadVarrimento(checkJogo());
+        if (instrucoes) {
+            document.getElementById("help_cores").click();
+        }
     };
 
     document.getElementById("btn_num").onclick = function () {                          //Ao clicar no elemento "btn_cores"
@@ -249,6 +258,9 @@ window.onload = function () {
         loadJogoNumeros();
         if (interacao == 2)                                                             //Se interação por varrimento estiver ativa...
             loadVarrimento(checkJogo());
+        if (instrucoes) {
+            document.getElementById("help_numeros").click();
+        }
     };
 
     document.getElementById("menu_paw").onclick = function () {                         //Ao clicar na opção de interação "apontar e esperar"
@@ -778,10 +790,6 @@ function contentReader(text) {
 //Função que carrega o jogo
 function jogoMemoria() {
     document.getElementById("memoTab").innerHTML = "";              //Limpa tabuleiro de jogo
-
-    if (instrucoes) {
-        document.getElementById("help_memoria").click();
-    }
 
     certas = 0;                                                     //Número de pares formados
     var x = 0;                                                      //??
