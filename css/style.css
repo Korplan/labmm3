@@ -1,105 +1,57 @@
 /*----------GERAL--------*/
-/*
-* {
-    scrollbar-face-color: #646464;
-    scrollbar-highlight-color: #646464;
-    scrollbar-3dlight-color: #646464;
-    scrollbar-darkshadow-color: #646464;
-    scrollbar-shadow-color: #646464;
-    scrollbar-arrow-color: #646464;
-    scrollbar-track-color: #646464;
-}
-::-webkit-scrollbar {
-    width: 10px;
-    background: #cfcfcf;
-}
-::-webkit-scrollbar-thumb {
-    background: #9e9e9e;
-}
-*/
-::selection{
+::selection {
     background: none;
 }
 
-body{
+body {
     background: url('../img/fundo.png');
-    background-repeat: no-repeat;       /*Não repete (não é padrão)*/
-    background-size: cover;             /*Tamanho do body*/
+    background-repeat: no-repeat; /*Não repete (não é padrão)*/
+    background-size: cover; /*Tamanho do body*/
     overflow: hidden;
 }
+
 
 .container p {
     font-size: 18px;
 }
 
-/*
-#body_memoria{
-    background: url('../img/fundo-06.png');
-    background-position-x: 100%;       !*Posição da imagem (em relação ao topo)*!
-    background-position-y: 0;       !*Posição da imagem (em relação à esquerda)*!
-    background-repeat: no-repeat;       !*Não repete (não é padrão)*!
-    background-size: cover;             !*Tamanho do body*!
-    z-index:-10;
-}
-*/
-/*
-#bodyn2{
-    background: url('../img/fundo_fundo-n2.png');
-    background-position-x: 33.3%;       !*Posição da imagem (em relação ao topo)*!
-    background-position-y: 33.3%;       !*Posição da imagem (em relação à esquerda)*!
-    background-repeat: no-repeat;       !*Não repete (não é padrão)*!
-    background-size: 100%;             !*Tamanho da imagem*!
-    height: 100vh;                      !*Tamanho do #bodyn2*!
-    z-index: -2;
-}
-#bodyn3{
-    background: url('../img/fundo_fundo-n3.png');
-    background-position-x: 33.3%;       !*Posição da imagem (em relação ao topo)*!
-    background-position-y: 33.3%;       !*Posição da imagem (em relação à esquerda)*!
-    background-repeat: no-repeat;       !*Não repete (não é padrão)*!
-    background-size: 100%;             !*Tamanho da imagem*!
-    height: 100vh;                      !*Tamanho do #bodyn3*!
-    z-index: -2;
-    animation-fill-mode:both;
-}
-*/
 
 /*Borda redonda*/
-.rounded{
+.rounded {
     border-radius: 10px;
 }
 
 /*Títulos*/
 h1{
-    font-size: 28px;
+    font-size: 28px; /*20px*/
     text-transform: uppercase;
     /*color: #fff;*/
 }
 
 /*----------CORES--------*/
-.grey{
+.grey {
     background-color: grey;
 }
 
-.white_elem{
+.white_elem {
     background-color: white;
 }
 
 /*----------ELEMENTOS--------*/
 /*Margens e Espaçamentos*/
-.margin_top_bottom{
+.margin_top_bottom {
     Margin-top: 20vh;
     Margin-bottom: 20vh;
 }
 
 /*Clicáveis*/
-.clickable{
+.clickable {
     position: relative;
     cursor: pointer;
-    -webkit-transition: 0.5s;                   /*Tempo que demora a rodar a carta*/
+    -webkit-transition: 0.5s; /*Tempo que demora a rodar a carta*/
 }
 
-.clickable .click{
+.clickable .click {
     width: 100%;
     height: 100%;
     /*background: url('../img/PaW/0.png') center no-repeat;*/
@@ -107,18 +59,18 @@ h1{
     z-index: 1000;
 }
 
-.clickable:hover{
+.clickable:hover {
     box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.3);
-    -webkit-transition: 0.5s;                   /*Tempo que demora a rodar a carta*/
+    -webkit-transition: 0.5s; /*Tempo que demora a rodar a carta*/
 }
 
-#selecionada{
+#selecionada {
     /*height: 70%;*/
     width: 70%;
 }
 
 /*Navegação*/
-#settings{
+#settings {
     color: #FFF;
     position: absolute;
     padding: 10px;
@@ -126,7 +78,7 @@ h1{
     left: 0;
 }
 
-.help{
+.help {
     color: #FFF;
     position: absolute;
     padding: 10px;
@@ -135,7 +87,7 @@ h1{
     cursor: pointer;
 }
 
-.side-nav .collapsible li label{
+.side-nav .collapsible li label {
     margin-left: 32px;
 }
 
@@ -145,7 +97,8 @@ h1{
 }
 
 /*Autoria e instrucoes*/
-#authors/*, #instructions_text*/{
+#authors /*, #instructions_text*/
+{
     text-align: justify;
     padding: 0 32px;
     font-size: 0.8em;
@@ -164,20 +117,22 @@ a#instructions{
 }
 */
 
-@media only screen and (max-width: 992px){
-    .side-nav .collapsible li label{
+@media only screen and (max-width: 992px) {
+    .side-nav .collapsible li label {
         margin-left: 16px;
     }
+
     .side-nav .collapsible-body {
         padding: 0 16px;
     }
-    #authors, #instructions_text{
+
+    #authors, #instructions_text {
         padding: 0 16px;
     }
 }
 
 /*Botão voltar*/
-#voltar{
+#voltar {
     color: #FFF;
     position: absolute;
     top: 0;
@@ -187,20 +142,20 @@ a#instructions{
 }
 
 /*Inativos*/
-.inativo{
+.inativo {
     background-color: grey !important;
 }
 
-.modal{
+.modal {
     color: #363636;
     margin-top: 20vh;
 }
 
-#modal_instrucoes{
+#modal_instrucoes {
     margin-top: 5vh !important;
 }
 
-.modal_ajuda{
+.modal_ajuda {
     color: #363636;
     margin-top: 5vh !important;
 }
@@ -212,47 +167,48 @@ a#instructions{
     top: 28px;
     left: 93vh;
 }
-
 .icon{
     height: 80%;
     width: 80%;
 }
 
-.line-height{
+.line-height {
     line-height: 1.3em;
 }
 
 /*----------JOGO MEMÓRIA---------*/
 /*Carta*/
-.menuIcon, .carta{
+.menuIcon, .carta {
     /*width: 200px;*/
     height: 250px;
     color: #363636;
 }
 
-.carta{
+.carta {
     background: #f4756b;
 }
 
 /*Rodar Cartas*/
 .flip {
-    -webkit-perspective: 4000px;                /*Roda segundo determinada perspetiva - simula o ângulo em que é virada*/
+    -webkit-perspective: 4000px; /*Roda segundo determinada perspetiva - simula o ângulo em que é virada*/
 }
+
 .flip .card.flipped {
-    -webkit-transform: rotatey(-180deg);        /*Roda -180º no eixo dos yy - simula o sentido em que é virada (direita-esquerda e vice-versa)*/
+    -webkit-transform: rotatey(-180deg); /*Roda -180º no eixo dos yy - simula o sentido em que é virada (direita-esquerda e vice-versa)*/
 }
+
 .flip .card {
     width: 100%;
     height: 100%;
-    -webkit-transform-style: preserve-3d;       /*Preserva o efeito 3D*/
-    -webkit-transition: 0.7s;                   /*Tempo que demora a rodar a carta*/
+    -webkit-transform-style: preserve-3d; /*Preserva o efeito 3D*/
+    -webkit-transition: 0.7s; /*Tempo que demora a rodar a carta*/
 }
 
 .flip .card .face {
     width: 100%;
     height: 100%;
     position: absolute;
-    -webkit-backface-visibility: hidden ;
+    -webkit-backface-visibility: hidden;
     z-index: 2;
     font-size: 3em;
     text-align: center;
@@ -274,7 +230,7 @@ a#instructions{
 
 /*Trás Carta*/
 .flip .card .back {
-    -webkit-transform: rotatey(-180deg);        /*Roda -180º no eixo dos yy - simula o sentido em que é virada (direita-esquerda e vice-versa)*/
+    -webkit-transform: rotatey(-180deg); /*Roda -180º no eixo dos yy - simula o sentido em que é virada (direita-esquerda e vice-versa)*/
     background: #efefef;
     color: #363636;
     cursor: pointer;
@@ -290,9 +246,7 @@ a#instructions{
     border-bottom: 60px solid white;
 }
 
-
-
-#apresentacao{
+#apresentacao {
     font-size: 20px;
     font-weight: bold;
     width: auto;
@@ -303,26 +257,26 @@ a#instructions{
     top: 50px;
 }
 
-#cor1, #cor2, #cor3{
+#cor1, #cor2, #cor3 {
     border-radius: 50px;
     width: 100px;
     height: 100px;
     margin: 25px;
 }
 
-#cor1{
+#cor1 {
     background-color: #be1e2c;
 }
 
-#cor2{
+#cor2 {
     background-color: #27408B;
 }
 
-#cor3{
+#cor3 {
     background-color: #f9dd2a;
 }
 
-#corFinal{
+#corFinal {
     border-radius: 100px;
     width: 150px;
     height: 150px;
@@ -332,7 +286,7 @@ a#instructions{
     transition-delay: 0.3s;
 }
 
-#apagar{
+#apagar {
     width: 60px;
     height: 60px;
     border-radius: 30px;
@@ -342,7 +296,7 @@ a#instructions{
     background-size: 30% auto;
 }
 
-.cores-lig{
+.cores-lig {
     width: 200px;
     height: 20px;
     background-color: #FFFFFF;
@@ -357,21 +311,21 @@ a#instructions{
     transition: background-color 1s ease;
 }
 
-#cores-lig-2{
+#cores-lig-2 {
     top: 70px;
     left: 70px;
     transition: background-color 1s ease;
 }
 
-#cores-lig-3{
-    transform:rotate(-45deg);
+#cores-lig-3 {
+    transform: rotate(-45deg);
     top: -10px;
     left: 70px;
     transition: background-color 1s ease;
 }
 
 /*----------JOGO NUMEROS--------*/
-.jogo-num-bola{
+.jogo-num-bola {
     border-radius: 70px;
     background: none;
     /*background-color: #ef5350;*/
@@ -383,21 +337,21 @@ a#instructions{
     */
 }
 
-#jogoNumeros img{
+#jogoNumeros img {
     width: 100%;
 }
 
-#op-num img{
+#op-num img {
     width: 20%;
 }
 
 /*----------OUTROS--------*/
 /*Classe de Teste*/
-.selected{
+.selected {
     border: 2px solid red;
 }
 
-.silaba{
+.silaba {
     text-transform: uppercase;
     display: inline-block;
     background-color: #fff;
@@ -408,12 +362,12 @@ a#instructions{
     color: #363636;
 }
 
-#silaba-falta{
+#silaba-falta {
     background-color: #cfcfcf;
-    -webkit-transition: 0.5s;                   /*Tempo que demora a rodar a carta*/
+    -webkit-transition: 0.5s; /*Tempo que demora a rodar a carta*/
 }
 
-.opcao{
+.opcao {
     margin: 10px 30px;
     font-size: 1.2em;
 }
@@ -581,25 +535,6 @@ a#instructions{
     }
 }
 
-@keyframes fadeOutRight {
-    from {
-        opacity: 1;
-    }
-
-    to {
-        opacity: 0;
-        -webkit-transform: translate3d(100%, 0, 0);
-        transform: translate3d(100%, 0, 0);
-    }
-}
-@keyframes none {
-    from {
-    }
-
-    to {
-    }
-}
-
 /*Aparece palvra incompleta (Entrada em Fade in da esquerda)*/
 @keyframes fadeInLeft {
     from {
@@ -608,7 +543,7 @@ a#instructions{
         opacity: 0;
     }
 
-    10%{
+    10% {
         opacity: 1;
     }
 
@@ -619,34 +554,24 @@ a#instructions{
     }
 }
 
-
-@keyframes movEsquerda {
-    from {
-        background-position-y: 200px;       /*Posição da imagem (em relação ao topo)*/
-    }
-
-    to {
-        background-position-y: 100px;       /*Posição da imagem (em relação à esquerda)*/
-    }
-}
-@keyframes movEsquerda2 {
-    from {
-        background-position-y: 0px;       /*Posição da imagem (em relação ao topo)*/
-    }
-
-    to {
-        background-position-y: -100px;       /*Posição da imagem (em relação ao topo)*/
-    }
-}
-
 /*----------OUTROS--------*/
 /*animation-direction: alternate;     Do the animation once, then do the animation backwards*/
 
-.aparece{
+.aparece {
     opacity: 1;
     animation: zoomIn 3s linear forwards;
 }
 
-#load{
+#load {
     height: 100vh;
+}
+
+.progress {
+    width: 25%;
+    margin-left: 38%;
+    background-color: #cfcfcf;
+}
+
+#barraLoad {
+    background-color: #75c044
 }
