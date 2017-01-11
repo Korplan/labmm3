@@ -3,7 +3,7 @@ var debug = true;                                           //(mostrar ou não) 
 var nome_utilizador = "";
 var instrucoes = true;                                        //(mostrar ou não) Instruções no inicio dos jogos
 
-//----------AUDIO--------------
+//----------AUDIO---------------
 var musica = document.createElement("Audio");               // Música de fundo
 musica.src = "sound/ukulele.mp3";
 musica.volume = 0.3;                                        // Volume da música
