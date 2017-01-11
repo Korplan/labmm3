@@ -518,7 +518,7 @@ function win() {
 }
 
 function lose() {
-    var frases = ["Tenta outra vez, " + nome + "!", "Essa não é a resposta certa.", "Tenta outra resposta, " + nome + "."];
+    var frases = ["Tenta outra vez, " + nome + "!", "Essa não é a resposta certa.", "Tenta outra resposta, " + nome + ".", "Não é essa.", "Escolhe outra, " + nome + "."];
     var escolhida = frases[Math.floor(Math.random() * frases.length)];
     contentReader(escolhida);                               //Lê uma frase personalizada do array acima
     return escolhida;
@@ -990,6 +990,7 @@ function loadJogoPalavras() {
                 if (efeitosSonorosOn) {                                                                       //Se os efeitos sonoros estiverem ligados, toca o som de resposta errada
                     somRespostaErrada.load();
                     somRespostaErrada.play();
+                    lose();
                 }
                 this.classList.remove('clickable');
                 this.classList.add('inativo');
@@ -1179,6 +1180,7 @@ function loadJogoCores() {
             } else if (efeitosSonorosOn) {                             //Se os efeitos sonoros estiverem ligados, toca o som de resposta correta
                 somRespostaErrada.load();
                 somRespostaErrada.play();
+                lose();
             }
         }
     };
