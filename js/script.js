@@ -7,7 +7,7 @@ var musica = document.createElement("Audio");               // Música de fundo
 musica.src = "sound/ukulele.mp3";
 musica.volume = 0.3;                                        // Volume da música
 musica.loop = true;                                         // Colocar música em loop
-var musicaOn = true;                                        // Variável que controla se a música está ligada ou desligada (INVERTIDO!)
+var musicaOn = false;                                        // Variável que controla se a música está ligada ou desligada (INVERTIDO!)
 
 var somVirarCarta = document.createElement("Audio");        // Som do virar de carta (jogo da memória)
 somVirarCarta.src = "sound/whoosh.mp3";
@@ -118,13 +118,13 @@ window.onload = function () {
         }
         else {
             clearInterval(intervaloLoad);
-            setTimeout(function(){
+            setTimeout(function () {
                 document.getElementById("load").style.display = "none";
-            },500);
-            setTimeout(function (){
+            }, 500);
+            setTimeout(function () {
                 document.getElementById("abrir_modal_nome").click();                                //Simula clique no botão invisível "abrir-modal-nome" e abre o modal do nome do utilizador
                 document.getElementById("abrir_modal_nome").style.display = "none";                 //"Elimina" botão invisível
-            },500);
+            }, 500);
         }
     }, 100);
 
@@ -631,11 +631,11 @@ function loadVarrimento(local) {
             if (j != i) {
                 local.getElementsByClassName("clickable")[j].classList.remove("z-depth-4");
                 local.getElementsByClassName("clickable")[j].classList.add("z-depth-1");
-                local.getElementsByClassName("clickable")[j].style.transform="scale(1)";
+                local.getElementsByClassName("clickable")[j].style.transform = "scale(1)";
             }
         local.getElementsByClassName("clickable")[i].classList.remove("z-depth-1");
         local.getElementsByClassName("clickable")[i].classList.add("z-depth-4");
-        local.getElementsByClassName("clickable")[i].style.transform="scale(1.05)";
+        local.getElementsByClassName("clickable")[i].style.transform = "scale(1.05)";
         print(i + "_" + (local.getElementsByClassName("clickable").length - 1));
     }, 1000);
 }
@@ -1468,17 +1468,17 @@ function loadJogoNumeros() {
             break;
     }
 
-    document.getElementById("op1").innerHTML = "";              //limpa o innerHTML do elemento
-    document.getElementById("op2").innerHTML = "";              //limpa o innerHTML do elemento
-    document.getElementById("op3").innerHTML = "";              //limpa o innerHTML do elemento
-    document.getElementById("op4").innerHTML = "";              //limpa o innerHTML do elemento
+    // document.getElementById("op1").innerHTML = "";              //limpa o innerHTML do elemento
+    // document.getElementById("op2").innerHTML = "";              //limpa o innerHTML do elemento
+    // document.getElementById("op3").innerHTML = "";              //limpa o innerHTML do elemento
+    // document.getElementById("op4").innerHTML = "";              //limpa o innerHTML do elemento
 
     var opCerta = Math.floor(Math.random() * (nivel + 1) + 1);                //escolhe a posição onde vai colocar a hipotese certa
 
-    for (var i = 1; i <= num1; i++) {                    //coloca as imagens das frutas na posição da resposta correta
+    for (var i = 0; i < num1; i++) {                    //coloca as imagens das frutas na posição da resposta correta
         document.getElementById("op" + opCerta).innerHTML += "<img src='img/frutas/" + f1 + ".png'>";
     }
-    for (var j = 1; j <= num2; j++) {
+    for (var j = 0; j < num2; j++) {
         document.getElementById("op" + opCerta).innerHTML += "<img src='img/frutas/" + f2 + ".png'>";
     }
 
