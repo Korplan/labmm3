@@ -47,7 +47,7 @@ var memoCartas = [];                            //Array pares de cartas
 var par = false;                                //Quando se seleciona uma carta passa a true para usar como comparação
 var ultimo = "";                                //Última carta virada
 var memInicial = 4;                             //Número inicial de cartas
-var memMax = 12;                                //Número máximo de cartas
+var memMax = 8;                                //Número máximo de cartas
 var certas = 0;                                 //Número de pares certos
 
 //----------JOGO PALAVRAS----------
@@ -518,8 +518,6 @@ function sair_jogo() {
     jogo = 0;                                                                           //Menu de jogos ativo
 };
 
-
-
 //----------APONTAR E ESPERAR----------//
 function loadPointAndWait(local) {
     var elements = local.getElementsByClassName("clickable");           //?? Variável que guarda todos os elementos com class "clicável"
@@ -830,12 +828,16 @@ function flip(id) {                                                     //Funç�
         }
         par = !par; //se par==true passa a par=false e se par==false passa a par=true
         if (certas == memInicial) {
-            print("GANHASTE!!");
-            win();
+            //print("GANHASTE!!");
+            //win();
             //document.getElementById("nome").value;
             if (memInicial < memMax)
                 memInicial += 2;
             setTimeout("jogoMemoria()", 2000);
+            if (certas == 8) {
+                document.getElementById("mensagem_parabens").innerHTML = win();
+                document.getElementById("abrir_modal_parabens").click();
+            }
         }
     }, 1000);
     print(ultimo);
@@ -932,8 +934,10 @@ function loadJogoPalavras() {
                 print(palavrasFeitas.length + " / " + palavras.length);
                 setTimeout(function () {
                     if (palavras.length == palavrasFeitas.length) {                                 //Se tiverem saído/ sido completadas todas as palavras
-                        alert("não ha mais");
+                        //alert("não ha mais");
                         document.getElementById("certo").onclick = null;                    //Bloqueia o clique no elemento "certo"
+                        document.getElementById("mensagem_parabens").innerHTML = win();
+                        document.getElementById("abrir_modal_parabens").click();
                     } else                                                                  //Senão
                         loadJogoPalavras();                                                 //Repete o jogo
                 }, 2000);
