@@ -11,12 +11,8 @@ img/frutas/maca.png
 img/frutas/mirtilo.png
 img/frutas/morango.png
 img/frutas/pera.png
-img/frutas!-19.png
-img/frutas!-21.png
-img/frutas!-23.png
-img/frutas!-24.png
-img/logo.png
 img/fundo.png
+img/logo.png
 img/icons/brush.png
 img/icons/icon_cores.png
 img/icons/icon_memoria.png
@@ -27,6 +23,11 @@ sound/whoosh.mp3
 sound/bell.mp3
 sound/whoosh2.mp3
 sound/wrong.mp3
+videos/numeros.mp4
+videos/cores.mp4
+videos/memoria.mp4
+videos/palavras.mp4
+videos/logo.mp4
 index.html
 js/jquery-3.1.1.min.js
 js/materialize.min.js
