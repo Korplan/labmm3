@@ -74,6 +74,7 @@ var laranja = "#f37e2b";
 var verde = "#54b430";
 var fala;
 var falaCompleta;
+var coresCertas = 0;
 
 //----------GERAL----------
 var interacao;                  // 0 - Point Wait
@@ -89,16 +90,16 @@ var jogo = 0;                   // 0 - Menu
 var nome = "";                  //??
 
 var palavras = [];                      //Array com frutas disponíveis no jogo das palavras
-palavras[0] = ["a", "mei", "xa"];
+palavras[0] = ["ba", "na", "na"];
 palavras[1] = ["a", "na", "nás"];
-palavras[2] = ["ce", "nou", "ra"];
+palavras[2] = ["pe", "ra"];
 palavras[3] = ["ce", "re", "ja"];
-palavras[4] = ["ma", "çã"];
+palavras[4] = ["mo", "ran", "go"];
 palavras[5] = ["mir", "ti", "lo"];
-palavras[6] = ["mo", "ran", "go"];
+palavras[6] = ["ce", "nou", "ra"];
 palavras[7] = ["la", "ran", "ja"];
-palavras[8] = ["pe", "ra"];
-palavras[9] = ["ba", "na", "na"];
+palavras[8] = ["a", "mei", "xa"];
+palavras[9] = ["ma", "ça"];
 
 //----------DEBUG----------//
 //Função que gera feedback na consola
@@ -495,12 +496,16 @@ function menu() {
 //----------MENSAGENS----------//
 function win() {
     var frases = ["Parabéns " + nome + ", ganhaste!", "Bem jogado " + nome + "!", "Ganhaste o jogo, " + nome + "!"];
-    contentReader(frases[Math.floor(Math.random() * frases.length)]);                             //Lê uma frase personalizada do array acima
+    var escolhida = frases[Math.floor(Math.random() * frases.length)];
+    contentReader(escolhida);                             //Lê uma frase personalizada do array acima
+    return escolhida;
 }
 
 function lose() {
     var frases = ["Tenta outra vez, " + nome + "!", "Essa não é a resposta certa.", "Tenta outra resposta, " + nome + "."];
-    contentReader(frases[Math.floor(Math.random() * frases.length)]);                               //Lê uma frase personalizada do array acima
+    var escolhida = frases[Math.floor(Math.random() * frases.length)];
+    contentReader(escolhida);                               //Lê uma frase personalizada do array acima
+    return escolhida;
 }
 
 function sair_jogo() {
@@ -521,6 +526,7 @@ function sair_jogo() {
         case 4:
             document.getElementById("jogoCores").style.display = "none";                        //Esconde a div "jogoCores"
             coresFeitas = 0;                                                                   //Reinicia o jogo
+            coresCertas = 0;
             break;
         default:
             print("ERRO: isto não deveria acontecer. Ver: " + jogo);
@@ -987,10 +993,17 @@ function loadJogoCores() {
     document.getElementById('paleta').style.animationDelay = "1s";
     document.getElementById('paleta').style.animationFillMode = "both";
 
+    var maxCores = 0;
+
+    if (coresCertas < 5)
+        maxCores = 6;
+    else
+        maxCores = palavras.length;
+
     if (!limpa) {
         corMuda = '#fff';
         do {                     //Sorteia uma fruta a desenhar
-            sorteiaDesenho = parseInt(Math.random() * (palavras.length));
+            sorteiaDesenho = parseInt(Math.random() * maxCores);
         } while (coresFeitas.indexOf(sorteiaDesenho) != -1);
         desenha();
         falaCompleta = document.getElementById('declaracao').innerHTML = "Olá " + nome + "! " + fala;
@@ -1141,6 +1154,7 @@ function loadJogoCores() {
                 coresFeitas.push(sorteiaDesenho);
                 print(coresFeitas.length + "/" + palavras.length);
                 if (coresFeitas.length != palavras.length) {
+                    coresCertas++;
                     setTimeout("loadJogoCores()", 1000);
                 } else alert("não há mais");
             } else if (efeitosSonorosOn) {                             //Se os efeitos sonoros estiverem ligados, toca o som de resposta correta
@@ -1174,45 +1188,45 @@ function desenha() {
     print(sorteiaDesenho);
     switch (sorteiaDesenho) {                                                   //Desenha em canvas a fruta sorteada
         case 0:
-            desenhaAmeixa(ctx);
-            fala = "Eu sou a ameixa e sou roxa.";
-            return rgbToHex(corMuda) == "#7b1fa2";
+            desenhaBanana(ctx);
+            fala = "Eu sou a banana e sou amarela.";
+            return rgbToHex(corMuda) == "#f9dd2a";
         case 1:
             desenhaAnanas(ctx);
             fala = "Eu sou o ananás e sou amarelo.";
             return rgbToHex(corMuda) == "#f9dd2a";
         case 2:
-            desenhaCenoura(ctx);
-            fala = "Eu sou a cenoura e sou cor de laranja.";
-            return rgbToHex(corMuda) == "#f37e2b";
+            desenhaPera(ctx);
+            fala = "Eu sou a pêra e sou amarela.";
+            return rgbToHex(corMuda) == "#f9dd2a";
         case 3:
             desenhaCereja(ctx);
             fala = "Nós somos as cerejas e somos vermelhas.";
             return rgbToHex(corMuda) == "#be1e2c";
         case 4:
-            desenhaMaca(ctx);
-            fala = "Eu sou a maçã e sou verde.";
-            return rgbToHex(corMuda) == "#54b430";
+            desenhaMorango(ctx);
+            fala = "Eu sou o morango e sou vermelho.";
+            return rgbToHex(corMuda) == "#be1e2c";
         case 5:
             desenhaMirtilo(ctx);
             fala = "Eu sou o mirtilo e sou azul.";
             return rgbToHex(corMuda) == "#27408b";
         case 6:
-            desenhaMorango(ctx);
-            fala = "Eu sou o morango e sou vermelho.";
-            return rgbToHex(corMuda) == "#be1e2c";
+            desenhaCenoura(ctx);
+            fala = "Eu sou a cenoura e sou cor de laranja.";
+            return rgbToHex(corMuda) == "#f37e2b";
         case 7:
             desenhaLaranja(ctx);
             fala = "Eu sou a laranja e sou cor de laranja.";
             return rgbToHex(corMuda) == "#f37e2b";
         case 8:
-            desenhaPera(ctx);
-            fala = "Eu sou a pêra e sou amarela.";
-            return rgbToHex(corMuda) == "#f9dd2a";
+            desenhaAmeixa(ctx);
+            fala = "Eu sou a ameixa e sou roxa.";
+            return rgbToHex(corMuda) == "#7b1fa2";
         case 9:
-            desenhaBanana(ctx);
-            fala = "Eu sou a banana e sou amarela.";
-            return rgbToHex(corMuda) == "#f9dd2a";
+            desenhaMaca(ctx);
+            fala = "Eu sou a maçã e sou verde.";
+            return rgbToHex(corMuda) == "#54b430";
     }
 }
 
@@ -1557,25 +1571,25 @@ function loadJogoNumeros() {
 function numParaFruta(num) {
     switch (num) {
         case 0:
-            return "ameixa";
+            return "banana";
         case 1:
             return "ananas";
         case 2:
-            return "cenoura";
+            return "pera";
         case 3:
             return "cereja";
         case 4:
-            return "maca";
+            return "morango";
         case 5:
             return "mirtilo";
         case 6:
-            return "morango";
+            return "cenoura";
         case 7:
             return "laranja";
         case 8:
-            return "pera";
+            return "ameixa";
         case 9:
-            return "banana";
+            return "maca";
         default:
             print("ERRO: numParaFruta");
             break;
