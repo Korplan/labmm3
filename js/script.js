@@ -1164,7 +1164,12 @@ function loadJogoCores() {
                 if (coresFeitas.length != palavras.length) {
                     coresCertas++;
                     setTimeout("loadJogoCores()", 1000);
-                } else alert("não há mais");
+                }
+                else {
+                    document.getElementById("mensagem_parabens").innerHTML = win();
+                    document.getElementById("abrir_modal_parabens").click();
+                }
+
             } else if (efeitosSonorosOn) {                             //Se os efeitos sonoros estiverem ligados, toca o som de resposta correta
                 somRespostaErrada.load();
                 somRespostaErrada.play();
