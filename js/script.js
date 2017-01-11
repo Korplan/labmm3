@@ -374,7 +374,7 @@ function onMouseOver(event) {                           //??
                         contentReader("cor de laranja");
                         break;
                     case roxo:
-                        contentReader("lilás");
+                        contentReader("roxo");
                         break;
                     case verde:
                         contentReader("verde");

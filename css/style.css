@@ -22,7 +22,7 @@
 }
 
 body{
-    background: url('../img/fundo/fundo_02645.png');
+    background: url('../img/fundo.png');
     background-repeat: no-repeat;       /*Não repete (não é padrão)*/
     background-size: cover;             /*Tamanho do body*/
     overflow: hidden;
