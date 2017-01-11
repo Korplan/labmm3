@@ -374,7 +374,7 @@ function onMouseOver(event) {                           //??
                         contentReader("cor de laranja");
                         break;
                     case roxo:
-                        contentReader("lilás");
+                        contentReader("roxo");
                         break;
                     case verde:
                         contentReader("verde");
@@ -554,6 +554,7 @@ function sair_jogo() {
     document.getElementById("help_memoria").style.display = "none";                     //Esconde o botão "help_memoria"
     document.getElementById("help_cores").style.display = "none";                       //Esconde o botão "help_cores"
     jogo = 0;                                                                           //Menu de jogos ativo
+    loadVarrimento(checkJogo());
 };
 
 //----------APONTAR E ESPERAR----------//
