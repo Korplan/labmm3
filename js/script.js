@@ -792,14 +792,14 @@ function contentReader(text) {
 //Função que carrega o jogo
 function jogoMemoria() {
     document.getElementById("memoTab").innerHTML = "";              //Limpa tabuleiro de jogo
-
+    memoCartas = [];
     certas = 0;                                                     //Número de pares formados
     var x = 0;                                                      //??
     for (var m = 0; m < memInicial; m += 2) {                       //
         memoCartas[m] = memoCartas[m + 1] = x;
         x++;
     }
-    memoCartas = [];
+
     print(memoCartas);
 
     // jogo_memoria = true;                                                //Mostrar jogo
