@@ -49,6 +49,7 @@ var ultimo = "";                                //Última carta virada
 var memInicial = 4;                             //Número inicial de cartas
 var memMax = 8;                                //Número máximo de cartas
 var certas = 0;                                 //Número de pares certos
+var jogosGanhos = 0;
 
 //----------JOGO PALAVRAS----------
 var palavrasFeitas = [];            //Array que armazena os index do array "palavras" que já sairam
@@ -111,18 +112,18 @@ function print(s) {
 //----------NO CARREGAMENTO-----------//
 window.onload = function () {
 
-/*
-    document.getElementById("barraLoad").style.width = "0";
-    var intervaloLoad = setInterval(function () {
-        if (parseInt(document.getElementById("barraLoad").style.width) <= 100) {
-            document.getElementById("barraLoad").style.width = parseInt(document.getElementById("barraLoad").style.width) + 2 + "%";
-        }
-        else {
-            document.getElementById("load").style.display = "none";
-            clearInterval(intervaloLoad);
-        }
-    }, 100);
-*/
+    /*
+     document.getElementById("barraLoad").style.width = "0";
+     var intervaloLoad = setInterval(function () {
+     if (parseInt(document.getElementById("barraLoad").style.width) <= 100) {
+     document.getElementById("barraLoad").style.width = parseInt(document.getElementById("barraLoad").style.width) + 2 + "%";
+     }
+     else {
+     document.getElementById("load").style.display = "none";
+     clearInterval(intervaloLoad);
+     }
+     }, 100);
+     */
 
     var temp = "";                                                                      //Elimina classes acrescentadas ao elemento "voz"
 
@@ -526,6 +527,7 @@ function sair_jogo() {
         case 1:
             document.getElementById("jogoMemoria").style.display = "none";                      //Esconde a div "jogoMemoria"
             memInicial = 4;                                                                         //Reinicia o jogo
+            jogosGanhos = 0;
             break;
         case 2:
             document.getElementById("jogoNumeros").style.display = "none";                      //Esconde a div "jogoNumeros"
@@ -797,11 +799,14 @@ function jogoMemoria() {
         memoCartas[m] = memoCartas[m + 1] = x;
         x++;
     }
+    memoCartas = [];
+    print(memoCartas);
 
     // jogo_memoria = true;                                                //Mostrar jogo
     memoCartas.sort(function () {                                       //Define posições aleatorias para os elementos do array
         return 0.5 - Math.random()
     });
+    print(memoCartas);
     var numCartas = 0;                                                  //Numeros de cartas colocadas no tabuleiro
 
     for (var id2 = 0; id2 < memInicial; id2++) {                             //Criar elementos (cartas) com id "item#"
@@ -868,9 +873,12 @@ function flip(id) {                                                     //Funç�
             //print("GANHASTE!!");
             //win();
             //document.getElementById("nome").value;
-            if (memInicial < memMax)
+            jogosGanhos++;
+            if (memInicial < memMax && jogosGanhos % 3 == 0) {
                 memInicial += 2;
-            setTimeout("jogoMemoria()", 2000);
+            }
+            if (jogosGanhos <= 9)
+                setTimeout("jogoMemoria()", 2000);
             if (certas == 8) {
                 document.getElementById("mensagem_parabens").innerHTML = win();
                 document.getElementById("abrir_modal_parabens").click();
@@ -1661,27 +1669,27 @@ function parallaxBaixo() {
 }
 
 /*
-function fundo() {
-    setInterval(function (){
-        for (var i = 1; i < 3000; i++){
-            if (jogo == 0 && i != 2999) {
-                if(i<10) {
-                    document.body.style.backgroundImage.src = "img/fundo_0" + i;
-                }
-                if(i<100 && i>10) {
-                    document.body.style.backgroundImage.src = "img/fundo_00" + i;
-                }
-                if(i<1000 && i>100) {
-                    document.body.style.backgroundImage.src = "img/fundo_000" + i;
-                }
-            }
-            else{
-                i=1;
-            }
-    }; 200)
-    }
-}
-*/
+ function fundo() {
+ setInterval(function (){
+ for (var i = 1; i < 3000; i++){
+ if (jogo == 0 && i != 2999) {
+ if(i<10) {
+ document.body.style.backgroundImage.src = "img/fundo_0" + i;
+ }
+ if(i<100 && i>10) {
+ document.body.style.backgroundImage.src = "img/fundo_00" + i;
+ }
+ if(i<1000 && i>100) {
+ document.body.style.backgroundImage.src = "img/fundo_000" + i;
+ }
+ }
+ else{
+ i=1;
+ }
+ }; 200)
+ }
+ }
+ */
 
 //----------CANVAS----------//
 
