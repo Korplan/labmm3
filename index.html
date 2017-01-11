@@ -37,9 +37,12 @@
         <div class="determinate" style="width: 70%"></div>
     </div>
 
-    <!--botão invisível-->
+    <!--botões invisíveis-->
     <a href="#" class="waves-effect waves-dark btn indigo lighten-1" style="display: none" data-target="modal_user"
        id="abrir_modal_nome"></a>
+
+    <a href="#" class="waves-effect waves-dark btn indigo lighten-1" style="display: none" data-target="modal_parabens"
+       id="abrir_modal_parabens"></a>
 
 
 <!-- Página - Escolher interação -->
@@ -149,56 +152,56 @@
     </div>
 </div>
 
-    <!-- Página - Jogo cores -->
-    <div id="jogoCores" style="display: none">
-        <h1 class="center">Jogo das Cores</h1>
-        <div class="container">
-            <div class="row" id="paleta">
-                <div class="col m6">
-                    <div class="row">
-                        <div class="col m6 z-depth-1 clickable" id="cor1">
-                            <div class="click">
-                            </div>
+<!-- Página - Jogo cores -->
+<div id="jogoCores" style="display: none">
+    <h1 class="center">Jogo das Cores</h1>
+    <div class="container">
+        <div class="row" id="paleta">
+            <div class="col m6">
+                <div class="row">
+                    <div class="col m6 z-depth-1 clickable" id="cor1">
+                        <div class="click">
                         </div>
-                        <div class="cores-lig z-depth-1" id="cores-lig-1"></div>
                     </div>
-                    <div class="row">
-                        <div class="col m6 z-depth-1 clickable" id="cor2">
-                            <div class="click">
-                            </div>
-                        </div>
-                        <div class="col m6 z-depth-1" id="corFinal" style="background: #FFF">
-                            <div class="click">
-                            </div>
-                        </div>
-                        <div class="cores-lig z-depth-1" id="cores-lig-2"></div>
-                    </div>
-                    <div class="row">
-                        <div class="col m6 z-depth-1 clickable" id="cor3">
-                            <div class="click">
-                            </div>
-                        </div>
-                        <div class="col m6">
-                            <div class="center z-depth-1 clickable" id="apagar">
-                                <div class="click">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="cores-lig z-depth-1" id="cores-lig-3"></div>
-                    </div>
+                    <div class="cores-lig z-depth-1" id="cores-lig-1"></div>
                 </div>
-                <div class="col m6" id="imagem">
-                    <canvas id="canvas" width="405" height="460"></canvas>
+                <div class="row">
+                    <div class="col m6 z-depth-1 clickable" id="cor2">
+                        <div class="click">
+                        </div>
+                    </div>
+                    <div class="col m6 z-depth-1" id="corFinal" style="background: #FFF">
+                        <div class="click">
+                        </div>
+                    </div>
+                    <div class="cores-lig z-depth-1" id="cores-lig-2"></div>
                 </div>
-                <div class="col m6">
+                <div class="row">
+                    <div class="col m6 z-depth-1 clickable" id="cor3">
+                        <div class="click">
+                        </div>
+                    </div>
                     <div class="col m6">
-                        <div id="triangulo" style = "margin-left: 5%"></div>
+                        <div class="center z-depth-1 clickable" id="apagar">
+                            <div class="click">
+                            </div>
+                        </div>
                     </div>
-                    <div class="col m6" id="apresentacao" style="margin-top: -15%"><p id="declaracao">Olá Francisco. Eu sou a pêra e sou amarela.</p></div>
+                    <div class="cores-lig z-depth-1" id="cores-lig-3"></div>
                 </div>
+            </div>
+            <div class="col m6" id="imagem">
+                <canvas id="canvas" width="405" height="460"></canvas>
+            </div>
+            <div class="col m6">
+                <div class="col m6">
+                    <div id="triangulo" style = "margin-left: 5%"></div>
+                </div>
+                <div class="col m6" id="apresentacao" style="margin-top: -15%"><p id="declaracao">Olá Francisco. Eu sou a pêra e sou amarela.</p></div>
             </div>
         </div>
     </div>
+</div>
 
 <!-- Página - Jogo números -->
 <div id="jogoNumeros" style="display: none">
@@ -351,112 +354,126 @@
     </div>
 </div>
 
-        <!-- Menu lateral-->
-        <ul id="slide-out" class="side-nav">
-            <li>
-                <div class="userView center">
-                    <img src="img/logo.png" style="width: 50%">
-                </div>
-            </li>
-            <li>
-                <div class="switch">
-                    <a>Instruções
-                        <label>
-                            <input type="checkbox">
-                            <span class="lever" id="menu_instrucoes"></span>
-                        </label>
-                    </a>
-                </div>
+<!-- Modal Parabéns - quando ganha o jogo -->
+<div id="modal_parabens" class="modal">
+    <div class="modal-content">
+        <h4>PARABÉNS!</h4><br/>
+        <div class="img_cenoura_modais">
+            <img src="img/frutas/cenoura.png" alt="cenoura" id="cenoura_modais">
+        </div>
+        <h5 id="mensagem_parabens"></h5>
+        <br/><br/>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" id="fechar_modal_parabens" class="modal-action modal-close waves-effect waves-dark btn-flat">Fechar</a>
+    </div>
+</div>
 
-            </li>
-            <li>
-                <div class="switch">
-                    <a>Leitura de ecrã
-                        <label>
-                            <input type="checkbox">
-                            <span class="lever" id="menu_leitor"></span>
-                        </label>
-                    </a>
-                </div>
+<!-- Menu lateral-->
+<ul id="slide-out" class="side-nav">
+    <li>
+        <div class="userView center">
+            <img src="img/logo.png" style="width: 50%">
+        </div>
+    </li>
+    <li>
+        <div class="switch">
+            <a>Instruções
+                <label>
+                    <input type="checkbox">
+                    <span class="lever" id="menu_instrucoes"></span>
+                </label>
+            </a>
+        </div>
 
-            </li>
+    </li>
+    <li>
+        <div class="switch">
+            <a>Leitura de ecrã
+                <label>
+                    <input type="checkbox">
+                    <span class="lever" id="menu_leitor"></span>
+                </label>
+            </a>
+        </div>
+
+    </li>
+    <li>
+        <div class="switch">
+            <a>Música
+                <label>
+                    <input type="checkbox">
+                    <span class="lever" id="menu_musica">
+            </span>
+                </label>
+            </a>
+        </div>
+    </li>
+    <li>
+        <div class="switch">
+            <a>Efeitos sonoros
+                <label>
+                    <input type="checkbox">
+                    <span class="lever" id="menu_sons">
+            </span>
+                </label>
+            </a>
+        </div>
+    </li>
+    <li><a class="subheader" style="color: #ef5350">NAVEGAÇÃO</a></li>
+    <li style="color: #000">
+        <ul class="collapsible" data-collapsible="accordion">
             <li>
-                <div class="switch">
-                    <a>Música
-                        <label>
-                            <input type="checkbox">
-                            <span class="lever" id="menu_musica">
-                    </span>
-                        </label>
-                    </a>
+                <input class="collapsible-header" name="menu" type="radio" id="menu_paw">
+                <label for="menu_paw">Apontar e esperar</label>
+                <div class="collapsible-body">O utilizador tem que colocar o cursor sobre o item a selecionar e
+                    esperar que o temporizador pare.
                 </div>
             </li>
             <li>
-                <div class="switch">
-                    <a>Efeitos sonoros
-                        <label>
-                            <input type="checkbox">
-                            <span class="lever" id="menu_sons">
-                    </span>
-                        </label>
-                    </a>
+                <input class="collapsible-header" name="menu" type="radio" id="menu_cursor">
+                <label for="menu_cursor">Cursor</label>
+                <div class="collapsible-body">O utilizador tem que colocar o cursor sobre o item a selecionar e
+                    clicar.
                 </div>
             </li>
-            <li><a class="subheader" style="color: #ef5350">NAVEGAÇÃO</a></li>
-            <li style="color: #000">
-                <ul class="collapsible" data-collapsible="accordion">
-                    <li>
-                        <input class="collapsible-header" name="menu" type="radio" id="menu_paw">
-                        <label for="menu_paw">Apontar e esperar</label>
-                        <div class="collapsible-body">O utilizador tem que colocar o cursor sobre o item a selecionar e
-                            esperar que o temporizador pare.
-                        </div>
-                    </li>
-                    <li>
-                        <input class="collapsible-header" name="menu" type="radio" id="menu_cursor">
-                        <label for="menu_cursor">Cursor</label>
-                        <div class="collapsible-body">O utilizador tem que colocar o cursor sobre o item a selecionar e
-                            clicar.
-                        </div>
-                    </li>
-                    <li>
-                        <input class="collapsible-header" name="menu" type="radio" id="menu_varrimento">
-                        <label for="menu_varrimento">Varrimento</label>
-                        <div class="collapsible-body">Os itens são selecionados automaticamente e o utilizador só tem
-                            que
-                            parar no pretendido.
-                        </div>
-                    </li>
-                    <li>
-                        <input class="collapsible-header" name="menu" type="radio" id="menu_voz">
-                        <label for="menu_voz">Controlo por voz</label>
-                        <div class="collapsible-body">O utilizador apenas tem que falar para selecionar itens.</div>
-                    </li>
-                </ul>
+            <li>
+                <input class="collapsible-header" name="menu" type="radio" id="menu_varrimento">
+                <label for="menu_varrimento">Varrimento</label>
+                <div class="collapsible-body">Os itens são selecionados automaticamente e o utilizador só tem
+                    que
+                    parar no pretendido.
+                </div>
             </li>
-            <!--
-                <li><a class="subheader" style="color: #ef5350">INSTRUÇÕES DOS JOGOS</a></li>
-                <li id="instructions_text">
-                    <span class="center">Para saber mais sobre o modo de funcionamento dos vários jogos disponíveis, por favor clique no botão abaixo.</span>
-                </li>
-            -->
-            <!--<a href="#" class="waves-effect waves-dark btn red lighten-1" data-target="modal_instrucoes" id="instructions">instruções
-                de Jogos</a>-->
-            <li id="authors">
-            <span class="center">Autoria de Cláudia Amaro, Cláudia Ribeiro, Inês Margarido e Joel Seabra.<br/>Frutas! &copy;
-                2017</span>
+            <li>
+                <input class="collapsible-header" name="menu" type="radio" id="menu_voz">
+                <label for="menu_voz">Controlo por voz</label>
+                <div class="collapsible-body">O utilizador apenas tem que falar para selecionar itens.</div>
             </li>
         </ul>
-    </div>
-    <script src="js/jquery-3.1.1.min.js"></script>
-    <script src="js/materialize.min.js"></script>
+    </li>
+    <!--
+        <li><a class="subheader" style="color: #ef5350">INSTRUÇÕES DOS JOGOS</a></li>
+        <li id="instructions_text">
+            <span class="center">Para saber mais sobre o modo de funcionamento dos vários jogos disponíveis, por favor clique no botão abaixo.</span>
+        </li>
+    -->
+    <!--<a href="#" class="waves-effect waves-dark btn red lighten-1" data-target="modal_instrucoes" id="instructions">instruções
+        de Jogos</a>-->
+    <li id="authors">
+    <span class="center">Autoria de Cláudia Amaro, Cláudia Ribeiro, Inês Margarido e Joel Seabra.<br/>Frutas! &copy;
+        2017</span>
+    </li>
+</ul>
+<script src="js/jquery-3.1.1.min.js"></script>
+<script src="js/materialize.min.js"></script>
 
-    <!-- Modais -->
-    <script>
-        $(document).ready(function () {
-            $('.modal').modal();
-        });
-        $(".button-collapse").sideNav();
-    </script>
+<!-- Modais -->
+<script>
+    $(document).ready(function () {
+        $('.modal').modal();
+    });
+    $(".button-collapse").sideNav();
+</script>
 </body>
 </html>

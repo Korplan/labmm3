@@ -200,9 +200,17 @@ a#instructions{
     margin-top: 5vh !important;
 }
 
-#modal_user {
-    margin-top: 32vh !important;
+#cenoura_modais {
+    height: 50%;
+    width: 15%;
+    position: fixed;
+    top: 28px;
+    left: 93vh;
 }
+
+/*#modal_user {*/
+    /*margin-top: 32vh !important;*/
+/*}*/
 
 .icon{
     height: 80%;

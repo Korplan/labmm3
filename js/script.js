@@ -54,6 +54,7 @@ var certas = 0;                                 //Número de pares certos
 var palavrasFeitas = [];            //Array que armazena os index do array "palavras" que já sairam
 var palavra;                        //Guarda palavra sorteada (=palavra para completar no jogo)
 var palavrasCertas = 0;
+
 //----------JOGO NUMEROS----------
 var numMax = 5;         //Número máximo de elementos por opção
 var nivel = 1;          //guarda o número do nível
@@ -124,6 +125,10 @@ window.onload = function () {
 
     document.getElementById("abrir_modal_nome").click();                                //Simula clique no botão invisível "abrir-modal-nome" e abre o modal do nome do utilizador
     document.getElementById("abrir_modal_nome").style.display = "none";                 //"Elimina" botão invisível
+
+    //Modal parabéns
+    document.getElementById("abrir_modal_parabens").style.display = "none";             //"Elimina" botão invisível
+    document.getElementById("fechar_modal_parabens").onclick = sair_jogo;            //Ao clicar no botão fechar do modal parabéns, sai do jogo
 
     document.getElementById("menu_musica").click();                                     //Simula clique no "menu-musica" do menu lateral
 
@@ -255,34 +260,8 @@ window.onload = function () {
         }
     };
 
-    document.getElementById("voltar").onclick = function () {
-        switch (jogo) {
-            case 1:
-                document.getElementById("jogoMemoria").style.display = "none";                      //Esconde a div "jogoMemoria"
-                break;
-            case 2:
-                document.getElementById("jogoNumeros").style.display = "none";                      //Esconde a div "jogoNumeros"
-                break;
-            case 3:
-                document.getElementById("jogoPalavras").style.display = "none";                     //Esconde a div "jogoPalavras"
-                palavrasFeitas = [];                                                                //Reinicia o jogo
-                break;
-            case 4:
-                document.getElementById("jogoCores").style.display = "none";                        //Esconde a div "jogoCores"
-                coresFeitas = [];                                                                   //Reinicia o jogo
-                break;
-            default:
-                print("ERRO: isto não deveria acontecer. Ver: " + jogo);
-                break;
-        }
-        document.getElementById("interacao2").style.display = "block";                      //Mostra a div "interacao2"
-        document.getElementById("voltar").style.display = "none";                           //Esconde o botão "voltar"
-        document.getElementById("help_numeros").style.display = "none";                     //Esconde o botão "help_numeros"
-        document.getElementById("help_palavras").style.display = "none";                    //Esconde o botão "help_palavras"
-        document.getElementById("help_memoria").style.display = "none";                     //Esconde o botão "help_memoria"
-        document.getElementById("help_cores").style.display = "none";                       //Esconde o botão "help_cores"
-        jogo = 0;                                                                           //Menu de jogos ativo
-    };
+    document.getElementById("voltar").onclick = sair_jogo;
+    print("cliquei em sair");
 
     document.getElementById('btn_num').addEventListener('mouseover', onMouseOver, true);        //???
     document.getElementById('btn_num').addEventListener('mouseout', onMouseOut, true);
@@ -505,6 +484,41 @@ function lose() {
     var frases = ["Tenta outra vez, " + nome + "!", "Essa não é a resposta certa.", "Tenta outra resposta, " + nome + "."];
     contentReader(frases[Math.floor(Math.random() * frases.length)]);                               //Lê uma frase personalizada do array acima
 }
+
+function sair_jogo() {
+    print("entrou na função");
+    switch (jogo) {
+        case 1:
+            document.getElementById("jogoMemoria").style.display = "none";                      //Esconde a div "jogoMemoria"
+            memInicial = 4;                                                                         //Reinicia o jogo
+            break;
+        case 2:
+            document.getElementById("jogoNumeros").style.display = "none";                      //Esconde a div "jogoNumeros"
+            ronda = 1;                                                                          //Reinicia o jogo
+            break;
+        case 3:
+            document.getElementById("jogoPalavras").style.display = "none";                     //Esconde a div "jogoPalavras"
+            palavrasCertas = 0;                                                                //Reinicia o jogo
+            break;
+        case 4:
+            document.getElementById("jogoCores").style.display = "none";                        //Esconde a div "jogoCores"
+            coresFeitas = 0;                                                                   //Reinicia o jogo
+            break;
+        default:
+            print("ERRO: isto não deveria acontecer. Ver: " + jogo);
+            break;
+    }
+
+    document.getElementById("interacao2").style.display = "block";                      //Mostra a div "interacao2"
+    document.getElementById("voltar").style.display = "none";                           //Esconde o botão "voltar"
+    document.getElementById("help_numeros").style.display = "none";                     //Esconde o botão "help_numeros"
+    document.getElementById("help_palavras").style.display = "none";                    //Esconde o botão "help_palavras"
+    document.getElementById("help_memoria").style.display = "none";                     //Esconde o botão "help_memoria"
+    document.getElementById("help_cores").style.display = "none";                       //Esconde o botão "help_cores"
+    jogo = 0;                                                                           //Menu de jogos ativo
+};
+
+
 
 //----------APONTAR E ESPERAR----------//
 function loadPointAndWait(local) {
@@ -1378,6 +1392,7 @@ function loadJogoNumeros() {
     document.getElementById("op1").innerHTML = "";              //limpa o innerHTML do elemento
     document.getElementById("op2").innerHTML = "";              //limpa o innerHTML do elemento
     document.getElementById("op3").innerHTML = "";              //limpa o innerHTML do elemento
+    document.getElementById("op4").innerHTML = "";              //limpa o innerHTML do elemento
 
     var opCerta = Math.floor(Math.random() * (nivel + 1) + 1);                //escolhe a posição onde vai colocar a hipotese certa
 
@@ -1396,7 +1411,8 @@ function loadJogoNumeros() {
             setTimeout("loadJogoNumeros()", 1000);
         }
         else {
-            document.getElementById("abrir_modal_nome").click();
+            document.getElementById("mensagem_parabens").innerHTML = "Parabéns " + nome + ", ganhaste o jogo!";
+            document.getElementById("abrir_modal_parabens").click();
         }
         print("ronda: " + ronda);
         this.style.animation = "tada 0.8s";
@@ -1406,7 +1422,7 @@ function loadJogoNumeros() {
         document.getElementById("sumo").click();
         document.getElementById("num1").click();
         /*document.getElementById("num2").click();*/
-        setTimeout("loadJogoNumeros()", 3000);
+        //setTimeout("loadJogoNumeros()", 3000);
     };
 
     //criação dos 3 níveis
