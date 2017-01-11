@@ -541,6 +541,7 @@ function sair_jogo() {
             document.getElementById("jogoCores").style.display = "none";                        //Esconde a div "jogoCores"
             coresFeitas = 0;                                                                   //Reinicia o jogo
             coresCertas = 0;
+            limpa = false;
             break;
         default:
             print("ERRO: isto não deveria acontecer. Ver: " + jogo);
@@ -555,7 +556,7 @@ function sair_jogo() {
     document.getElementById("help_cores").style.display = "none";                       //Esconde o botão "help_cores"
     jogo = 0;                                                                           //Menu de jogos ativo
     loadVarrimento(checkJogo());
-};
+}
 
 //----------APONTAR E ESPERAR----------//
 function loadPointAndWait(local) {
@@ -1257,6 +1258,10 @@ function desenha() {
 function loadJogoNumeros() {
 
     print("ronda: " + ronda);
+    for(var kk = 1; kk<=4; kk++) {
+        document.getElementById("op" + kk).classList.add("clickable");
+        document.getElementById("op" + kk).classList.remove("inativo");
+    }
 
     var f1, f2, fErrada1, fErrada2;                                     //variaveis que guardam fruta1, fruta2, frutaErrada1 e frutaErrada2
     do {
@@ -1524,29 +1529,33 @@ function loadJogoNumeros() {
     }
 
 
-    for (var l = 1; l <= nivel + 1; l++) {                  //Sorteia o nº de opções erradas (de acordo com o nível em que está) e coloca as imagens das frutas em cada uma das posiçoes com respostas erradas
-        if (l != opCerta) {                             //as erradas sao colocadas num sitio diferente da opção certa
-            do {
-                fErrada1 = Math.floor(Math.random() * (numMax - 1) + 1);
-            } while (fErrada1 == num1 || temp == fErrada1);                   //sorteia um número diferente do correto
-            temp = fErrada1;
-            fErrada2 = numMax - fErrada1;               //calcula o numero de 2as frutas
+    for (var l = 1; l <= 4; l++) {                  //Sorteia o nº de opções erradas (de acordo com o nível em que está) e coloca as imagens das frutas em cada uma das posiçoes com respostas erradas
+        if(l<= nivel +1) {
+            if (l != opCerta) {                             //as erradas sao colocadas num sitio diferente da opção certa
+                do {
+                    fErrada1 = Math.floor(Math.random() * (numMax - 1) + 1);
+                } while (fErrada1 == num1 || temp == fErrada1);                   //sorteia um número diferente do correto
+                temp = fErrada1;
+                fErrada2 = numMax - fErrada1;               //calcula o numero de 2as frutas
 
-            for (var k = 0; k < fErrada1; k++) {        //coloca as imagens das frutas na posição respetiva
-                document.getElementById("op" + l).innerHTML += "<img src='img/frutas/" + f1 + ".png'>";
+                for (var k = 0; k < fErrada1; k++) {        //coloca as imagens das frutas na posição respetiva
+                    document.getElementById("op" + l).innerHTML += "<img src='img/frutas/" + f1 + ".png'>";
+                }
+                for (var n = 0; n < fErrada2; n++) {
+                    document.getElementById("op" + l).innerHTML += "<img src='img/frutas/" + f2 + ".png'>";
+                }
+                print(num1 + "=" + fErrada1);
+                document.getElementById("op" + l).onclick = function () {
+                    somRespostaErrada.load();
+                    somRespostaErrada.play();
+                    this.style.animation = "shake 0.8s";
+                    this.style.animationFillMode = "both";
+                    this.classList.remove("clickable");
+                    this.classList.add("inativo");
+                };
             }
-            for (var n = 0; n < fErrada2; n++) {
-                document.getElementById("op" + l).innerHTML += "<img src='img/frutas/" + f2 + ".png'>";
-            }
-            print(num1 + "=" + fErrada1);
-            document.getElementById("op" + l).onclick = function () {
-                somRespostaErrada.load();
-                somRespostaErrada.play();
-                this.style.animation = "shake 0.8s";
-                this.style.animationFillMode = "both";
-                this.classList.remove("clickable");
-                this.classList.add("inativo");
-            };
+        } else{
+            document.getElementById("op" + l).classList.remove("clickable");
         }
     }
 
