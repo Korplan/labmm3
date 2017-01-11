@@ -1,7 +1,6 @@
 //----------VARIÁVEIS GLOBAIS----------//
 var debug = true;                                           //(mostrar ou não) Prints na consola
-var nome_utilizador = "";
-var instrucoes = true;                                        //(mostrar ou não) Instruções no inicio dos jogos
+var instrucoes = false;                                        //(mostrar ou não) Instruções no inicio dos jogos
 
 //----------AUDIO---------------
 var musica = document.createElement("Audio");               // Música de fundo
@@ -152,11 +151,13 @@ window.onload = function () {
         efeitosSonorosOn = !efeitosSonorosOn;
     };
 
+    document.getElementById("menu_sons").click();                                       //Simula clique no "menu-sons" do menu lateral
+
     document.getElementById("menu_instrucoes").onclick = function () {                        //Liga ou desliga instruções
         instrucoes = !instrucoes;
     };
 
-    document.getElementById("menu_sons").click();                                       //Simula clique no "menu-sons" do menu lateral
+    document.getElementById("menu_instrucoes").click();
 
     if (!('webkitSpeechRecognition' in window)) {                                       //Verifica se o browser suporta v2t (voz para texto)
         print("O browser não é compatível com reconhecimento de voz");                  //Escreve na consola (ver função "print")
@@ -219,6 +220,7 @@ window.onload = function () {
             loadVarrimento(checkJogo());
         if (instrucoes) {
             document.getElementById("help_memoria").click();
+            setTimeout("document.getElementById('modal_palavras').getElementsByTagName('a')[0].click()", 2000);
         }
     };
 
@@ -539,7 +541,7 @@ function sair_jogo() {
             break;
         case 4:
             document.getElementById("jogoCores").style.display = "none";                        //Esconde a div "jogoCores"
-            coresFeitas = 0;                                                                   //Reinicia o jogo
+            coresFeitas = [];                                                                   //Reinicia o jogo
             coresCertas = 0;
             limpa = false;
             break;
@@ -555,7 +557,8 @@ function sair_jogo() {
     document.getElementById("help_memoria").style.display = "none";                     //Esconde o botão "help_memoria"
     document.getElementById("help_cores").style.display = "none";                       //Esconde o botão "help_cores"
     jogo = 0;                                                                           //Menu de jogos ativo
-    loadVarrimento(checkJogo());
+    if (interacao == 2)
+        loadVarrimento(checkJogo());
 }
 
 //----------APONTAR E ESPERAR----------//
@@ -577,7 +580,7 @@ function pointWait(elem) {
             elem.getElementsByClassName("click")[0].style.background = "url(img/PaW/" + sprite + ".png) center no-repeat";
             print(sprite);
             sprite++;
-            if (sprite == 11) {
+            if (sprite == 10) {
                 clearInterval(select_animation);
                 anim = false;
                 sprite = 0;
@@ -690,6 +693,9 @@ function loadVoiceRec() {
         if ((command == "cancela" || command == "cancelar") && debug)
             stop = true;
         else {
+            if (jogo > 0 && (command == "voltar" || command == "volta" || command == "fechar" || command == "fecha" || command == "sai" || command == "sair"))
+                document.getElementById("voltar").click();
+
             // selectItem();
             switch (jogo) {
                 case 0:             //MENU
@@ -714,15 +720,22 @@ function loadVoiceRec() {
                     }
                     break;
                 case 1:             //Memoria
-                    document.getElementById("item" + command[command.length - 1]).click();
+                    if (command == "ajuda")
+                        document.getElementById("help_memoria").click();
+                    else
+                        document.getElementById("item" + command[command.length - 1]).click();
                     break;
                 case 2:             //Numeros
-
+                    if (command == "ajuda")
+                        document.getElementById("help_numeros").click();
+                    else
+                        document.getElementById("op" + command[command.length - 1]).click();
                     break;
                 case 3:             //Palavras
                     if (command == palavras[palavra].join("")) {
                         document.getElementById("certo").click();
-                    }
+                    } else if (command == "ajuda")
+                        document.getElementById("help_palavras").click();
                     break;
                 case 4:             //Cores
                     switch (command) {
@@ -746,11 +759,12 @@ function loadVoiceRec() {
                         case 'apagar':
                             document.getElementById("apagar").click();
                             break;
+                        case 'ajuda':
+                            document.getElementById("help_cores").click();
+                            break;
                     }
                     break;
             }
-            if (jogo > 0 && (command == "voltar" || command == "volta" || command == "fechar" || command == "fecha"))
-                document.getElementById("voltar").click();
         }
     };
     speechRecognition.onspeechend = function () {
@@ -1258,7 +1272,7 @@ function desenha() {
 function loadJogoNumeros() {
 
     print("ronda: " + ronda);
-    for(var kk = 1; kk<=4; kk++) {
+    for (var kk = 1; kk <= 4; kk++) {
         document.getElementById("op" + kk).classList.add("clickable");
         document.getElementById("op" + kk).classList.remove("inativo");
     }
@@ -1464,10 +1478,10 @@ function loadJogoNumeros() {
 
     var opCerta = Math.floor(Math.random() * (nivel + 1) + 1);                //escolhe a posição onde vai colocar a hipotese certa
 
-    for (var i = 0; i < num1; i++) {                    //coloca as imagens das frutas na posição da resposta correta
+    for (var i = 1; i <= num1; i++) {                    //coloca as imagens das frutas na posição da resposta correta
         document.getElementById("op" + opCerta).innerHTML += "<img src='img/frutas/" + f1 + ".png'>";
     }
-    for (var j = 0; j < num2; j++) {
+    for (var j = 1; j <= num2; j++) {
         document.getElementById("op" + opCerta).innerHTML += "<img src='img/frutas/" + f2 + ".png'>";
     }
 
@@ -1530,7 +1544,7 @@ function loadJogoNumeros() {
 
 
     for (var l = 1; l <= 4; l++) {                  //Sorteia o nº de opções erradas (de acordo com o nível em que está) e coloca as imagens das frutas em cada uma das posiçoes com respostas erradas
-        if(l<= nivel +1) {
+        if (l <= nivel + 1) {
             if (l != opCerta) {                             //as erradas sao colocadas num sitio diferente da opção certa
                 do {
                     fErrada1 = Math.floor(Math.random() * (numMax - 1) + 1);
@@ -1554,7 +1568,7 @@ function loadJogoNumeros() {
                     this.classList.add("inativo");
                 };
             }
-        } else{
+        } else {
             document.getElementById("op" + l).classList.remove("clickable");
         }
     }
