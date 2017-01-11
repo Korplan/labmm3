@@ -111,18 +111,22 @@ function print(s) {
 //----------NO CARREGAMENTO-----------//
 window.onload = function () {
 
-    /*
-     document.getElementById("barraLoad").style.width = "0";
-     var intervaloLoad = setInterval(function () {
-     if (parseInt(document.getElementById("barraLoad").style.width) <= 100) {
-     document.getElementById("barraLoad").style.width = parseInt(document.getElementById("barraLoad").style.width) + 2 + "%";
-     }
-     else {
-     document.getElementById("load").style.display = "none";
-     clearInterval(intervaloLoad);
-     }
-     }, 100);
-     */
+    document.getElementById("barraLoad").style.width = "0";
+    var intervaloLoad = setInterval(function () {
+        if (parseInt(document.getElementById("barraLoad").style.width) <= 100) {
+            document.getElementById("barraLoad").style.width = parseInt(document.getElementById("barraLoad").style.width) + 2.5 + "%";
+        }
+        else {
+            clearInterval(intervaloLoad);
+            setTimeout(function(){
+                document.getElementById("load").style.display = "none";
+            },500);
+            setTimeout(function (){
+                document.getElementById("abrir_modal_nome").click();                                //Simula clique no botão invisível "abrir-modal-nome" e abre o modal do nome do utilizador
+                document.getElementById("abrir_modal_nome").style.display = "none";                 //"Elimina" botão invisível
+            },500);
+        }
+    }, 100);
 
     var temp = "";                                                                      //Elimina classes acrescentadas ao elemento "voz"
 
@@ -138,8 +142,6 @@ window.onload = function () {
         }
     };
 
-    document.getElementById("abrir_modal_nome").click();                                //Simula clique no botão invisível "abrir-modal-nome" e abre o modal do nome do utilizador
-    document.getElementById("abrir_modal_nome").style.display = "none";                 //"Elimina" botão invisível
 
     //Modal parabéns
     document.getElementById("abrir_modal_parabens").style.display = "none";             //"Elimina" botão invisível
@@ -591,15 +593,6 @@ function pointWait(elem) {
     }
 }
 
-// function unloadPointAndWait(local) {
-//     var elements = local.getElementsByClassName("clickable");
-//
-//     for (var i = 0; i < elements.length; i++) {
-//         elements[i].removeEventListener('mouseover', onMouseOver, true);
-//         elements[i].removeEventListener('mouseout', onMouseOut, true);
-//     }
-// }
-
 //Função que ??
 function checkJogo() {
     switch (jogo) {                                             //Verifica que jogo/ menu está ativo
@@ -638,9 +631,11 @@ function loadVarrimento(local) {
             if (j != i) {
                 local.getElementsByClassName("clickable")[j].classList.remove("z-depth-4");
                 local.getElementsByClassName("clickable")[j].classList.add("z-depth-1");
+                local.getElementsByClassName("clickable")[j].style.transform="scale(1)";
             }
         local.getElementsByClassName("clickable")[i].classList.remove("z-depth-1");
         local.getElementsByClassName("clickable")[i].classList.add("z-depth-4");
+        local.getElementsByClassName("clickable")[i].style.transform="scale(1.05)";
         print(i + "_" + (local.getElementsByClassName("clickable").length - 1));
     }, 1000);
 }
