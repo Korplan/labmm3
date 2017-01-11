@@ -22,7 +22,7 @@
 }
 
 body{
-    background: url('../img/fundo-05.png');
+    background: url('../img/fundo/fundo_02645.png');
     background-repeat: no-repeat;       /*Não repete (não é padrão)*/
     background-size: cover;             /*Tamanho do body*/
     overflow: hidden;
@@ -644,4 +644,8 @@ a#instructions{
 .aparece{
     opacity: 1;
     animation: zoomIn 3s linear forwards;
+}
+
+#load{
+    height: 100vh;
 }

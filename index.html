@@ -32,10 +32,15 @@
 <a href="#" class="button" id="voltar" style="display: none"><i
         class="material-icons medium">close</i></a>
 
-    <!--No Carregamento-->
-    <div class="progress" style="display:none">
-        <div class="determinate" style="width: 70%"></div>
+<!--No Carregamento-->
+<div id="load" class="center white" style="padding-top:10%; display:none;">
+    <video width="500px" autoplay>
+        <source src="logo.mp4" type="video/mp4">
+    </video>
+    <div class="progress green lighten-4" style="width: 30%; margin-left: 35%">
+        <div class="determinate green darken-1" id="barraLoad"></div>
     </div>
+</div>
 
     <!--botões invisíveis-->
     <a href="#" class="waves-effect waves-dark btn indigo lighten-1" style="display: none" data-target="modal_user"
@@ -250,13 +255,15 @@
 <!-- Modal - Alterar Interação -->
 <div id="modal1" class="modal">
     <div class="modal-content">
-        <h4>ALTERAR O TIPO DE INTERAÇÃO</h4>
-        <p>Pode alterar a qualquer momento o tipo de interação no menu de opções <i
+        <h4>ALTERAR DEFINIÇÕES</h4>
+        <p>Pode alterar a qualquer momento as definições no menu "Definições" <i
                 class="material-icons tiny">settings</i>.</p>
+<!--
         <br/><br/>
         <h4>INSTRUÇÕES PARA O USO DOS JOGOS</h4>
         <p>Pode aceder a qualquer momento às instruções para o uso dos jogos no menu de opções <i
                 class="material-icons tiny">settings</i>.</p>
+-->
     </div>
     <div class="modal-footer">
         <a href="#!" class="modal-action modal-close waves-effect waves-dark btn-flat">Continuar</a>

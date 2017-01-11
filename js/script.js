@@ -109,6 +109,20 @@ function print(s) {
 
 //----------NO CARREGAMENTO-----------//
 window.onload = function () {
+
+/*
+    document.getElementById("barraLoad").style.width = "0";
+    var intervaloLoad = setInterval(function () {
+        if (parseInt(document.getElementById("barraLoad").style.width) <= 100) {
+            document.getElementById("barraLoad").style.width = parseInt(document.getElementById("barraLoad").style.width) + 2 + "%";
+        }
+        else {
+            document.getElementById("load").style.display = "none";
+            clearInterval(intervaloLoad);
+        }
+    }, 100);
+*/
+
     var temp = "";                                                                      //Elimina classes acrescentadas ao elemento "voz"
 
     document.getElementById("menu_musica").onclick = function () {
@@ -134,6 +148,10 @@ window.onload = function () {
 
     document.getElementById("menu_sons").onclick = function () {                        //Liga ou desliga efeitos sonoros
         efeitosSonorosOn = !efeitosSonorosOn;
+    };
+
+    document.getElementById("menu_instrucoes").onclick = function () {                        //Liga ou desliga instruções
+        instrucoes = !instrucoes;
     };
 
     document.getElementById("menu_sons").click();                                       //Simula clique no "menu-sons" do menu lateral
@@ -754,6 +772,11 @@ function contentReader(text) {
 //Função que carrega o jogo
 function jogoMemoria() {
     document.getElementById("memoTab").innerHTML = "";              //Limpa tabuleiro de jogo
+
+    if (instrucoes) {
+        document.getElementById("help_memoria").click();
+    }
+
     certas = 0;                                                     //Número de pares formados
     var x = 0;                                                      //??
     for (var m = 0; m < memInicial; m += 2) {                       //
@@ -1152,8 +1175,8 @@ function desenha() {
     switch (sorteiaDesenho) {                                                   //Desenha em canvas a fruta sorteada
         case 0:
             desenhaAmeixa(ctx);
-            fala = "Eu sou a ameixa e sou vermelha.";
-            return rgbToHex(corMuda) == "#be1e2c";
+            fala = "Eu sou a ameixa e sou roxa.";
+            return rgbToHex(corMuda) == "#7b1fa2";
         case 1:
             desenhaAnanas(ctx);
             fala = "Eu sou o ananás e sou amarelo.";
@@ -1559,7 +1582,7 @@ function numParaFruta(num) {
     }
 }
 
-//----------PARALLAX----------//
+//----------FUNDO----------//
 function parallaxInicio() {
     document.body.style.backgroundPositionY = "33.3%";
     document.body.style.backgroundPositionX = "33.3%";
@@ -1610,6 +1633,28 @@ function parallaxBaixo() {
     document.getElementById("bodyn3").style.animationFillMode = "both";
 }
 
+/*
+function fundo() {
+    setInterval(function (){
+        for (var i = 1; i < 3000; i++){
+            if (jogo == 0 && i != 2999) {
+                if(i<10) {
+                    document.body.style.backgroundImage.src = "img/fundo_0" + i;
+                }
+                if(i<100 && i>10) {
+                    document.body.style.backgroundImage.src = "img/fundo_00" + i;
+                }
+                if(i<1000 && i>100) {
+                    document.body.style.backgroundImage.src = "img/fundo_000" + i;
+                }
+            }
+            else{
+                i=1;
+            }
+    }; 200)
+    }
+}
+*/
 
 //----------CANVAS----------//
 
