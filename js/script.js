@@ -855,6 +855,10 @@ function flip(id) {                                                     //Funç�
         somVirarCarta.play();
     }
 
+    if(interacao==2){
+        document.getElementById("item" + id).style.transform="scale3d(1, 1, 1) rotatey(180deg)";
+    }
+
     // if (jogo_memoria) {                 //Se jogo_memoria=true
     setTimeout(function () {        //Ocorre 1 vez passado 1segundo
         if (!par)                   //Se for virada a primeira carta ainda não há um par
@@ -1468,10 +1472,10 @@ function loadJogoNumeros() {
             break;
     }
 
-    // document.getElementById("op1").innerHTML = "";              //limpa o innerHTML do elemento
-    // document.getElementById("op2").innerHTML = "";              //limpa o innerHTML do elemento
-    // document.getElementById("op3").innerHTML = "";              //limpa o innerHTML do elemento
-    // document.getElementById("op4").innerHTML = "";              //limpa o innerHTML do elemento
+    document.getElementById("op1").innerHTML = "";              //limpa o innerHTML do elemento
+    document.getElementById("op2").innerHTML = "";              //limpa o innerHTML do elemento
+    document.getElementById("op3").innerHTML = "";              //limpa o innerHTML do elemento
+    document.getElementById("op4").innerHTML = "";              //limpa o innerHTML do elemento
 
     var opCerta = Math.floor(Math.random() * (nivel + 1) + 1);                //escolhe a posição onde vai colocar a hipotese certa
 
