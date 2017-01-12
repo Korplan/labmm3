@@ -18,6 +18,16 @@ img/icons/icon_cores.png
 img/icons/icon_memoria.png
 img/icons/icon_numeros.png
 img/icons/icon_palavras.png
+img/PaW/0.png
+img/PaW/1.png
+img/PaW/2.png
+img/PaW/3.png
+img/PaW/4.png
+img/PaW/5.png
+img/PaW/6.png
+img/PaW/7.png
+img/PaW/8.png
+img/PaW/9.png
 sound/ukulele.mp3
 sound/whoosh.mp3
 sound/bell.mp3
@@ -27,12 +37,6 @@ videos/cores.mp4
 videos/memoria.mp4
 videos/palavras.mp4
 videos/logo.mp4
-index.html
-js/jquery-3.1.1.min.js
-js/materialize.min.js
-js/script.js
-css/materialize.css
-css/style.css
 
 NETWORK:
 *

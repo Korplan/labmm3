@@ -1,5 +1,5 @@
 //----------VARIÁVEIS GLOBAIS----------//
-var debug = true;                                           //(mostrar ou não) Prints na consola
+var debug = false;                                           //(mostrar ou não) Prints na consola
 var instrucoes = false;                                        //(mostrar ou não) Instruções no inicio dos jogos
 
 //----------AUDIO---------------
